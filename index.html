@@ -259,20 +259,11 @@
                 </div>
               </div>
               <br>
-              <div class="row">
-                <div class="col">
-                  <center>
-                    <h5>llustration of the MotionTrans Dataset, which comprises 3,213 demonstrations spanning 15 human tasks and 15 robot tasks collected across more than 10 scenes. For statistical analysis, tasks are grouped by motion-similar skill categories. </h5>
-                    <img src="./resources/main_dataset.png" width="65%"></img>
-                  </center>
-                </div>
-              </div>
-              <br>
               
               <div class="row">
                 <div class="col">
                   <center>
-                    <h5>With diverse demonstrations, MotionTrans performs human-robot <b>co-training without additional visual post-processing.</b><h5>
+                    <h5>llustration of the MotionTrans Dataset, which comprises 3,213 demonstrations spanning 15 human tasks and 15 robot tasks collected across more than 10 scenes. For statistical analysis, tasks are grouped by motion-similar skill categories.<h5>
                   </center>
                 </div>
               </div>
@@ -380,6 +371,173 @@
                       <h5 class="video-title">Pour milk bottle to the yellow pan</h5>
                       <video autoplay muted loop playsinline controls preload="metadata"
                             src="resources/human_data/pour_milk_bottle_to_the_yellow_pan_0.mp4" style="border-radius:10px; width:100%;"></video>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Minimal CSS scoped to this block -->
+                <style>
+                  .video-pager .vp-page { display: none; }
+                  .video-pager .vp-page.active { display: block; }
+                  .vp-controls {
+                    display: flex; align-items: center; justify-content: center;
+                    gap: 16px; margin: 8px 0 16px;
+                  }
+                  .vp-btn {
+                    border: none; width: 40px; height: 40px; border-radius: 999px;
+                    background: #222; color: #fff; line-height: 40px; text-align: center;
+                    font-size: 20px; cursor: pointer;
+                  }
+                  .vp-btn:focus { outline: 2px solid #888; }
+                  .vp-dots { display: flex; gap: 10px; align-items: center; }
+                  .vp-dot {
+                    width: 10px; height: 10px; border-radius: 50%; background: #cfcfcf; cursor: pointer;
+                  }
+                  .vp-dot.active { background: #333; }
+                  .video-title { margin-bottom: 8px; font-size: 1rem; }
+                </style>
+
+                <!-- Minimal JS scoped to this block -->
+                <script>
+                  (function () {
+                    const pager = document.getElementById('humanVideoPager');
+                    if (!pager) return;
+                    const pages = Array.from(pager.querySelectorAll('.vp-page'));
+                    const prev = pager.querySelector('.vp-prev');
+                    const next = pager.querySelector('.vp-next');
+                    const dots = Array.from(pager.querySelectorAll('.vp-dot'));
+                    let idx = 0;
+
+                    function pauseHiddenPages(except) {
+                      pages.forEach((p, k) => {
+                        if (k !== except) {
+                          p.querySelectorAll('video').forEach(v => {
+                            try { v.pause(); v.currentTime = 0; } catch (e) {}
+                          });
+                        }
+                      });
+                    }
+
+                    function show(i) {
+                      pages[idx].classList.remove('active');
+                      idx = (i + pages.length) % pages.length;
+                      pages[idx].classList.add('active');
+                      dots.forEach((d, k) => d.classList.toggle('active', k === idx));
+                      pauseHiddenPages(idx);
+                    }
+
+                    prev.addEventListener('click', () => show(idx - 1));
+                    next.addEventListener('click', () => show(idx + 1));
+                    dots.forEach((d, k) => d.addEventListener('click', () => show(k)));
+
+                    pauseHiddenPages(0);
+                  })();
+                </script>
+              </div>
+              <!-- =================== END of modified video pager block =================== -->
+
+              <!-- ================== START of modified video pager block (2 cols x 3 rows) ================== -->
+              <div id="humanVideoPager" class="video-pager">
+                <!-- Controls -->
+                <div class="vp-controls">
+                  <button class="vp-btn vp-prev" aria-label="Previous page">‹</button>
+                  <div class="vp-dots" role="tablist" aria-label="Video pages">
+                    <span class="vp-dot active" role="tab" aria-selected="true" aria-controls="vp-page-1"></span>
+                    <span class="vp-dot" role="tab" aria-selected="false" aria-controls="vp-page-2"></span>
+                    <span class="vp-dot" role="tab" aria-selected="false" aria-controls="vp-page-3"></span>
+                  </div>
+                  <button class="vp-btn vp-next" aria-label="Next page">›</button>
+                </div>
+
+                <!-- Page 1 (6 videos) -->
+                <div id="vp-page-1" class="vp-page active">
+                  <div class="row">
+                    <div class="col-12 col-md-6 mb-4">
+                      <h5 class="video-title">Push orange cube to the bulky bottle</h5>
+                      <video autoplay muted loop playsinline controls preload="metadata"
+                            src="resources/robot_data/push_orange_cube_to_the_bulky_bottle_0.mp4" style="border-radius:10px; width:100%;"></video>
+                    </div>
+                    <div class="col-12 col-md-6 mb-4">
+                      <h5 class="video-title">Put toy panda to the box</h5>
+                      <video autoplay muted loop playsinline controls preload="metadata"
+                            src="resources/robot_data/put_toy_panda_to_the_box_0.mp4" style="border-radius:10px; width:100%;"></video>
+                    </div>
+                    <div class="col-12 col-md-6 mb-4">
+                      <h5 class="video-title">Put bread to the red pad</h5>
+                      <video autoplay muted loop playsinline controls preload="metadata"
+                            src="resources/robot_data/put_bread_to_the_red_pad_0.mp4" style="border-radius:10px; width:100%;"></video>
+                    </div>
+                    <div class="col-12 col-md-6 mb-4">
+                      <h5 class="video-title">Open the white cap style box</h5>
+                      <video autoplay muted loop playsinline controls preload="metadata"
+                            src="resources/robot_data/open_the_white_cap_style_box_0.mp4" style="border-radius:10px; width:100%;"></video>
+                    </div>
+                    <div class="col-12 col-md-6 mb-4">
+                      <h5 class="video-title">Drop black bottle to purple bucket</h5>
+                      <video autoplay muted loop playsinline controls preload="metadata"
+                            src="resources/robot_data/drop_black_bottle_to_purple_bucket_0.mp4" style="border-radius:10px; width:100%;"></video>
+                    </div>
+                    <div class="col-12 col-md-6 mb-4">
+                      <h5 class="video-title">Pour cola to the red cup</h5>
+                      <video autoplay muted loop playsinline controls preload="metadata"
+                            src="resources/robot_data/pour_coak_to_the_red_cup_0.mp4" style="border-radius:10px; width:100%;"></video>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Page 2 (6 videos, placeholders to be replaced) -->
+                <div id="vp-page-2" class="vp-page">
+                  <div class="row">
+                    <div class="col-12 col-md-6 mb-4">
+                      <h5 class="video-title">Move red dice to the bulky bottle</h5>
+                      <video autoplay muted loop playsinline controls preload="metadata"
+                            src="resources/robot_data/move_red_dice_to_the_bulky_bottle_0.mp4" style="border-radius:10px; width:100%;"></video>
+                    </div>
+                    <div class="col-12 col-md-6 mb-4">
+                      <h5 class="video-title">Flip down the black bottle</h5>
+                      <video autoplay muted loop playsinline controls preload="metadata"
+                            src="resources/robot_data/flip_down_the_black_bottle_0.mp4" style="border-radius:10px; width:100%;"></video>
+                    </div>
+                    <div class="col-12 col-md-6 mb-4">
+                      <h5 class="video-title">Press the pink mouse</h5>
+                      <video autoplay muted loop playsinline controls preload="metadata"
+                            src="resources/robot_data/press_the_pink_mouse_0.mp4" style="border-radius:10px; width:100%;"></video>
+                    </div>
+                    <div class="col-12 col-md-6 mb-4">
+                      <h5 class="video-title">Put bread to the high black platform</h5>
+                      <video autoplay muted loop playsinline controls preload="metadata"
+                            src="resources/robot_data/put_bread_to_the_high_black_platform_0.mp4" style="border-radius:10px; width:100%;"></video>
+                    </div>
+                    <div class="col-12 col-md-6 mb-4">
+                      <h5 class="video-title">Put Capybara to the purple pad</h5>
+                      <video autoplay muted loop playsinline controls preload="metadata"
+                            src="resources/robot_data/put_Capybara_to_the_purple_pad_0.mp4" style="border-radius:10px; width:100%;"></video>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Page 3 (3 videos, placeholders to be replaced) -->
+                <div id="vp-page-3" class="vp-page">
+                  <div class="row">
+                    <div class="col-12 col-md-6 mb-4">
+                      <h5 class="video-title">Put chilli to the white plate</h5>
+                      <video autoplay muted loop playsinline controls preload="metadata"
+                            src="resources/robot_data/put_chilli_to_the_white_plate_0.mp4" style="border-radius:10px; width:100%;"></video>
+                    </div>
+                    <div class="col-12 col-md-6 mb-4">
+                      <h5 class="video-title">Wipe blue towel on the table and push it left or right to the pink bowl</h5>
+                      <video autoplay muted loop playsinline controls preload="metadata"
+                            src="resources/robot_data/wipe_blue_towel_on_the_table_and_push_it_left_or_right_to_the_pink_bowl_0.mp4" style="border-radius:10px; width:100%;"></video>
+                    </div>
+                    <div class="col-12 col-md-6 mb-4">
+                      <h5 class="video-title">Put mango to the pink bowl</h5>
+                      <video autoplay muted loop playsinline controls preload="metadata"
+                            src="resources/robot_data/put_mango_to_the_pink_bowl_0.mp4" style="border-radius:10px; width:100%;"></video>
+                    </div>
+                    <div class="col-12 col-md-6 mb-4">
+                      <h5 class="video-title">Put cucumber to purple bucket</h5>
+                      <video autoplay muted loop playsinline controls preload="metadata"
+                            src="resources/robot_data/put_cucumber_to_purple_bucket_0.mp4" style="border-radius:10px; width:100%;"></video>
                     </div>
                   </div>
                 </div>
