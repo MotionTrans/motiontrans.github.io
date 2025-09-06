@@ -270,6 +270,7 @@
               <br>
 
               <!-- ================== START of modified video pager block (2 cols x 3 rows) ================== -->
+              <h3 class="title is-3" style="text-align:center; margin: 8px 0 12px;">Human Tasks</h3>
               <div id="humanVideoPager" class="video-pager">
                 <!-- Controls -->
                 <div class="vp-controls">
@@ -318,7 +319,7 @@
                   </div>
                 </div>
 
-                <!-- Page 2 (6 videos, placeholders to be replaced) -->
+                <!-- Page 2 (6 videos) -->
                 <div id="vp-page-2" class="vp-page">
                   <div class="row">
                     <div class="col-12 col-md-6 mb-4">
@@ -332,7 +333,7 @@
                             src="resources/human_data/put_mango_to_the_pink_bowl_while_avoiding_obstacle_by_lifting.mp4" style="border-radius:10px; width:100%;"></video>
                     </div>
                     <div class="col-12 col-md-6 mb-4">
-                      <h5 class="video-title"Press red dice to make it rotation</h5>
+                      <h5 class="video-title">Press red dice to make it rotation</h5>
                       <video autoplay muted loop playsinline controls preload="metadata"
                             src="resources/human_data/press_red_dice_to_make_it_rotation_0.mp4" style="border-radius:10px; width:100%;"></video>
                     </div>
@@ -354,7 +355,7 @@
                   </div>
                 </div>
 
-                <!-- Page 3 (3 videos, placeholders to be replaced) -->
+                <!-- Page 3 (3 videos) -->
                 <div id="vp-page-3" class="vp-page">
                   <div class="row">
                     <div class="col-12 col-md-6 mb-4">
@@ -437,20 +438,21 @@
               <!-- =================== END of modified video pager block =================== -->
 
               <!-- ================== START of modified video pager block (2 cols x 3 rows) ================== -->
-              <div id="humanVideoPager" class="video-pager">
+              <h3 class="title is-3" style="text-align:center; margin: 24px 0 12px;">Robot Tasks</h3>
+              <div id="robotVideoPager" class="video-pager">
                 <!-- Controls -->
                 <div class="vp-controls">
                   <button class="vp-btn vp-prev" aria-label="Previous page">‹</button>
                   <div class="vp-dots" role="tablist" aria-label="Video pages">
-                    <span class="vp-dot active" role="tab" aria-selected="true" aria-controls="vp-page-1"></span>
-                    <span class="vp-dot" role="tab" aria-selected="false" aria-controls="vp-page-2"></span>
-                    <span class="vp-dot" role="tab" aria-selected="false" aria-controls="vp-page-3"></span>
+                    <span class="vp-dot active" role="tab" aria-selected="true" aria-controls="rvp-page-1"></span>
+                    <span class="vp-dot" role="tab" aria-selected="false" aria-controls="rvp-page-2"></span>
+                    <span class="vp-dot" role="tab" aria-selected="false" aria-controls="rvp-page-3"></span>
                   </div>
                   <button class="vp-btn vp-next" aria-label="Next page">›</button>
                 </div>
 
                 <!-- Page 1 (6 videos) -->
-                <div id="vp-page-1" class="vp-page active">
+                <div id="rvp-page-1" class="vp-page active">
                   <div class="row">
                     <div class="col-12 col-md-6 mb-4">
                       <h5 class="video-title">Push orange cube to the bulky bottle</h5>
@@ -485,8 +487,8 @@
                   </div>
                 </div>
 
-                <!-- Page 2 (6 videos, placeholders to be replaced) -->
-                <div id="vp-page-2" class="vp-page">
+                <!-- Page 2 (≤6 videos) -->
+                <div id="rvp-page-2" class="vp-page">
                   <div class="row">
                     <div class="col-12 col-md-6 mb-4">
                       <h5 class="video-title">Move red dice to the bulky bottle</h5>
@@ -516,8 +518,8 @@
                   </div>
                 </div>
 
-                <!-- Page 3 (3 videos, placeholders to be replaced) -->
-                <div id="vp-page-3" class="vp-page">
+                <!-- Page 3 (≤6 videos) -->
+                <div id="rvp-page-3" class="vp-page">
                   <div class="row">
                     <div class="col-12 col-md-6 mb-4">
                       <h5 class="video-title">Put chilli to the white plate</h5>
@@ -567,7 +569,7 @@
                 <!-- Minimal JS scoped to this block -->
                 <script>
                   (function () {
-                    const pager = document.getElementById('humanVideoPager');
+                    const pager = document.getElementById('robotVideoPager');
                     if (!pager) return;
                     const pages = Array.from(pager.querySelectorAll('.vp-page'));
                     const prev = pager.querySelector('.vp-prev');
