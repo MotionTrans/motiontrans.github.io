@@ -696,34 +696,36 @@
 
   <section class="section">
   <div class="container">
+    <h2 class="title is-2" style="text-align: center; padding-bottom: 20px;">Experimental Results</h2>
+
+    <!-- Zero Shot Success Rate Results -->
     <div class="columns is-centered">
-      <div class="column is-full-width">
-        <h2 class="title is-2" style="text-align: center; padding-bottom: 10px;">Method and Results</h2>
+      <div class="column is-full">
+        <h3 class="title is-3" style="text-align: center;">Zero Shot Success Rate Results (SR, %)</h3>
+        <figure style="text-align: center;">
+          <img src="./resources/experiment_results/zeroshot_sr.png" alt="Zero Shot Success Rate" style="border-radius: 10px; max-width: 100%; height: auto;">
+        </figure>
+        <p class="has-text-centered text-muted" style="font-size: 1.1em; padding-top: 10px;">
+          This chart presents the Zero Shot Success Rate (SR) results for various tasks. The comparison between MotionTrans-DP (blue) and MotionTrans-π0-VLA (pink) is shown across 16 different tasks.
+        </p>
+      </div>
+    </div>
 
-        <!-- Experimental results chart 1 -->
-        <div class="card shadow-sm border-0 mb-4">
-          <div class="card-body text-center">
-            <h5 class="mb-3">Zero-Shot Success Rate Results (SR, %)</h5>
-            <img src="/mnt/data/086decbb-3a06-41f6-947a-894adc3c0c1e.png" class="img-fluid rounded" alt="Zero Shot Success Rate Chart">
-            <p class="mt-3 mb-0 text-muted small">
-              The chart demonstrates the Zero-Shot Success Rate (SR) across various tasks, comparing MotionTrans-DP and MotionTrans-π0-VLA across several demonstrations.
-            </p>
-          </div>
-        </div>
-
-        <!-- Description for the experimental results -->
-        <div class="card shadow-sm border-0">
-          <div class="card-body">
-            <h5 class="mb-3">Analysis of Results</h5>
-            <p class="text-muted small">
-              The results highlight the effectiveness of different strategies in learning task-specific policies. MotionTrans-DP outperforms MotionTrans-π0-VLA in several key tasks, particularly when the dataset and task variety are complex. However, MotionTrans-π0-VLA shows strong performance in other tasks, suggesting that the framework is adaptable to various human-robot learning scenarios.
-            </p>
-          </div>
-        </div>
+    <!-- Zero Shot Motion Progress Score Results -->
+    <div class="columns is-centered">
+      <div class="column is-full">
+        <h3 class="title is-3" style="text-align: center;">Zero Shot Motion Progress Score Results (Score)</h3>
+        <figure style="text-align: center;">
+          <img src="./resources/experiment_results/zeroshot_score.png" alt="Zero Shot Motion Progress Score" style="border-radius: 10px; max-width: 100%; height: auto;">
+        </figure>
+        <p class="has-text-centered text-muted" style="font-size: 1.1em; padding-top: 10px;">
+          The chart here shows the Zero Shot Motion Progress Score (Score) for the same tasks, highlighting how both methods, MotionTrans-DP (red) and MotionTrans-π0-VLA (yellow), perform across various actions.
+        </p>
       </div>
     </div>
   </div>
 </section>
+
 
 
   <section class="section">
