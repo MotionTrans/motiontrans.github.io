@@ -277,47 +277,174 @@
                 </div>
               </div>
               <br>
-              <div class="row">
-                <div class="col">
-                    <h5> Drop bread to the green bucket.</h5>
-                    <video autoplay muted loop playsinline controls src="resources/human_data/drop_bread.mp4" width="100%"
-                           style="border-radius:10px; "></video>
 
+              <!-- ================== START of modified video pager block ================== -->
+              <div id="humanVideoPager" class="video-pager">
+                <!-- Controls -->
+                <div class="vp-controls">
+                  <button class="vp-btn vp-prev" aria-label="Previous page">‹</button>
+                  <div class="vp-dots" role="tablist" aria-label="Video pages">
+                    <span class="vp-dot active" role="tab" aria-selected="true" aria-controls="vp-page-1"></span>
+                    <span class="vp-dot" role="tab" aria-selected="false" aria-controls="vp-page-2"></span>
+                    <span class="vp-dot" role="tab" aria-selected="false" aria-controls="vp-page-3"></span>
+                  </div>
+                  <button class="vp-btn vp-next" aria-label="Next page">›</button>
                 </div>
-                <div class="col">
-                  <h5>Pour water in front of a drink vending machine</h5>
-                  <video autoplay muted loop playsinline controls src="resources/human_data.webm" width="100%"
-                         style="border-radius:10px; "></video>
-                </div>
-              </div>
-              <br>
-              <div class="row">
-                <div class="col">
-                    <h5>Pack a bottle of beer in a hallway</h5>
-                    <video autoplay muted loop playsinline controls src="resources/human_data.webm" width="100%"
-                           style="border-radius:10px; "></video>
 
+                <!-- Page 1 (6 videos) -->
+                <div id="vp-page-1" class="vp-page active">
+                  <div class="row">
+                    <div class="col-12 col-md-4 mb-4">
+                      <h5 class="video-title">Drop bread to the green bucket.</h5>
+                      <video autoplay muted loop playsinline controls preload="metadata"
+                             src="resources/human_data/drop_bread.mp4" style="border-radius:10px; width:100%;"></video>
+                    </div>
+                    <div class="col-12 col-md-4 mb-4">
+                      <h5 class="video-title">Pour water in front of a drink vending machine</h5>
+                      <video autoplay muted loop playsinline controls preload="metadata"
+                             src="resources/human_data.webm" style="border-radius:10px; width:100%;"></video>
+                    </div>
+                    <div class="col-12 col-md-4 mb-4">
+                      <h5 class="video-title">Pack a bottle of beer in a hallway</h5>
+                      <video autoplay muted loop playsinline controls preload="metadata"
+                             src="resources/human_data.webm" style="border-radius:10px; width:100%;"></video>
+                    </div>
+                    <div class="col-12 col-md-4 mb-4">
+                      <h5 class="video-title">Pour green tea in a sushi restaurant</h5>
+                      <video autoplay muted loop playsinline controls preload="metadata"
+                             src="resources/human_data.webm" style="border-radius:10px; width:100%;"></video>
+                    </div>
+                    <div class="col-12 col-md-4 mb-4">
+                      <h5 class="video-title">Picking up an orange in front of an outdoor grill</h5>
+                      <video autoplay muted loop playsinline controls preload="metadata"
+                             src="resources/human_data.webm" style="border-radius:10px; width:100%;"></video>
+                    </div>
+                    <div class="col-12 col-md-4 mb-4">
+                      <h5 class="video-title">Grasp and place a metal bottle in a university office</h5>
+                      <video autoplay muted loop playsinline controls preload="metadata"
+                             src="resources/human_data.webm" style="border-radius:10px; width:100%;"></video>
+                    </div>
+                  </div>
                 </div>
-                <div class="col">
-                  <h5>Pour green tea in a sushi restaurant</h5>
-                  <video autoplay muted loop playsinline controls src="resources/human_data.webm" width="100%"
-                         style="border-radius:10px; "></video>
-                </div>
-              </div>
-              <br>
-              <div class="row">
-                <div class="col">
-                  <h5>Picking up an orange in front of an outdoor grill</h5>
-                    <video autoplay muted loop playsinline controls src="resources/human_data.webm" width="100%"
-                           style="border-radius:10px; "></video>
 
+                <!-- Page 2 (6 videos, placeholders to be replaced) -->
+                <div id="vp-page-2" class="vp-page">
+                  <div class="row">
+                    <div class="col-12 col-md-4 mb-4">
+                      <h5 class="video-title">Demo 7</h5>
+                      <video autoplay muted loop playsinline controls preload="metadata"
+                             src="resources/human_data.webm" style="border-radius:10px; width:100%;"></video>
+                    </div>
+                    <div class="col-12 col-md-4 mb-4">
+                      <h5 class="video-title">Demo 8</h5>
+                      <video autoplay muted loop playsinline controls preload="metadata"
+                             src="resources/human_data.webm" style="border-radius:10px; width:100%;"></video>
+                    </div>
+                    <div class="col-12 col-md-4 mb-4">
+                      <h5 class="video-title">Demo 9</h5>
+                      <video autoplay muted loop playsinline controls preload="metadata"
+                             src="resources/human_data.webm" style="border-radius:10px; width:100%;"></video>
+                    </div>
+                    <div class="col-12 col-md-4 mb-4">
+                      <h5 class="video-title">Demo 10</h5>
+                      <video autoplay muted loop playsinline controls preload="metadata"
+                             src="resources/human_data.webm" style="border-radius:10px; width:100%;"></video>
+                    </div>
+                    <div class="col-12 col-md-4 mb-4">
+                      <h5 class="video-title">Demo 11</h5>
+                      <video autoplay muted loop playsinline controls preload="metadata"
+                             src="resources/human_data.webm" style="border-radius:10px; width:100%;"></video>
+                    </div>
+                    <div class="col-12 col-md-4 mb-4">
+                      <h5 class="video-title">Demo 12</h5>
+                      <video autoplay muted loop playsinline controls preload="metadata"
+                             src="resources/human_data.webm" style="border-radius:10px; width:100%;"></video>
+                    </div>
+                  </div>
                 </div>
-                <div class="col">
-                  <h5>Grasp and place a metal bottle in a university office</h5>
-                  <video autoplay muted loop playsinline controls src="resources/human_data.webm" width="100%"
-                         style="border-radius:10px; "></video>
+
+                <!-- Page 3 (3 videos, placeholders to be replaced) -->
+                <div id="vp-page-3" class="vp-page">
+                  <div class="row">
+                    <div class="col-12 col-md-4 mb-4">
+                      <h5 class="video-title">Demo 13</h5>
+                      <video autoplay muted loop playsinline controls preload="metadata"
+                             src="resources/human_data.webm" style="border-radius:10px; width:100%;"></video>
+                    </div>
+                    <div class="col-12 col-md-4 mb-4">
+                      <h5 class="video-title">Demo 14</h5>
+                      <video autoplay muted loop playsinline controls preload="metadata"
+                             src="resources/human_data.webm" style="border-radius:10px; width:100%;"></video>
+                    </div>
+                    <div class="col-12 col-md-4 mb-4">
+                      <h5 class="video-title">Demo 15</h5>
+                      <video autoplay muted loop playsinline controls preload="metadata"
+                             src="resources/human_data.webm" style="border-radius:10px; width:100%;"></video>
+                    </div>
+                  </div>
                 </div>
+
+                <!-- Minimal CSS scoped to this block -->
+                <style>
+                  .video-pager .vp-page { display: none; }
+                  .video-pager .vp-page.active { display: block; }
+                  .vp-controls {
+                    display: flex; align-items: center; justify-content: center;
+                    gap: 16px; margin: 8px 0 16px;
+                  }
+                  .vp-btn {
+                    border: none; width: 40px; height: 40px; border-radius: 999px;
+                    background: #222; color: #fff; line-height: 40px; text-align: center;
+                    font-size: 20px; cursor: pointer;
+                  }
+                  .vp-btn:focus { outline: 2px solid #888; }
+                  .vp-dots { display: flex; gap: 10px; align-items: center; }
+                  .vp-dot {
+                    width: 10px; height: 10px; border-radius: 50%; background: #cfcfcf; cursor: pointer;
+                  }
+                  .vp-dot.active { background: #333; }
+                  .video-title { margin-bottom: 8px; font-size: 1rem; }
+                </style>
+
+                <!-- Minimal JS scoped to this block -->
+                <script>
+                  (function () {
+                    const pager = document.getElementById('humanVideoPager');
+                    if (!pager) return;
+                    const pages = Array.from(pager.querySelectorAll('.vp-page'));
+                    const prev = pager.querySelector('.vp-prev');
+                    const next = pager.querySelector('.vp-next');
+                    const dots = Array.from(pager.querySelectorAll('.vp-dot'));
+                    let idx = 0;
+
+                    function pauseHiddenPages(except) {
+                      pages.forEach((p, k) => {
+                        if (k !== except) {
+                          p.querySelectorAll('video').forEach(v => {
+                            try { v.pause(); v.currentTime = 0; } catch (e) {}
+                          });
+                        }
+                      });
+                    }
+
+                    function show(i) {
+                      pages[idx].classList.remove('active');
+                      idx = (i + pages.length) % pages.length;
+                      pages[idx].classList.add('active');
+                      dots.forEach((d, k) => d.classList.toggle('active', k === idx));
+                      pauseHiddenPages(idx);
+                    }
+
+                    prev.addEventListener('click', () => show(idx - 1));
+                    next.addEventListener('click', () => show(idx + 1));
+                    dots.forEach((d, k) => d.addEventListener('click', () => show(k)));
+
+                    pauseHiddenPages(0);
+                  })();
+                </script>
               </div>
+              <!-- =================== END of modified video pager block =================== -->
+
             </td>
           </tr>
         </div> 
