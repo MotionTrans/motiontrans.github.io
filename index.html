@@ -42,15 +42,16 @@
   <!-- ================== Cover (DexWild-like) Styles with Tunable Variables ================== -->
   <style>
     :root{
-      /* ======= 可调变量（封面） ======= */
-      --cover-title-size: clamp(44px, 7.2vw, 128px);   /* 封面主标题字号 */
+      /* ======= 可调变量 ======= */
+      --brand-size: clamp(72px, 10vw, 160px);          /* “MotionTrans” 字号（最大） */
+      --title-rest-size: clamp(18px, 2.2vw, 36px);     /* 其余标题文字字号（较小） */
       --cover-subtitle-size: clamp(16px, 1.8vw, 28px); /* 作者行字号 */
-      --cover-side-gutter: 7vw;                        /* 文字内容距离左右边距（“到左右的距离”） */
+      --cover-side-gutter: 7vw;                        /* 文字距离左右的留白 */
       --cover-max-width: 1400px;                       /* 文案区域最大宽度 */
-      --cover-title-weight: 800;                       /* 主标题字重 */
-      --cover-line-height: 1.06;                       /* 主标题行高 */
-      --cover-top-offset: 0vh;                         /* 往上/下微调文字块位置（正=下移） */
-      --cover-overlay-bg: rgba(0,0,0,0.0);             /* 文案区域半透明底色（可 0~0.35） */
+      --cover-title-weight: 800;                       /* 品牌词字重 */
+      --title-gap: .35em;                              /* 品牌词与小标题的垂直间距 */
+      --cover-top-offset: 0vh;                         /* 垂直微调（正=下移） */
+      --cover-overlay-bg: rgba(0,0,0,0.0);             /* 文案块半透明底色 */
       --cover-cta-gap: 10px;                           /* 按钮间距 */
       --cover-shadow: 0 6px 28px rgba(0,0,0,.55);
       --cover-text-shadow: 2px 2px 12px rgba(0,0,0,.65);
@@ -101,22 +102,40 @@
       background: var(--cover-overlay-bg);
       border-radius: 12px;
     }
+
+    /* ====== 标题：最大只放 “MotionTrans”，其余换行且更小 ====== */
     .cover__title {
-      font-size: var(--cover-title-size);
-      font-weight: var(--cover-title-weight);
-      line-height: var(--cover-line-height);
-      letter-spacing: -0.02em;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       margin: 0 0 12px 0;
     }
+    .cover__title .brand {
+      font-size: var(--brand-size);
+      font-weight: var(--cover-title-weight);
+      line-height: 1.03;
+      letter-spacing: -0.02em;
+    }
+    .cover__title .rest {
+      margin-top: var(--title-gap);
+      font-size: var(--title-rest-size);
+      line-height: 1.2;
+      font-weight: 500;
+      opacity: .98;
+      letter-spacing: 0;
+    }
+    .cover__title .rest .line { display: block; }
+
     .cover__subtitle {
       font-size: var(--cover-subtitle-size);
       font-weight: 500;
       opacity: .96;
-      margin-bottom: 14px;
+      margin-top: 14px;
     }
     .cover__meta {
       font-size: clamp(12px, 1.1vw, 18px);
       opacity: .9;
+      margin-top: 10px;
       margin-bottom: 20px;
     }
     .cover__actions {
@@ -148,7 +167,7 @@
     .section--after-cover { padding-block: 48px; }
     .no-bottom-padding { padding-bottom: 0 !important; }
 
-    /* ====== Video Pager（点分页）基础样式 ====== */
+    /* ====== Video Pager 基础样式（若无需可删） ====== */
     .video-pager .vp-page { display: none; }
     .video-pager .vp-page.active { display: block; }
     .vp-controls {
@@ -162,9 +181,7 @@
     }
     .vp-btn:focus { outline: 2px solid #888; }
     .vp-dots { display: flex; gap: 10px; align-items: center; }
-    .vp-dot {
-      width: 10px; height: 10px; border-radius: 50%; background: #cfcfcf; cursor: pointer;
-    }
+    .vp-dot { width: 10px; height: 10px; border-radius: 50%; background: #cfcfcf; cursor: pointer; }
     .vp-dot.active { background: #333; }
     .video-title { margin-bottom: 8px; font-size: 1rem; }
   </style>
@@ -196,7 +213,7 @@
     </div>
   </nav>
 
-  <!-- ================== 封面（DexWild 风格） ================== -->
+  <!-- ================== 封面（Only “MotionTrans” is huge; the rest is smaller and line-broken） ================== -->
   <header id="top" class="cover" aria-label="Hero cover">
     <!-- 背景：可换为 <img src="resources/your_image.jpg" alt=""> -->
     <video id="bg-video" autoplay loop muted playsinline>
@@ -205,8 +222,12 @@
 
     <div class="cover__overlay">
       <div class="cover__content">
-        <h1 class="cover__title">
-          MotionTrans: Human VR Data Enable Motion-Level Learning for Robotic Manipulation Policies
+        <h1 class="cover__title" aria-label="MotionTrans: Human VR Data Enable Motion-Level Learning for Robotic Manipulation Policies">
+          <span class="brand">MotionTrans</span>
+          <span class="rest">
+            <span class="line">Human VR Data Enable Motion-Level Learning</span>
+            <span class="line">for Robotic Manipulation Policies</span>
+          </span>
         </h1>
 
         <div class="cover__subtitle">
@@ -246,7 +267,7 @@
       </div>
     </div>
   </header>
-
+  
   <!-- ================== Teaser ================== -->
   <section class="section section--after-cover" id="teaser">
     <div class="container">
