@@ -1,15 +1,14 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-55NDKMPMDH"></script>
-	<script>
-		window.dataLayer = window.dataLayer || [];
-		function gtag() { dataLayer.push(arguments); }
-		gtag('js', new Date());
-
-		gtag('config', 'G-55NDKMPMDH');
-	</script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-55NDKMPMDH');
+  </script>
 
   <meta charset="utf-8">
   <meta name="description" content="MotionTrans: Human VR Data Enable Motion-Level Learning for Robotic Manipulation Policies">
@@ -17,65 +16,164 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>MotionTrans</title>
 
-  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
-        rel="stylesheet">
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700;800&family=Noto+Sans:wght@400;500;700&display=swap" rel="stylesheet">
 
+  <!-- CSS libs (kept for the rest of the page) -->
   <link rel="stylesheet" href="./static/css/bulma.min.css">
   <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
   <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
-  <!-- <link rel="stylesheet" href="./static/css/fontawesome.all.min.css"> -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
-  <link rel="stylesheet" href="./static/css/index.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
+  <!-- Icons -->
+  <link rel="icon" href="./resources/favicon.ico">
+  <script src="https://kit.fontawesome.com/006a5775d5.js" crossorigin="anonymous"></script>
+
+  <!-- JS libs (for later sections) -->
   <script src="https://www.youtube.com/iframe_api"></script>
   <script src="./static/js/ajax.googleapis.com_ajax_libs_jquery_3.5.1_jquery.min.js"></script>
   <script src="./static/js/isInViewport.min.js"></script>
-  <!-- <script defer src="./static/js/fontawesome.all.min.js"></script> -->
   <script src="./static/js/bulma-carousel.min.js"></script>
   <script src="./static/js/bulma-slider.min.js"></script>
   <script src="./static/js/index.js"></script>
 
-  <link rel="icon" href="./resources/favicon.ico">
-  
-  <script src="https://kit.fontawesome.com/006a5775d5.js" crossorigin="anonymous"></script>
+  <!-- ================== Cover (DexWild-like) Styles with Tunable Variables ================== -->
+  <style>
+    :root{
+      /* ======= 可调变量（封面） ======= */
+      --cover-title-size: clamp(44px, 7.2vw, 128px);   /* 封面主标题字号 */
+      --cover-subtitle-size: clamp(16px, 1.8vw, 28px); /* 作者行字号 */
+      --cover-side-gutter: 7vw;                        /* 文字内容距离左右边距（“到左右的距离”） */
+      --cover-max-width: 1400px;                       /* 文案区域最大宽度 */
+      --cover-title-weight: 800;                       /* 主标题字重 */
+      --cover-line-height: 1.06;                       /* 主标题行高 */
+      --cover-top-offset: 0vh;                         /* 往上/下微调文字块位置（正=下移） */
+      --cover-overlay-bg: rgba(0,0,0,0.0);             /* 文案区域半透明底色（可 0~0.35） */
+      --cover-cta-gap: 10px;                           /* 按钮间距 */
+      --cover-shadow: 0 6px 28px rgba(0,0,0,.55);
+      --cover-text-shadow: 2px 2px 12px rgba(0,0,0,.65);
+    }
+
+    html, body { height: 100%; margin: 0; font-family: "Google Sans","Noto Sans",system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif; }
+    * { box-sizing: border-box; }
+
+    /* ====== 顶部透明导航（覆盖在封面上） ====== */
+    .navbar.is-transparent { background: transparent; }
+    .navbar.is-transparent .navbar-item,
+    .navbar.is-transparent .navbar-link { color: #fff; }
+    .navbar.is-transparent .navbar-item:hover,
+    .navbar.is-transparent .navbar-link:hover { background: rgba(255,255,255,.08); color: #fff; }
+
+    /* ====== 封面容器 ====== */
+    .cover {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      min-height: 580px;
+      overflow: hidden;
+      background: #000;
+    }
+    .cover video, .cover img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: saturate(1.05) contrast(1.02) brightness(.92);
+    }
+    .cover__overlay {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      padding-left: var(--cover-side-gutter);
+      padding-right: var(--cover-side-gutter);
+      background: linear-gradient(to bottom, rgba(0,0,0,.15) 0%, rgba(0,0,0,.35) 60%, rgba(0,0,0,.5) 100%);
+    }
+    .cover__content {
+      width: min(var(--cover-max-width), calc(100% - 2*var(--cover-side-gutter)));
+      margin-top: var(--cover-top-offset);
+      text-align: center;
+      color: #fff;
+      text-shadow: var(--cover-text-shadow);
+      padding: 18px 0;
+      background: var(--cover-overlay-bg);
+      border-radius: 12px;
+    }
+    .cover__title {
+      font-size: var(--cover-title-size);
+      font-weight: var(--cover-title-weight);
+      line-height: var(--cover-line-height);
+      letter-spacing: -0.02em;
+      margin: 0 0 12px 0;
+    }
+    .cover__subtitle {
+      font-size: var(--cover-subtitle-size);
+      font-weight: 500;
+      opacity: .96;
+      margin-bottom: 14px;
+    }
+    .cover__meta {
+      font-size: clamp(12px, 1.1vw, 18px);
+      opacity: .9;
+      margin-bottom: 20px;
+    }
+    .cover__actions {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: var(--cover-cta-gap);
+      margin-top: 6px;
+    }
+    .cover__btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 16px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.6);
+      color: #fff;
+      text-decoration: none;
+      backdrop-filter: blur(4px);
+      background: rgba(0,0,0,.25);
+      transition: transform .15s ease, background .15s ease, border-color .15s ease;
+      box-shadow: var(--cover-shadow);
+      font-size: 14px;
+      line-height: 1;
+    }
+    .cover__btn:hover { transform: translateY(-1px); background: rgba(255,255,255,.08); border-color: #fff; }
+
+    /* ====== 主体区基础留白 ====== */
+    .section--after-cover { padding-block: 48px; }
+    .no-bottom-padding { padding-bottom: 0 !important; }
+
+    /* ====== Video Pager（点分页）基础样式 ====== */
+    .video-pager .vp-page { display: none; }
+    .video-pager .vp-page.active { display: block; }
+    .vp-controls {
+      display: flex; align-items: center; justify-content: center;
+      gap: 16px; margin: 8px 0 16px;
+    }
+    .vp-btn {
+      border: none; width: 40px; height: 40px; border-radius: 999px;
+      background: #222; color: #fff; line-height: 40px; text-align: center;
+      font-size: 20px; cursor: pointer;
+    }
+    .vp-btn:focus { outline: 2px solid #888; }
+    .vp-dots { display: flex; gap: 10px; align-items: center; }
+    .vp-dot {
+      width: 10px; height: 10px; border-radius: 50%; background: #cfcfcf; cursor: pointer;
+    }
+    .vp-dot.active { background: #333; }
+    .video-title { margin-bottom: 8px; font-size: 1rem; }
+  </style>
 </head>
+
 <body>
 
-  <!-- <div class="full-page-image">
-    <video id="bg-video" autoplay loop muted playsinline>
-        <source src="resources/test_video.mp4" type="video/mp4">
-    </video>
-  </div> -->
-  <body>
-
-  <div class="full-page-image" style="position: relative; height: 100vh; overflow: hidden;">
-    <video id="bg-video" autoplay loop muted playsinline style="width: 100%; height: 100%; object-fit: cover;">
-        <source src="resources/test_video.mp4" type="video/mp4">
-    </video>
-
-    <!-- 文字覆盖层 -->
-    <div class="overlay-text" style="
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        text-align: center;
-        color: white;
-        text-shadow: 2px 2px 10px rgba(0,0,0,0.7);">
-      <h1 class="title is-1" style="font-weight: bold" style="font-size: 5em;">
-        MotionTrans: Human VR Data Enable Motion-Level Learning for Robotic Manipulation Policies
-      </h1>
-      <div class="is-size-4" style="font-size: 1.5em;">
-        <span class="author-block">Author1*</span>&nbsp;&nbsp;
-        <span class="author-block">Author2*</span>&nbsp;&nbsp;
-        <span class="author-block">Author3*</span>&nbsp;&nbsp;
-        <span class="author-block">Author4*</span>
-      </div>
-    </div>
-  </div>
-
-  <nav class="navbar" role="navigation" aria-label="main navigation">
+  <!-- ===== 透明导航（覆盖在封面顶端） ===== -->
+  <nav class="navbar is-transparent" role="navigation" aria-label="main navigation" style="position:absolute; width:100%; z-index:10;">
     <div class="navbar-brand">
       <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
         <span aria-hidden="true"></span>
@@ -84,833 +182,665 @@
       </a>
     </div>
     <div class="navbar-menu">
-      <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
-        <a class="navbar-item" href="">
-        <span class="icon">
-            <i class="fas fa-home"></i>
-        </span>
+      <div class="navbar-start" style="flex-grow:1; justify-content:center;">
+        <a class="navbar-item" href="#top">
+          <span class="icon"><i class="fas fa-home"></i></span>
         </a>
-  
         <div class="navbar-item has-dropdown is-hoverable">
-          <a class="navbar-link">
-            Related Research
-          </a>
+          <a class="navbar-link">Related Research</a>
           <div class="navbar-dropdown">
-            <a class="navbar-item" href="https://robot-tv.github.io">
-              Open-TeleVision
-            </a>
+            <a class="navbar-item" href="https://robot-tv.github.io" target="_blank" rel="noopener">Open-TeleVision</a>
           </div>
         </div>
       </div>
-  
     </div>
   </nav>
-<section class="hero">
-  <div class="hero-body">
-    <div class="container">
-      <div class="columns is-centered">
-        <div class="column has-text-centered">
-          <h1 class="title is-1 publication-title">
-             <span style="font-weight: normal;">MotionTrans: Human VR Data Enable Motion-Level Learning for Robotic Manipulation Policies
-          </h1>
-          <div class="is-size-4 publication-authors">
-            <span class="author-block">
-              <a href=>Auther1*</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              <a href=>Auther1*</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              <a href=>Auther1*</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              <a href=>Auther1*</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            </span>
-          </div>
-          
-          <div class="column has-text-centered">
-            <div class="publication-links">
-              <span class="link-block">
-                <a href="https://arxiv.org/" target="_blank"
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                      <i class="fas fa-file-pdf"></i>
-                  </span>
-                  <span>Paper</span>
-                </a>
-              </span>
-              <span class="link-block">
-                <a href="https://arxiv.org/" target="_blank"
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                      <i class="ai ai-arxiv"></i>
-                  </span>
-                  <span>arXiv</span>
-                </a>
-              </span>
-              
-              <!-- Video Link. -->
-              <span class="link-block">
-                <a href="https://huggingface.co/" class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                    <img src="resources/hf-logo.png" alt="Hugging Face Logo" style="width: 1em; height: 1em;">
-                  </span>
-                  <span>Datasets</span>
-                </a>
-              </span>
-<!-- 
-			        <span class="link-block">
-                <a href=""
-                    class="external-link button is-normal is-rounded is-dark" target="_blank">
-                    <span class="icon">
-                      <i class="fas fa-wrench"></i>
-                    </span>
-                    <span>Hardware</span>
-                </a>
-              </span> -->
 
-              <!-- <span class="link-block">
-                <a href="https://www.bilibili.com/"
-                    class="external-link button is-normal is-rounded is-dark" target="_blank">
-                    <span class="icon">
-                      <i class="fab fa-bilibili"></i>
-                    </span>
-                    <span>Bilibili</span>
-                </a>
-              </span> -->
-              
-              <!-- <span class="link-block">
-                <a href="https://x.com/xuxin_cheng" target="_blank"
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                      <i class="fab fa-twitter"></i>
-                  </span>
-                  <span>Summary</span>
-                </a>
-              </span> -->
+  <!-- ================== 封面（DexWild 风格） ================== -->
+  <header id="top" class="cover" aria-label="Hero cover">
+    <!-- 背景：可换为 <img src="resources/your_image.jpg" alt=""> -->
+    <video id="bg-video" autoplay loop muted playsinline>
+      <source src="resources/test_video.mp4" type="video/mp4">
+    </video>
 
-              <span class="link-block">
-                <a href="https://github.com/" class="external-link button is-normal is-rounded is-dark" target="_blank">
-                  <span class="icon">
-                    <i class="fab fa-github"></i>
-                  </span>
-                  <span>Code</span>
-                </a>
-              </span>
+    <div class="cover__overlay">
+      <div class="cover__content">
+        <h1 class="cover__title">
+          MotionTrans: Human VR Data Enable Motion-Level Learning for Robotic Manipulation Policies
+        </h1>
 
-              <span class="link-block">
-                <a href="https://github.com/" class="external-link button is-normal is-rounded is-dark" target="_blank">
-                  <span class="icon">
-                    <i class="fab fa-github"></i>
-                  </span>
-                  <span>Human Data Collection (ZED)</span>
-                </a>
-              </span>
+        <div class="cover__subtitle">
+          <span class="author-block">Author1*</span>&nbsp;·&nbsp;
+          <span class="author-block">Author2*</span>&nbsp;·&nbsp;
+          <span class="author-block">Author3*</span>&nbsp;·&nbsp;
+          <span class="author-block">Author4*</span>
+        </div>
+
+        <div class="cover__meta">
+          <em>* equal contributions</em> &nbsp;&nbsp;|&nbsp;&nbsp; Carnegie Mellon University &nbsp;&nbsp;|&nbsp;&nbsp; RSS&nbsp;2025
+        </div>
+
+        <div class="cover__actions">
+          <a class="cover__btn" href="https://arxiv.org/" target="_blank" rel="noopener">
+            <i class="fas fa-file-pdf"></i><span>Paper (PDF)</span>
+          </a>
+          <a class="cover__btn" href="https://arxiv.org/" target="_blank" rel="noopener">
+            <i class="ai ai-arxiv"></i><span>arXiv</span>
+          </a>
+          <a class="cover__btn" href="https://huggingface.co/" target="_blank" rel="noopener">
+            <img src="resources/hf-logo.png" alt="" style="width:1em;height:1em;"><span>Datasets</span>
+          </a>
+          <a class="cover__btn" href="https://github.com/" target="_blank" rel="noopener">
+            <i class="fab fa-github"></i><span>Code</span>
+          </a>
+          <a class="cover__btn" href="https://github.com/" target="_blank" rel="noopener">
+            <i class="fas fa-code"></i><span>Training Code</span>
+          </a>
+          <a class="cover__btn" href="#" target="_blank" rel="noopener">
+            <i class="fas fa-microchip"></i><span>Hardware Guide</span>
+          </a>
+          <a class="cover__btn" href="#" target="_blank" rel="noopener">
+            <i class="fas fa-clipboard-list"></i><span>Data Collection Guide</span>
+          </a>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </header>
 
-<!-- <section class="section" style="padding-top: 0; padding-bottom: 0">
-  <div class="container">
-    <h4 style="text-align: center;">In Submission to XXX conference</h4>
-  </div>
-</section> -->
-
-<section class="section" style="padding-bottom: 0">
-  <div class="container">
-    <div id="method_video" class="columns is-centered has-text-centered">
-      <div class="column is-two-thirds no-bottom-padding">
-        <center>
-          <video playsinline autoplay loop muted controls src="resources/Teaser.mp4" width="100%" preload="metadata"
-            style="border-radius:10px;"></video>
-        </center>
-      </div>
-    </div>
-
-    <h4 style="text-align: center;">Teaser</h4>
-  </div>
-</section>
-
-  <section class="section">
+  <!-- ================== Teaser ================== -->
+  <section class="section section--after-cover" id="teaser">
     <div class="container">
-      <!-- Abstract. -->
+      <div id="method_video" class="columns is-centered has-text-centered">
+        <div class="column is-two-thirds no-bottom-padding">
+          <center>
+            <video playsinline autoplay loop muted controls src="resources/Teaser.mp4" width="100%" preload="metadata"
+              style="border-radius:10px;"></video>
+          </center>
+        </div>
+      </div>
+      <h4 style="text-align: center;">Teaser</h4>
+    </div>
+  </section>
+
+  <!-- ================== Abstract ================== -->
+  <section class="section" id="abstract">
+    <div class="container">
       <div class="columns is-centered has-text-centered">
         <div class="column is-two-thirds">
           <h2 class="title is-2">Abstract</h2>
           <div class="content has-text-justified">
             <p>
-              Scaling real robot data is a key bottleneck in imitation learning, leading to the use of auxiliary data for policy training. While other aspects of robotic manipulation such as image or language understanding may be learned from internet-based datasets, acquiring motion knowledge remains challenging. Human data, with its rich diversity of manipulation behaviors, offers a valuable resource for this purpose. While previous works show that using human data can bring benefits, such as improving robustness and training efficiency, it remains unclear whether it can realize its greatest advantage: enabling robot policies to directly learn new motions for task completion. In this paper, we systematically explore this potential through multi-task human-robot cotraining. We introduce MotionTrans, a framework that includes a data collection system, a human data transformation pipeline, and a weighted cotraining strategy. By cotraining 30 human-robot tasks simultaneously, we direcly transfer more than 10 motions from human data to deployable end-to-end robot policies. Notably, 9 tasks achieve non-trivial success rates in zero-shot manner. MotionTrans also significantly enhances pretraining-finetuning performance (+40% success rate). Through ablation study, we also identify key factors for successful motion learning: cotraining with robot data. These findings unlock the potential of motion-level learning from human data, offering insights into its effective use for training robotic manipulation policies. All data, code, and model weights will be open-sourced.
+              Scaling real robot data is a key bottleneck in imitation learning, leading to the use of auxiliary data for policy training. While other aspects of robotic manipulation such as image or language understanding may be learned from internet-based datasets, acquiring motion knowledge remains challenging. Human data, with its rich diversity of manipulation behaviors, offers a valuable resource for this purpose. While previous works show that using human data can bring benefits, such as improving robustness and training efficiency, it remains unclear whether it can realize its greatest advantage: enabling robot policies to directly learn new motions for task completion. In this paper, we systematically explore this potential through multi-task human-robot cotraining. We introduce MotionTrans, a framework that includes a data collection system, a human data transformation pipeline, and a weighted cotraining strategy. By cotraining 30 human-robot tasks simultaneously, we directly transfer more than 10 motions from human data to deployable end-to-end robot policies. Notably, 9 tasks achieve non-trivial success rates in zero-shot manner. MotionTrans also significantly enhances pretraining-finetuning performance (+40% success rate). Through ablation study, we identify key factors for successful motion learning: cotraining with robot data. These findings unlock the potential of motion-level learning from human data, offering insights into its effective use for training robotic manipulation policies. All data, code, and model weights will be open-sourced.
             </p>
           </div>
         </div>
       </div>
     </div>
+  </section>
 
-
-  <section class="section">
+  <!-- ================== Collecting Human and Robot Demonstrations ================== -->
+  <section class="section" id="collection">
     <div class="container">
       <div class="columns is-centered">
         <div class="column is-full-width">
           <h2 class="title is-2" style="text-align: center; padding-bottom: 10px;">Collecting Human and Robot Demonstrations</h2>
-          <tr>
-            <td>
-              <!-- START: Hardware + Data Collection showcase (image left, video right) -->
-              <style>
-                /* Equal-height helpers scoped to this block */
-                .equal-height-row { align-items: stretch !important; }
-                .equal-height-row .col-eq { display: flex; }
-                .equal-height-row .col-eq .card { width: 100%; display: flex; flex-direction: column; }
-                .equal-height-row .card-body { display: flex; flex-direction: column; }
-                /* Keep media same height using aspect-ratio; remove object-fit to avoid cropping */
-                .equal-height-row .media-fixed {
-                  width: 100%;
-                  aspect-ratio: 16 / 9;
-                  object-fit: cover;
-                  border-radius: .5rem;
-                }
-              </style>
+          <div>
+            <!-- START: Hardware + Data Collection showcase -->
+            <style>
+              /* Equal-height helpers scoped to this block */
+              .equal-height-row { align-items: stretch !important; }
+              .equal-height-row .col-eq { display: flex; }
+              .equal-height-row .col-eq .card { width: 100%; display: flex; flex-direction: column; }
+              .equal-height-row .card-body { display: flex; flex-direction: column; }
+              /* Keep media same height using aspect-ratio */
+              .equal-height-row .media-fixed {
+                width: 100%;
+                aspect-ratio: 16 / 9;
+                object-fit: cover;
+                border-radius: .5rem;
+              }
+            </style>
 
-              <div class="row equal-height-row">
-                <!-- Left: hardware illustration -->
-                <div class="col-12 col-md-6 mb-4 col-eq">
-                  <div class="card shadow-sm border-0 h-100">
-                    <div class="card-body text-center">
-                      <h5 class="mb-3">Hardware System: VR-based Human Data Capture + Single-arm Robot Platform</h5>
-                      <img src="./resources/main_hardware.png" class="img-fluid media-fixed" alt="MotionTrans hardware overview">
-                      <p class="mt-3 mb-0 text-muted small">
-                        We synchronize VR headset/controllers and multi-view cameras to capture 3D hand trajectories,
-                        egocentric video, and robot state with precise time alignment.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Right: data collection demo video -->
-                <div class="col-12 col-md-6 mb-4 col-eq">
-                  <div class="card shadow-sm border-0 h-100">
-                    <div class="card-body text-center">
-                      <h5 class="mb-3">Data Collection Demo</h5>
-                      <video class="media-fixed" autoplay muted loop playsinline controls preload="metadata"
-                            poster="./resources/data_collection_poster.jpg">
-                        <source src="resources/human_data_collection/box_panda_box.mp4" type="video/mp4">
-                        Your browser does not support the video tag.
-                      </video>
-                      <p class="mt-3 mb-0 text-muted small">
-                        During collection we log hand keypoints, egocentric observations, and textual annotations under a unified clock,
-                        making downstream alignment and training straightforward.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Dataset summary (refined copy) -->
-              <div class="row">
-                <div class="col">
-                  <div class="alert alert-light border rounded shadow-sm">
-                    <h5 class="mb-2">MotionTrans Dataset at a Glance</h5>
-                    <p class="mb-0">
-                      We collected <b>3,213</b> demonstrations across <b>15</b> human tasks and <b>15</b> robot tasks in <b>10+</b> real-world scenes.
-                      Tasks are grouped by motion-similar skill categories to support cross-embodiment (Human→Robot) co-training and transfer.
+            <div class="row equal-height-row">
+              <!-- Left: hardware illustration -->
+              <div class="col-12 col-md-6 mb-4 col-eq">
+                <div class="card shadow-sm border-0 h-100">
+                  <div class="card-body text-center">
+                    <h5 class="mb-3">Hardware System: VR-based Human Data Capture + Single-arm Robot Platform</h5>
+                    <img src="./resources/main_hardware.png" class="img-fluid media-fixed" alt="MotionTrans hardware overview">
+                    <p class="mt-3 mb-0 text-muted small">
+                      We synchronize VR headset/controllers and multi-view cameras to capture 3D hand trajectories,
+                      egocentric video, and robot state with precise time alignment.
                     </p>
                   </div>
                 </div>
               </div>
-              <!-- END: Hardware + Data Collection showcase -->
 
-
-
-
-              <br>
-
-              <!-- ================== START of modified video pager block (2 cols x 3 rows) ================== -->
-              <h3 class="title is-3" style="text-align:center; margin: 8px 0 12px;">Human Tasks</h3>
-              <div id="humanVideoPager" class="video-pager">
-                <!-- Controls -->
-                <div class="vp-controls">
-                  <button class="vp-btn vp-prev" aria-label="Previous page">‹</button>
-                  <div class="vp-dots" role="tablist" aria-label="Video pages">
-                    <span class="vp-dot active" role="tab" aria-selected="true" aria-controls="vp-page-1"></span>
-                    <span class="vp-dot" role="tab" aria-selected="false" aria-controls="vp-page-2"></span>
-                    <span class="vp-dot" role="tab" aria-selected="false" aria-controls="vp-page-3"></span>
-                  </div>
-                  <button class="vp-btn vp-next" aria-label="Next page">›</button>
-                </div>
-
-                <!-- Page 1 (6 videos) -->
-                <div id="vp-page-1" class="vp-page active">
-                  <div class="row">
-                    <div class="col-12 col-md-6 mb-4">
-                      <h5 class="video-title">Unplug the white charger</h5>
-                      <video autoplay muted loop playsinline controls preload="metadata"
-                            src="resources/human_data/unplug_the_white_charger_0.mp4" style="border-radius:10px; width:100%;"></video>
-                    </div>
-                    <div class="col-12 col-md-6 mb-4">
-                      <h5 class="video-title">Drop bread to the green bucket</h5>
-                      <video autoplay muted loop playsinline controls preload="metadata"
-                            src="resources/human_data/press_red_dice_to_make_it_rotation_0.mp4" style="border-radius:10px; width:100%;"></video>
-                    </div>
-                    <div class="col-12 col-md-6 mb-4">
-                      <h5 class="video-title">Press the stapler</h5>
-                      <video autoplay muted loop playsinline controls preload="metadata"
-                            src="resources/human_data/press_the_stapler_0.mp4" style="border-radius:10px; width:100%;"></video>
-                    </div>
-                    <div class="col-12 col-md-6 mb-4">
-                      <h5 class="video-title">Put orange to the green bucket</h5>
-                      <video autoplay muted loop playsinline controls preload="metadata"
-                            src="resources/human_data/put_orange_to_the_green_bucket_0.mp4" style="border-radius:10px; width:100%;"></video>
-                    </div>
-                    <div class="col-12 col-md-6 mb-4">
-                      <h5 class="video-title">Wipe blue towel on the table and push it to the bulky bottle</h5>
-                      <video autoplay muted loop playsinline controls preload="metadata"
-                            src="resources/human_data/wipe_blue_towel_on_the_table_and_push_it_to_the_bulky_bottle_0.mp4" style="border-radius:10px; width:100%;"></video>
-                    </div>
-                    <div class="col-12 col-md-6 mb-4">
-                      <h5 class="video-title">Close silver laptop</h5>
-                      <video autoplay muted loop playsinline controls preload="metadata"
-                            src="resources/human_data/close_silver_laptop_0.mp4" style="border-radius:10px; width:100%;"></video>
-                    </div>
+              <!-- Right: data collection demo video -->
+              <div class="col-12 col-md-6 mb-4 col-eq">
+                <div class="card shadow-sm border-0 h-100">
+                  <div class="card-body text-center">
+                    <h5 class="mb-3">Data Collection Demo</h5>
+                    <video class="media-fixed" autoplay muted loop playsinline controls preload="metadata"
+                          poster="./resources/data_collection_poster.jpg">
+                      <source src="resources/human_data_collection/box_panda_box.mp4" type="video/mp4">
+                      Your browser does not support the video tag.
+                    </video>
+                    <p class="mt-3 mb-0 text-muted small">
+                      During collection we log hand keypoints, egocentric observations, and textual annotations under a unified clock,
+                      making downstream alignment and training straightforward.
+                    </p>
                   </div>
                 </div>
-
-                <!-- Page 2 (6 videos) -->
-                <div id="vp-page-2" class="vp-page">
-                  <div class="row">
-                    <div class="col-12 col-md-6 mb-4">
-                      <h5 class="video-title">Put mango to pink bowl while avoiding obstacle by bypassing</h5>
-                      <video autoplay muted loop playsinline controls preload="metadata"
-                            src="resources/human_data/put_mango_to_pink_bowl_while_avoiding_obstacle_by_bypassing_0.mp4" style="border-radius:10px; width:100%;"></video>
-                    </div>
-                    <div class="col-12 col-md-6 mb-4">
-                      <h5 class="video-title">Put mango to the pink bowl while avoiding obstacle by lifting</h5>
-                      <video autoplay muted loop playsinline controls preload="metadata"
-                            src="resources/human_data/put_mango_to_the_pink_bowl_while_avoiding_obstacle_by_lifting.mp4" style="border-radius:10px; width:100%;"></video>
-                    </div>
-                    <div class="col-12 col-md-6 mb-4">
-                      <h5 class="video-title">Press red dice to make it rotation</h5>
-                      <video autoplay muted loop playsinline controls preload="metadata"
-                            src="resources/human_data/press_red_dice_to_make_it_rotation_0.mp4" style="border-radius:10px; width:100%;"></video>
-                    </div>
-                    <div class="col-12 col-md-6 mb-4">
-                      <h5 class="video-title">Put banana to the white plate</h5>
-                      <video autoplay muted loop playsinline controls preload="metadata"
-                            src="resources/human_data/put_banana_to_the_white_plate_0.mp4" style="border-radius:10px; width:100%;"></video>
-                    </div>
-                    <div class="col-12 col-md-6 mb-4">
-                      <h5 class="video-title">Pour bottle to the pink bowl</h5>
-                      <video autoplay muted loop playsinline controls preload="metadata"
-                            src="resources/human_data/pour_bottle_to_the_pink_bowl.mp4" style="border-radius:10px; width:100%;"></video>
-                    </div>
-                    <div class="col-12 col-md-6 mb-4">
-                      <h5 class="video-title">Put toy bear to the black box</h5>
-                      <video autoplay muted loop playsinline controls preload="metadata"
-                            src="resources/human_data/put_toy_bear_to_the_black_box_0.mp4" style="border-radius:10px; width:100%;"></video>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Page 3 (3 videos) -->
-                <div id="vp-page-3" class="vp-page">
-                  <div class="row">
-                    <div class="col-12 col-md-6 mb-4">
-                      <h5 class="video-title">First open the white cap style box then put toy panda to the box</h5>
-                      <video autoplay muted loop playsinline controls preload="metadata"
-                            src="resources/human_data/first_open_the_white_cap_style_box_then_put_toy_panda_to_the_box_0.mp4" style="border-radius:10px; width:100%;"></video>
-                    </div>
-                    <div class="col-12 col-md-6 mb-4">
-                      <h5 class="video-title">Fold the blue towel</h5>
-                      <video autoplay muted loop playsinline controls preload="metadata"
-                            src="resources/human_data/fold_the_blue_towel_0.mp4" style="border-radius:10px; width:100%;"></video>
-                    </div>
-                    <div class="col-12 col-md-6 mb-4">
-                      <h5 class="video-title">Pour milk bottle to the yellow pan</h5>
-                      <video autoplay muted loop playsinline controls preload="metadata"
-                            src="resources/human_data/pour_milk_bottle_to_the_yellow_pan_0.mp4" style="border-radius:10px; width:100%;"></video>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Minimal CSS scoped to this block -->
-                <style>
-                  .video-pager .vp-page { display: none; }
-                  .video-pager .vp-page.active { display: block; }
-                  .vp-controls {
-                    display: flex; align-items: center; justify-content: center;
-                    gap: 16px; margin: 8px 0 16px;
-                  }
-                  .vp-btn {
-                    border: none; width: 40px; height: 40px; border-radius: 999px;
-                    background: #222; color: #fff; line-height: 40px; text-align: center;
-                    font-size: 20px; cursor: pointer;
-                  }
-                  .vp-btn:focus { outline: 2px solid #888; }
-                  .vp-dots { display: flex; gap: 10px; align-items: center; }
-                  .vp-dot {
-                    width: 10px; height: 10px; border-radius: 50%; background: #cfcfcf; cursor: pointer;
-                  }
-                  .vp-dot.active { background: #333; }
-                  .video-title { margin-bottom: 8px; font-size: 1rem; }
-                </style>
-
-                <!-- Minimal JS scoped to this block -->
-                <script>
-                  (function () {
-                    const pager = document.getElementById('humanVideoPager');
-                    if (!pager) return;
-                    const pages = Array.from(pager.querySelectorAll('.vp-page'));
-                    const prev = pager.querySelector('.vp-prev');
-                    const next = pager.querySelector('.vp-next');
-                    const dots = Array.from(pager.querySelectorAll('.vp-dot'));
-                    let idx = 0;
-
-                    function pauseHiddenPages(except) {
-                      pages.forEach((p, k) => {
-                        if (k !== except) {
-                          p.querySelectorAll('video').forEach(v => {
-                            try { v.pause(); v.currentTime = 0; } catch (e) {}
-                          });
-                        }
-                      });
-                    }
-
-                    function show(i) {
-                      pages[idx].classList.remove('active');
-                      idx = (i + pages.length) % pages.length;
-                      pages[idx].classList.add('active');
-                      dots.forEach((d, k) => d.classList.toggle('active', k === idx));
-                      pauseHiddenPages(idx);
-                    }
-
-                    prev.addEventListener('click', () => show(idx - 1));
-                    next.addEventListener('click', () => show(idx + 1));
-                    dots.forEach((d, k) => d.addEventListener('click', () => show(k)));
-
-                    pauseHiddenPages(0);
-                  })();
-                </script>
               </div>
-              <!-- =================== END of modified video pager block =================== -->
+            </div>
 
-              <!-- ================== START of modified video pager block (2 cols x 3 rows) ================== -->
-              <h3 class="title is-3" style="text-align:center; margin: 24px 0 12px;">Robot Tasks</h3>
-              <div id="robotVideoPager" class="video-pager">
-                <!-- Controls -->
-                <div class="vp-controls">
-                  <button class="vp-btn vp-prev" aria-label="Previous page">‹</button>
-                  <div class="vp-dots" role="tablist" aria-label="Video pages">
-                    <span class="vp-dot active" role="tab" aria-selected="true" aria-controls="rvp-page-1"></span>
-                    <span class="vp-dot" role="tab" aria-selected="false" aria-controls="rvp-page-2"></span>
-                    <span class="vp-dot" role="tab" aria-selected="false" aria-controls="rvp-page-3"></span>
-                  </div>
-                  <button class="vp-btn vp-next" aria-label="Next page">›</button>
+            <!-- Dataset summary -->
+            <div class="row">
+              <div class="col">
+                <div class="alert alert-light border rounded shadow-sm">
+                  <h5 class="mb-2">MotionTrans Dataset at a Glance</h5>
+                  <p class="mb-0">
+                    We collected <b>3,213</b> demonstrations across <b>15</b> human tasks and <b>15</b> robot tasks in <b>10+</b> real-world scenes.
+                    Tasks are grouped by motion-similar skill categories to support cross-embodiment (Human→Robot) co-training and transfer.
+                  </p>
                 </div>
-
-                <!-- Page 1 (6 videos) -->
-                <div id="rvp-page-1" class="vp-page active">
-                  <div class="row">
-                    <div class="col-12 col-md-6 mb-4">
-                      <h5 class="video-title">Push orange cube to the bulky bottle</h5>
-                      <video autoplay muted loop playsinline controls preload="metadata"
-                            src="resources/robot_data/push_orange_cube_to_the_bulky_bottle_0.mp4" style="border-radius:10px; width:100%;"></video>
-                    </div>
-                    <div class="col-12 col-md-6 mb-4">
-                      <h5 class="video-title">Put toy panda to the box</h5>
-                      <video autoplay muted loop playsinline controls preload="metadata"
-                            src="resources/robot_data/put_toy_panda_to_the_box_0.mp4" style="border-radius:10px; width:100%;"></video>
-                    </div>
-                    <div class="col-12 col-md-6 mb-4">
-                      <h5 class="video-title">Put bread to the red pad</h5>
-                      <video autoplay muted loop playsinline controls preload="metadata"
-                            src="resources/robot_data/put_bread_to_the_red_pad_0.mp4" style="border-radius:10px; width:100%;"></video>
-                    </div>
-                    <div class="col-12 col-md-6 mb-4">
-                      <h5 class="video-title">Open the white cap style box</h5>
-                      <video autoplay muted loop playsinline controls preload="metadata"
-                            src="resources/robot_data/open_the_white_cap_style_box_0.mp4" style="border-radius:10px; width:100%;"></video>
-                    </div>
-                    <div class="col-12 col-md-6 mb-4">
-                      <h5 class="video-title">Drop black bottle to purple bucket</h5>
-                      <video autoplay muted loop playsinline controls preload="metadata"
-                            src="resources/robot_data/drop_black_bottle_to_purple_bucket_0.mp4" style="border-radius:10px; width:100%;"></video>
-                    </div>
-                    <div class="col-12 col-md-6 mb-4">
-                      <h5 class="video-title">Pour cola to the red cup</h5>
-                      <video autoplay muted loop playsinline controls preload="metadata"
-                            src="resources/robot_data/pour_coak_to_the_red_cup_0.mp4" style="border-radius:10px; width:100%;"></video>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Page 2 (≤6 videos) -->
-                <div id="rvp-page-2" class="vp-page">
-                  <div class="row">
-                    <div class="col-12 col-md-6 mb-4">
-                      <h5 class="video-title">Move red dice to the bulky bottle</h5>
-                      <video autoplay muted loop playsinline controls preload="metadata"
-                            src="resources/robot_data/move_red_dice_to_the_bulky_bottle_0.mp4" style="border-radius:10px; width:100%;"></video>
-                    </div>
-                    <div class="col-12 col-md-6 mb-4">
-                      <h5 class="video-title">Flip down the black bottle</h5>
-                      <video autoplay muted loop playsinline controls preload="metadata"
-                            src="resources/robot_data/flip_down_the_black_bottle_0.mp4" style="border-radius:10px; width:100%;"></video>
-                    </div>
-                    <div class="col-12 col-md-6 mb-4">
-                      <h5 class="video-title">Press the pink mouse</h5>
-                      <video autoplay muted loop playsinline controls preload="metadata"
-                            src="resources/robot_data/press_the_pink_mouse_0.mp4" style="border-radius:10px; width:100%;"></video>
-                    </div>
-                    <div class="col-12 col-md-6 mb-4">
-                      <h5 class="video-title">Put bread to the high black platform</h5>
-                      <video autoplay muted loop playsinline controls preload="metadata"
-                            src="resources/robot_data/put_bread_to_the_high_black_platform_0.mp4" style="border-radius:10px; width:100%;"></video>
-                    </div>
-                    <div class="col-12 col-md-6 mb-4">
-                      <h5 class="video-title">Put Capybara to the purple pad</h5>
-                      <video autoplay muted loop playsinline controls preload="metadata"
-                            src="resources/robot_data/put_Capybara_to_the_purple_pad_0.mp4" style="border-radius:10px; width:100%;"></video>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Page 3 (≤6 videos) -->
-                <div id="rvp-page-3" class="vp-page">
-                  <div class="row">
-                    <div class="col-12 col-md-6 mb-4">
-                      <h5 class="video-title">Put chilli to the white plate</h5>
-                      <video autoplay muted loop playsinline controls preload="metadata"
-                            src="resources/robot_data/put_chilli_to_the_white_plate_0.mp4" style="border-radius:10px; width:100%;"></video>
-                    </div>
-                    <div class="col-12 col-md-6 mb-4">
-                      <h5 class="video-title">Wipe blue towel on the table and push it left or right to the pink bowl</h5>
-                      <video autoplay muted loop playsinline controls preload="metadata"
-                            src="resources/robot_data/wipe_blue_towel_on_the_table_and_push_it_left_or_right_to_the_pink_bowl_0.mp4" style="border-radius:10px; width:100%;"></video>
-                    </div>
-                    <div class="col-12 col-md-6 mb-4">
-                      <h5 class="video-title">Put mango to the pink bowl</h5>
-                      <video autoplay muted loop playsinline controls preload="metadata"
-                            src="resources/robot_data/put_mango_to_the_pink_bowl_0.mp4" style="border-radius:10px; width:100%;"></video>
-                    </div>
-                    <div class="col-12 col-md-6 mb-4">
-                      <h5 class="video-title">Put cucumber to purple bucket</h5>
-                      <video autoplay muted loop playsinline controls preload="metadata"
-                            src="resources/robot_data/put_cucumber_to_purple_bucket_0.mp4" style="border-radius:10px; width:100%;"></video>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Minimal CSS scoped to this block -->
-                <style>
-                  .video-pager .vp-page { display: none; }
-                  .video-pager .vp-page.active { display: block; }
-                  .vp-controls {
-                    display: flex; align-items: center; justify-content: center;
-                    gap: 16px; margin: 8px 0 16px;
-                  }
-                  .vp-btn {
-                    border: none; width: 40px; height: 40px; border-radius: 999px;
-                    background: #222; color: #fff; line-height: 40px; text-align: center;
-                    font-size: 20px; cursor: pointer;
-                  }
-                  .vp-btn:focus { outline: 2px solid #888; }
-                  .vp-dots { display: flex; gap: 10px; align-items: center; }
-                  .vp-dot {
-                    width: 10px; height: 10px; border-radius: 50%; background: #cfcfcf; cursor: pointer;
-                  }
-                  .vp-dot.active { background: #333; }
-                  .video-title { margin-bottom: 8px; font-size: 1rem; }
-                </style>
-
-                <!-- Minimal JS scoped to this block -->
-                <script>
-                  (function () {
-                    const pager = document.getElementById('robotVideoPager');
-                    if (!pager) return;
-                    const pages = Array.from(pager.querySelectorAll('.vp-page'));
-                    const prev = pager.querySelector('.vp-prev');
-                    const next = pager.querySelector('.vp-next');
-                    const dots = Array.from(pager.querySelectorAll('.vp-dot'));
-                    let idx = 0;
-
-                    function pauseHiddenPages(except) {
-                      pages.forEach((p, k) => {
-                        if (k !== except) {
-                          p.querySelectorAll('video').forEach(v => {
-                            try { v.pause(); v.currentTime = 0; } catch (e) {}
-                          });
-                        }
-                      });
-                    }
-
-                    function show(i) {
-                      pages[idx].classList.remove('active');
-                      idx = (i + pages.length) % pages.length;
-                      pages[idx].classList.add('active');
-                      dots.forEach((d, k) => d.classList.toggle('active', k === idx));
-                      pauseHiddenPages(idx);
-                    }
-
-                    prev.addEventListener('click', () => show(idx - 1));
-                    next.addEventListener('click', () => show(idx + 1));
-                    dots.forEach((d, k) => d.addEventListener('click', () => show(k)));
-
-                    pauseHiddenPages(0);
-                  })();
-                </script>
               </div>
-              <!-- =================== END of modified video pager block =================== -->
+            </div>
+            <!-- END: Hardware + Data Collection showcase -->
 
+            <br>
 
-            </td>
-          </tr>
-        </div> 
+            <!-- ================== Human Tasks (Video Pager) ================== -->
+            <h3 class="title is-3" style="text-align:center; margin: 8px 0 12px;">Human Tasks</h3>
+            <div id="humanVideoPager" class="video-pager">
+              <!-- Controls -->
+              <div class="vp-controls">
+                <button class="vp-btn vp-prev" aria-label="Previous page">‹</button>
+                <div class="vp-dots" role="tablist" aria-label="Video pages">
+                  <span class="vp-dot active" role="tab" aria-selected="true" aria-controls="vp-page-1"></span>
+                  <span class="vp-dot" role="tab" aria-selected="false" aria-controls="vp-page-2"></span>
+                  <span class="vp-dot" role="tab" aria-selected="false" aria-controls="vp-page-3"></span>
+                </div>
+                <button class="vp-btn vp-next" aria-label="Next page">›</button>
+              </div>
+
+              <!-- Page 1 (6 videos) -->
+              <div id="vp-page-1" class="vp-page active">
+                <div class="row">
+                  <div class="col-12 col-md-6 mb-4">
+                    <h5 class="video-title">Unplug the white charger</h5>
+                    <video autoplay muted loop playsinline controls preload="metadata"
+                          src="resources/human_data/unplug_the_white_charger_0.mp4" style="border-radius:10px; width:100%;"></video>
+                  </div>
+                  <div class="col-12 col-md-6 mb-4">
+                    <h5 class="video-title">Drop bread to the green bucket</h5>
+                    <video autoplay muted loop playsinline controls preload="metadata"
+                          src="resources/human_data/press_red_dice_to_make_it_rotation_0.mp4" style="border-radius:10px; width:100%;"></video>
+                  </div>
+                  <div class="col-12 col-md-6 mb-4">
+                    <h5 class="video-title">Press the stapler</h5>
+                    <video autoplay muted loop playsinline controls preload="metadata"
+                          src="resources/human_data/press_the_stapler_0.mp4" style="border-radius:10px; width:100%;"></video>
+                  </div>
+                  <div class="col-12 col-md-6 mb-4">
+                    <h5 class="video-title">Put orange to the green bucket</h5>
+                    <video autoplay muted loop playsinline controls preload="metadata"
+                          src="resources/human_data/put_orange_to_the_green_bucket_0.mp4" style="border-radius:10px; width:100%;"></video>
+                  </div>
+                  <div class="col-12 col-md-6 mb-4">
+                    <h5 class="video-title">Wipe blue towel on the table and push it to the bulky bottle</h5>
+                    <video autoplay muted loop playsinline controls preload="metadata"
+                          src="resources/human_data/wipe_blue_towel_on_the_table_and_push_it_to_the_bulky_bottle_0.mp4" style="border-radius:10px; width:100%;"></video>
+                  </div>
+                  <div class="col-12 col-md-6 mb-4">
+                    <h5 class="video-title">Close silver laptop</h5>
+                    <video autoplay muted loop playsinline controls preload="metadata"
+                          src="resources/human_data/close_silver_laptop_0.mp4" style="border-radius:10px; width:100%;"></video>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Page 2 -->
+              <div id="vp-page-2" class="vp-page">
+                <div class="row">
+                  <div class="col-12 col-md-6 mb-4">
+                    <h5 class="video-title">Put mango to pink bowl while avoiding obstacle by bypassing</h5>
+                    <video autoplay muted loop playsinline controls preload="metadata"
+                          src="resources/human_data/put_mango_to_pink_bowl_while_avoiding_obstacle_by_bypassing_0.mp4" style="border-radius:10px; width:100%;"></video>
+                  </div>
+                  <div class="col-12 col-md-6 mb-4">
+                    <h5 class="video-title">Put mango to the pink bowl while avoiding obstacle by lifting</h5>
+                    <video autoplay muted loop playsinline controls preload="metadata"
+                          src="resources/human_data/put_mango_to_the_pink_bowl_while_avoiding_obstacle_by_lifting.mp4" style="border-radius:10px; width:100%;"></video>
+                  </div>
+                  <div class="col-12 col-md-6 mb-4">
+                    <h5 class="video-title">Press red dice to make it rotation</h5>
+                    <video autoplay muted loop playsinline controls preload="metadata"
+                          src="resources/human_data/press_red_dice_to_make_it_rotation_0.mp4" style="border-radius:10px; width:100%;"></video>
+                  </div>
+                  <div class="col-12 col-md-6 mb-4">
+                    <h5 class="video-title">Put banana to the white plate</h5>
+                    <video autoplay muted loop playsinline controls preload="metadata"
+                          src="resources/human_data/put_banana_to_the_white_plate_0.mp4" style="border-radius:10px; width:100%;"></video>
+                  </div>
+                  <div class="col-12 col-md-6 mb-4">
+                    <h5 class="video-title">Pour bottle to the pink bowl</h5>
+                    <video autoplay muted loop playsinline controls preload="metadata"
+                          src="resources/human_data/pour_bottle_to_the_pink_bowl.mp4" style="border-radius:10px; width:100%;"></video>
+                  </div>
+                  <div class="col-12 col-md-6 mb-4">
+                    <h5 class="video-title">Put toy bear to the black box</h5>
+                    <video autoplay muted loop playsinline controls preload="metadata"
+                          src="resources/human_data/put_toy_bear_to_the_black_box_0.mp4" style="border-radius:10px; width:100%;"></video>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Page 3 -->
+              <div id="vp-page-3" class="vp-page">
+                <div class="row">
+                  <div class="col-12 col-md-6 mb-4">
+                    <h5 class="video-title">First open the white cap style box then put toy panda to the box</h5>
+                    <video autoplay muted loop playsinline controls preload="metadata"
+                          src="resources/human_data/first_open_the_white_cap_style_box_then_put_toy_panda_to_the_box_0.mp4" style="border-radius:10px; width:100%;"></video>
+                  </div>
+                  <div class="col-12 col-md-6 mb-4">
+                    <h5 class="video-title">Fold the blue towel</h5>
+                    <video autoplay muted loop playsinline controls preload="metadata"
+                          src="resources/human_data/fold_the_blue_towel_0.mp4" style="border-radius:10px; width:100%;"></video>
+                  </div>
+                  <div class="col-12 col-md-6 mb-4">
+                    <h5 class="video-title">Pour milk bottle to the yellow pan</h5>
+                    <video autoplay muted loop playsinline controls preload="metadata"
+                          src="resources/human_data/pour_milk_bottle_to_the_yellow_pan_0.mp4" style="border-radius:10px; width:100%;"></video>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Pager JS -->
+              <script>
+                (function () {
+                  const pager = document.getElementById('humanVideoPager');
+                  if (!pager) return;
+                  const pages = Array.from(pager.querySelectorAll('.vp-page'));
+                  const prev = pager.querySelector('.vp-prev');
+                  const next = pager.querySelector('.vp-next');
+                  const dots = Array.from(pager.querySelectorAll('.vp-dot'));
+                  let idx = 0;
+
+                  function pauseHiddenPages(except) {
+                    pages.forEach((p, k) => {
+                      if (k !== except) {
+                        p.querySelectorAll('video').forEach(v => {
+                          try { v.pause(); v.currentTime = 0; } catch (e) {}
+                        });
+                      }
+                    });
+                  }
+
+                  function show(i) {
+                    pages[idx].classList.remove('active');
+                    idx = (i + pages.length) % pages.length;
+                    pages[idx].classList.add('active');
+                    dots.forEach((d, k) => d.classList.toggle('active', k === idx));
+                    pauseHiddenPages(idx);
+                  }
+
+                  prev.addEventListener('click', () => show(idx - 1));
+                  next.addEventListener('click', () => show(idx + 1));
+                  dots.forEach((d, k) => d.addEventListener('click', () => show(k)));
+
+                  pauseHiddenPages(0);
+                })();
+              </script>
+            </div>
+            <!-- ================== End Human Tasks ================== -->
+
+            <!-- ================== Robot Tasks (Video Pager) ================== -->
+            <h3 class="title is-3" style="text-align:center; margin: 24px 0 12px;">Robot Tasks</h3>
+            <div id="robotVideoPager" class="video-pager">
+              <!-- Controls -->
+              <div class="vp-controls">
+                <button class="vp-btn vp-prev" aria-label="Previous page">‹</button>
+                <div class="vp-dots" role="tablist" aria-label="Video pages">
+                  <span class="vp-dot active" role="tab" aria-selected="true" aria-controls="rvp-page-1"></span>
+                  <span class="vp-dot" role="tab" aria-selected="false" aria-controls="rvp-page-2"></span>
+                  <span class="vp-dot" role="tab" aria-selected="false" aria-controls="rvp-page-3"></span>
+                </div>
+                <button class="vp-btn vp-next" aria-label="Next page">›</button>
+              </div>
+
+              <!-- Page 1 -->
+              <div id="rvp-page-1" class="vp-page active">
+                <div class="row">
+                  <div class="col-12 col-md-6 mb-4">
+                    <h5 class="video-title">Push orange cube to the bulky bottle</h5>
+                    <video autoplay muted loop playsinline controls preload="metadata"
+                          src="resources/robot_data/push_orange_cube_to_the_bulky_bottle_0.mp4" style="border-radius:10px; width:100%;"></video>
+                  </div>
+                  <div class="col-12 col-md-6 mb-4">
+                    <h5 class="video-title">Put toy panda to the box</h5>
+                    <video autoplay muted loop playsinline controls preload="metadata"
+                          src="resources/robot_data/put_toy_panda_to_the_box_0.mp4" style="border-radius:10px; width:100%;"></video>
+                  </div>
+                  <div class="col-12 col-md-6 mb-4">
+                    <h5 class="video-title">Put bread to the red pad</h5>
+                    <video autoplay muted loop playsinline controls preload="metadata"
+                          src="resources/robot_data/put_bread_to_the_red_pad_0.mp4" style="border-radius:10px; width:100%;"></video>
+                  </div>
+                  <div class="col-12 col-md-6 mb-4">
+                    <h5 class="video-title">Open the white cap style box</h5>
+                    <video autoplay muted loop playsinline controls preload="metadata"
+                          src="resources/robot_data/open_the_white_cap_style_box_0.mp4" style="border-radius:10px; width:100%;"></video>
+                  </div>
+                  <div class="col-12 col-md-6 mb-4">
+                    <h5 class="video-title">Drop black bottle to purple bucket</h5>
+                    <video autoplay muted loop playsinline controls preload="metadata"
+                          src="resources/robot_data/drop_black_bottle_to_purple_bucket_0.mp4" style="border-radius:10px; width:100%;"></video>
+                  </div>
+                  <div class="col-12 col-md-6 mb-4">
+                    <h5 class="video-title">Pour cola to the red cup</h5>
+                    <video autoplay muted loop playsinline controls preload="metadata"
+                          src="resources/robot_data/pour_coak_to_the_red_cup_0.mp4" style="border-radius:10px; width:100%;"></video>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Page 2 -->
+              <div id="rvp-page-2" class="vp-page">
+                <div class="row">
+                  <div class="col-12 col-md-6 mb-4">
+                    <h5 class="video-title">Move red dice to the bulky bottle</h5>
+                    <video autoplay muted loop playsinline controls preload="metadata"
+                          src="resources/robot_data/move_red_dice_to_the_bulky_bottle_0.mp4" style="border-radius:10px; width:100%;"></video>
+                  </div>
+                  <div class="col-12 col-md-6 mb-4">
+                    <h5 class="video-title">Flip down the black bottle</h5>
+                    <video autoplay muted loop playsinline controls preload="metadata"
+                          src="resources/robot_data/flip_down_the_black_bottle_0.mp4" style="border-radius:10px; width:100%;"></video>
+                  </div>
+                  <div class="col-12 col-md-6 mb-4">
+                    <h5 class="video-title">Press the pink mouse</h5>
+                    <video autoplay muted loop playsinline controls preload="metadata"
+                          src="resources/robot_data/press_the_pink_mouse_0.mp4" style="border-radius:10px; width:100%;"></video>
+                  </div>
+                  <div class="col-12 col-md-6 mb-4">
+                    <h5 class="video-title">Put bread to the high black platform</h5>
+                    <video autoplay muted loop playsinline controls preload="metadata"
+                          src="resources/robot_data/put_bread_to_the_high_black_platform_0.mp4" style="border-radius:10px; width:100%;"></video>
+                  </div>
+                  <div class="col-12 col-md-6 mb-4">
+                    <h5 class="video-title">Put Capybara to the purple pad</h5>
+                    <video autoplay muted loop playsinline controls preload="metadata"
+                          src="resources/robot_data/put_Capybara_to_the_purple_pad_0.mp4" style="border-radius:10px; width:100%;"></video>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Page 3 -->
+              <div id="rvp-page-3" class="vp-page">
+                <div class="row">
+                  <div class="col-12 col-md-6 mb-4">
+                    <h5 class="video-title">Put chilli to the white plate</h5>
+                    <video autoplay muted loop playsinline controls preload="metadata"
+                          src="resources/robot_data/put_chilli_to_the_white_plate_0.mp4" style="border-radius:10px; width:100%;"></video>
+                  </div>
+                  <div class="col-12 col-md-6 mb-4">
+                    <h5 class="video-title">Wipe blue towel on the table and push it left or right to the pink bowl</h5>
+                    <video autoplay muted loop playsinline controls preload="metadata"
+                          src="resources/robot_data/wipe_blue_towel_on_the_table_and_push_it_left_or_right_to_the_pink_bowl_0.mp4" style="border-radius:10px; width:100%;"></video>
+                  </div>
+                  <div class="col-12 col-md-6 mb-4">
+                    <h5 class="video-title">Put mango to the pink bowl</h5>
+                    <video autoplay muted loop playsinline controls preload="metadata"
+                          src="resources/robot_data/put_mango_to_the_pink_bowl_0.mp4" style="border-radius:10px; width:100%;"></video>
+                  </div>
+                  <div class="col-12 col-md-6 mb-4">
+                    <h5 class="video-title">Put cucumber to purple bucket</h5>
+                    <video autoplay muted loop playsinline controls preload="metadata"
+                          src="resources/robot_data/put_cucumber_to_purple_bucket_0.mp4" style="border-radius:10px; width:100%;"></video>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Pager JS -->
+              <script>
+                (function () {
+                  const pager = document.getElementById('robotVideoPager');
+                  if (!pager) return;
+                  const pages = Array.from(pager.querySelectorAll('.vp-page'));
+                  const prev = pager.querySelector('.vp-prev');
+                  const next = pager.querySelector('.vp-next');
+                  const dots = Array.from(pager.querySelectorAll('.vp-dot'));
+                  let idx = 0;
+
+                  function pauseHiddenPages(except) {
+                    pages.forEach((p, k) => {
+                      if (k !== except) {
+                        p.querySelectorAll('video').forEach(v => {
+                          try { v.pause(); v.currentTime = 0; } catch (e) {}
+                        });
+                      }
+                    });
+                  }
+
+                  function show(i) {
+                    pages[idx].classList.remove('active');
+                    idx = (i + pages.length) % pages.length;
+                    pages[idx].classList.add('active');
+                    dots.forEach((d, k) => d.classList.toggle('active', k === idx));
+                    pauseHiddenPages(idx);
+                  }
+
+                  prev.addEventListener('click', () => show(idx - 1));
+                  next.addEventListener('click', () => show(idx + 1));
+                  dots.forEach((d, k) => d.addEventListener('click', () => show(k)));
+
+                  pauseHiddenPages(0);
+                })();
+              </script>
+            </div>
+            <!-- ================== End Robot Tasks ================== -->
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-  <section class="section">
+  <!-- ================== Unified Human-Centric State-Action Space ================== -->
+  <section class="section" id="method">
     <div class="container">
       <div class="columns is-centered">
         <div class="column is-full-width">
           <h2 class="title is-2" style="text-align: center; padding-bottom: 10px;">Unified Human-Centric State-Action Space</h2>
-          <tr>
-            <td>
-              <div class="row">
-                <div class="col">
-                  <center>
-                    <h5> We proposed MotionTrans framework, a pipeline for transforming human data into robot format, and a weighted human-robot multi-task cotraining strategy.</h5>
-                    <img src="./resources/main_method.png" width="65%"></img>
-                  </center>
-                </div>
-              </div>
-              <br>
-              <!-- <div class="row">
-                <div class="col">
-                  <center>
-                    <h5>Robot Observations</h5>
-                    <video playsinline autoplay loop muted controls src="resources/test_video.mp4" width="100%"
-                      preload="metadata" style="border-radius:10px;"></video>
-                  </center>
-                </div>
-                <div class="col">
-                  <center>
-                    <h5>Human Observations</h5>
-                    <video playsinline autoplay loop muted controls src="resources/test_video.mp4" width="100%"
-                      preload="metadata" style="border-radius:10px;"></video>
-                  </center>
-                </div>
-              </div> -->
-              <!-- <div class="row">
-                <div class="col">
-                  <center>
-                    <iframe src="resources/503_episode_10.html" width="75%" height="600px" frameborder="0" scrolling="no"></iframe>
-                  </center>
-                </div>
-              </div> -->
-            </td>
-          </tr>
-
+          <div class="row">
+            <div class="col">
+              <center>
+                <h5> We proposed MotionTrans framework, a pipeline for transforming human data into robot format, and a weighted human-robot multi-task cotraining strategy.</h5>
+                <img src="./resources/main_method.png" width="65%" alt="MotionTrans method">
+              </center>
+            </div>
+          </div>
         </div> 
       </div>
     </div>
   </section>
 
-  <section class="section">
-  <div class="container">
-    <h2 class="title is-2" style="text-align: center; padding-bottom: 20px;">Experimental Results</h2>
+  <!-- ================== Experimental Results ================== -->
+  <section class="section" id="experiments">
+    <div class="container">
+      <h2 class="title is-2" style="text-align: center; padding-bottom: 20px;">Experimental Results</h2>
 
-    <!-- Zero Shot Success Rate Results -->
-    <div class="columns is-centered">
-      <div class="column is-full">
-        <h3 class="title is-3" style="text-align: center;">Zero Shot Success Rate Results (SR, %)</h3>
-        <figure style="text-align: center;">
-          <img src="./resources/experiment_results/zeroshot_sr.png" alt="Zero Shot Success Rate" style="border-radius: 10px; max-width: 100%; height: auto;">
-        </figure>
-        <p class="has-text-centered text-muted" style="font-size: 1.1em; padding-top: 10px;">
-          This chart presents the Zero Shot Success Rate (SR) results for various tasks. The comparison between MotionTrans-DP (blue) and MotionTrans-π0-VLA (pink) is shown across 16 different tasks.
-        </p>
+      <!-- Zero Shot Success Rate Results -->
+      <div class="columns is-centered">
+        <div class="column is-full">
+          <h3 class="title is-3" style="text-align: center;">Zero Shot Success Rate Results (SR, %)</h3>
+          <figure style="text-align: center;">
+            <img src="./resources/experiment_results/zeroshot_sr.png" alt="Zero Shot Success Rate" style="border-radius: 10px; max-width: 100%; height: auto;">
+          </figure>
+          <p class="has-text-centered text-muted" style="font-size: 1.1em; padding-top: 10px;">
+            This chart presents the Zero Shot Success Rate (SR) results for various tasks. The comparison between MotionTrans-DP (blue) and MotionTrans-π0-VLA (pink) is shown across 16 different tasks.
+          </p>
+        </div>
+      </div>
+
+      <!-- Zero Shot Motion Progress Score Results -->
+      <div class="columns is-centered">
+        <div class="column is-full">
+          <h3 class="title is-3" style="text-align: center;">Zero Shot Motion Progress Score Results (Score)</h3>
+          <figure style="text-align: center;">
+            <img src="./resources/experiment_results/zeroshot_score.png" alt="Zero Shot Motion Progress Score" style="border-radius: 10px; max-width: 100%; height: auto;">
+          </figure>
+          <p class="has-text-centered text-muted" style="font-size: 1.1em; padding-top: 10px;">
+            The chart here shows the Zero Shot Motion Progress Score (Score) for the same tasks, highlighting how both methods, MotionTrans-DP (red) and MotionTrans-π0-VLA (yellow), perform across various actions.
+          </p>
+        </div>
       </div>
     </div>
+  </section>
 
-    <!-- Zero Shot Motion Progress Score Results -->
-    <div class="columns is-centered">
-      <div class="column is-full">
-        <h3 class="title is-3" style="text-align: center;">Zero Shot Motion Progress Score Results (Score)</h3>
-        <figure style="text-align: center;">
-          <img src="./resources/experiment_results/zeroshot_score.png" alt="Zero Shot Motion Progress Score" style="border-radius: 10px; max-width: 100%; height: auto;">
-        </figure>
-        <p class="has-text-centered text-muted" style="font-size: 1.1em; padding-top: 10px;">
-          The chart here shows the Zero Shot Motion Progress Score (Score) for the same tasks, highlighting how both methods, MotionTrans-DP (red) and MotionTrans-π0-VLA (yellow), perform across various actions.
-        </p>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-
-  <section class="section">
+  <!-- ================== Co-training Improves Generalizability ================== -->
+  <section class="section" id="generalization">
     <div class="container">
       <div class="columns is-centered">
         <div class="column is-full-width">
           <h2 class="title is-2" style="text-align: center; padding-bottom: 10px;">MotionTrans Co-training Improves Motion Generalizabilty</h2>
-          <tr>
-            <td>
-              <div class="row">
-                <div class="col">
-                    <h3>Few-shot Cross-Humanoid Generalization (THU Franka)</h3>
-                </div>
-              </div>
-              <br>
-
-              <div class="row">
-                <div class="col">
-                    <h5>20 CMU demos</h5>
-                    <video autoplay muted loop playsinline controls src="resources/test_video.mp4" width="100%"
-                           style="border-radius:10px; "></video>
-
-                </div>
-                <div class="col">
-                  <h5>Co-trained with human data</h5>
-                  <video autoplay muted loop playsinline controls src="resources/test_video.mp4" width="100%"
-                         style="border-radius:10px; "></video>
-
-                </div>
-              </div>
-
-              <br>
-
-              <div class="row">
-                <div class="col">
-                  <h3>Object Generalization (THU Franka)</h3>
-                </div>
-              </div>
-              <br>
-
-              <div class="row">
-                <div class="col">
-                    <h5>Seen in robot data: blue pepsi bottle</h5>
-                    <video autoplay muted loop playsinline controls src="resources/test_video.mp4" width="100%"
-                           style="border-radius:10px; "></video>
-                </div>
-                <div class="col">
-                  <h5>Seen in human data: red coke can</h5>
-                  <video autoplay muted loop playsinline controls src="resources/test_video.mp4" width="100%"
-                         style="border-radius:10px; "></video>
-
-              </div>
-              </div>
-              <br>
-
-              <div class="row">
-                <div class="col">
-                  <h5>Seen in human data</h5>
-                  <video autoplay muted loop playsinline controls src="resources/test_video.mp4" width="100%"
-                         style="border-radius:10px; "></video>
-
-                </div>
-                <div class="col">
-                  <h5>Seen in human data</h5>
-                  <video autoplay muted loop playsinline controls src="resources/test_video.mp4" width="100%"
-                         style="border-radius:10px; "></video>
-
-                </div>
-              </div>
-
-              <br>
-
-              <div class="row">
-                <div class="col">
-                    <h3>Object Placement Generalization THU Franka</h3>
-                </div>
-              </div>
-              <br>
-
-              <div class="row">
-                <div class="col">
-                    <h5><em>Baseline</em>: Trained on 20 robot demos</h5>
-                    <video autoplay muted loop playsinline controls src="resources/test_video.mp4" width="100%"
-                           style="border-radius:10px; "></video>
-
-                </div>
-                <div class="col">
-                  <h5><em>Ours</em>: co-trained with human data with diverse placements</h5>
-                  <video autoplay muted loop playsinline controls src="resources/test_video.mp4" width="100%"
-                         style="border-radius:10px; "></video>
-
-                </div>
-              </div>
-
-              <br>
-
-              <div class="row">
-                <div class="col">
-                  <h3>Background Generalization (UCSD H1)</h3>
-                </div>
-              </div>
-              <br>
-
-              <div class="row">
-                <div class="col">
-                    <h5>Seen in robot data</h5>
-                    <video autoplay muted loop playsinline controls src="resources/test_video.mp4" width="100%"
-                           style="border-radius:10px; "></video>
-                </div>
-                <div class="col">
-                  <h5>Seen in human data</h5>
-                  <video autoplay muted loop playsinline controls src="resources/test_video.mp4" width="100%"
-                         style="border-radius:10px; "></video>
-
-              </div>
-              </div>
-              <br>
-
-              <div class="row">
-                <div class="col">
-                  <h5>Seen in human data: wooden table</h5>
-                  <video autoplay muted loop playsinline controls src="resources/test_video.mp4" width="100%"
-                         style="border-radius:10px; "></video>
-
-                </div>
-                <div class="col">
-                  <h5>Seen in human data: green cardboard</h5>
-                  <video autoplay muted loop playsinline controls src="resources/test_video.mp4" width="100%"
-                         style="border-radius:10px; "></video>
-
-                </div>
-              </div>
-
-              <br>
-
-              <!-- <div class="row">
-                <div class="col">
-                  <center>
-                    <h5>We open-source code to replay human/humanoid recordings in Mujoco to demonstrate human-centric representation.</h5>
-                    <video playsinline autoplay loop muted controls src="resources/mujoco_sim_recording.mp4" width="50%"
-                      preload="metadata" style="border-radius:10px;"></video>
-                  </center>
-                </div>
-              </div> -->
-
+          <div>
+            <div class="row">
+              <div class="col">
+                  <h3>Few-shot Cross-Humanoid Generalization (THU Franka)</h3>
               </div>
             </div>
-            </td>
-          </tr>
+            <br>
+
+            <div class="row">
+              <div class="col">
+                  <h5>20 CMU demos</h5>
+                  <video autoplay muted loop playsinline controls src="resources/test_video.mp4" width="100%"
+                        style="border-radius:10px;"></video>
+              </div>
+              <div class="col">
+                <h5>Co-trained with human data</h5>
+                <video autoplay muted loop playsinline controls src="resources/test_video.mp4" width="100%"
+                      style="border-radius:10px;"></video>
+              </div>
+            </div>
+
+            <br>
+
+            <div class="row">
+              <div class="col">
+                  <h3>Object Generalization (THU Franka)</h3>
+              </div>
+            </div>
+            <br>
+
+            <div class="row">
+              <div class="col">
+                  <h5>Seen in robot data: blue pepsi bottle</h5>
+                  <video autoplay muted loop playsinline controls src="resources/test_video.mp4" width="100%"
+                        style="border-radius:10px;"></video>
+              </div>
+              <div class="col">
+                <h5>Seen in human data: red coke can</h5>
+                <video autoplay muted loop playsinline controls src="resources/test_video.mp4" width="100%"
+                      style="border-radius:10px;"></video>
+            </div>
+            </div>
+
+            <br>
+
+            <div class="row">
+              <div class="col">
+                <h5>Seen in human data</h5>
+                <video autoplay muted loop playsinline controls src="resources/test_video.mp4" width="100%"
+                      style="border-radius:10px;"></video>
+              </div>
+              <div class="col">
+                <h5>Seen in human data</h5>
+                <video autoplay muted loop playsinline controls src="resources/test_video.mp4" width="100%"
+                      style="border-radius:10px;"></video>
+              </div>
+            </div>
+
+            <br>
+
+            <div class="row">
+              <div class="col">
+                  <h3>Object Placement Generalization THU Franka</h3>
+              </div>
+            </div>
+            <br>
+
+            <div class="row">
+              <div class="col">
+                  <h5><em>Baseline</em>: Trained on 20 robot demos</h5>
+                  <video autoplay muted loop playsinline controls src="resources/test_video.mp4" width="100%"
+                        style="border-radius:10px;"></video>
+              </div>
+              <div class="col">
+                <h5><em>Ours</em>: co-trained with human data with diverse placements</h5>
+                <video autoplay muted loop playsinline controls src="resources/test_video.mp4" width="100%"
+                      style="border-radius:10px;"></video>
+              </div>
+            </div>
+
+            <br>
+
+            <div class="row">
+              <div class="col">
+                <h3>Background Generalization (UCSD H1)</h3>
+              </div>
+            </div>
+            <br>
+
+            <div class="row">
+              <div class="col">
+                  <h5>Seen in robot data</h5>
+                  <video autoplay muted loop playsinline controls src="resources/test_video.mp4" width="100%"
+                        style="border-radius:10px;"></video>
+              </div>
+              <div class="col">
+                <h5>Seen in human data</h5>
+                <video autoplay muted loop playsinline controls src="resources/test_video.mp4" width="100%"
+                      style="border-radius:10px;"></video>
+            </div>
+            </div>
+            <br>
+
+            <div class="row">
+              <div class="col">
+                <h5>Seen in human data: wooden table</h5>
+                <video autoplay muted loop playsinline controls src="resources/test_video.mp4" width="100%"
+                      style="border-radius:10px;"></video>
+              </div>
+              <div class="col">
+                <h5>Seen in human data: green cardboard</h5>
+                <video autoplay muted loop playsinline controls src="resources/test_video.mp4" width="100%"
+                      style="border-radius:10px;"></video>
+              </div>
+            </div>
+          </div>
         </div> 
       </div>
     </div>
   </section>
 
-<section class="section" id="BibTeX">
-  <div class="container content">
-    <h2 class="titile">BibTeX</h2>
+  <!-- ================== BibTeX ================== -->
+  <section class="section" id="BibTeX">
+    <div class="container content">
+      <h2 class="title">BibTeX</h2>
 <pre><code>
-  @article{qiu2025-humanpolicy,
-    title={Humanoid Policy \~{} Human Policy},
-    author={Ri-Zhao Qiu and Shiqi Yang and Xuxin Cheng and Chaitanya Chawla and Jialong Li and Tairan He and Ge Yan and David J. Yoon and Ryan Hoque and Lars Paulsen and Ge Yang and Jian Zhang and Sha Yi and Guanya Shi and Xiaolong Wang},
-    journal={arXiv preprint arXiv:2503.13441},
-    year={2025}
-  }
+@article{qiu2025-humanpolicy,
+  title={Humanoid Policy \~{} Human Policy},
+  author={Ri-Zhao Qiu and Shiqi Yang and Xuxin Cheng and Chaitanya Chawla and Jialong Li and Tairan He and Ge Yan and David J. Yoon and Ryan Hoque and Lars Paulsen and Ge Yang and Jian Zhang and Sha Yi and Guanya Shi and Xiaolong Wang},
+  journal={arXiv preprint arXiv:2503.13441},
+  year={2025}
+}
 </code></pre>
-  </div>
-</section>
-
+    </div>
+  </section>
 
 </body>
-
 </html>
