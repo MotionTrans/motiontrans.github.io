@@ -299,6 +299,200 @@
     </div>
   </section>
 
+  <!-- ================== Teaser image ================== -->
+  <section class="section section--after-cover" id="teaser">
+    <div class="container">
+      <div id="method_video" class="columns is-centered has-text-centered">
+        <div class="column is-two-thirds no-bottom-padding">
+          <center>
+            <video playsinline autoplay loop muted controls src="resources/Teaser.mp4" width="100%" preload="metadata"
+              style="border-radius:10px;"></video>
+          </center>
+        </div>
+      </div>
+      <h4 style="text-align: center;">We propose MotionTrans, a framework that enables motion-level learning from VR-collected human data. </h4>
+    </div>
+  </section>
+
+  <!-- ================== Unified Human-Centric State-Action Space ================== -->
+  <section class="section" id="method">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-full-width">
+          <h2 class="title is-2" style="text-align: center; padding-bottom: 10px;">Unified Human-Centric State-Action Space</h2>
+          <div class="row">
+            <div class="col">
+              <center>
+                <h5> We proposed MotionTrans framework, a pipeline for transforming human data into robot format, and a weighted human-robot multi-task cotraining strategy.</h5>
+                <img src="./resources/main_method.png" width="65%" alt="MotionTrans method">
+              </center>
+            </div>
+          </div>
+        </div> 
+      </div>
+    </div>
+  </section>
+
+  <!-- ================== Experimental Results ================== -->
+  <section class="section" id="experiments">
+    <div class="container">
+      <h2 class="title is-2" style="text-align: center; padding-bottom: 20px;">Experimental Results</h2>
+
+      <!-- Zero Shot Success Rate Results -->
+      <div class="columns is-centered">
+        <div class="column is-full">
+          <h3 class="title is-3" style="text-align: center;">Zero Shot Success Rate Results (SR, %)</h3>
+          <figure style="text-align: center;">
+            <img src="./resources/experiment_results/zeroshot_sr.png" alt="Zero Shot Success Rate" style="border-radius: 10px; max-width: 100%; height: auto;">
+          </figure>
+          <p class="has-text-centered text-muted" style="font-size: 1.1em; padding-top: 10px;">
+            This chart presents the Zero Shot Success Rate (SR) results for various tasks. The comparison between MotionTrans-DP (blue) and MotionTrans-π0-VLA (pink) is shown across 16 different tasks.
+          </p>
+        </div>
+      </div>
+
+      <!-- Zero Shot Motion Progress Score Results -->
+      <div class="columns is-centered">
+        <div class="column is-full">
+          <h3 class="title is-3" style="text-align: center;">Zero Shot Motion Progress Score Results (Score)</h3>
+          <figure style="text-align: center;">
+            <img src="./resources/experiment_results/zeroshot_score.png" alt="Zero Shot Motion Progress Score" style="border-radius: 10px; max-width: 100%; height: auto;">
+          </figure>
+          <p class="has-text-centered text-muted" style="font-size: 1.1em; padding-top: 10px;">
+            The chart here shows the Zero Shot Motion Progress Score (Score) for the same tasks, highlighting how both methods, MotionTrans-DP (red) and MotionTrans-π0-VLA (yellow), perform across various actions.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================== Co-training Improves Generalizability ================== -->
+  <section class="section" id="generalization">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-full-width">
+          <h2 class="title is-2" style="text-align: center; padding-bottom: 10px;">MotionTrans Co-training Improves Motion Generalizabilty</h2>
+          <div>
+            <div class="row">
+              <div class="col">
+                  <h3>Few-shot Cross-Humanoid Generalization (THU Franka)</h3>
+              </div>
+            </div>
+            <br>
+
+            <div class="row">
+              <div class="col">
+                  <h5>20 CMU demos</h5>
+                  <video autoplay muted loop playsinline controls src="resources/test_video.mp4" width="100%"
+                        style="border-radius:10px;"></video>
+              </div>
+              <div class="col">
+                <h5>Co-trained with human data</h5>
+                <video autoplay muted loop playsinline controls src="resources/test_video.mp4" width="100%"
+                      style="border-radius:10px;"></video>
+              </div>
+            </div>
+
+            <br>
+
+            <div class="row">
+              <div class="col">
+                  <h3>Object Generalization (THU Franka)</h3>
+              </div>
+            </div>
+            <br>
+
+            <div class="row">
+              <div class="col">
+                  <h5>Seen in robot data: blue pepsi bottle</h5>
+                  <video autoplay muted loop playsinline controls src="resources/test_video.mp4" width="100%"
+                        style="border-radius:10px;"></video>
+              </div>
+              <div class="col">
+                <h5>Seen in human data: red coke can</h5>
+                <video autoplay muted loop playsinline controls src="resources/test_video.mp4" width="100%"
+                      style="border-radius:10px;"></video>
+            </div>
+            </div>
+
+            <br>
+
+            <div class="row">
+              <div class="col">
+                <h5>Seen in human data</h5>
+                <video autoplay muted loop playsinline controls src="resources/test_video.mp4" width="100%"
+                      style="border-radius:10px;"></video>
+              </div>
+              <div class="col">
+                <h5>Seen in human data</h5>
+                <video autoplay muted loop playsinline controls src="resources/test_video.mp4" width="100%"
+                      style="border-radius:10px;"></video>
+              </div>
+            </div>
+
+            <br>
+
+            <div class="row">
+              <div class="col">
+                  <h3>Object Placement Generalization THU Franka</h3>
+              </div>
+            </div>
+            <br>
+
+            <div class="row">
+              <div class="col">
+                  <h5><em>Baseline</em>: Trained on 20 robot demos</h5>
+                  <video autoplay muted loop playsinline controls src="resources/test_video.mp4" width="100%"
+                        style="border-radius:10px;"></video>
+              </div>
+              <div class="col">
+                <h5><em>Ours</em>: co-trained with human data with diverse placements</h5>
+                <video autoplay muted loop playsinline controls src="resources/test_video.mp4" width="100%"
+                      style="border-radius:10px;"></video>
+              </div>
+            </div>
+
+            <br>
+
+            <div class="row">
+              <div class="col">
+                <h3>Background Generalization (UCSD H1)</h3>
+              </div>
+            </div>
+            <br>
+
+            <div class="row">
+              <div class="col">
+                  <h5>Seen in robot data</h5>
+                  <video autoplay muted loop playsinline controls src="resources/test_video.mp4" width="100%"
+                        style="border-radius:10px;"></video>
+              </div>
+              <div class="col">
+                <h5>Seen in human data</h5>
+                <video autoplay muted loop playsinline controls src="resources/test_video.mp4" width="100%"
+                      style="border-radius:10px;"></video>
+            </div>
+            </div>
+            <br>
+
+            <div class="row">
+              <div class="col">
+                <h5>Seen in human data: wooden table</h5>
+                <video autoplay muted loop playsinline controls src="resources/test_video.mp4" width="100%"
+                      style="border-radius:10px;"></video>
+              </div>
+              <div class="col">
+                <h5>Seen in human data: green cardboard</h5>
+                <video autoplay muted loop playsinline controls src="resources/test_video.mp4" width="100%"
+                      style="border-radius:10px;"></video>
+              </div>
+            </div>
+          </div>
+        </div> 
+      </div>
+    </div>
+  </section>
+
   <!-- ================== Collecting Human and Robot Demonstrations ================== -->
   <section class="section" id="collection">
     <div class="container">
@@ -604,185 +798,6 @@
 
           </div>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ================== Unified Human-Centric State-Action Space ================== -->
-  <section class="section" id="method">
-    <div class="container">
-      <div class="columns is-centered">
-        <div class="column is-full-width">
-          <h2 class="title is-2" style="text-align: center; padding-bottom: 10px;">Unified Human-Centric State-Action Space</h2>
-          <div class="row">
-            <div class="col">
-              <center>
-                <h5> We proposed MotionTrans framework, a pipeline for transforming human data into robot format, and a weighted human-robot multi-task cotraining strategy.</h5>
-                <img src="./resources/main_method.png" width="65%" alt="MotionTrans method">
-              </center>
-            </div>
-          </div>
-        </div> 
-      </div>
-    </div>
-  </section>
-
-  <!-- ================== Experimental Results ================== -->
-  <section class="section" id="experiments">
-    <div class="container">
-      <h2 class="title is-2" style="text-align: center; padding-bottom: 20px;">Experimental Results</h2>
-
-      <!-- Zero Shot Success Rate Results -->
-      <div class="columns is-centered">
-        <div class="column is-full">
-          <h3 class="title is-3" style="text-align: center;">Zero Shot Success Rate Results (SR, %)</h3>
-          <figure style="text-align: center;">
-            <img src="./resources/experiment_results/zeroshot_sr.png" alt="Zero Shot Success Rate" style="border-radius: 10px; max-width: 100%; height: auto;">
-          </figure>
-          <p class="has-text-centered text-muted" style="font-size: 1.1em; padding-top: 10px;">
-            This chart presents the Zero Shot Success Rate (SR) results for various tasks. The comparison between MotionTrans-DP (blue) and MotionTrans-π0-VLA (pink) is shown across 16 different tasks.
-          </p>
-        </div>
-      </div>
-
-      <!-- Zero Shot Motion Progress Score Results -->
-      <div class="columns is-centered">
-        <div class="column is-full">
-          <h3 class="title is-3" style="text-align: center;">Zero Shot Motion Progress Score Results (Score)</h3>
-          <figure style="text-align: center;">
-            <img src="./resources/experiment_results/zeroshot_score.png" alt="Zero Shot Motion Progress Score" style="border-radius: 10px; max-width: 100%; height: auto;">
-          </figure>
-          <p class="has-text-centered text-muted" style="font-size: 1.1em; padding-top: 10px;">
-            The chart here shows the Zero Shot Motion Progress Score (Score) for the same tasks, highlighting how both methods, MotionTrans-DP (red) and MotionTrans-π0-VLA (yellow), perform across various actions.
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ================== Co-training Improves Generalizability ================== -->
-  <section class="section" id="generalization">
-    <div class="container">
-      <div class="columns is-centered">
-        <div class="column is-full-width">
-          <h2 class="title is-2" style="text-align: center; padding-bottom: 10px;">MotionTrans Co-training Improves Motion Generalizabilty</h2>
-          <div>
-            <div class="row">
-              <div class="col">
-                  <h3>Few-shot Cross-Humanoid Generalization (THU Franka)</h3>
-              </div>
-            </div>
-            <br>
-
-            <div class="row">
-              <div class="col">
-                  <h5>20 CMU demos</h5>
-                  <video autoplay muted loop playsinline controls src="resources/test_video.mp4" width="100%"
-                        style="border-radius:10px;"></video>
-              </div>
-              <div class="col">
-                <h5>Co-trained with human data</h5>
-                <video autoplay muted loop playsinline controls src="resources/test_video.mp4" width="100%"
-                      style="border-radius:10px;"></video>
-              </div>
-            </div>
-
-            <br>
-
-            <div class="row">
-              <div class="col">
-                  <h3>Object Generalization (THU Franka)</h3>
-              </div>
-            </div>
-            <br>
-
-            <div class="row">
-              <div class="col">
-                  <h5>Seen in robot data: blue pepsi bottle</h5>
-                  <video autoplay muted loop playsinline controls src="resources/test_video.mp4" width="100%"
-                        style="border-radius:10px;"></video>
-              </div>
-              <div class="col">
-                <h5>Seen in human data: red coke can</h5>
-                <video autoplay muted loop playsinline controls src="resources/test_video.mp4" width="100%"
-                      style="border-radius:10px;"></video>
-            </div>
-            </div>
-
-            <br>
-
-            <div class="row">
-              <div class="col">
-                <h5>Seen in human data</h5>
-                <video autoplay muted loop playsinline controls src="resources/test_video.mp4" width="100%"
-                      style="border-radius:10px;"></video>
-              </div>
-              <div class="col">
-                <h5>Seen in human data</h5>
-                <video autoplay muted loop playsinline controls src="resources/test_video.mp4" width="100%"
-                      style="border-radius:10px;"></video>
-              </div>
-            </div>
-
-            <br>
-
-            <div class="row">
-              <div class="col">
-                  <h3>Object Placement Generalization THU Franka</h3>
-              </div>
-            </div>
-            <br>
-
-            <div class="row">
-              <div class="col">
-                  <h5><em>Baseline</em>: Trained on 20 robot demos</h5>
-                  <video autoplay muted loop playsinline controls src="resources/test_video.mp4" width="100%"
-                        style="border-radius:10px;"></video>
-              </div>
-              <div class="col">
-                <h5><em>Ours</em>: co-trained with human data with diverse placements</h5>
-                <video autoplay muted loop playsinline controls src="resources/test_video.mp4" width="100%"
-                      style="border-radius:10px;"></video>
-              </div>
-            </div>
-
-            <br>
-
-            <div class="row">
-              <div class="col">
-                <h3>Background Generalization (UCSD H1)</h3>
-              </div>
-            </div>
-            <br>
-
-            <div class="row">
-              <div class="col">
-                  <h5>Seen in robot data</h5>
-                  <video autoplay muted loop playsinline controls src="resources/test_video.mp4" width="100%"
-                        style="border-radius:10px;"></video>
-              </div>
-              <div class="col">
-                <h5>Seen in human data</h5>
-                <video autoplay muted loop playsinline controls src="resources/test_video.mp4" width="100%"
-                      style="border-radius:10px;"></video>
-            </div>
-            </div>
-            <br>
-
-            <div class="row">
-              <div class="col">
-                <h5>Seen in human data: wooden table</h5>
-                <video autoplay muted loop playsinline controls src="resources/test_video.mp4" width="100%"
-                      style="border-radius:10px;"></video>
-              </div>
-              <div class="col">
-                <h5>Seen in human data: green cardboard</h5>
-                <video autoplay muted loop playsinline controls src="resources/test_video.mp4" width="100%"
-                      style="border-radius:10px;"></video>
-              </div>
-            </div>
-          </div>
-        </div> 
       </div>
     </div>
   </section>
