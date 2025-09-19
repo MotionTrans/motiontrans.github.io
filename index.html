@@ -576,6 +576,54 @@
     </div>
   </section>
 
+  <!-- ================== Few-shot Learning Results ================== -->
+  <section class="section" id="fewshot-results">
+    <div class="container">
+      <h2 class="title is-2" style="text-align:center; padding-bottom:10px;">
+        Few-shot Learning Results
+        <span class="has-text-grey is-size-5" style="display:block; margin-top:6px;">
+          Motion progress <em>Score</em> and Success Rate (<em>SR,%</em>) vs. number of demos (0 / 5 / 20)
+        </span>
+      </h2>
+
+      <!-- scoped styles -->
+      <style>
+        #fewshot-results .fig-grid{
+          display:grid; grid-template-columns: 1fr 1fr; gap:24px;
+        }
+        @media (max-width: 992px){ #fewshot-results .fig-grid{ grid-template-columns: 1fr; } }
+        #fewshot-results figure{
+          margin:0; background:#fff; border-radius:12px; overflow:hidden;
+          box-shadow: 0 8px 28px rgba(0,0,0,.12);
+        }
+        #fewshot-results img{ width:100%; height:auto; display:block; }
+        #fewshot-results figcaption{
+          padding:10px 14px; font-size:.95rem; color:#6b7280; text-align:center;
+          background: #fafafa;
+        }
+      </style>
+
+      <div class="fig-grid">
+        <figure>
+          <img
+            src="./resources/experiment_results/main_fewshot_result_sr.png"
+            alt="Few-shot success rate across tasks and average"
+            loading="lazy">
+          <figcaption>Few-shot Motion Progress <b>Score</b> (higher is better).</figcaption>
+        </figure>
+
+        <figure>
+          <img
+            src="./resources/experiment_results/main_fewshot_result_score.png"
+            alt="Few-shot motion progress score across tasks and average"
+            loading="lazy">
+          <figcaption>Few-shot <b>Success Rate</b> (SR, %) across tasks and average.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+
 
 
   <!-- ================== Co-training Improves Generalizability ================== -->
