@@ -588,10 +588,15 @@
 
       <!-- scoped styles -->
       <style>
+        /* 始终单列堆叠显示两幅图 */
         #fewshot-results .fig-grid{
-          display:grid; grid-template-columns: 1fr 1fr; gap:24px;
+          display: grid;
+          grid-template-columns: 1fr;   /* 单列 */
+          gap: 24px;
+          max-width: 1100px;            /* 可选：限制宽度并居中 */
+          margin: 0 auto;
         }
-        @media (max-width: 992px){ #fewshot-results .fig-grid{ grid-template-columns: 1fr; } }
+        /* 不再需要两列的媒体查询 */
         #fewshot-results figure{
           margin:0; background:#fff; border-radius:12px; overflow:hidden;
           box-shadow: 0 8px 28px rgba(0,0,0,.12);
@@ -599,9 +604,10 @@
         #fewshot-results img{ width:100%; height:auto; display:block; }
         #fewshot-results figcaption{
           padding:10px 14px; font-size:.95rem; color:#6b7280; text-align:center;
-          background: #fafafa;
+          background:#fafafa;
         }
       </style>
+
 
       <div class="fig-grid">
         <figure>
