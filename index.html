@@ -340,33 +340,56 @@
     <div class="container">
       <h2 class="title is-2" style="text-align: center; padding-bottom: 20px;">Experimental Results</h2>
 
-      <!-- Zero Shot Success Rate Results -->
-      <div class="columns is-centered">
-        <div class="column is-full">
-          <h3 class="title is-3" style="text-align: center;">Zero Shot Success Rate Results (SR, %)</h3>
-          <figure style="text-align: center;">
-            <img src="./resources/experiment_results/zeroshot_sr.png" alt="Zero Shot Success Rate" style="border-radius: 10px; max-width: 100%; height: auto;">
-          </figure>
-          <p class="has-text-centered text-muted" style="font-size: 1.1em; padding-top: 10px;">
-            This chart presents the Zero Shot Success Rate (SR) results for various tasks. The comparison between MotionTrans-DP (blue) and MotionTrans-π0-VLA (pink) is shown across 16 different tasks.
-          </p>
-        </div>
-      </div>
+      <!-- scoped styles -->
+      <style>
+        #experiments .fig-grid{
+          display: grid;
+          grid-template-columns: 1fr;  /* 单列 */
+          gap: 24px;
+          max-width: 1100px;
+          margin: 0 auto;
+        }
+        #experiments figure{
+          margin: 0;
+          background: #fff;
+          border-radius: 12px;
+          overflow: hidden;
+          box-shadow: 0 8px 28px rgba(0,0,0,.12);
+        }
+        #experiments img{ width:100%; height:auto; display:block; }
+        #experiments figcaption{
+          padding: 10px 14px;
+          font-size: .95rem;
+          color: #6b7280;
+          text-align: center;
+          background: #fafafa;
+        }
+      </style>
 
-      <!-- Zero Shot Motion Progress Score Results -->
-      <div class="columns is-centered">
-        <div class="column is-full">
-          <h3 class="title is-3" style="text-align: center;">Zero Shot Motion Progress Score Results (Score)</h3>
-          <figure style="text-align: center;">
-            <img src="./resources/experiment_results/zeroshot_score.png" alt="Zero Shot Motion Progress Score" style="border-radius: 10px; max-width: 100%; height: auto;">
-          </figure>
-          <p class="has-text-centered text-muted" style="font-size: 1.1em; padding-top: 10px;">
-            The chart here shows the Zero Shot Motion Progress Score (Score) for the same tasks, highlighting how both methods, MotionTrans-DP (red) and MotionTrans-π0-VLA (yellow), perform across various actions.
-          </p>
-        </div>
+      <div class="fig-grid">
+        <figure>
+          <img
+            src="./resources/experiment_results/zeroshot_sr.png"
+            alt="Zero-shot success rate across tasks"
+            loading="lazy">
+          <figcaption>
+            Zero-shot <b>Success Rate</b> (SR, %) across tasks. Comparison between MotionTrans-DP (blue) and MotionTrans-π0-VLA (pink).
+          </figcaption>
+        </figure>
+
+        <figure>
+          <img
+            src="./resources/experiment_results/zeroshot_score.png"
+            alt="Zero-shot motion progress score across tasks"
+            loading="lazy">
+          <figcaption>
+            Zero-shot Motion Progress <b>Score</b> across tasks. Comparison between MotionTrans-DP (red) and MotionTrans-π0-VLA (yellow).
+          </figcaption>
+        </figure>
       </div>
     </div>
   </section>
+
 
   <!-- ================== Task-wise Qualitative Results (Human · MotionTrans-DP · MotionTrans-Pi0-VLA) ================== -->
   <section class="section" id="qualitative-results">
