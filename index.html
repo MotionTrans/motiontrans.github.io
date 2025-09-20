@@ -250,8 +250,8 @@
     </div>
   </section>
 
-  <!-- ================== Zero-shot Qualitative Results ================== -->
-  <section class="section mt-section" id="qualitative-results">
+  <!-- ================== Zero-shot (Videos + Results) ================== -->
+  <section class="section mt-section" id="zero-shot">
     <div class="container">
       <h2 class="title is-2 mt-title">MotionTrans Zero-Shot Inference Results on Real Robot</h2>
       <p class="has-text-grey" style="text-align:center; margin-bottom:12px;">
@@ -259,8 +259,20 @@
       </p>
 
       <div class="mt-card">
-        <!-- Scoped styles for this block -->
+        <!-- scoped styles for both segments -->
         <style>
+          /* segment header (统一两边风格) */
+          .mt-seg-title{
+            display:flex; align-items:center; gap:10px;
+            margin: 6px 0 12px; font-weight:800; color:#374151; letter-spacing:.2px;
+          }
+          .mt-seg-title::before{
+            content:""; width:10px; height:10px; border-radius:50%;
+            background: linear-gradient(90deg, #7c3aed, #06b6d4);
+            box-shadow: 0 0 0 4px rgba(124,58,237,.12);
+          }
+
+          /* ======== Video Pager (zero-shot) ======== */
           #resultVideoPager{
             --gap: 24px; --badge-bg: rgba(0,0,0,.55); --badge-shadow: 0 2px 8px rgba(0,0,0,.25);
           }
@@ -275,9 +287,17 @@
           }
           #resultVideoPager .rvp-caption{ text-align:center; margin-top:6px; font-size:.95rem; color:#6b7280; }
           #resultVideoPager .vp-controls{ margin: 6px 0 16px; }
+
+          /* ======== Figure grid (统一风格) ======== */
+          #zero-shot .fig-grid{ display:grid; grid-template-columns: 1fr; gap:24px; max-width:1100px; margin:0 auto; }
+          #zero-shot figure{ margin:0; background:#fff; border-radius:12px; overflow:hidden; box-shadow:0 8px 28px rgba(0,0,0,.12); }
+          #zero-shot img{ width:100%; height:auto; display:block; }
+          #zero-shot figcaption{ padding:10px 14px; font-size:.95rem; color:#6b7280; text-align:center; background:#fafafa; }
         </style>
 
-        <div id="resultVideoPager" class="video-pager" aria-label="Qualitative result video pager">
+        <!-- Qualitative videos -->
+        <div class="mt-seg-title">Qualitative Videos</div>
+        <div id="resultVideoPager" class="video-pager" aria-label="Zero-shot qualitative video pager">
           <div class="vp-controls">
             <button class="vp-btn vp-prev" aria-label="Previous task">‹</button>
             <div class="vp-dots" role="tablist" aria-label="Task pages"></div>
@@ -285,6 +305,20 @@
           </div>
         </div>
 
+        <!-- Quantitative results -->
+        <div class="mt-seg-title" style="margin-top:18px;">Quantitative Results</div>
+        <div class="fig-grid">
+          <figure>
+            <img src="./resources/experiment_results/zeroshot_sr.png" alt="Zero-shot success rate across tasks" loading="lazy">
+            <figcaption>Zero-shot <b>Success Rate</b> (SR, %) across tasks. Comparison between MotionTrans-DP (blue) and MotionTrans-π0-VLA (pink).</figcaption>
+          </figure>
+          <figure>
+            <img src="./resources/experiment_results/zeroshot_score.png" alt="Zero-shot motion progress score across tasks" loading="lazy">
+            <figcaption>Zero-shot Motion Progress <b>Score</b> across tasks. Comparison between MotionTrans-DP (red) and MotionTrans-π0-VLA (yellow).</figcaption>
+          </figure>
+        </div>
+
+        <!-- JS for zero-shot pager -->
         <script>
           (function () {
             const pager = document.getElementById('resultVideoPager');
@@ -323,21 +357,21 @@
                       <span class="rvp-badge">Human Data</span>
                       <video autoplay muted loop playsinline controls preload="metadata" src="${t.human}"></video>
                     </div>
-                    <div class="rvp-caption">Human demonstration</div>
+                    <!-- human 灰字说明按要求移除 -->
                   </div>
                   <div class="rvp-item">
                     <div class="rvp-video">
                       <span class="rvp-badge">MotionTrans-DP</span>
                       <video autoplay muted loop playsinline controls preload="metadata" src="${t.dp0}"></video>
                     </div>
-                    <div class="rvp-caption">Robot inference (MotionTrans-DP Zero Shot)</div>
+                    <div class="rvp-caption">MotionTrans-DP · Zero Shot</div>
                   </div>
                   <div class="rvp-item">
                     <div class="rvp-video">
                       <span class="rvp-badge">MotionTrans-Pi0-VLA</span>
                       <video autoplay muted loop playsinline controls preload="metadata" src="${t.pi0}"></video>
                     </div>
-                    <div class="rvp-caption">Robot inference (MotionTrans-Pi0-VLA Zero Shot)</div>
+                    <div class="rvp-caption">MotionTrans-Pi0-VLA · Zero Shot</div>
                   </div>
                 </div>
               `;
@@ -345,6 +379,7 @@
             });
             pager.appendChild(frag);
 
+            // dots
             dotsWrap.innerHTML = '';
             const pages = Array.from(pager.querySelectorAll('.vp-page'));
             pages.forEach((p, k) => {
@@ -361,13 +396,11 @@
             let idx = 0;
             function pauseHiddenPages(except) {
               pages.forEach((pg, k) => {
-                if (k !== except) {
-                  pg.querySelectorAll('video').forEach(v => { try { v.pause(); v.currentTime = 0; } catch(e){} });
-                }
+                if (k !== except) { pg.querySelectorAll('video').forEach(v => { try{ v.pause(); v.currentTime = 0; } catch(e){} }); }
               });
             }
             function playVisiblePage(i) {
-              pages[i].querySelectorAll('video').forEach(v => { try { v.currentTime = 0; v.play(); } catch(e){} });
+              pages[i].querySelectorAll('video').forEach(v => { try{ v.currentTime = 0; v.play(); } catch(e){} });
             }
             function show(i) {
               pages[idx].classList.remove('active');
@@ -377,8 +410,7 @@
               pages[idx].classList.add('active');
               dots[idx].classList.add('active');
               dots[idx].setAttribute('aria-selected', 'true');
-              pauseHiddenPages(idx);
-              playVisiblePage(idx);
+              pauseHiddenPages(idx); playVisiblePage(idx);
             }
             prev.addEventListener('click', () => show(idx - 1));
             next.addEventListener('click', () => show(idx + 1));
@@ -386,39 +418,15 @@
               if (e.key === 'ArrowLeft') show(idx - 1);
               if (e.key === 'ArrowRight') show(idx + 1);
             });
-            pauseHiddenPages(0);
-            playVisiblePage(0);
+            pauseHiddenPages(0); playVisiblePage(0);
           })();
         </script>
       </div>
     </div>
   </section>
 
-  <!-- ================== Experimental Results (figures stacked) ================== -->
-  <section class="section mt-section" id="experiments">
-    <div class="container">
-      <h2 class="title is-2 mt-title">Experimental Results</h2>
-      <div class="mt-card">
-        <div class="mt-fig-grid">
-          <figure class="mt-fig">
-            <img src="./resources/experiment_results/zeroshot_sr.png" alt="Zero-shot success rate across tasks" loading="lazy">
-            <figcaption>
-              Zero-shot <b>Success Rate</b> (SR, %) across tasks. Comparison between MotionTrans-DP (blue) and MotionTrans-π0-VLA (pink).
-            </figcaption>
-          </figure>
-          <figure class="mt-fig">
-            <img src="./resources/experiment_results/zeroshot_score.png" alt="Zero-shot motion progress score across tasks" loading="lazy">
-            <figcaption>
-              Zero-shot Motion Progress <b>Score</b> across tasks. Comparison between MotionTrans-DP (red) and MotionTrans-π0-VLA (yellow).
-            </figcaption>
-          </figure>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ================== Few-shot Qualitative Videos (Human · MotionTrans-DP) ================== -->
-  <section class="section mt-section" id="fewshot-qual-videos">
+  <!-- ================== Few-shot (Videos + Results) ================== -->
+  <section class="section mt-section" id="fewshot">
     <div class="container">
       <h2 class="title is-2 mt-title">MotionTrans Few-Shot Inference Results on Real Robot</h2>
       <p class="has-text-grey" style="text-align:center; margin-bottom:12px;">
@@ -426,8 +434,19 @@
       </p>
 
       <div class="mt-card">
-        <!-- scoped styles -->
+        <!-- scoped styles (与 zero-shot 统一风格) -->
         <style>
+          .mt-seg-title{
+            display:flex; align-items:center; gap:10px;
+            margin: 6px 0 12px; font-weight:800; color:#374151; letter-spacing:.2px;
+          }
+          .mt-seg-title::before{
+            content:""; width:10px; height:10px; border-radius:50%;
+            background: linear-gradient(90deg, #7c3aed, #06b6d4);
+            box-shadow: 0 0 0 4px rgba(124,58,237,.12);
+          }
+
+          /* Few-shot pager (与之前保持一致) */
           #fewshotVideoPager{
             --gap: 24px; --badge-bg: rgba(0,0,0,.55); --badge-shadow: 0 2px 8px rgba(0,0,0,.25);
             --frame-border: #e5e7eb; --frame-title: #374151; --frame-bg: #fff;
@@ -446,8 +465,16 @@
           #fewshotVideoPager .rvp-badge{ position:absolute; top:10px; left:10px; padding:6px 10px; border-radius:999px; background:var(--badge-bg); color:#fff; font-size:12px; letter-spacing:.2px; box-shadow:var(--badge-shadow); user-select:none; }
           #fewshotVideoPager .rvp-caption{ text-align:center; margin-top:6px; font-size:.95rem; color:#6b7280; }
           #fewshotVideoPager .vp-controls{ margin:6px 0 16px; }
+
+          /* Few-shot figures (折线图图片) */
+          #fewshot .fig-grid{ display:grid; grid-template-columns: 1fr; gap:24px; max-width:1100px; margin:0 auto; }
+          #fewshot figure{ margin:0; background:#fff; border-radius:12px; overflow:hidden; box-shadow:0 8px 28px rgba(0,0,0,.12); }
+          #fewshot img{ width:100%; height:auto; display:block; }
+          #fewshot figcaption{ padding:10px 14px; font-size:.95rem; color:#6b7280; text-align:center; background:#fafafa; }
         </style>
 
+        <!-- Qualitative videos -->
+        <div class="mt-seg-title">Qualitative Videos</div>
         <div id="fewshotVideoPager" class="video-pager" aria-label="Few-shot qualitative video pager">
           <div class="vp-controls">
             <button class="vp-btn vp-prev" aria-label="Previous task">‹</button>
@@ -456,6 +483,20 @@
           </div>
         </div>
 
+        <!-- Quantitative results -->
+        <div class="mt-seg-title" style="margin-top:18px;">Quantitative Results</div>
+        <div class="fig-grid">
+          <figure>
+            <img src="./resources/experiment_results/main_fewshot_result_score.png" alt="Few-shot motion progress score across tasks and average" loading="lazy">
+            <figcaption>Few-shot Motion Progress <b>Score</b> (higher is better).</figcaption>
+          </figure>
+          <figure>
+            <img src="./resources/experiment_results/main_fewshot_result_sr.png" alt="Few-shot success rate across tasks and average" loading="lazy">
+            <figcaption>Few-shot <b>Success Rate</b> (SR, %) across tasks and average.</figcaption>
+          </figure>
+        </div>
+
+        <!-- JS for few-shot pager -->
         <script>
           (function () {
             const pager = document.getElementById('fewshotVideoPager');
@@ -515,6 +556,7 @@
             });
             pager.appendChild(frag);
 
+            // dots
             dotsWrap.innerHTML = '';
             const pages = Array.from(pager.querySelectorAll('.vp-page'));
             pages.forEach((p, k) => {
@@ -531,13 +573,11 @@
             let idx = 0;
             function pauseHiddenPages(except) {
               pages.forEach((pg, k) => {
-                if (k !== except) {
-                  pg.querySelectorAll('video').forEach(v => { try { v.pause(); v.currentTime = 0; } catch(e){} });
-                }
+                if (k !== except) { pg.querySelectorAll('video').forEach(v => { try{ v.pause(); v.currentTime = 0; } catch(e){} }); }
               });
             }
             function playVisiblePage(i) {
-              pages[i].querySelectorAll('video').forEach(v => { try { v.currentTime = 0; v.play(); } catch(e){} });
+              pages[i].querySelectorAll('video').forEach(v => { try{ v.currentTime = 0; v.play(); } catch(e){} });
             }
             function show(i) {
               pages[idx].classList.remove('active');
@@ -562,27 +602,6 @@
     </div>
   </section>
 
-  <!-- ================== Few-shot Learning Results (figures stacked) ================== -->
-  <section class="section mt-section" id="fewshot-results">
-    <div class="container">
-      <h2 class="title is-2 mt-title">Few-shot Learning Results</h2>
-      <p class="has-text-grey" style="text-align:center; margin-bottom:12px;">
-        Motion progress <em>Score</em> and Success Rate (<em>SR,%</em>) vs. number of demos (0 / 5 / 20)
-      </p>
-      <div class="mt-card">
-        <div class="mt-fig-grid">
-          <figure class="mt-fig">
-            <img src="./resources/experiment_results/main_fewshot_result_score.png" alt="Few-shot motion progress score across tasks and average" loading="lazy">
-            <figcaption>Few-shot Motion Progress <b>Score</b> (higher is better).</figcaption>
-          </figure>
-          <figure class="mt-fig">
-            <img src="./resources/experiment_results/main_fewshot_result_sr.png" alt="Few-shot success rate across tasks and average" loading="lazy">
-            <figcaption>Few-shot <b>Success Rate</b> (SR, %) across tasks and average.</figcaption>
-          </figure>
-        </div>
-      </div>
-    </div>
-  </section>
 
   <!-- ================== Collecting Human and Robot Demonstrations ================== -->
   <section class="section mt-section" id="collection">
