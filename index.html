@@ -268,31 +268,94 @@
     </div>
   </header>
 
+  <!-- ===== Pretty styles for teaser/abstract/method blocks (scoped) ===== -->
+  <style>
+    /* 只作用于下面这四个区块 */
+    .mt-section .mt-card{
+      background: linear-gradient(180deg, #ffffff, #fafafa);
+      border: 1px solid #e5e7eb;          /* gray-200 */
+      border-radius: 16px;
+      box-shadow: 0 10px 32px rgba(0,0,0,.08);
+      padding: 18px;
+    }
+    .mt-section .mt-card.compact{ padding:14px; }
+
+    .mt-section .mt-video-wrap{
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16/9;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    .mt-section .mt-video-wrap video,
+    .mt-section .mt-img-wrap img{
+      width: 100%; height: 100%; object-fit: cover; display: block;
+    }
+    .mt-section .mt-badge{
+      position: absolute; top: 10px; left: 10px;
+      padding: 6px 10px; border-radius: 999px;
+      background: rgba(0,0,0,.55); color:#fff; font-size:12px; letter-spacing:.2px;
+      box-shadow: 0 2px 8px rgba(0,0,0,.25);
+      user-select: none;
+    }
+
+    .mt-section .mt-caption{
+      margin-top: 8px; text-align: center; color:#6b7280; font-size:.95rem;
+    }
+
+    /* 标题小装饰线 */
+    .mt-section h2.title{
+      position: relative; display: inline-block; padding-bottom: 6px;
+    }
+    .mt-section h2.title:after{
+      content:""; position:absolute; left:50%; transform:translateX(-50%);
+      bottom:-4px; width: 120px; height: 3px; border-radius: 999px;
+      background: linear-gradient(90deg, #7c3aed, #06b6d4);
+    }
+
+    /* Abstract 玻璃拟态效果（轻） */
+    .mt-section .mt-abstract{
+      backdrop-filter: blur(4px);
+      background: linear-gradient(180deg, rgba(255,255,255,.95), rgba(255,255,255,.9));
+      border-left: 4px solid #7c3aed;   /* violet */
+    }
+
+    /* 图片容器 */
+    .mt-section .mt-img-wrap{
+      position: relative; width:100%; border-radius:12px; overflow:hidden;
+    }
+
+    /* 居中列宽优化（比 is-two-thirds 稍宽一点） */
+    @media (min-width: 1024px){
+      .mt-section .w-70 { width: 70%; margin-left:auto; margin-right:auto; }
+    }
+  </style>
+
   <!-- ================== Teaser ================== -->
-  <section class="section section--after-cover" id="teaser">
+  <section class="section section--after-cover mt-section" id="teaser">
     <div class="container">
-      <div id="method_video" class="columns is-centered has-text-centered">
-        <div class="column is-two-thirds no-bottom-padding">
-          <center>
-            <video playsinline autoplay loop muted controls src="resources/Teaser.mp4" width="100%" preload="metadata"
-              style="border-radius:10px;"></video>
-          </center>
+      <h2 class="title is-2 has-text-centered" style="margin-bottom:16px;">Teaser</h2>
+      <div class="mt-card w-70">
+        <div class="mt-video-wrap">
+          <span class="mt-badge">Teaser</span>
+          <video playsinline autoplay loop muted controls src="resources/Teaser.mp4" preload="metadata"></video>
         </div>
       </div>
-      <h4 style="text-align: center;">Teaser</h4>
     </div>
   </section>
 
   <!-- ================== Abstract ================== -->
-  <section class="section" id="abstract">
+  <section class="section mt-section" id="abstract">
     <div class="container">
       <div class="columns is-centered has-text-centered">
         <div class="column is-two-thirds">
           <h2 class="title is-2">Abstract</h2>
-          <div class="content has-text-justified">
-            <p>
-              Scaling real robot data is a key bottleneck in imitation learning, leading to the use of auxiliary data for policy training. While other aspects of robotic manipulation such as image or language understanding may be learned from internet-based datasets, acquiring motion knowledge remains challenging. Human data, with its rich diversity of manipulation behaviors, offers a valuable resource for this purpose. While previous works show that using human data can bring benefits, such as improving robustness and training efficiency, it remains unclear whether it can realize its greatest advantage: enabling robot policies to directly learn new motions for task completion. In this paper, we systematically explore this potential through multi-task human-robot cotraining. We introduce MotionTrans, a framework that includes a data collection system, a human data transformation pipeline, and a weighted cotraining strategy. By cotraining 30 human-robot tasks simultaneously, we directly transfer more than 10 motions from human data to deployable end-to-end robot policies. Notably, 9 tasks achieve non-trivial success rates in zero-shot manner. MotionTrans also significantly enhances pretraining-finetuning performance (+40% success rate). Through ablation study, we identify key factors for successful motion learning: cotraining with robot data. These findings unlock the potential of motion-level learning from human data, offering insights into its effective use for training robotic manipulation policies. All data, code, and model weights will be open-sourced.
-            </p>
+          <div class="mt-card mt-abstract" style="text-align:left;">
+            <div class="content has-text-justified" style="margin:0;">
+              <p>
+                Scaling real robot data is a key bottleneck in imitation learning, leading to the use of auxiliary data for policy training. While other aspects of robotic manipulation such as image or language understanding may be learned from internet-based datasets, acquiring motion knowledge remains challenging. Human data, with its rich diversity of manipulation behaviors, offers a valuable resource for this purpose. While previous works show that using human data can bring benefits, such as improving robustness and training efficiency, it remains unclear whether it can realize its greatest advantage: enabling robot policies to directly learn new motions for task completion. In this paper, we systematically explore this potential through multi-task human-robot cotraining. We introduce MotionTrans, a framework that includes a data collection system, a human data transformation pipeline, and a weighted cotraining strategy. By cotraining 30 human-robot tasks simultaneously, we directly transfer more than 10 motions from human data to deployable end-to-end robot policies. Notably, 9 tasks achieve non-trivial success rates in zero-shot manner. MotionTrans also significantly enhances pretraining-finetuning performance (+40% success rate). Through ablation study, we identify key factors for successful motion learning: cotraining with robot data. These findings unlock the potential of motion-level learning from human data, offering insights into its effective use for training robotic manipulation policies. All data, code, and model weights will be open-sourced.
+              </p>
+            </div>
           </div>
         </div>
       </div>
@@ -300,40 +363,31 @@
   </section>
 
   <!-- ================== Teaser image ================== -->
-  <section class="section" id="method">
+  <section class="section mt-section" id="method">
     <div class="container">
-      <div class="columns is-centered">
-          <div class="row">
-            <div class="col">
-              <center>
-                <h5> We proposed MotionTrans framework, a pipeline for transforming human data into robot format, and a weighted human-robot multi-task cotraining strategy.</h5>
-                <img src="./resources/main_teaser_v1.png" width="65%" alt="MotionTrans method">
-              </center>
-            </div>
-          </div>
-        </div> 
+      <h2 class="title is-2 has-text-centered" style="padding-bottom:10px;">Method Teaser</h2>
+      <div class="mt-card w-70">
+        <div class="mt-img-wrap">
+          <img src="./resources/main_teaser_v1.png" alt="MotionTrans method">
+        </div>
+        <p class="mt-caption">We propose a framework to transform human data into robot format and a weighted human-robot multi-task co-training strategy.</p>
       </div>
     </div>
   </section>
 
   <!-- ================== Unified Human-Centric State-Action Space ================== -->
-  <section class="section" id="method">
+  <section class="section mt-section" id="method">
     <div class="container">
-      <div class="columns is-centered">
-        <div class="column is-full-width">
-          <h2 class="title is-2" style="text-align: center; padding-bottom: 10px;">Unified Human-Centric State-Action Space</h2>
-          <div class="row">
-            <div class="col">
-              <center>
-                <h5> We proposed MotionTrans framework, a pipeline for transforming human data into robot format, and a weighted human-robot multi-task cotraining strategy.</h5>
-                <img src="./resources/main_method.png" width="65%" alt="MotionTrans method">
-              </center>
-            </div>
-          </div>
-        </div> 
+      <h2 class="title is-2 has-text-centered" style="padding-bottom:10px;">Unified Human-Centric State-Action Space</h2>
+      <div class="mt-card w-70">
+        <div class="mt-img-wrap">
+          <img src="./resources/main_method.png" alt="MotionTrans method">
+        </div>
+        <p class="mt-caption">A unified state-action space and transformation pipeline for cross-embodiment motion learning.</p>
       </div>
     </div>
   </section>
+
 
   <!-- ================== Experimental Results ================== -->
   <section class="section" id="experiments">
