@@ -96,27 +96,30 @@
     .cover__content { width: min(var(--cover-max-width), calc(100% - 2*var(--cover-side-gutter))); margin-top: var(--cover-top-offset); text-align: center; color: #fff; text-shadow: var(--cover-text-shadow); padding: 18px 0; background: var(--cover-overlay-bg); border-radius: 12px; }
     .cover__title { display: flex; flex-direction: column; align-items: center; margin: 0 0 12px 0; }
     .cover__title .brand { font-size: var(--brand-size); font-weight: var(--cover-title-weight); line-height: 1.03; letter-spacing: -0.02em; }
-    /* ===== Purple outline for the cover title ===== */
-    /* 建议把这个变量并入你已存在的 :root 里；不并也可以，重复声明 :root 会合并 */
-    :root { --brand-stroke: #7c3aed; }
-
+    /* 封面标题：透明描边 + 渐变文字裁剪 */
     .cover__title .brand{
-      color:#fff;
-      -webkit-text-fill-color:#fff;                 /* 保持白色填充 */
-      -webkit-text-stroke: 3px var(--brand-stroke); /* 紫色描边（Safari/Chromium） */
-      text-shadow: none;                            /* 想保留原投影就删这一行 */
+      font-size: var(--brand-size);
+      font-weight: var(--cover-title-weight);
+      line-height: 1.03;
+      letter-spacing: -0.02em;
+
+      /* 你的要求：透明描边 + 文本裁剪背景 */
+      color:#000;                                   /* 兼容回退 */
+      -webkit-text-stroke: 3px transparent;         /* 透明描边（不着色，只保留外轮廓） */
+      text-stroke: 5px transparent;                 /* 未来标准，兼容性备用 */
+
+      background: linear-gradient(
+        90deg,
+        red, orange, yellow, green, cyan, blue, purple
+      ) top left / 100% 100%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;         /* 让渐变真正填充字形 */
+
+      /* 细节优化：在深色视频上略提亮可读性（可选） */
+      text-shadow: 0 2px 12px rgba(0,0,0,.35);
     }
 
-    /* 非 WebKit 的降级描边（用多重 text-shadow 模拟描边） */
-    @supports not (-webkit-text-stroke: 1px #000){
-      .cover__title .brand{
-        text-shadow:
-          2px 0   var(--brand-stroke), -2px 0   var(--brand-stroke),
-          0   2px var(--brand-stroke),  0  -2px var(--brand-stroke),
-          1.5px 1.5px var(--brand-stroke), -1.5px -1.5px var(--brand-stroke),
-          1.5px -1.5px var(--brand-stroke), -1.5px 1.5px var(--brand-stroke);
-      }
-    }
 
     .cover__title .rest { margin-top: var(--title-gap); font-size: var(--title-rest-size); line-height: 1.2; font-weight: 500; opacity: .98; }
     .cover__title .rest .line { display: block; }
