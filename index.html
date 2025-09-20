@@ -395,111 +395,85 @@
   <section class="section" id="qualitative-results">
     <div class="container">
       <h2 class="title is-2" style="text-align:center; padding-bottom:10px;">
-        MotionTrans Zero-Shot inference Results on Real Robot
+        MotionTrans Zero-Shot Inference Results on Real Robot
         <span class="has-text-grey is-size-5" style="display:block; margin-top:6px;">
-          (Left: Human Data · Middle: MotionTrans-DP · Right: MotionTrans-Pi0-VLA)
+          (Top: Human Demonstration · Bottom: MotionTrans-DP & MotionTrans-Pi0-VLA)
         </span>
       </h2>
 
       <!-- Styles (scoped) -->
       <style>
         #resultVideoPager{
-          --gap: 24px;
+          --gap: 20px;
           --badge-bg: rgba(0,0,0,.55);
           --badge-shadow: 0 2px 8px rgba(0,0,0,.25);
         }
-
         #resultVideoPager .rvp-task{
-          text-align:center;
-          margin: 0 0 12px;
-          font-weight: 700;
-          line-height: 1.2;
+          text-align:center; margin: 0 0 12px; font-weight: 800; line-height: 1.2;
         }
 
-        /* 布局：第一行整行（Human），第二行两列（DP / Pi0） */
+        /* 布局：第一行 Human（跨两列） + 第二行两列（DP / Pi0） */
         #resultVideoPager .rvp-grid{
-          display: grid;
+          display:grid;
           grid-template-columns: repeat(2, 1fr);
           gap: var(--gap);
         }
         #resultVideoPager .rvp-grid .rvp-item:nth-child(1){
-          grid-column: 1 / -1; /* Human 跨两列 */
+          grid-column: 1 / -1; /* Human 跨两列占满第一行 */
         }
 
-        #resultVideoPager .rvp-item{
-          display:flex;
-          flex-direction:column;
-        }
-
-        #resultVideoPager .rvp-video{
-          position:relative;
-          width:100%;
-          aspect-ratio: 16 / 9;
-          border-radius: 10px;
-          overflow:hidden;
-        }
-        #resultVideoPager .rvp-video video{
-          width:100%;
-          height:100%;
-          object-fit:cover;
-          display:block;
-        }
-
-        #resultVideoPager .rvp-badge{
-          position:absolute;
-          top:10px;
-          left:10px;
-          padding:6px 10px;
-          border-radius:999px;
-          background: var(--badge-bg);
-          color:#fff;
-          font-size:12px;
-          letter-spacing:.2px;
-          box-shadow: var(--badge-shadow);
-          user-select:none;
-        }
-
-        #resultVideoPager .rvp-caption{
+        /* 行标题（显眼） */
+        #resultVideoPager .rvp-row-title{
+          grid-column: 1 / -1;
           text-align:center;
-          margin-top:6px;
-          font-size:.95rem;
-          color:#6b7280;
+          font-size: 1.15rem;
+          font-weight: 700;
+          color: #374151;
+          letter-spacing: .2px;
+          margin: 2px 0 6px;
         }
 
-        #resultVideoPager .vp-controls{
-          margin: 6px 0 16px;
+        /* 卡片 & 视频 */
+        #resultVideoPager .rvp-item{ display:flex; flex-direction:column; }
+        #resultVideoPager .rvp-video{
+          position:relative; width:100%;
+          aspect-ratio: 16 / 9; border-radius: 12px; overflow:hidden;
         }
+        #resultVideoPager .rvp-video video{ width:100%; height:100%; object-fit:cover; display:block; }
 
-        /* ===== Human（第一行）占容器 50% 宽并居中，保持比例 ===== */
-        #resultVideoPager .rvp-grid .rvp-item:nth-child(1) .rvp-video{
-          width: 50%;
-          margin: 0 auto;         /* 居中 */
-          aspect-ratio: 16 / 9;   /* 可改 4/3、1/1 等 */
+        /* Human 尺寸：占容器 56% 宽并居中，保持比例 */
+        #resultVideoPager .rvp-item--human .rvp-video{
+          width: 56%;
+          margin: 0 auto;
+          aspect-ratio: 16 / 9;
         }
-        #resultVideoPager .rvp-grid .rvp-item:nth-child(1) .rvp-caption{
-          width: 50%;
+        #resultVideoPager .rvp-item--human .rvp-caption{
+          width: 56%;
           margin: 6px auto 0;
           text-align: center;
         }
 
-        /* 小屏兜底：Human 改为 100% 宽；极窄屏改为单列堆叠 */
-        @media (max-width: 768px){
-          #resultVideoPager .rvp-grid .rvp-item:nth-child(1) .rvp-video,
-          #resultVideoPager .rvp-grid .rvp-item:nth-child(1) .rvp-caption{
-            width: 100%;
-          }
+        /* 角标 */
+        #resultVideoPager .rvp-badge{
+          position:absolute; top:10px; left:10px; padding:6px 10px; border-radius:999px;
+          background: var(--badge-bg); color:#fff; font-size:12px; letter-spacing:.2px;
+          box-shadow: var(--badge-shadow); user-select:none;
         }
-        @media (max-width: 640px){
-          #resultVideoPager .rvp-grid{
-            grid-template-columns: 1fr;
-          }
-          #resultVideoPager .rvp-grid .rvp-item:nth-child(1){
-            grid-column: auto;
-          }
+
+        /* 次级说明 */
+        #resultVideoPager .rvp-caption{
+          text-align:center; margin-top:6px; font-size:.95rem; color:#6b7280;
+        }
+
+        #resultVideoPager .vp-controls{ margin: 8px 0 16px; }
+
+        /* 窄屏兜底：单列堆叠 + Human 100% 宽 */
+        @media (max-width: 768px){
+          #resultVideoPager .rvp-grid{ grid-template-columns: 1fr; }
+          #resultVideoPager .rvp-item--human .rvp-video,
+          #resultVideoPager .rvp-item--human .rvp-caption{ width:100%; }
         }
       </style>
-
-
 
       <div id="resultVideoPager" class="video-pager" aria-label="Qualitative result video pager">
         <!-- Controls -->
@@ -575,7 +549,7 @@
           const next = pager.querySelector('.vp-next');
           const dotsWrap = pager.querySelector('.vp-dots');
 
-          // 构建页面
+          // Build pages
           const frag = document.createDocumentFragment();
           tasks.forEach((t, i) => {
             const page = document.createElement('div');
@@ -585,13 +559,20 @@
             page.innerHTML = `
               <h3 class="rvp-task">${t.title}</h3>
               <div class="rvp-grid">
-                <div class="rvp-item">
+                <!-- Human 行 -->
+                <div class="rvp-item rvp-item--human">
                   <div class="rvp-video">
                     <span class="rvp-badge">Human Data</span>
                     <video autoplay muted loop playsinline controls preload="metadata" src="${t.human}"></video>
                   </div>
+                  <div class="rvp-row-title">Human Demonstration</div>
                   <div class="rvp-caption">Human demonstration</div>
                 </div>
+
+                <!-- 机器人行标题（跨两列） -->
+                <div class="rvp-row-title">Robot Inference</div>
+
+                <!-- MotionTrans-DP -->
                 <div class="rvp-item">
                   <div class="rvp-video">
                     <span class="rvp-badge">MotionTrans-DP</span>
@@ -599,6 +580,8 @@
                   </div>
                   <div class="rvp-caption">Robot inference (MotionTrans-DP Zero Shot)</div>
                 </div>
+
+                <!-- MotionTrans-Pi0-VLA -->
                 <div class="rvp-item">
                   <div class="rvp-video">
                     <span class="rvp-badge">MotionTrans-Pi0-VLA</span>
@@ -612,7 +595,7 @@
           });
           pager.appendChild(frag);
 
-          // 生成圆点
+          // Dots
           dotsWrap.innerHTML = '';
           const pages = Array.from(pager.querySelectorAll('.vp-page'));
           pages.forEach((p, k) => {
@@ -627,7 +610,6 @@
           const dots = Array.from(dotsWrap.querySelectorAll('.vp-dot'));
 
           let idx = 0;
-
           function pauseHiddenPages(except) {
             pages.forEach((pg, k) => {
               if (k !== except) {
@@ -655,6 +637,7 @@
             pauseHiddenPages(idx);
             playVisiblePage(idx);
           }
+
           prev.addEventListener('click', () => show(idx - 1));
           next.addEventListener('click', () => show(idx + 1));
           pager.addEventListener('keydown', (e) => {
@@ -668,6 +651,7 @@
       </script>
     </div>
   </section>
+
 
   <!-- ================== Few-shot Learning Results ================== -->
   <section class="section" id="fewshot-results">
