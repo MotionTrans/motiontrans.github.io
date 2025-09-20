@@ -19,7 +19,7 @@
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700;800&family=Noto+Sans:wght@400;500;700&display=swap" rel="stylesheet">
 
-  <!-- CSS libs (kept for the rest of the page) -->
+  <!-- CSS libs -->
   <link rel="stylesheet" href="./static/css/bulma.min.css">
   <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
   <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
@@ -31,7 +31,7 @@
   <link rel="icon" href="./resources/Tsinghua_University-Logo_256x256.ico">
   <script src="https://kit.fontawesome.com/006a5775d5.js" crossorigin="anonymous"></script>
 
-  <!-- JS libs (for later sections) -->
+  <!-- JS libs -->
   <script src="https://www.youtube.com/iframe_api"></script>
   <script src="./static/js/ajax.googleapis.com_ajax_libs_jquery_3.5.1_jquery.min.js"></script>
   <script src="./static/js/isInViewport.min.js"></script>
@@ -39,20 +39,19 @@
   <script src="./static/js/bulma-slider.min.js"></script>
   <script src="./static/js/index.js"></script>
 
-  <!-- ================== Cover (DexWild-like) Styles with Tunable Variables ================== -->
+  <!-- ================== Global Cover Styles ================== -->
   <style>
     :root{
-      /* ======= 可调变量 ======= */
-      --brand-size: clamp(64px, 10vw, 160px);          /* “MotionTrans” 字号（最大） */
-      --title-rest-size: clamp(48px, 2.2vw, 36px);     /* 其余标题文字字号（较小） */
-      --cover-subtitle-size: clamp(16px, 1.8vw, 28px); /* 作者行字号 */
-      --cover-side-gutter: 7vw;                        /* 文字距离左右的留白 */
-      --cover-max-width: 1400px;                       /* 文案区域最大宽度 */
-      --cover-title-weight: 800;                       /* 品牌词字重 */
-      --title-gap: .35em;                              /* 品牌词与小标题的垂直间距 */
-      --cover-top-offset: 0vh;                         /* 垂直微调（正=下移） */
-      --cover-overlay-bg: rgba(0,0,0,0.0);             /* 文案块半透明底色 */
-      --cover-cta-gap: 10px;                           /* 按钮间距 */
+      --brand-size: clamp(64px, 10vw, 160px);
+      --title-rest-size: clamp(48px, 2.2vw, 36px);
+      --cover-subtitle-size: clamp(16px, 1.8vw, 28px);
+      --cover-side-gutter: 7vw;
+      --cover-max-width: 1400px;
+      --cover-title-weight: 800;
+      --title-gap: .35em;
+      --cover-top-offset: 0vh;
+      --cover-overlay-bg: rgba(0,0,0,0.0);
+      --cover-cta-gap: 10px;
       --cover-shadow: 0 6px 28px rgba(0,0,0,.55);
       --cover-text-shadow: 2px 2px 12px rgba(0,0,0,.65);
     }
@@ -60,149 +59,120 @@
     html, body { height: 100%; margin: 0; font-family: "Google Sans","Noto Sans",system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif; }
     * { box-sizing: border-box; }
 
-    /* ====== 顶部透明导航（覆盖在封面上） ====== */
     .navbar.is-transparent { background: transparent; }
-    .navbar.is-transparent .navbar-item,
-    .navbar.is-transparent .navbar-link { color: #fff; }
-    .navbar.is-transparent .navbar-item:hover,
-    .navbar.is-transparent .navbar-link:hover { background: rgba(255,255,255,.08); color: #fff; }
+    .navbar.is-transparent .navbar-item, .navbar.is-transparent .navbar-link { color: #fff; }
+    .navbar.is-transparent .navbar-item:hover, .navbar.is-transparent .navbar-link:hover { background: rgba(255,255,255,.08); color: #fff; }
 
-    /* ====== 封面容器 ====== */
     .cover {
-      position: relative;
-      width: 100%;
-      height: 100vh;
-      min-height: 580px;
-      overflow: hidden;
-      background: #000;
+      position: relative; width: 100%; height: 100vh; min-height: 580px; overflow: hidden; background: #000;
     }
-    .cover video, .cover img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-      filter: saturate(1.05) contrast(1.02) brightness(.92);
-    }
+    .cover video, .cover img { width: 100%; height: 100%; object-fit: cover; display: block; filter: saturate(1.05) contrast(1.02) brightness(.92); }
     .cover__overlay {
-      position: absolute;
-      inset: 0;
-      display: grid;
-      place-items: center;
-      padding-left: var(--cover-side-gutter);
-      padding-right: var(--cover-side-gutter);
+      position: absolute; inset: 0; display: grid; place-items: center;
+      padding-left: var(--cover-side-gutter); padding-right: var(--cover-side-gutter);
       background: linear-gradient(to bottom, rgba(0,0,0,.15) 0%, rgba(0,0,0,.35) 60%, rgba(0,0,0,.5) 100%);
     }
     .cover__content {
       width: min(var(--cover-max-width), calc(100% - 2*var(--cover-side-gutter)));
       margin-top: var(--cover-top-offset);
-      text-align: center;
-      color: #fff;
-      text-shadow: var(--cover-text-shadow);
-      padding: 18px 0;
-      background: var(--cover-overlay-bg);
-      border-radius: 12px;
+      text-align: center; color: #fff; text-shadow: var(--cover-text-shadow);
+      padding: 18px 0; background: var(--cover-overlay-bg); border-radius: 12px;
     }
-
-    /* ====== 标题：最大只放 “MotionTrans”，其余换行且更小 ====== */
-    .cover__title {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      margin: 0 0 12px 0;
-    }
-    .cover__title .brand {
-      font-size: var(--brand-size);
-      font-weight: var(--cover-title-weight);
-      line-height: 1.03;
-      letter-spacing: -0.02em;
-    }
-    .cover__title .rest {
-      margin-top: var(--title-gap);
-      font-size: var(--title-rest-size);
-      line-height: 1.2;
-      font-weight: 500;
-      opacity: .98;
-      letter-spacing: 0;
-    }
+    .cover__title { display: flex; flex-direction: column; align-items: center; margin: 0 0 12px 0; }
+    .cover__title .brand { font-size: var(--brand-size); font-weight: var(--cover-title-weight); line-height: 1.03; letter-spacing: -0.02em; }
+    .cover__title .rest { margin-top: var(--title-gap); font-size: var(--title-rest-size); line-height: 1.2; font-weight: 500; opacity: .98; }
     .cover__title .rest .line { display: block; }
-
-    .cover__subtitle {
-      font-size: var(--cover-subtitle-size);
-      font-weight: 500;
-      opacity: .96;
-      margin-top: 14px;
-    }
-    .cover__meta {
-      font-size: clamp(32px, 1.1vw, 18px);
-      opacity: .9;
-      margin-top: 10px;
-      margin-bottom: 20px;
-    }
-    .cover__actions {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: var(--cover-cta-gap);
-      margin-top: 6px;
-    }
+    .cover__subtitle { font-size: var(--cover-subtitle-size); font-weight: 500; opacity: .96; margin-top: 14px; }
+    .cover__meta { font-size: clamp(32px, 1.1vw, 18px); opacity: .9; margin-top: 10px; margin-bottom: 20px; }
+    .cover__actions { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--cover-cta-gap); margin-top: 6px; }
     .cover__btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 10px 16px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,.6);
-      color: #fff;
-      text-decoration: none;
-      backdrop-filter: blur(4px);
-      background: rgba(0,0,0,.25);
-      transition: transform .15s ease, background .15s ease, border-color .15s ease;
-      box-shadow: var(--cover-shadow);
-      font-size: 14px;
-      line-height: 1;
+      display: inline-flex; align-items: center; gap: 8px; padding: 10px 16px; border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.6); color: #fff; text-decoration: none; backdrop-filter: blur(4px);
+      background: rgba(0,0,0,.25); transition: transform .15s ease, background .15s ease, border-color .15s ease;
+      box-shadow: var(--cover-shadow); font-size: 14px; line-height: 1;
     }
     .cover__btn:hover { transform: translateY(-1px); background: rgba(255,255,255,.08); border-color: #fff; }
-
-    /* ====== 主体区基础留白 ====== */
     .section--after-cover { padding-block: 48px; }
-    .no-bottom-padding { padding-bottom: 0 !important; }
 
-    /* ====== Video Pager 基础样式（若无需可删） ====== */
+    /* Video pager base */
     .video-pager .vp-page { display: none; }
     .video-pager .vp-page.active { display: block; }
-    .vp-controls {
-      display: flex; align-items: center; justify-content: center;
-      gap: 16px; margin: 8px 0 16px;
-    }
-    .vp-btn {
-      border: none; width: 40px; height: 40px; border-radius: 999px;
-      background: #222; color: #fff; line-height: 40px; text-align: center;
-      font-size: 20px; cursor: pointer;
-    }
+    .vp-controls { display: flex; align-items: center; justify-content: center; gap: 16px; margin: 8px 0 16px; }
+    .vp-btn { border: none; width: 40px; height: 40px; border-radius: 999px; background: #222; color: #fff; line-height: 40px; text-align: center; font-size: 20px; cursor: pointer; }
     .vp-btn:focus { outline: 2px solid #888; }
     .vp-dots { display: flex; gap: 10px; align-items: center; }
     .vp-dot { width: 10px; height: 10px; border-radius: 50%; background: #cfcfcf; cursor: pointer; }
     .vp-dot.active { background: #333; }
-    .video-title { margin-bottom: 8px; font-size: 1rem; }
+  </style>
+
+  <!-- ================== Global MotionTrans Theme (applies site-wide) ================== -->
+  <style>
+    /* Section wrapper to scope theme */
+    .mt-section { position: relative; }
+
+    /* Card container used everywhere */
+    .mt-card{
+      background: linear-gradient(180deg, #ffffff, #fafafa);
+      border: 1px solid #e5e7eb;      /* gray-200 */
+      border-radius: 16px;
+      box-shadow: 0 10px 32px rgba(0,0,0,.08);
+      padding: 18px;
+    }
+    .mt-card.compact{ padding:14px; }
+
+    /* Pretty title with gradient underline; always centered */
+    .mt-title{
+      display: table;                  /* 自身居中 */
+      margin: 0 auto 14px auto;        /* 居中 + 底部间距 */
+      padding-bottom: 6px;
+      position: relative;
+      text-align: center !important;
+    }
+    .mt-title::after{
+      content:""; position:absolute; left:50%; transform:translateX(-50%);
+      bottom:-4px; width: 120px; height: 3px; border-radius: 999px;
+      background: linear-gradient(90deg, #7c3aed, #06b6d4);
+    }
+
+    /* Media wrappers (video/img) */
+    .mt-video-wrap, .mt-img-wrap{
+      position: relative; width: 100%; border-radius: 12px; overflow: hidden;
+    }
+    .mt-video-wrap{ aspect-ratio: 16 / 9; }
+    .mt-video-wrap video, .mt-img-wrap img{ width: 100%; height: 100%; object-fit: cover; display: block; }
+
+    /* Small badge (optional) */
+    .mt-badge{
+      position: absolute; top: 10px; left: 10px; padding: 6px 10px; border-radius: 999px;
+      background: rgba(0,0,0,.55); color:#fff; font-size:12px; letter-spacing:.2px;
+      box-shadow: 0 2px 8px rgba(0,0,0,.25); user-select: none;
+    }
+
+    /* Figure cards (used by results) */
+    .mt-fig-grid{ display:grid; grid-template-columns: 1fr; gap:24px; max-width:1100px; margin:0 auto; }
+    .mt-fig{ margin:0; background:#fff; border-radius:12px; overflow:hidden; box-shadow: 0 8px 28px rgba(0,0,0,.12); }
+    .mt-fig img{ width:100%; height:auto; display:block; }
+    .mt-fig figcaption{ padding:10px 14px; font-size:.95rem; color:#6b7280; text-align:center; background:#fafafa; }
+
+    /* Utility: center a narrow column on large screens */
+    @media (min-width: 1024px){
+      .w-70 { width: 70%; margin-left:auto; margin-right:auto; }
+    }
   </style>
 </head>
 
 <body>
 
-  <!-- ===== 透明导航（覆盖在封面顶端） ===== -->
+  <!-- ===== Transparent navbar ===== -->
   <nav class="navbar is-transparent" role="navigation" aria-label="main navigation" style="position:absolute; width:100%; z-index:10;">
     <div class="navbar-brand">
       <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
       </a>
     </div>
     <div class="navbar-menu">
       <div class="navbar-start" style="flex-grow:1; justify-content:center;">
-        <a class="navbar-item" href="#top">
-          <span class="icon"><i class="fas fa-home"></i></span>
-        </a>
+        <a class="navbar-item" href="#top"><span class="icon"><i class="fas fa-home"></i></span></a>
         <div class="navbar-item has-dropdown is-hoverable">
           <a class="navbar-link">Related Research</a>
           <div class="navbar-dropdown">
@@ -213,13 +183,11 @@
     </div>
   </nav>
 
-  <!-- ================== 封面（Only “MotionTrans” is huge; the rest is smaller and line-broken） ================== -->
+  <!-- ================== Hero Cover ================== -->
   <header id="top" class="cover" aria-label="Hero cover">
-    <!-- 背景：可换为 <img src="resources/your_image.jpg" alt=""> -->
     <video id="bg-video" autoplay loop muted playsinline>
       <source src="resources/grid_8x9_3.mp4" type="video/mp4">
     </video>
-
     <div class="cover__overlay">
       <div class="cover__content">
         <h1 class="cover__title" aria-label="MotionTrans: Human VR Data Enable Motion-Level Learning for Robotic Manipulation Policies">
@@ -229,128 +197,33 @@
             <span class="line">for Robotic Manipulation Policies</span>
           </span>
         </h1>
-
         <div class="cover__subtitle">
           <span class="author-block">Author1*</span>&nbsp;·&nbsp;
           <span class="author-block">Author2*</span>&nbsp;·&nbsp;
           <span class="author-block">Author3*</span>&nbsp;·&nbsp;
           <span class="author-block">Author4*</span>
         </div>
-
-        <div class="cover__meta">
-          IIIS, Tsinghua University
-        </div>
-
+        <div class="cover__meta">IIIS, Tsinghua University</div>
         <div class="cover__actions">
-          <a class="cover__btn" href="https://arxiv.org/" target="_blank" rel="noopener">
-            <i class="fas fa-file-pdf"></i><span>Paper (PDF)</span>
-          </a>
-          <a class="cover__btn" href="https://arxiv.org/" target="_blank" rel="noopener">
-            <i class="ai ai-arxiv"></i><span>arXiv</span>
-          </a>
-          <a class="cover__btn" href="https://huggingface.co/" target="_blank" rel="noopener">
-            <img src="resources/hf-logo.png" alt="" style="width:1em;height:1em;"><span>Datasets</span>
-          </a>
-          <a class="cover__btn" href="https://github.com/" target="_blank" rel="noopener">
-            <i class="fab fa-github"></i><span>Code</span>
-          </a>
-          <a class="cover__btn" href="https://github.com/" target="_blank" rel="noopener">
-            <i class="fas fa-code"></i><span>Training Code</span>
-          </a>
-          <a class="cover__btn" href="#" target="_blank" rel="noopener">
-            <i class="fas fa-microchip"></i><span>Hardware Guide</span>
-          </a>
-          <a class="cover__btn" href="#" target="_blank" rel="noopener">
-            <i class="fas fa-clipboard-list"></i><span>Data Collection Guide</span>
-          </a>
+          <a class="cover__btn" href="https://arxiv.org/" target="_blank" rel="noopener"><i class="fas fa-file-pdf"></i><span>Paper (PDF)</span></a>
+          <a class="cover__btn" href="https://arxiv.org/" target="_blank" rel="noopener"><i class="ai ai-arxiv"></i><span>arXiv</span></a>
+          <a class="cover__btn" href="https://huggingface.co/" target="_blank" rel="noopener"><img src="resources/hf-logo.png" alt="" style="width:1em;height:1em;"><span>Datasets</span></a>
+          <a class="cover__btn" href="https://github.com/" target="_blank" rel="noopener"><i class="fab fa-github"></i><span>Code</span></a>
+          <a class="cover__btn" href="https://github.com/" target="_blank" rel="noopener"><i class="fas fa-code"></i><span>Training Code</span></a>
+          <a class="cover__btn" href="#" target="_blank" rel="noopener"><i class="fas fa-microchip"></i><span>Hardware Guide</span></a>
+          <a class="cover__btn" href="#" target="_blank" rel="noopener"><i class="fas fa-clipboard-list"></i><span>Data Collection Guide</span></a>
         </div>
       </div>
     </div>
   </header>
 
-  <!-- ===== Pretty styles for teaser/abstract/method blocks (scoped) ===== -->
-  <style>
-    /* 只作用于下面这四个区块 */
-    .mt-section .mt-card{
-      background: linear-gradient(180deg, #ffffff, #fafafa);
-      border: 1px solid #e5e7eb;          /* gray-200 */
-      border-radius: 16px;
-      box-shadow: 0 10px 32px rgba(0,0,0,.08);
-      padding: 18px;
-    }
-    .mt-section .mt-card.compact{ padding:14px; }
-
-    .mt-section .mt-video-wrap{
-      position: relative;
-      width: 100%;
-      aspect-ratio: 16/9;
-      border-radius: 12px;
-      overflow: hidden;
-    }
-    .mt-section .mt-video-wrap video,
-    .mt-section .mt-img-wrap img{
-      width: 100%; height: 100%; object-fit: cover; display: block;
-    }
-    .mt-section .mt-badge{
-      position: absolute; top: 10px; left: 10px;
-      padding: 6px 10px; border-radius: 999px;
-      background: rgba(0,0,0,.55); color:#fff; font-size:12px; letter-spacing:.2px;
-      box-shadow: 0 2px 8px rgba(0,0,0,.25);
-      user-select: none;
-    }
-
-    .mt-section .mt-caption{
-      margin-top: 8px; text-align: center; color:#6b7280; font-size:.95rem;
-    }
-
-    /* 标题小装饰线 */
-    .mt-section h2.title{
-      position: relative; display: inline-block; padding-bottom: 6px;
-    }
-    .mt-section h2.title:after{
-      content:""; position:absolute; left:50%; transform:translateX(-50%);
-      bottom:-4px; width: 120px; height: 3px; border-radius: 999px;
-      background: linear-gradient(90deg, #7c3aed, #06b6d4);
-    }
-
-    /* Abstract 玻璃拟态效果（轻） */
-    .mt-section .mt-abstract{
-      backdrop-filter: blur(4px);
-      background: linear-gradient(180deg, rgba(255,255,255,.95), rgba(255,255,255,.9));
-      border-left: 4px solid #7c3aed;   /* violet */
-    }
-
-    /* 图片容器 */
-    .mt-section .mt-img-wrap{
-      position: relative; width:100%; border-radius:12px; overflow:hidden;
-    }
-
-    /* 居中列宽优化（比 is-two-thirds 稍宽一点） */
-    @media (min-width: 1024px){
-      .mt-section .w-70 { width: 70%; margin-left:auto; margin-right:auto; }
-    }
-  </style>
-
-  <!-- ================== Teaser ================== -->
-  <section class="section section--after-cover mt-section" id="teaser">
-    <div class="container">
-      <h2 class="title is-2 has-text-centered" style="margin-bottom:16px;">Teaser</h2>
-      <div class="mt-card w-70">
-        <div class="mt-video-wrap">
-          <span class="mt-badge">Teaser</span>
-          <video playsinline autoplay loop muted controls src="resources/Teaser.mp4" preload="metadata"></video>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- ================== Abstract ================== -->
   <section class="section mt-section" id="abstract">
     <div class="container">
-      <div class="columns is-centered has-text-centered">
+      <h2 class="title is-2 mt-title">Abstract</h2>
+      <div class="columns is-centered">
         <div class="column is-two-thirds">
-          <h2 class="title is-2">Abstract</h2>
-          <div class="mt-card mt-abstract" style="text-align:left;">
+          <div class="mt-card" style="backdrop-filter: blur(4px); background: linear-gradient(180deg, rgba(255,255,255,.95), rgba(255,255,255,.9)); border-left:4px solid #7c3aed;">
             <div class="content has-text-justified" style="margin:0;">
               <p>
                 Scaling real robot data is a key bottleneck in imitation learning, leading to the use of auxiliary data for policy training. While other aspects of robotic manipulation such as image or language understanding may be learned from internet-based datasets, acquiring motion knowledge remains challenging. Human data, with its rich diversity of manipulation behaviors, offers a valuable resource for this purpose. While previous works show that using human data can bring benefits, such as improving robustness and training efficiency, it remains unclear whether it can realize its greatest advantage: enabling robot policies to directly learn new motions for task completion. In this paper, we systematically explore this potential through multi-task human-robot cotraining. We introduce MotionTrans, a framework that includes a data collection system, a human data transformation pipeline, and a weighted cotraining strategy. By cotraining 30 human-robot tasks simultaneously, we directly transfer more than 10 motions from human data to deployable end-to-end robot policies. Notably, 9 tasks achieve non-trivial success rates in zero-shot manner. MotionTrans also significantly enhances pretraining-finetuning performance (+40% success rate). Through ablation study, we identify key factors for successful motion learning: cotraining with robot data. These findings unlock the potential of motion-level learning from human data, offering insights into its effective use for training robotic manipulation policies. All data, code, and model weights will be open-sourced.
@@ -362,487 +235,104 @@
     </div>
   </section>
 
-  <!-- ================== Teaser image ================== -->
-  <section class="section mt-section" id="method">
+  <!-- ================== Method Teaser ================== -->
+  <section class="section mt-section" id="method-teaser">
     <div class="container">
-      <h2 class="title is-2 has-text-centered" style="padding-bottom:10px;">Method Teaser</h2>
+      <h2 class="title is-2 mt-title">Method Teaser</h2>
       <div class="mt-card w-70">
         <div class="mt-img-wrap">
           <img src="./resources/main_teaser_v1.png" alt="MotionTrans method">
         </div>
-        <p class="mt-caption">We propose a framework to transform human data into robot format and a weighted human-robot multi-task co-training strategy.</p>
+        <p class="has-text-grey mt-2" style="text-align:center; margin-top:8px;">
+          We propose a framework to transform human data into robot format and a weighted human-robot multi-task co-training strategy.
+        </p>
       </div>
     </div>
   </section>
 
   <!-- ================== Unified Human-Centric State-Action Space ================== -->
-  <section class="section mt-section" id="method">
+  <section class="section mt-section" id="unified-human-centric">
     <div class="container">
-      <h2 class="title is-2 has-text-centered" style="padding-bottom:10px;">Unified Human-Centric State-Action Space</h2>
+      <h2 class="title is-2 mt-title">Unified Human-Centric State-Action Space</h2>
       <div class="mt-card w-70">
         <div class="mt-img-wrap">
           <img src="./resources/main_method.png" alt="MotionTrans method">
         </div>
-        <p class="mt-caption">A unified state-action space and transformation pipeline for cross-embodiment motion learning.</p>
+        <p class="has-text-grey" style="text-align:center; margin-top:8px;">
+          A unified state-action space and transformation pipeline for cross-embodiment motion learning.
+        </p>
       </div>
     </div>
   </section>
 
-
-  <!-- ================== Experimental Results ================== -->
-  <section class="section" id="experiments">
+  <!-- ================== Zero-shot Qualitative Results ================== -->
+  <section class="section mt-section" id="qualitative-results">
     <div class="container">
-      <h2 class="title is-2" style="text-align: center; padding-bottom: 20px;">Experimental Results</h2>
+      <h2 class="title is-2 mt-title">MotionTrans Zero-Shot Inference Results on Real Robot</h2>
+      <p class="has-text-grey" style="text-align:center; margin-bottom:12px;">
+        (Left: Human Data · Middle: MotionTrans-DP · Right: MotionTrans-Pi0-VLA)
+      </p>
 
-      <!-- scoped styles -->
-      <style>
-        #experiments .fig-grid{
-          display: grid;
-          grid-template-columns: 1fr;  /* 单列 */
-          gap: 24px;
-          max-width: 1100px;
-          margin: 0 auto;
-        }
-        #experiments figure{
-          margin: 0;
-          background: #fff;
-          border-radius: 12px;
-          overflow: hidden;
-          box-shadow: 0 8px 28px rgba(0,0,0,.12);
-        }
-        #experiments img{ width:100%; height:auto; display:block; }
-        #experiments figcaption{
-          padding: 10px 14px;
-          font-size: .95rem;
-          color: #6b7280;
-          text-align: center;
-          background: #fafafa;
-        }
-      </style>
+      <div class="mt-card">
+        <!-- Scoped styles for this block -->
+        <style>
+          #resultVideoPager{
+            --gap: 24px; --badge-bg: rgba(0,0,0,.55); --badge-shadow: 0 2px 8px rgba(0,0,0,.25);
+          }
+          #resultVideoPager .rvp-task{ text-align:center; margin:0 0 12px; font-weight:700; line-height:1.2; }
+          #resultVideoPager .rvp-grid{ display:grid; grid-template-columns: repeat(3, 1fr); gap: var(--gap); }
+          #resultVideoPager .rvp-item{ display:flex; flex-direction:column; }
+          #resultVideoPager .rvp-video{ position:relative; width:100%; aspect-ratio:16/9; border-radius:10px; overflow:hidden; }
+          #resultVideoPager .rvp-video video{ width:100%; height:100%; object-fit:cover; display:block; }
+          #resultVideoPager .rvp-badge{
+            position:absolute; top:10px; left:10px; padding:6px 10px; border-radius:999px;
+            background: var(--badge-bg); color:#fff; font-size:12px; letter-spacing:.2px; box-shadow: var(--badge-shadow); user-select:none;
+          }
+          #resultVideoPager .rvp-caption{ text-align:center; margin-top:6px; font-size:.95rem; color:#6b7280; }
+          #resultVideoPager .vp-controls{ margin: 6px 0 16px; }
+        </style>
 
-      <div class="fig-grid">
-        <figure>
-          <img
-            src="./resources/experiment_results/zeroshot_sr.png"
-            alt="Zero-shot success rate across tasks"
-            loading="lazy">
-          <figcaption>
-            Zero-shot <b>Success Rate</b> (SR, %) across tasks. Comparison between MotionTrans-DP (blue) and MotionTrans-π0-VLA (pink).
-          </figcaption>
-        </figure>
-
-        <figure>
-          <img
-            src="./resources/experiment_results/zeroshot_score.png"
-            alt="Zero-shot motion progress score across tasks"
-            loading="lazy">
-          <figcaption>
-            Zero-shot Motion Progress <b>Score</b> across tasks. Comparison between MotionTrans-DP (red) and MotionTrans-π0-VLA (yellow).
-          </figcaption>
-        </figure>
-      </div>
-    </div>
-  </section>
-
-  <!-- ================== Task-wise Qualitative Results (Human · MotionTrans-DP · MotionTrans-Pi0-VLA) ================== -->
-  <section class="section" id="qualitative-results">
-    <div class="container">
-      <h2 class="title is-2" style="text-align:center; padding-bottom:10px;">
-        MotionTrans Zero-Shot inference Results on Real Robot
-        <span class="has-text-grey is-size-5" style="display:block; margin-top:6px;">
-          (Left: Human Data · Middle: MotionTrans-DP · Right: MotionTrans-Pi0-VLA)
-        </span>
-      </h2>
-
-      <!-- Styles (scoped) -->
-      <style>
-        #resultVideoPager{
-          --gap: 24px;
-          --badge-bg: rgba(0,0,0,.55);
-          --badge-shadow: 0 2px 8px rgba(0,0,0,.25);
-        }
-        #resultVideoPager .rvp-task{
-          text-align:center; margin: 0 0 12px; font-weight: 700; line-height: 1.2;
-        }
-        /* 始终 3 列并排，不再降列 */
-        #resultVideoPager .rvp-grid{
-          display:grid; grid-template-columns: repeat(3, 1fr); gap: var(--gap);
-        }
-        #resultVideoPager .rvp-item{ display:flex; flex-direction:column; }
-        #resultVideoPager .rvp-video{
-          position:relative; width:100%; aspect-ratio: 16/9; border-radius: 10px; overflow:hidden;
-        }
-        #resultVideoPager .rvp-video video{ width:100%; height:100%; object-fit:cover; display:block; }
-        #resultVideoPager .rvp-badge{
-          position:absolute; top:10px; left:10px; padding:6px 10px; border-radius:999px;
-          background: var(--badge-bg); color:#fff; font-size:12px; letter-spacing:.2px;
-          box-shadow: var(--badge-shadow); user-select:none;
-        }
-        #resultVideoPager .rvp-caption{
-          text-align:center; margin-top:6px; font-size:.95rem; color:#6b7280;
-        }
-        #resultVideoPager .vp-controls{ margin: 6px 0 16px; }
-      </style>
-
-      <div id="resultVideoPager" class="video-pager" aria-label="Qualitative result video pager">
-        <!-- Controls -->
-        <div class="vp-controls">
-          <button class="vp-btn vp-prev" aria-label="Previous task">‹</button>
-          <div class="vp-dots" role="tablist" aria-label="Task pages"></div>
-          <button class="vp-btn vp-next" aria-label="Next task">›</button>
+        <div id="resultVideoPager" class="video-pager" aria-label="Qualitative result video pager">
+          <div class="vp-controls">
+            <button class="vp-btn vp-prev" aria-label="Previous task">‹</button>
+            <div class="vp-dots" role="tablist" aria-label="Task pages"></div>
+            <button class="vp-btn vp-next" aria-label="Next task">›</button>
+          </div>
         </div>
-        <!-- Pages will be generated by JS below -->
-      </div>
 
-      <script>
-        (function () {
-          const pager = document.getElementById('resultVideoPager');
-          if (!pager) return;
+        <script>
+          (function () {
+            const pager = document.getElementById('resultVideoPager');
+            if (!pager) return;
 
-          const tasks = [
-            { title: "Orange → Green Bucket",
-              human: "resources/human_data/put_orange_to_the_green_bucket_0.mp4",
-              dp0:  "resources/infer_video_720x1280/orange_bucket_dp0_1280x720.mp4",
-              pi0:  "resources/infer_video_720x1280/orange_bucket_pi0_1280x720.mp4", },
-            { title: "Unplug Charger",
-              human: "resources/human_data/unplug_the_white_charger_0.mp4",
-              dp0:  "resources/infer_video_720x1280/unplug_charger_dp0_1280x720.mp4",
-              pi0:  "resources/infer_video_720x1280/unplug_charger_pi0_1280x720.mp4", },
-            { title: "Close Laptop",
-              human: "resources/human_data/close_silver_laptop_0.mp4",
-              dp0:  "resources/infer_video_720x1280/close_laptop_dp0_1280x720.mp4",
-              pi0:  "resources/infer_video_720x1280/close_laptop_pi0_1280x720.mp4", },
-            { title: "Banana → White Plate",
-              human: "resources/human_data/put_banana_to_the_white_plate_0.mp4",
-              dp0:  "resources/infer_video_720x1280/banana_plate_dp0_1280x720.mp4",
-              pi0:  "resources/infer_video_720x1280/banana_plate_pi0_1280x720.mp4", },
-            { title: "Open Box → Put Toy Panda",
-              human: "resources/human_data/first_open_the_white_cap_style_box_then_put_toy_panda_to_the_box_0.mp4",
-              dp0:  "resources/infer_video_720x1280/box_panda_box_dp0_1280x720.mp4",
-              pi0:  "resources/infer_video_720x1280/box_panda_box_pi0_1280x720.mp4", },
-            { title: "Press Dice",
-              human: "resources/human_data/press_red_dice_to_make_it_rotation_0.mp4",
-              dp0:  "resources/infer_video_720x1280/press_dice_dp0_1280x720.mp4",
-              pi0:  "resources/infer_video_720x1280/press_dice_pi0_1280x720.mp4", },
-            { title: "Pour Bottle to Bowl",
-              human: "resources/human_data/pour_bottle_to_the_pink_bowl.mp4",
-              dp0:  "resources/infer_video_720x1280/pour_bottle_dp0_1280x720.mp4",
-              pi0:  "resources/infer_video_720x1280/pour_bottle_pi0_1280x720.mp4", },
-            { title: "Bread-Bucket",
-              human: "resources/human_data/drop_bread_to_the_green_bucket_0.mp4",
-              dp0:  "resources/infer_video_720x1280/bread_bucket_dp0_1280x720.mp4",
-              pi0:  "resources/infer_video_720x1280/bread_bucket_pi0_1280x720.mp4", },
-            { title: "Press Stapler",
-              human: "resources/human_data/press_the_stapler_0.mp4",
-              dp0:  "resources/infer_video_720x1280/press_stapler_dp0_1280x720.mp4",
-              pi0:  "resources/infer_video_720x1280/press_stapler_pi0_1280x720.mp4", },
-            { title: "Mango → Pink Bowl (Bypass)",
-              human: "resources/human_data/put_mango_to_pink_bowl_while_avoiding_obstacle_by_bypassing_0.mp4",
-              dp0:  "resources/infer_video_720x1280/mango_bypass_dp0_1280x720.mp4",
-              pi0:  "resources/infer_video_720x1280/mango_bypass_pi0_1280x720.mp4", },
-            { title: "Mango → Pink Bowl (Lift)",
-              human: "resources/human_data/put_mango_to_the_pink_bowl_while_avoiding_obstacle_by_lifting.mp4",
-              dp0:  "resources/infer_video_720x1280/mango_bypass_dp0_1280x720.mp4",
-              pi0:  "resources/infer_video_720x1280/mango_bypass_pi0_1280x720.mp4", },
-            { title: "Toy Bear → Black Box",
-              human: "resources/human_data/put_toy_bear_to_the_black_box_0.mp4",
-              dp0:  "resources/infer_video_720x1280/mango_lift_dp0_1280x720.mp4",
-              pi0:  "resources/infer_video_720x1280/mango_lift_pi0_1280x720.mp4", },
-            { title: "Wipe Towe",
-              human: "resources/human_data/wipe_blue_towel_on_the_table_and_push_it_to_the_bulky_bottle_0.mp4",
-              dp0:  "resources/infer_video_720x1280/wipe_towel_dp0_1280x720.mp4",
-              pi0:  "resources/infer_video_720x1280/wipe_towel_pi0_1280x720.mp4", },
-          ];
+            const tasks = [
+              { title: "Orange → Green Bucket", human: "resources/human_data/put_orange_to_the_green_bucket_0.mp4", dp0: "resources/infer_video_720x1280/orange_bucket_dp0_1280x720.mp4", pi0: "resources/infer_video_720x1280/orange_bucket_pi0_1280x720.mp4" },
+              { title: "Unplug Charger", human: "resources/human_data/unplug_the_white_charger_0.mp4", dp0: "resources/infer_video_720x1280/unplug_charger_dp0_1280x720.mp4", pi0: "resources/infer_video_720x1280/unplug_charger_pi0_1280x720.mp4" },
+              { title: "Close Laptop", human: "resources/human_data/close_silver_laptop_0.mp4", dp0: "resources/infer_video_720x1280/close_laptop_dp0_1280x720.mp4", pi0: "resources/infer_video_720x1280/close_laptop_pi0_1280x720.mp4" },
+              { title: "Banana → White Plate", human: "resources/human_data/put_banana_to_the_white_plate_0.mp4", dp0: "resources/infer_video_720x1280/banana_plate_dp0_1280x720.mp4", pi0: "resources/infer_video_720x1280/banana_plate_pi0_1280x720.mp4" },
+              { title: "Open Box → Put Toy Panda", human: "resources/human_data/first_open_the_white_cap_style_box_then_put_toy_panda_to_the_box_0.mp4", dp0: "resources/infer_video_720x1280/box_panda_box_dp0_1280x720.mp4", pi0: "resources/infer_video_720x1280/box_panda_box_pi0_1280x720.mp4" },
+              { title: "Press Dice", human: "resources/human_data/press_red_dice_to_make_it_rotation_0.mp4", dp0: "resources/infer_video_720x1280/press_dice_dp0_1280x720.mp4", pi0: "resources/infer_video_720x1280/press_dice_pi0_1280x720.mp4" },
+              { title: "Pour Bottle to Bowl", human: "resources/human_data/pour_bottle_to_the_pink_bowl.mp4", dp0: "resources/infer_video_720x1280/pour_bottle_dp0_1280x720.mp4", pi0: "resources/infer_video_720x1280/pour_bottle_pi0_1280x720.mp4" },
+              { title: "Bread-Bucket", human: "resources/human_data/drop_bread_to_the_green_bucket_0.mp4", dp0: "resources/infer_video_720x1280/bread_bucket_dp0_1280x720.mp4", pi0: "resources/infer_video_720x1280/bread_bucket_pi0_1280x720.mp4" },
+              { title: "Press Stapler", human: "resources/human_data/press_the_stapler_0.mp4", dp0: "resources/infer_video_720x1280/press_stapler_dp0_1280x720.mp4", pi0: "resources/infer_video_720x1280/press_stapler_pi0_1280x720.mp4" },
+              { title: "Mango → Pink Bowl (Bypass)", human: "resources/human_data/put_mango_to_pink_bowl_while_avoiding_obstacle_by_bypassing_0.mp4", dp0: "resources/infer_video_720x1280/mango_bypass_dp0_1280x720.mp4", pi0: "resources/infer_video_720x1280/mango_bypass_pi0_1280x720.mp4" },
+              { title: "Mango → Pink Bowl (Lift)", human: "resources/human_data/put_mango_to_the_pink_bowl_while_avoiding_obstacle_by_lifting.mp4", dp0: "resources/infer_video_720x1280/mango_bypass_dp0_1280x720.mp4", pi0: "resources/infer_video_720x1280/mango_bypass_pi0_1280x720.mp4" },
+              { title: "Toy Bear → Black Box", human: "resources/human_data/put_toy_bear_to_the_black_box_0.mp4", dp0: "resources/infer_video_720x1280/mango_lift_dp0_1280x720.mp4", pi0: "resources/infer_video_720x1280/mango_lift_pi0_1280x720.mp4" },
+              { title: "Wipe Towe", human: "resources/human_data/wipe_blue_towel_on_the_table_and_push_it_to_the_bulky_bottle_0.mp4", dp0: "resources/infer_video_720x1280/wipe_towel_dp0_1280x720.mp4", pi0: "resources/infer_video_720x1280/wipe_towel_pi0_1280x720.mp4" },
+            ];
 
-          const prev = pager.querySelector('.vp-prev');
-          const next = pager.querySelector('.vp-next');
-          const dotsWrap = pager.querySelector('.vp-dots');
+            const prev = pager.querySelector('.vp-prev');
+            const next = pager.querySelector('.vp-next');
+            const dotsWrap = pager.querySelector('.vp-dots');
 
-          // 构建页面
-          const frag = document.createDocumentFragment();
-          tasks.forEach((t, i) => {
-            const page = document.createElement('div');
-            page.className = 'vp-page' + (i === 0 ? ' active' : '');
-            page.id = 'rvp-page-' + (i + 1);
-
-            page.innerHTML = `
-              <h3 class="rvp-task">${t.title}</h3>
-              <div class="rvp-grid">
-                <div class="rvp-item">
-                  <div class="rvp-video">
-                    <span class="rvp-badge">Human Data</span>
-                    <video autoplay muted loop playsinline controls preload="metadata" src="${t.human}"></video>
-                  </div>
-                  <div class="rvp-caption">Human demonstration</div>
-                </div>
-                <div class="rvp-item">
-                  <div class="rvp-video">
-                    <span class="rvp-badge">MotionTrans-DP</span>
-                    <video autoplay muted loop playsinline controls preload="metadata" src="${t.dp0}"></video>
-                  </div>
-                  <div class="rvp-caption">Robot inference (MotionTrans-DP Zero Shot)</div>
-                </div>
-                <div class="rvp-item">
-                  <div class="rvp-video">
-                    <span class="rvp-badge">MotionTrans-Pi0-VLA</span>
-                    <video autoplay muted loop playsinline controls preload="metadata" src="${t.pi0}"></video>
-                  </div>
-                  <div class="rvp-caption">Robot inference (MotionTrans-Pi0-VLA Zero Shot)</div>
-                </div>
-              </div>
-            `;
-            frag.appendChild(page);
-          });
-          pager.appendChild(frag);
-
-          // 生成圆点
-          dotsWrap.innerHTML = '';
-          const pages = Array.from(pager.querySelectorAll('.vp-page'));
-          pages.forEach((p, k) => {
-            const dot = document.createElement('span');
-            dot.className = 'vp-dot' + (k === 0 ? ' active' : '');
-            dot.setAttribute('role', 'tab');
-            dot.setAttribute('aria-selected', k === 0 ? 'true' : 'false');
-            dot.setAttribute('aria-controls', p.id);
-            dot.addEventListener('click', () => show(k));
-            dotsWrap.appendChild(dot);
-          });
-          const dots = Array.from(dotsWrap.querySelectorAll('.vp-dot'));
-
-          let idx = 0;
-
-          function pauseHiddenPages(except) {
-            pages.forEach((pg, k) => {
-              if (k !== except) {
-                pg.querySelectorAll('video').forEach(v => {
-                  try { v.pause(); v.currentTime = 0; } catch(e){}
-                });
-              }
-            });
-          }
-          function playVisiblePage(i) {
-            const vids = pages[i].querySelectorAll('video');
-            vids.forEach(v => { try { v.currentTime = 0; v.play(); } catch(e){} });
-          }
-          function show(i) {
-            pages[idx].classList.remove('active');
-            dots[idx].classList.remove('active');
-            dots[idx].setAttribute('aria-selected', 'false');
-
-            idx = (i + pages.length) % pages.length;
-
-            pages[idx].classList.add('active');
-            dots[idx].classList.add('active');
-            dots[idx].setAttribute('aria-selected', 'true');
-
-            pauseHiddenPages(idx);
-            playVisiblePage(idx);
-          }
-          prev.addEventListener('click', () => show(idx - 1));
-          next.addEventListener('click', () => show(idx + 1));
-          pager.addEventListener('keydown', (e) => {
-            if (e.key === 'ArrowLeft') show(idx - 1);
-            if (e.key === 'ArrowRight') show(idx + 1);
-          });
-
-          pauseHiddenPages(0);
-          playVisiblePage(0);
-        })();
-      </script>
-    </div>
-  </section>
-
-  
-
-
-  <!-- ================== Few-shot Learning Results ================== -->
-  <section class="section" id="fewshot-results">
-    <div class="container">
-      <h2 class="title is-2" style="text-align:center; padding-bottom:10px;">
-        Few-shot Learning Results
-        <span class="has-text-grey is-size-5" style="display:block; margin-top:6px;">
-          Motion progress <em>Score</em> and Success Rate (<em>SR,%</em>) vs. number of demos (0 / 5 / 20)
-        </span>
-      </h2>
-
-      <!-- scoped styles -->
-      <style>
-        /* 始终单列堆叠显示两幅图 */
-        #fewshot-results .fig-grid{
-          display: grid;
-          grid-template-columns: 1fr;   /* 单列 */
-          gap: 24px;
-          max-width: 1100px;            /* 可选：限制宽度并居中 */
-          margin: 0 auto;
-        }
-        /* 不再需要两列的媒体查询 */
-        #fewshot-results figure{
-          margin:0; background:#fff; border-radius:12px; overflow:hidden;
-          box-shadow: 0 8px 28px rgba(0,0,0,.12);
-        }
-        #fewshot-results img{ width:100%; height:auto; display:block; }
-        #fewshot-results figcaption{
-          padding:10px 14px; font-size:.95rem; color:#6b7280; text-align:center;
-          background:#fafafa;
-        }
-      </style>
-
-
-      <div class="fig-grid">
-        <figure>
-          <img
-            src="./resources/experiment_results/main_fewshot_result_score.png"
-            alt="Few-shot motion progress score across tasks and average"
-            loading="lazy">
-          <figcaption>Few-shot Motion Progress <b>Score</b> (higher is better).</figcaption>
-        </figure>
-
-        <figure>
-          <img
-            src="./resources/experiment_results/main_fewshot_result_sr.png"
-            alt="Few-shot success rate across tasks and average"
-            loading="lazy">
-          <figcaption>Few-shot <b>Success Rate</b> (SR, %) across tasks and average.</figcaption>
-        </figure>
-      </div>
-    </div>
-  </section>
-
-  <!-- ================== Few-shot Qualitative Videos (Human · MotionTrans-DP) ================== -->
-  <section class="section" id="fewshot-qual-videos">
-    <div class="container">
-      <h2 class="title is-2" style="text-align:center; padding-bottom:10px;">
-        MotionTrans Few-Shot Inference Results on Real Robot
-        <span class="has-text-grey is-size-5" style="display:block; margin-top:6px;">
-          (Left: Human Data · Right: MotionTrans-DP, few-shot)
-        </span>
-      </h2>
-
-      <!-- scoped styles (独立于 zero-shot 部分) -->
-      <style>
-        #fewshotVideoPager{
-          --gap: 24px;
-          --badge-bg: rgba(0,0,0,.55);
-          --badge-shadow: 0 2px 8px rgba(0,0,0,.25);
-          --frame-border: #e5e7eb;   /* gray-200 */
-          --frame-title: #374151;    /* gray-700 */
-          --frame-bg: #fff;
-        }
-        #fewshotVideoPager .rvp-task{
-          text-align:center; margin:0 0 12px; font-weight:800; line-height:1.2;
-        }
-        /* 两列并排；窄屏降为一列 */
-        #fewshotVideoPager .rvp-grid{
-          display:grid; grid-template-columns: repeat(2, 1fr); gap: var(--gap);
-        }
-        @media (max-width: 768px){
-          #fewshotVideoPager .rvp-grid{ grid-template-columns: 1fr; }
-        }
-
-        /* 统一“框”样式（人类/机器人相同） */
-        #fewshotVideoPager .rvp-frame{
-          background: var(--frame-bg);
-          border: 1px solid var(--frame-border);
-          border-radius: 14px;
-          box-shadow: 0 6px 24px rgba(0,0,0,.08);
-          padding: 14px 16px 16px;
-          display: flex; flex-direction: column;
-        }
-        #fewshotVideoPager .rvp-frame-title{
-          font-size: 1.1rem; font-weight: 800; color: var(--frame-title);
-          margin: 2px 0 10px; letter-spacing: .2px; text-align: left;
-        }
-
-        #fewshotVideoPager .rvp-item{ display:flex; flex-direction:column; }
-        #fewshotVideoPager .rvp-video{
-          position:relative; width:100%; aspect-ratio:16/9; border-radius:12px; overflow:hidden;
-        }
-        #fewshotVideoPager .rvp-video video{ width:100%; height:100%; object-fit:cover; display:block; }
-        #fewshotVideoPager .rvp-badge{
-          position:absolute; top:10px; left:10px; padding:6px 10px; border-radius:999px;
-          background:var(--badge-bg); color:#fff; font-size:12px; letter-spacing:.2px;
-          box-shadow:var(--badge-shadow); user-select:none;
-        }
-        #fewshotVideoPager .rvp-caption{
-          text-align:center; margin-top:6px; font-size:.95rem; color:#6b7280;
-        }
-
-        #fewshotVideoPager .vp-controls{ margin:6px 0 16px; }
-      </style>
-
-      <div id="fewshotVideoPager" class="video-pager" aria-label="Few-shot qualitative video pager">
-        <div class="vp-controls">
-          <button class="vp-btn vp-prev" aria-label="Previous task">‹</button>
-          <div class="vp-dots" role="tablist" aria-label="Task pages"></div>
-          <button class="vp-btn vp-next" aria-label="Next task">›</button>
-        </div>
-        <!-- pages are injected by JS -->
-      </div>
-
-      <script>
-        (function () {
-          const pager = document.getElementById('fewshotVideoPager');
-          if (!pager) return;
-
-          // ===== 13 个任务（左 Human / 右 MotionTrans-DP few-shot）=====
-          const tasks = [
-            { title: "Orange → Green Bucket",
-              human: "resources/human_data/put_orange_to_the_green_bucket_0.mp4",
-              dp0:   "resources/infer_video_720x1280/orange_bucket_dp20_1280x720.mp4" },
-            { title: "Unplug Charger",
-              human: "resources/human_data/unplug_the_white_charger_0.mp4",
-              dp0:   "resources/infer_video_720x1280/unplug_charger_dp20_1280x720.mp4" },
-            { title: "Close Laptop",
-              human: "resources/human_data/close_silver_laptop_0.mp4",
-              dp0:   "resources/infer_video_720x1280/close_laptop_dp20_1280x720.mp4" },
-            { title: "Banana → White Plate",
-              human: "resources/human_data/put_banana_to_the_white_plate_0.mp4",
-              dp0:   "resources/infer_video_720x1280/banana_plate_dp20_1280x720.mp4" },
-            { title: "Open Box → Put Toy Panda",
-              human: "resources/human_data/first_open_the_white_cap_style_box_then_put_toy_panda_to_the_box_0.mp4",
-              dp0:   "resources/infer_video_720x1280/box_panda_box_dp20_1280x720.mp4" },
-            { title: "Press Dice",
-              human: "resources/human_data/press_red_dice_to_make_it_rotation_0.mp4",
-              dp0:   "resources/infer_video_720x1280/press_dice_dp20_1280x720.mp4" },
-            { title: "Pour Bottle to Bowl",
-              human: "resources/human_data/pour_bottle_to_the_pink_bowl.mp4",
-              dp0:   "resources/infer_video_720x1280/pour_bottle_dp20_1280x720.mp4" },
-            { title: "Bread-Bucket",
-              human: "resources/human_data/drop_bread_to_the_green_bucket_0.mp4",
-              dp0:   "resources/infer_video_720x1280/bread_bucket_dp20_1280x720.mp4" },
-            { title: "Press Stapler",
-              human: "resources/human_data/press_the_stapler_0.mp4",
-              dp0:   "resources/infer_video_720x1280/press_stapler_dp20_1280x720.mp4" },
-            { title: "Mango → Pink Bowl (Bypass)",
-              human: "resources/human_data/put_mango_to_pink_bowl_while_avoiding_obstacle_by_bypassing_0.mp4",
-              dp0:   "resources/infer_video_720x1280/mango_bypass_dp20_1280x720.mp4" },
-            { title: "Mango → Pink Bowl (Lift)",
-              human: "resources/human_data/put_mango_to_the_pink_bowl_while_avoiding_obstacle_by_lifting.mp4",
-              dp0:   "resources/infer_video_720x1280/mango_bypass_dp20_1280x720.mp4" },  // 如有 *lift* 可替换
-            { title: "Toy Bear → Black Box",
-              human: "resources/human_data/put_toy_bear_to_the_black_box_0.mp4",
-              dp0:   "resources/infer_video_720x1280/mango_lift_dp20_1280x720.mp4" },    // 你的映射
-            { title: "Wipe Towel",
-              human: "resources/human_data/wipe_blue_towel_on_the_table_and_push_it_to_the_bulky_bottle_0.mp4",
-              dp0:   "resources/infer_video_720x1280/wipe_towel_dp20_1280x720.mp4" },
-          ];
-
-          const prev = pager.querySelector('.vp-prev');
-          const next = pager.querySelector('.vp-next');
-          const dotsWrap = pager.querySelector('.vp-dots');
-
-          // 生成页面：每页两个“相同样式”的框
-          const frag = document.createDocumentFragment();
-          tasks.forEach((t, i) => {
-            const page = document.createElement('div');
-            page.className = 'vp-page' + (i === 0 ? ' active' : '');
-            page.id = 'fvp-page-' + (i + 1);
-            page.innerHTML = `
-              <h3 class="rvp-task">${t.title}</h3>
-              <div class="rvp-grid">
-                <!-- Human 框 -->
-                <div class="rvp-frame">
-                  <div class="rvp-frame-title">Human Demonstration</div>
+            const frag = document.createDocumentFragment();
+            tasks.forEach((t, i) => {
+              const page = document.createElement('div');
+              page.className = 'vp-page' + (i === 0 ? ' active' : '');
+              page.id = 'rvp-page-' + (i + 1);
+              page.innerHTML = `
+                <h3 class="rvp-task">${t.title}</h3>
+                <div class="rvp-grid">
                   <div class="rvp-item">
                     <div class="rvp-video">
                       <span class="rvp-badge">Human Data</span>
@@ -850,406 +340,500 @@
                     </div>
                     <div class="rvp-caption">Human demonstration</div>
                   </div>
-                </div>
-
-                <!-- Robot 框（few-shot） -->
-                <div class="rvp-frame">
-                  <div class="rvp-frame-title">Robot Inference (few-shot)</div>
                   <div class="rvp-item">
                     <div class="rvp-video">
                       <span class="rvp-badge">MotionTrans-DP</span>
                       <video autoplay muted loop playsinline controls preload="metadata" src="${t.dp0}"></video>
                     </div>
-                    <div class="rvp-caption">MotionTrans-DP, few-shot</div>
+                    <div class="rvp-caption">Robot inference (MotionTrans-DP Zero Shot)</div>
+                  </div>
+                  <div class="rvp-item">
+                    <div class="rvp-video">
+                      <span class="rvp-badge">MotionTrans-Pi0-VLA</span>
+                      <video autoplay muted loop playsinline controls preload="metadata" src="${t.pi0}"></video>
+                    </div>
+                    <div class="rvp-caption">Robot inference (MotionTrans-Pi0-VLA Zero Shot)</div>
                   </div>
                 </div>
-              </div>
-            `;
-            frag.appendChild(page);
-          });
-          pager.appendChild(frag);
-
-          // 生成圆点
-          dotsWrap.innerHTML = '';
-          const pages = Array.from(pager.querySelectorAll('.vp-page'));
-          pages.forEach((p, k) => {
-            const dot = document.createElement('span');
-            dot.className = 'vp-dot' + (k === 0 ? ' active' : '');
-            dot.setAttribute('role', 'tab');
-            dot.setAttribute('aria-selected', k === 0 ? 'true' : 'false');
-            dot.setAttribute('aria-controls', p.id);
-            dot.addEventListener('click', () => show(k));
-            dotsWrap.appendChild(dot);
-          });
-          const dots = Array.from(dotsWrap.querySelectorAll('.vp-dot'));
-
-          let idx = 0;
-          function pauseHiddenPages(except) {
-            pages.forEach((pg, k) => {
-              if (k !== except) {
-                pg.querySelectorAll('video').forEach(v => {
-                  try { v.pause(); v.currentTime = 0; } catch(e){}
-                });
-              }
+              `;
+              frag.appendChild(page);
             });
-          }
-          function playVisiblePage(i) {
-            pages[i].querySelectorAll('video').forEach(v => {
-              try { v.currentTime = 0; v.play(); } catch(e){}
+            pager.appendChild(frag);
+
+            dotsWrap.innerHTML = '';
+            const pages = Array.from(pager.querySelectorAll('.vp-page'));
+            pages.forEach((p, k) => {
+              const dot = document.createElement('span');
+              dot.className = 'vp-dot' + (k === 0 ? ' active' : '');
+              dot.setAttribute('role', 'tab');
+              dot.setAttribute('aria-selected', k === 0 ? 'true' : 'false');
+              dot.setAttribute('aria-controls', p.id);
+              dot.addEventListener('click', () => show(k));
+              dotsWrap.appendChild(dot);
             });
-          }
-          function show(i) {
-            pages[idx].classList.remove('active');
-            dots[idx].classList.remove('active');
-            dots[idx].setAttribute('aria-selected', 'false');
+            const dots = Array.from(dotsWrap.querySelectorAll('.vp-dot'));
 
-            idx = (i + pages.length) % pages.length;
-
-            pages[idx].classList.add('active');
-            dots[idx].classList.add('active');
-            dots[idx].setAttribute('aria-selected', 'true');
-
-            pauseHiddenPages(idx);
-            playVisiblePage(idx);
-          }
-
-          prev.addEventListener('click', () => show(idx - 1));
-          next.addEventListener('click', () => show(idx + 1));
-          pager.addEventListener('keydown', (e) => {
-            if (e.key === 'ArrowLeft') show(idx - 1);
-            if (e.key === 'ArrowRight') show(idx + 1);
-          });
-
-          // 初始状态
-          pauseHiddenPages(0);
-          playVisiblePage(0);
-        })();
-      </script>
+            let idx = 0;
+            function pauseHiddenPages(except) {
+              pages.forEach((pg, k) => {
+                if (k !== except) {
+                  pg.querySelectorAll('video').forEach(v => { try { v.pause(); v.currentTime = 0; } catch(e){} });
+                }
+              });
+            }
+            function playVisiblePage(i) {
+              pages[i].querySelectorAll('video').forEach(v => { try { v.currentTime = 0; v.play(); } catch(e){} });
+            }
+            function show(i) {
+              pages[idx].classList.remove('active');
+              dots[idx].classList.remove('active');
+              dots[idx].setAttribute('aria-selected', 'false');
+              idx = (i + pages.length) % pages.length;
+              pages[idx].classList.add('active');
+              dots[idx].classList.add('active');
+              dots[idx].setAttribute('aria-selected', 'true');
+              pauseHiddenPages(idx);
+              playVisiblePage(idx);
+            }
+            prev.addEventListener('click', () => show(idx - 1));
+            next.addEventListener('click', () => show(idx + 1));
+            pager.addEventListener('keydown', (e) => {
+              if (e.key === 'ArrowLeft') show(idx - 1);
+              if (e.key === 'ArrowRight') show(idx + 1);
+            });
+            pauseHiddenPages(0);
+            playVisiblePage(0);
+          })();
+        </script>
+      </div>
     </div>
   </section>
 
+  <!-- ================== Experimental Results (figures stacked) ================== -->
+  <section class="section mt-section" id="experiments">
+    <div class="container">
+      <h2 class="title is-2 mt-title">Experimental Results</h2>
+      <div class="mt-card">
+        <div class="mt-fig-grid">
+          <figure class="mt-fig">
+            <img src="./resources/experiment_results/zeroshot_sr.png" alt="Zero-shot success rate across tasks" loading="lazy">
+            <figcaption>
+              Zero-shot <b>Success Rate</b> (SR, %) across tasks. Comparison between MotionTrans-DP (blue) and MotionTrans-π0-VLA (pink).
+            </figcaption>
+          </figure>
+          <figure class="mt-fig">
+            <img src="./resources/experiment_results/zeroshot_score.png" alt="Zero-shot motion progress score across tasks" loading="lazy">
+            <figcaption>
+              Zero-shot Motion Progress <b>Score</b> across tasks. Comparison between MotionTrans-DP (red) and MotionTrans-π0-VLA (yellow).
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+    </div>
+  </section>
 
+  <!-- ================== Few-shot Qualitative Videos (Human · MotionTrans-DP) ================== -->
+  <section class="section mt-section" id="fewshot-qual-videos">
+    <div class="container">
+      <h2 class="title is-2 mt-title">MotionTrans Few-Shot Inference Results on Real Robot</h2>
+      <p class="has-text-grey" style="text-align:center; margin-bottom:12px;">
+        (Left: Human Data · Right: MotionTrans-DP, few-shot)
+      </p>
 
+      <div class="mt-card">
+        <!-- scoped styles -->
+        <style>
+          #fewshotVideoPager{
+            --gap: 24px; --badge-bg: rgba(0,0,0,.55); --badge-shadow: 0 2px 8px rgba(0,0,0,.25);
+            --frame-border: #e5e7eb; --frame-title: #374151; --frame-bg: #fff;
+          }
+          #fewshotVideoPager .rvp-task{ text-align:center; margin:0 0 12px; font-weight:800; line-height:1.2; }
+          #fewshotVideoPager .rvp-grid{ display:grid; grid-template-columns: repeat(2, 1fr); gap: var(--gap); }
+          @media (max-width: 768px){ #fewshotVideoPager .rvp-grid{ grid-template-columns: 1fr; } }
+          #fewshotVideoPager .rvp-frame{
+            background: var(--frame-bg); border: 1px solid var(--frame-border); border-radius: 14px;
+            box-shadow: 0 6px 24px rgba(0,0,0,.08); padding: 14px 16px 16px; display:flex; flex-direction:column;
+          }
+          #fewshotVideoPager .rvp-frame-title{ font-size:1.1rem; font-weight:800; color:var(--frame-title); margin:2px 0 10px; letter-spacing:.2px; text-align:left; }
+          #fewshotVideoPager .rvp-item{ display:flex; flex-direction:column; }
+          #fewshotVideoPager .rvp-video{ position:relative; width:100%; aspect-ratio:16/9; border-radius:12px; overflow:hidden; }
+          #fewshotVideoPager .rvp-video video{ width:100%; height:100%; object-fit:cover; display:block; }
+          #fewshotVideoPager .rvp-badge{ position:absolute; top:10px; left:10px; padding:6px 10px; border-radius:999px; background:var(--badge-bg); color:#fff; font-size:12px; letter-spacing:.2px; box-shadow:var(--badge-shadow); user-select:none; }
+          #fewshotVideoPager .rvp-caption{ text-align:center; margin-top:6px; font-size:.95rem; color:#6b7280; }
+          #fewshotVideoPager .vp-controls{ margin:6px 0 16px; }
+        </style>
 
+        <div id="fewshotVideoPager" class="video-pager" aria-label="Few-shot qualitative video pager">
+          <div class="vp-controls">
+            <button class="vp-btn vp-prev" aria-label="Previous task">‹</button>
+            <div class="vp-dots" role="tablist" aria-label="Task pages"></div>
+            <button class="vp-btn vp-next" aria-label="Next task">›</button>
+          </div>
+        </div>
 
+        <script>
+          (function () {
+            const pager = document.getElementById('fewshotVideoPager');
+            if (!pager) return;
 
+            const tasks = [
+              { title: "Orange → Green Bucket", human: "resources/human_data/put_orange_to_the_green_bucket_0.mp4", dp0: "resources/infer_video_720x1280/orange_bucket_dp20_1280x720.mp4" },
+              { title: "Unplug Charger", human: "resources/human_data/unplug_the_white_charger_0.mp4", dp0: "resources/infer_video_720x1280/unplug_charger_dp20_1280x720.mp4" },
+              { title: "Close Laptop", human: "resources/human_data/close_silver_laptop_0.mp4", dp0: "resources/infer_video_720x1280/close_laptop_dp20_1280x720.mp4" },
+              { title: "Banana → White Plate", human: "resources/human_data/put_banana_to_the_white_plate_0.mp4", dp0: "resources/infer_video_720x1280/banana_plate_dp20_1280x720.mp4" },
+              { title: "Open Box → Put Toy Panda", human: "resources/human_data/first_open_the_white_cap_style_box_then_put_toy_panda_to_the_box_0.mp4", dp0: "resources/infer_video_720x1280/box_panda_box_dp20_1280x720.mp4" },
+              { title: "Press Dice", human: "resources/human_data/press_red_dice_to_make_it_rotation_0.mp4", dp0: "resources/infer_video_720x1280/press_dice_dp20_1280x720.mp4" },
+              { title: "Pour Bottle to Bowl", human: "resources/human_data/pour_bottle_to_the_pink_bowl.mp4", dp0: "resources/infer_video_720x1280/pour_bottle_dp20_1280x720.mp4" },
+              { title: "Bread-Bucket", human: "resources/human_data/drop_bread_to_the_green_bucket_0.mp4", dp0: "resources/infer_video_720x1280/bread_bucket_dp20_1280x720.mp4" },
+              { title: "Press Stapler", human: "resources/human_data/press_the_stapler_0.mp4", dp0: "resources/infer_video_720x1280/press_stapler_dp20_1280x720.mp4" },
+              { title: "Mango → Pink Bowl (Bypass)", human: "resources/human_data/put_mango_to_pink_bowl_while_avoiding_obstacle_by_bypassing_0.mp4", dp0: "resources/infer_video_720x1280/mango_bypass_dp20_1280x720.mp4" },
+              { title: "Mango → Pink Bowl (Lift)", human: "resources/human_data/put_mango_to_the_pink_bowl_while_avoiding_obstacle_by_lifting.mp4", dp0: "resources/infer_video_720x1280/mango_bypass_dp20_1280x720.mp4" },
+              { title: "Toy Bear → Black Box", human: "resources/human_data/put_toy_bear_to_the_black_box_0.mp4", dp0: "resources/infer_video_720x1280/mango_lift_dp20_1280x720.mp4" },
+              { title: "Wipe Towel", human: "resources/human_data/wipe_blue_towel_on_the_table_and_push_it_to_the_bulky_bottle_0.mp4", dp0: "resources/infer_video_720x1280/wipe_towel_dp20_1280x720.mp4" },
+            ];
 
+            const prev = pager.querySelector('.vp-prev');
+            const next = pager.querySelector('.vp-next');
+            const dotsWrap = pager.querySelector('.vp-dots');
 
+            const frag = document.createDocumentFragment();
+            tasks.forEach((t, i) => {
+              const page = document.createElement('div');
+              page.className = 'vp-page' + (i === 0 ? ' active' : '');
+              page.id = 'fvp-page-' + (i + 1);
+              page.innerHTML = `
+                <h3 class="rvp-task">${t.title}</h3>
+                <div class="rvp-grid">
+                  <div class="rvp-frame">
+                    <div class="rvp-frame-title">Human Demonstration</div>
+                    <div class="rvp-item">
+                      <div class="rvp-video">
+                        <span class="rvp-badge">Human Data</span>
+                        <video autoplay muted loop playsinline controls preload="metadata" src="${t.human}"></video>
+                      </div>
+                      <div class="rvp-caption">Human demonstration</div>
+                    </div>
+                  </div>
+                  <div class="rvp-frame">
+                    <div class="rvp-frame-title">Robot Inference (few-shot)</div>
+                    <div class="rvp-item">
+                      <div class="rvp-video">
+                        <span class="rvp-badge">MotionTrans-DP</span>
+                        <video autoplay muted loop playsinline controls preload="metadata" src="${t.dp0}"></video>
+                      </div>
+                      <div class="rvp-caption">MotionTrans-DP, few-shot</div>
+                    </div>
+                  </div>
+                </div>
+              `;
+              frag.appendChild(page);
+            });
+            pager.appendChild(frag);
 
+            dotsWrap.innerHTML = '';
+            const pages = Array.from(pager.querySelectorAll('.vp-page'));
+            pages.forEach((p, k) => {
+              const dot = document.createElement('span');
+              dot.className = 'vp-dot' + (k === 0 ? ' active' : '');
+              dot.setAttribute('role', 'tab');
+              dot.setAttribute('aria-selected', k === 0 ? 'true' : 'false');
+              dot.setAttribute('aria-controls', p.id);
+              dot.addEventListener('click', () => show(k));
+              dotsWrap.appendChild(dot);
+            });
+            const dots = Array.from(dotsWrap.querySelectorAll('.vp-dot'));
+
+            let idx = 0;
+            function pauseHiddenPages(except) {
+              pages.forEach((pg, k) => {
+                if (k !== except) {
+                  pg.querySelectorAll('video').forEach(v => { try { v.pause(); v.currentTime = 0; } catch(e){} });
+                }
+              });
+            }
+            function playVisiblePage(i) {
+              pages[i].querySelectorAll('video').forEach(v => { try { v.currentTime = 0; v.play(); } catch(e){} });
+            }
+            function show(i) {
+              pages[idx].classList.remove('active');
+              dots[idx].classList.remove('active');
+              dots[idx].setAttribute('aria-selected', 'false');
+              idx = (i + pages.length) % pages.length;
+              pages[idx].classList.add('active');
+              dots[idx].classList.add('active');
+              dots[idx].setAttribute('aria-selected', 'true');
+              pauseHiddenPages(idx); playVisiblePage(idx);
+            }
+            prev.addEventListener('click', () => show(idx - 1));
+            next.addEventListener('click', () => show(idx + 1));
+            pager.addEventListener('keydown', (e) => {
+              if (e.key === 'ArrowLeft') show(idx - 1);
+              if (e.key === 'ArrowRight') show(idx + 1);
+            });
+            pauseHiddenPages(0); playVisiblePage(0);
+          })();
+        </script>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================== Few-shot Learning Results (figures stacked) ================== -->
+  <section class="section mt-section" id="fewshot-results">
+    <div class="container">
+      <h2 class="title is-2 mt-title">Few-shot Learning Results</h2>
+      <p class="has-text-grey" style="text-align:center; margin-bottom:12px;">
+        Motion progress <em>Score</em> and Success Rate (<em>SR,%</em>) vs. number of demos (0 / 5 / 20)
+      </p>
+      <div class="mt-card">
+        <div class="mt-fig-grid">
+          <figure class="mt-fig">
+            <img src="./resources/experiment_results/main_fewshot_result_score.png" alt="Few-shot motion progress score across tasks and average" loading="lazy">
+            <figcaption>Few-shot Motion Progress <b>Score</b> (higher is better).</figcaption>
+          </figure>
+          <figure class="mt-fig">
+            <img src="./resources/experiment_results/main_fewshot_result_sr.png" alt="Few-shot success rate across tasks and average" loading="lazy">
+            <figcaption>Few-shot <b>Success Rate</b> (SR, %) across tasks and average.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <!-- ================== Collecting Human and Robot Demonstrations ================== -->
-  <section class="section" id="collection">
+  <section class="section mt-section" id="collection">
     <div class="container">
-      <div class="columns is-centered">
-        <div class="column is-full-width">
-          <h2 class="title is-2" style="text-align: center; padding-bottom: 10px;">Collecting Human and Robot Demonstrations</h2>
-          <div>
-            <!-- START: Hardware + Data Collection showcase -->
-            <style>
-              /* Equal-height helpers scoped to this block */
-              .equal-height-row { align-items: stretch !important; }
-              .equal-height-row .col-eq { display: flex; }
-              .equal-height-row .col-eq .card { width: 100%; display: flex; flex-direction: column; }
-              .equal-height-row .card-body { display: flex; flex-direction: column; }
-              /* Keep media same height using aspect-ratio */
-              .equal-height-row .media-fixed {
-                width: 100%;
-                aspect-ratio: 16 / 9;
-                object-fit: cover;
-                border-radius: .5rem;
-              }
-            </style>
+      <h2 class="title is-2 mt-title">Collecting Human and Robot Demonstrations</h2>
+      <div class="mt-card">
+        <!-- scoped helpers -->
+        <style>
+          .equal-height-row { align-items: stretch !important; }
+          .equal-height-row .col-eq { display: flex; }
+          .equal-height-row .col-eq .card { width: 100%; display: flex; flex-direction: column; }
+          .equal-height-row .card-body { display: flex; flex-direction: column; }
+          .equal-height-row .media-fixed { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border-radius: .5rem; }
+        </style>
 
-            <div class="row equal-height-row">
-              <!-- Left: hardware illustration -->
-              <div class="col-12 col-md-6 mb-4 col-eq">
-                <div class="card shadow-sm border-0 h-100">
-                  <div class="card-body text-center">
-                    <h5 class="mb-3">Hardware System: VR-based Human Data Capture + Single-arm Robot Platform</h5>
-                    <img src="./resources/main_hardware.png" class="img-fluid media-fixed" alt="MotionTrans hardware overview">
-                    <p class="mt-3 mb-0 text-muted small">
-                      We synchronize VR headset/controllers and multi-view cameras to capture 3D hand trajectories,
-                      egocentric video, and robot state with precise time alignment.
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Right: data collection demo video -->
-              <div class="col-12 col-md-6 mb-4 col-eq">
-                <div class="card shadow-sm border-0 h-100">
-                  <div class="card-body text-center">
-                    <h5 class="mb-3">Data Collection Demo</h5>
-                    <video class="media-fixed" autoplay muted loop playsinline controls preload="metadata"
-                          poster="./resources/data_collection_poster.jpg">
-                      <source src="resources/human_data_collection/box_panda_box.mp4" type="video/mp4">
-                      Your browser does not support the video tag.
-                    </video>
-                    <p class="mt-3 mb-0 text-muted small">
-                      During collection we log hand keypoints, egocentric observations, and textual annotations under a unified clock,
-                      making downstream alignment and training straightforward.
-                    </p>
-                  </div>
-                </div>
+        <div class="row equal-height-row">
+          <div class="col-12 col-md-6 mb-4 col-eq">
+            <div class="card shadow-sm border-0 h-100">
+              <div class="card-body text-center">
+                <h5 class="mb-3">Hardware System: VR-based Human Data Capture + Single-arm Robot Platform</h5>
+                <img src="./resources/main_hardware.png" class="img-fluid media-fixed" alt="MotionTrans hardware overview">
+                <p class="mt-3 mb-0 text-muted small">
+                  We synchronize VR headset/controllers and multi-view cameras to capture 3D hand trajectories,
+                  egocentric video, and robot state with precise time alignment.
+                </p>
               </div>
             </div>
-
-            <!-- Dataset summary -->
-            <div class="row">
-              <div class="col">
-                <div class="alert alert-light border rounded shadow-sm">
-                  <h5 class="mb-2">MotionTrans Dataset at a Glance</h5>
-                  <p class="mb-0">
-                    We collected <b>3,213</b> demonstrations across <b>15</b> human tasks and <b>15</b> robot tasks in <b>10+</b> real-world scenes.
-                    Tasks are grouped by motion-similar skill categories to support cross-embodiment (Human→Robot) co-training and transfer.
-                  </p>
-                </div>
-              </div>
-            </div>
-            <!-- END: Hardware + Data Collection showcase -->
-
-            <br>
-
-            <!-- ================== Human Tasks (Video Pager, 3x2 + 对齐修复) ================== -->
-            <h3 class="title is-3" style="text-align:center; margin: 8px 0 12px;">Human Tasks</h3>
-
-            <!-- 只需在页面里添加一次这段样式（可以放在全局 <style> 中） -->
-            <style>
-              /* 局部变量：标题行高 & 行数（控制对齐） */
-              #humanVideoPager { --video-title-lh: 1.25; --video-title-lines: 2; }
-
-              /* 3×2 网格，响应式降列 */
-              #humanVideoPager .video-grid{
-                display: grid;
-                grid-template-columns: repeat(3, minmax(0, 1fr));
-                gap: 24px;
-              }
-              @media (max-width: 992px){  /* md */
-                #humanVideoPager .video-grid{ grid-template-columns: repeat(2, minmax(0,1fr)); }
-              }
-              @media (max-width: 576px){  /* sm */
-                #humanVideoPager .video-grid{ grid-template-columns: 1fr; }
-              }
-
-              /* 卡片结构：标题固定高度 + 16:9 视频 */
-              #humanVideoPager .video-item{ display:flex; flex-direction:column; }
-              #humanVideoPager .video-title{
-                margin: 0 0 8px 0;
-                font-size: 1rem;
-                line-height: var(--video-title-lh);
-                /* 两行截断并固定最小高度，保证整齐对齐 */
-                display: -webkit-box;
-                -webkit-line-clamp: var(--video-title-lines);
-                -webkit-box-orient: vertical;
-                overflow: hidden;
-                min-height: calc(var(--video-title-lh) * var(--video-title-lines) * 1em);
-              }
-              #humanVideoPager .video-wrap{
-                width: 100%;
-                aspect-ratio: 16 / 9;
-                border-radius: 10px;
-                overflow: hidden;
-              }
-              #humanVideoPager .video-wrap video{
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-                display: block;
-              }
-            </style>
-
-            <div id="humanVideoPager" class="video-pager">
-              <!-- Controls -->
-              <div class="vp-controls">
-                <button class="vp-btn vp-prev" aria-label="Previous page">‹</button>
-                <div class="vp-dots" role="tablist" aria-label="Video pages">
-                  <span class="vp-dot active" role="tab" aria-selected="true" aria-controls="vp-page-1"></span>
-                  <span class="vp-dot" role="tab" aria-selected="false" aria-controls="vp-page-2"></span>
-                  <span class="vp-dot" role="tab" aria-selected="false" aria-controls="vp-page-3"></span>
-                </div>
-                <button class="vp-btn vp-next" aria-label="Next page">›</button>
-              </div>
-
-              <!-- Page 1 (3x2) -->
-              <div id="vp-page-1" class="vp-page active">
-                <div class="video-grid">
-                  <div class="video-item">
-                    <h5 class="video-title" title="Unplug Charger: Unplug the white charger">Unplug Charger: Unplug the white charger</h5>
-                    <div class="video-wrap">
-                      <video autoplay muted loop playsinline controls preload="metadata"
-                            src="resources/human_data/unplug_the_white_charger_0.mp4"></video>
-                    </div>
-                  </div>
-                  <div class="video-item">
-                    <h5 class="video-title" title="Bread-Bucket: Drop bread to the green bucket">Bread-Bucket: Drop bread to the green bucket</h5>
-                    <div class="video-wrap">
-                      <video autoplay muted loop playsinline controls preload="metadata"
-                            src="resources/human_data/press_red_dice_to_make_it_rotation_0.mp4"></video>
-                    </div>
-                  </div>
-                  <div class="video-item">
-                    <h5 class="video-title" title="Press Stapler: Press the stapler">Press Stapler: Press the stapler</h5>
-                    <div class="video-wrap">
-                      <video autoplay muted loop playsinline controls preload="metadata"
-                            src="resources/human_data/press_the_stapler_0.mp4"></video>
-                    </div>
-                  </div>
-                  <div class="video-item">
-                    <h5 class="video-title" title="Orange-Bucket: Put orange to the green bucket">Orange-Bucket: Put orange to the green bucket</h5>
-                    <div class="video-wrap">
-                      <video autoplay muted loop playsinline controls preload="metadata"
-                            src="resources/human_data/put_orange_to_the_green_bucket_0.mp4"></video>
-                    </div>
-                  </div>
-                  <div class="video-item">
-                    <h5 class="video-title" title="Wipe Towel: Wipe blue towel on the table and push it to the bulky bottle">
-                      Wipe Towel: Wipe blue towel on the table and push it to the bulky bottle
-                    </h5>
-                    <div class="video-wrap">
-                      <video autoplay muted loop playsinline controls preload="metadata"
-                            src="resources/human_data/wipe_blue_towel_on_the_table_and_push_it_to_the_bulky_bottle_0.mp4"></video>
-                    </div>
-                  </div>
-                  <div class="video-item">
-                    <h5 class="video-title" title="Close Laptop: Close silver laptop">Close Laptop: Close silver laptop</h5>
-                    <div class="video-wrap">
-                      <video autoplay muted loop playsinline controls preload="metadata"
-                            src="resources/human_data/close_silver_laptop_0.mp4"></video>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Page 2 (3x2) -->
-              <div id="vp-page-2" class="vp-page">
-                <div class="video-grid">
-                  <div class="video-item">
-                    <h5 class="video-title" title="Mango-Bowl (Bypass): Put mango to pink bowl while avoiding obstacle by bypassing">
-                      Mango-Bowl (Bypass): Put mango to pink bowl while avoiding obstacle by bypassing
-                    </h5>
-                    <div class="video-wrap">
-                      <video autoplay muted loop playsinline controls preload="metadata"
-                            src="resources/human_data/put_mango_to_pink_bowl_while_avoiding_obstacle_by_bypassing_0.mp4"></video>
-                    </div>
-                  </div>
-                  <div class="video-item">
-                    <h5 class="video-title" title="Mango-Bowl (Lift): Put mango to the pink bowl while avoiding obstacle by lifting">
-                      Mango-Bowl (Lift): Put mango to the pink bowl while avoiding obstacle by lifting
-                    </h5>
-                    <div class="video-wrap">
-                      <video autoplay muted loop playsinline controls preload="metadata"
-                            src="resources/human_data/put_mango_to_the_pink_bowl_while_avoiding_obstacle_by_lifting.mp4"></video>
-                    </div>
-                  </div>
-                  <div class="video-item">
-                    <h5 class="video-title" title="Press Dice: Press red dice to make it rotation">Press Dice: Press red dice to make it rotation</h5>
-                    <div class="video-wrap">
-                      <video autoplay muted loop playsinline controls preload="metadata"
-                            src="resources/human_data/press_red_dice_to_make_it_rotation_0.mp4"></video>
-                    </div>
-                  </div>
-                  <div class="video-item">
-                    <h5 class="video-title" title="Banana-Plate: Put banana to the white plate">Banana-Plate: Put banana to the white plate</h5>
-                    <div class="video-wrap">
-                      <video autoplay muted loop playsinline controls preload="metadata"
-                            src="resources/human_data/put_banana_to_the_white_plate_0.mp4"></video>
-                    </div>
-                  </div>
-                  <div class="video-item">
-                    <h5 class="video-title" title="Pour Bottle: Pour bottle to the pink bowl">Pour Bottle: Pour bottle to the pink bowl</h5>
-                    <div class="video-wrap">
-                      <video autoplay muted loop playsinline controls preload="metadata"
-                            src="resources/human_data/pour_bottle_to_the_pink_bowl.mp4"></video>
-                    </div>
-                  </div>
-                  <div class="video-item">
-                    <h5 class="video-title" title="Toy Bear-Box: Put toy bear to the black box">Toy Bear-Box: Put toy bear to the black box</h5>
-                    <div class="video-wrap">
-                      <video autoplay muted loop playsinline controls preload="metadata"
-                            src="resources/human_data/put_toy_bear_to_the_black_box_0.mp4"></video>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Page 3 (3x2) -->
-              <div id="vp-page-3" class="vp-page">
-                <div class="video-grid">
-                  <div class="video-item">
-                    <h5 class="video-title" title="Open Box + Pand-Box: First open the white cap style box then put toy panda to the box">
-                      Open Box + Pand-Box: First open the white cap style box then put toy panda to the box
-                    </h5>
-                    <div class="video-wrap">
-                      <video autoplay muted loop playsinline controls preload="metadata"
-                            src="resources/human_data/first_open_the_white_cap_style_box_then_put_toy_panda_to_the_box_0.mp4"></video>
-                    </div>
-                  </div>
-                  <div class="video-item">
-                    <h5 class="video-title" title="Fold Towel: Fold the blue towel">Fold Towel: Fold the blue towel</h5>
-                    <div class="video-wrap">
-                      <video autoplay muted loop playsinline controls preload="metadata"
-                            src="resources/human_data/fold_the_blue_towel_0.mp4"></video>
-                    </div>
-                  </div>
-                  <div class="video-item">
-                    <h5 class="video-title" title="Pour Milk Bottle: Pour milk bottle to the yellow pan">Pour Milk Bottle: Pour milk bottle to the yellow pan</h5>
-                    <div class="video-wrap">
-                      <video autoplay muted loop playsinline controls preload="metadata"
-                            src="resources/human_data/pour_milk_bottle_to_the_yellow_pan_0.mp4"></video>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Pager JS（原样） -->
-              <script>
-                (function () {
-                  const pager = document.getElementById('humanVideoPager');
-                  if (!pager) return;
-                  const pages = Array.from(pager.querySelectorAll('.vp-page'));
-                  const prev = pager.querySelector('.vp-prev');
-                  const next = pager.querySelector('.vp-next');
-                  const dots = Array.from(pager.querySelectorAll('.vp-dot'));
-                  let idx = 0;
-
-                  function pauseHiddenPages(except) {
-                    pages.forEach((p, k) => {
-                      if (k !== except) {
-                        p.querySelectorAll('video').forEach(v => {
-                          try { v.pause(); v.currentTime = 0; } catch (e) {}
-                        });
-                      }
-                    });
-                  }
-
-                  function show(i) {
-                    pages[idx].classList.remove('active');
-                    idx = (i + pages.length) % pages.length;
-                    pages[idx].classList.add('active');
-                    dots.forEach((d, k) => d.classList.toggle('active', k === idx));
-                    pauseHiddenPages(idx);
-                  }
-
-                  prev.addEventListener('click', () => show(idx - 1));
-                  next.addEventListener('click', () => show(idx + 1));
-                  dots.forEach((d, k) => d.addEventListener('click', () => show(k)));
-
-                  pauseHiddenPages(0);
-                })();
-              </script>
-            </div>
-            <!-- ================== End Human Tasks ================== -->
-
           </div>
+
+          <div class="col-12 col-md-6 mb-4 col-eq">
+            <div class="card shadow-sm border-0 h-100">
+              <div class="card-body text-center">
+                <h5 class="mb-3">Data Collection Demo</h5>
+                <video class="media-fixed" autoplay muted loop playsinline controls preload="metadata" poster="./resources/data_collection_poster.jpg">
+                  <source src="resources/human_data_collection/box_panda_box.mp4" type="video/mp4">
+                  Your browser does not support the video tag.
+                </video>
+                <p class="mt-3 mb-0 text-muted small">
+                  During collection we log hand keypoints, egocentric observations, and textual annotations under a unified clock,
+                  making downstream alignment and training straightforward.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dataset summary -->
+        <div class="row">
+          <div class="col">
+            <div class="alert alert-light border rounded shadow-sm">
+              <h5 class="mb-2">MotionTrans Dataset at a Glance</h5>
+              <p class="mb-0">
+                We collected <b>3,213</b> demonstrations across <b>15</b> human tasks and <b>15</b> robot tasks in <b>10+</b> real-world scenes.
+                Tasks are grouped by motion-similar skill categories to support cross-embodiment (Human→Robot) co-training and transfer.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <br>
+
+        <!-- ================== Human Tasks (Video Pager, 3x2) ================== -->
+        <h3 class="title is-3" style="text-align:center; margin: 8px 0 12px;">Human Tasks</h3>
+
+        <style>
+          #humanVideoPager { --video-title-lh: 1.25; --video-title-lines: 2; }
+          #humanVideoPager .video-grid{ display:grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+          @media (max-width: 992px){ #humanVideoPager .video-grid{ grid-template-columns: repeat(2, minmax(0,1fr)); } }
+          @media (max-width: 576px){ #humanVideoPager .video-grid{ grid-template-columns: 1fr; } }
+          #humanVideoPager .video-item{ display:flex; flex-direction:column; }
+          #humanVideoPager .video-title{
+            margin: 0 0 8px 0; font-size: 1rem; line-height: var(--video-title-lh);
+            display: -webkit-box; -webkit-line-clamp: var(--video-title-lines); -webkit-box-orient: vertical;
+            overflow: hidden; min-height: calc(var(--video-title-lh) * var(--video-title-lines) * 1em);
+          }
+          #humanVideoPager .video-wrap{ width:100%; aspect-ratio: 16 / 9; border-radius: 10px; overflow: hidden; }
+          #humanVideoPager .video-wrap video{ width:100%; height:100%; object-fit: cover; display:block; }
+        </style>
+
+        <div id="humanVideoPager" class="video-pager">
+          <div class="vp-controls">
+            <button class="vp-btn vp-prev" aria-label="Previous page">‹</button>
+            <div class="vp-dots" role="tablist" aria-label="Video pages">
+              <span class="vp-dot active" role="tab" aria-selected="true" aria-controls="vp-page-1"></span>
+              <span class="vp-dot" role="tab" aria-selected="false" aria-controls="vp-page-2"></span>
+              <span class="vp-dot" role="tab" aria-selected="false" aria-controls="vp-page-3"></span>
+            </div>
+            <button class="vp-btn vp-next" aria-label="Next page">›</button>
+          </div>
+
+          <!-- Page 1 -->
+          <div id="vp-page-1" class="vp-page active">
+            <div class="video-grid">
+              <div class="video-item">
+                <h5 class="video-title" title="Unplug Charger: Unplug the white charger">Unplug Charger: Unplug the white charger</h5>
+                <div class="video-wrap">
+                  <video autoplay muted loop playsinline controls preload="metadata" src="resources/human_data/unplug_the_white_charger_0.mp4"></video>
+                </div>
+              </div>
+              <div class="video-item">
+                <h5 class="video-title" title="Bread-Bucket: Drop bread to the green bucket">Bread-Bucket: Drop bread to the green bucket</h5>
+                <div class="video-wrap">
+                  <video autoplay muted loop playsinline controls preload="metadata" src="resources/human_data/press_red_dice_to_make_it_rotation_0.mp4"></video>
+                </div>
+              </div>
+              <div class="video-item">
+                <h5 class="video-title" title="Press Stapler: Press the stapler">Press Stapler: Press the stapler</h5>
+                <div class="video-wrap">
+                  <video autoplay muted loop playsinline controls preload="metadata" src="resources/human_data/press_the_stapler_0.mp4"></video>
+                </div>
+              </div>
+              <div class="video-item">
+                <h5 class="video-title" title="Orange-Bucket: Put orange to the green bucket">Orange-Bucket: Put orange to the green bucket</h5>
+                <div class="video-wrap">
+                  <video autoplay muted loop playsinline controls preload="metadata" src="resources/human_data/put_orange_to_the_green_bucket_0.mp4"></video>
+                </div>
+              </div>
+              <div class="video-item">
+                <h5 class="video-title" title="Wipe Towel: Wipe blue towel on the table and push it to the bulky bottle">Wipe Towel: Wipe blue towel on the table and push it to the bulky bottle</h5>
+                <div class="video-wrap">
+                  <video autoplay muted loop playsinline controls preload="metadata" src="resources/human_data/wipe_blue_towel_on_the_table_and_push_it_to_the_bulky_bottle_0.mp4"></video>
+                </div>
+              </div>
+              <div class="video-item">
+                <h5 class="video-title" title="Close Laptop: Close silver laptop">Close Laptop: Close silver laptop</h5>
+                <div class="video-wrap">
+                  <video autoplay muted loop playsinline controls preload="metadata" src="resources/human_data/close_silver_laptop_0.mp4"></video>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Page 2 -->
+          <div id="vp-page-2" class="vp-page">
+            <div class="video-grid">
+              <div class="video-item">
+                <h5 class="video-title" title="Mango-Bowl (Bypass): Put mango to pink bowl while avoiding obstacle by bypassing">Mango-Bowl (Bypass): Put mango to pink bowl while avoiding obstacle by bypassing</h5>
+                <div class="video-wrap">
+                  <video autoplay muted loop playsinline controls preload="metadata" src="resources/human_data/put_mango_to_pink_bowl_while_avoiding_obstacle_by_bypassing_0.mp4"></video>
+                </div>
+              </div>
+              <div class="video-item">
+                <h5 class="video-title" title="Mango-Bowl (Lift): Put mango to the pink bowl while avoiding obstacle by lifting">Mango-Bowl (Lift): Put mango to the pink bowl while avoiding obstacle by lifting</h5>
+                <div class="video-wrap">
+                  <video autoplay muted loop playsinline controls preload="metadata" src="resources/human_data/put_mango_to_the_pink_bowl_while_avoiding_obstacle_by_lifting.mp4"></video>
+                </div>
+              </div>
+              <div class="video-item">
+                <h5 class="video-title" title="Press Dice: Press red dice to make it rotation">Press Dice: Press red dice to make it rotation</h5>
+                <div class="video-wrap">
+                  <video autoplay muted loop playsinline controls preload="metadata" src="resources/human_data/press_red_dice_to_make_it_rotation_0.mp4"></video>
+                </div>
+              </div>
+              <div class="video-item">
+                <h5 class="video-title" title="Banana-Plate: Put banana to the white plate">Banana-Plate: Put banana to the white plate</h5>
+                <div class="video-wrap">
+                  <video autoplay muted loop playsinline controls preload="metadata" src="resources/human_data/put_banana_to_the_white_plate_0.mp4"></video>
+                </div>
+              </div>
+              <div class="video-item">
+                <h5 class="video-title" title="Pour Bottle: Pour bottle to the pink bowl">Pour Bottle: Pour bottle to the pink bowl</h5>
+                <div class="video-wrap">
+                  <video autoplay muted loop playsinline controls preload="metadata" src="resources/human_data/pour_bottle_to_the_pink_bowl.mp4"></video>
+                </div>
+              </div>
+              <div class="video-item">
+                <h5 class="video-title" title="Toy Bear-Box: Put toy bear to the black box">Toy Bear-Box: Put toy bear to the black box</h5>
+                <div class="video-wrap">
+                  <video autoplay muted loop playsinline controls preload="metadata" src="resources/human_data/put_toy_bear_to_the_black_box_0.mp4"></video>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Page 3 -->
+          <div id="vp-page-3" class="vp-page">
+            <div class="video-grid">
+              <div class="video-item">
+                <h5 class="video-title" title="Open Box + Pand-Box: First open the white cap style box then put toy panda to the box">Open Box + Pand-Box: First open the white cap style box then put toy panda to the box</h5>
+                <div class="video-wrap">
+                  <video autoplay muted loop playsinline controls preload="metadata" src="resources/human_data/first_open_the_white_cap_style_box_then_put_toy_panda_to_the_box_0.mp4"></video>
+                </div>
+              </div>
+              <div class="video-item">
+                <h5 class="video-title" title="Fold Towel: Fold the blue towel">Fold Towel: Fold the blue towel</h5>
+                <div class="video-wrap">
+                  <video autoplay muted loop playsinline controls preload="metadata" src="resources/human_data/fold_the_blue_towel_0.mp4"></video>
+                </div>
+              </div>
+              <div class="video-item">
+                <h5 class="video-title" title="Pour Milk Bottle: Pour milk bottle to the yellow pan">Pour Milk Bottle: Pour milk bottle to the yellow pan</h5>
+                <div class="video-wrap">
+                  <video autoplay muted loop playsinline controls preload="metadata" src="resources/human_data/pour_milk_bottle_to_the_yellow_pan_0.mp4"></video>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <script>
+            (function () {
+              const pager = document.getElementById('humanVideoPager');
+              if (!pager) return;
+              const pages = Array.from(pager.querySelectorAll('.vp-page'));
+              const prev = pager.querySelector('.vp-prev');
+              const next = pager.querySelector('.vp-next');
+              const dots = Array.from(pager.querySelectorAll('.vp-dot'));
+              let idx = 0;
+
+              function pauseHiddenPages(except) {
+                pages.forEach((p, k) => {
+                  if (k !== except) { p.querySelectorAll('video').forEach(v => { try{ v.pause(); v.currentTime = 0; }catch(e){} }); }
+                });
+              }
+              function show(i) {
+                pages[idx].classList.remove('active');
+                idx = (i + pages.length) % pages.length;
+                pages[idx].classList.add('active');
+                dots.forEach((d, k) => d.classList.toggle('active', k === idx));
+                pauseHiddenPages(idx);
+              }
+              prev.addEventListener('click', () => show(idx - 1));
+              next.addEventListener('click', () => show(idx + 1));
+              dots.forEach((d, k) => d.addEventListener('click', () => show(k)));
+              pauseHiddenPages(0);
+            })();
+          </script>
         </div>
       </div>
     </div>
   </section>
 
   <!-- ================== BibTeX ================== -->
-  <section class="section" id="BibTeX">
-    <div class="container content">
-      <h2 class="title">BibTeX</h2>
+  <section class="section mt-section" id="BibTeX">
+    <div class="container">
+      <h2 class="title is-2 mt-title">BibTeX</h2>
+      <div class="mt-card">
 <pre><code>
 @article{qiu2025-humanpolicy,
   title={Humanoid Policy \~{} Human Policy},
@@ -1258,6 +842,7 @@
   year={2025}
 }
 </code></pre>
+      </div>
     </div>
   </section>
 
