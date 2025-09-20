@@ -141,6 +141,28 @@
 
     @media (min-width: 1024px){ .w-70 { width: 70%; margin-left:auto; margin-right:auto; } }
 
+    /* ===== Purple outline for the cover title ===== */
+    :root { --brand-stroke: #7c3aed; }  /* 统一改描边颜色时只改这里 */
+
+    .cover__title .brand{
+      color:#fff;                        /* 填充为白色 */
+      -webkit-text-fill-color:#fff;      /* WebKit 保持白色填充 */
+      -webkit-text-stroke: 3px var(--brand-stroke);   /* 紫色描边（Safari/Chromium） */
+      text-shadow: none;                 /* 如需保留原投影可删掉这一行 */
+    }
+
+    /* 非 WebKit 浏览器的降级描边（用多重 text-shadow 模拟） */
+    @supports not (-webkit-text-stroke: 1px #000){
+      .cover__title .brand{
+        text-shadow:
+          2px 0   var(--brand-stroke), -2px 0   var(--brand-stroke),
+          0   2px var(--brand-stroke),  0  -2px var(--brand-stroke),
+          1.5px 1.5px var(--brand-stroke), -1.5px -1.5px var(--brand-stroke),
+          1.5px -1.5px var(--brand-stroke), -1.5px 1.5px var(--brand-stroke);
+      }
+    }
+
+
     /* ===== Human / Robot Tasks（卡片网格基样式在各自作用域内再细化） ===== */
   </style>
 </head>
