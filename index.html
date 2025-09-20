@@ -712,277 +712,264 @@
     </div>
   </section>
 
-  <!-- ================== Human Tasks (Cards + Pager + Centered Toolbar) ================== -->
-  <section class="section mt-section" id="human-tasks">
-    <div class="container">
-      <h3 class="title is-3 mt-title">Human Tasks</h3>
+  <!-- ================== Human Tasks ================== -->
+  <h3 class="title is-3" style="text-align:center; margin: 8px 0 12px;">Human Tasks</h3>
 
-      <div class="mt-card">
-        <!-- 本段专用样式 -->
-        <style>
-          /* —— 工具栏（整体居中） —— */
-          .ht-toolbar{
-            display:flex;
-            flex-wrap:wrap;
-            gap:12px;
-            align-items:center;
-            justify-content:center;   /* 让整组控件水平居中 */
-            margin:12px auto 18px;    /* 左右 auto，容器本身也居中 */
-            max-width:980px;
-          }
-          .ht-select, .ht-input, .ht-btn{
-            height:38px;
-            border:1px solid #e5e7eb;
-            border-radius:8px;
-            padding:0 10px;
-            background:#fff;
-            box-shadow: 0 2px 10px rgba(0,0,0,.04);
-          }
-          .ht-input{ width:260px; }
-          .ht-btn{ cursor:pointer; }
-          .ht-btn:hover{ background:#f9fafb; }
+  <div id="humanTasks" class="mt-card">
+    <!-- scoped styles for Human Tasks -->
+    <style>
+      /* —— 工具栏（整体居中，同行显示下拉+Go） —— */
+      #humanTasks .ht-toolbar{
+        display:flex;
+        flex-wrap:wrap;
+        gap:12px;
+        align-items:center;
+        justify-content:center;      /* 居中放置 */
+        margin:12px auto 18px;
+        max-width:980px;
+      }
+      #humanTasks .ht-select{
+        padding:10px 14px;
+        border:1px solid #e5e7eb;
+        border-radius: 999px;
+        background:#fff;
+        font-size:14px;
+        min-width:280px;
+        outline:none;
+        box-shadow: 0 2px 8px rgba(0,0,0,.04);
+      }
+      #humanTasks .ht-go{
+        padding:10px 16px;
+        border:1px solid #e5e7eb;
+        border-radius:999px;
+        background:#111; color:#fff; font-size:14px; line-height:1;
+        cursor:pointer;
+        box-shadow: 0 2px 8px rgba(0,0,0,.06);
+        transition: transform .15s ease, opacity .15s ease;
+      }
+      #humanTasks .ht-go:hover{ transform: translateY(-1px); }
+      #humanTasks .ht-go:disabled{ opacity:.5; cursor:not-allowed; }
 
-          /* —— 网格与卡片 —— */
-          #humanVideoPager .video-grid{
-            display:grid;
-            grid-template-columns: repeat(3, minmax(0, 1fr)); /* 每页并排 3 个 */
-            gap: 22px;
-          }
-          @media (max-width: 992px){
-            #humanVideoPager .video-grid{ grid-template-columns: repeat(2, minmax(0,1fr)); }
-          }
-          @media (max-width: 576px){
-            #humanVideoPager .video-grid{ grid-template-columns: 1fr; }
-          }
+      /* —— 翻页控件 —— */
+      #humanTasks .vp-controls{
+        display:flex; align-items:center; justify-content:center; gap:16px; margin: 6px 0 16px;
+      }
+      #humanTasks .vp-btn{
+        border:none; width:40px; height:40px; border-radius:999px;
+        background:#222; color:#fff; line-height:40px; text-align:center; font-size:20px; cursor:pointer;
+      }
+      #humanTasks .vp-btn:focus{ outline:2px solid #888; }
+      #humanTasks .vp-dots{ display:flex; gap:10px; align-items:center; }
+      #humanTasks .vp-dot{ width:10px; height:10px; border-radius:50%; background:#cfcfcf; cursor:pointer; }
+      #humanTasks .vp-dot.active{ background:#333; }
 
-          .ht-card{
-            display:flex; flex-direction:column;
-            background:#fff;
-            border:1px solid #e5e7eb;
-            border-radius:14px;
-            box-shadow: 0 8px 28px rgba(0,0,0,.08);
-            padding:14px;
-          }
-          .ht-title{
-            font-size:1rem; font-weight:700; margin:0 0 6px 0; line-height:1.25;
-          }
-          .ht-sub{
-            margin:0 0 10px 0; color:#6b7280; font-size:.92rem; line-height:1.25;
-          }
-          .video-wrap{
-            width:100%; aspect-ratio:16/9; border-radius:10px; overflow:hidden;
-            border:1px solid #eef2f7;
-          }
-          .video-wrap video{ width:100%; height:100%; object-fit:cover; display:block; }
+      /* —— 页面与网格 —— */
+      #humanTasks .video-pager .vp-page{ display:none; }
+      #humanTasks .video-pager .vp-page.active{ display:block; }
+      #humanTasks .video-grid{
+        display:grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap:24px;
+      }
+      @media (max-width: 992px){
+        #humanTasks .video-grid{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      }
+      @media (max-width: 576px){
+        #humanTasks .video-grid{ grid-template-columns: 1fr; }
+      }
 
-          /* —— 翻页控件（与全站一致） —— */
-          #humanVideoPager .vp-controls{
-            display:flex; align-items:center; justify-content:center; gap:16px; margin: 8px 0 16px;
-          }
-          #humanVideoPager .vp-btn{
-            border:none; width:40px; height:40px; border-radius:999px; background:#222; color:#fff;
-            line-height:40px; text-align:center; font-size:20px; cursor:pointer;
-          }
-          #humanVideoPager .vp-btn:focus{ outline:2px solid #888; }
-          #humanVideoPager .vp-dots{ display:flex; gap:10px; align-items:center; }
-          #humanVideoPager .vp-dot{ width:10px; height:10px; border-radius:50%; background:#cfcfcf; cursor:pointer; }
-          #humanVideoPager .vp-dot.active{ background:#333; }
+      /* —— 卡片 —— */
+      #humanTasks .ht-card{
+        background:#fff; border:1px solid #e5e7eb; border-radius:12px; padding:12px;
+        box-shadow:0 6px 20px rgba(0,0,0,.06); display:flex; flex-direction:column;
+      }
+      #humanTasks .video-title{ margin:0 0 8px 0; font-size:1rem; line-height:1.25; }
+      #humanTasks .video-wrap{ width:100%; aspect-ratio:16/9; border-radius:10px; overflow:hidden; }
+      #humanTasks .video-wrap video{ width:100%; height:100%; object-fit:cover; display:block; }
 
-          /* —— 高亮被跳转到的卡片 —— */
-          .ht-highlight{
-            box-shadow: 0 0 0 3px #7c3aed55, 0 10px 32px rgba(0,0,0,.12);
-            transition: box-shadow .25s ease;
-          }
-        </style>
+      /* —— 高亮跳转反馈 —— */
+      #humanTasks .ht-card.flash{
+        box-shadow: 0 0 0 3px #7c3aed inset, 0 8px 24px rgba(124,58,237,.25);
+        transition: box-shadow .25s ease;
+      }
+    </style>
 
-        <!-- 工具栏：下拉选择 + 可选关键字输入（两者都能跳转） -->
-        <div class="ht-toolbar" aria-label="Human task search and jump">
-          <select id="ht-select" class="ht-select" aria-label="Jump to task">
-            <option value="">Jump to task…</option>
-          </select>
-
-          <input id="ht-search" class="ht-input" list="ht-task-list" placeholder="Type to search… (Enter to jump)" aria-label="Search task by name">
-          <datalist id="ht-task-list"></datalist>
-          <button id="ht-go" class="ht-btn" aria-label="Go to task">Go</button>
-        </div>
-
-        <!-- 翻页容器 -->
-        <div id="humanVideoPager" class="video-pager">
-          <div class="vp-controls">
-            <button class="vp-btn vp-prev" aria-label="Previous page">‹</button>
-            <div class="vp-dots" role="tablist" aria-label="Video pages"></div>
-            <button class="vp-btn vp-next" aria-label="Next page">›</button>
-          </div>
-          <!-- 页面内容由脚本注入 -->
-        </div>
-
-        <!-- 本段脚本（生成卡片/翻页 + 搜索/跳转） -->
-        <script>
-          (function(){
-            // —— 任务清单（按你现有数据路径）——
-            const tasks = [
-              { id:"unplug-charger",   title:"Unplug Charger",           sub:"Unplug the white charger",                                                      src:"resources/human_data/unplug_the_white_charger_0.mp4" },
-              { id:"bread-bucket",     title:"Bread-Bucket",             sub:"Drop bread to the green bucket",                                                src:"resources/human_data/drop_bread_to_the_green_bucket_0.mp4" },
-              { id:"press-stapler",    title:"Press Stapler",            sub:"Press the stapler",                                                             src:"resources/human_data/press_the_stapler_0.mp4" },
-              { id:"orange-bucket",    title:"Orange-Bucket",            sub:"Put orange to the green bucket",                                               src:"resources/human_data/put_orange_to_the_green_bucket_0.mp4" },
-              { id:"wipe-towel",       title:"Wipe Towel",               sub:"Wipe blue towel on the table and push it to the bulky bottle",                 src:"resources/human_data/wipe_blue_towel_on_the_table_and_push_it_to_the_bulky_bottle_0.mp4" },
-              { id:"close-laptop",     title:"Close Laptop",             sub:"Close silver laptop",                                                           src:"resources/human_data/close_silver_laptop_0.mp4" },
-              { id:"mango-bypass",     title:"Mango-Bowl (Bypass)",      sub:"Put mango to pink bowl while avoiding obstacle by bypassing",                  src:"resources/human_data/put_mango_to_pink_bowl_while_avoiding_obstacle_by_bypassing_0.mp4" },
-              { id:"mango-lift",       title:"Mango-Bowl (Lift)",        sub:"Put mango to the pink bowl while avoiding obstacle by lifting",                src:"resources/human_data/put_mango_to_the_pink_bowl_while_avoiding_obstacle_by_lifting.mp4" },
-              { id:"press-dice",       title:"Press Dice",               sub:"Press red dice to make it rotation",                                           src:"resources/human_data/press_red_dice_to_make_it_rotation_0.mp4" },
-              { id:"banana-plate",     title:"Banana-Plate",             sub:"Put banana to the white plate",                                                src:"resources/human_data/put_banana_to_the_white_plate_0.mp4" },
-              { id:"pour-bottle",      title:"Pour Bottle",              sub:"Pour bottle to the pink bowl",                                                 src:"resources/human_data/pour_bottle_to_the_pink_bowl.mp4" },
-              { id:"bear-box",         title:"Toy Bear-Box",             sub:"Put toy bear to the black box",                                                src:"resources/human_data/put_toy_bear_to_the_black_box_0.mp4" },
-              { id:"open-panda-box",   title:"Open Box + Panda-Box",     sub:"First open the white cap style box then put toy panda to the box",             src:"resources/human_data/first_open_the_white_cap_style_box_then_put_toy_panda_to_the_box_0.mp4" },
-              { id:"fold-towel",       title:"Fold Towel",               sub:"Fold the blue towel",                                                          src:"resources/human_data/fold_the_blue_towel_0.mp4" },
-              { id:"pour-milk-bottle", title:"Pour Milk Bottle",         sub:"Pour milk bottle to the yellow pan",                                           src:"resources/human_data/pour_milk_bottle_to_the_yellow_pan_0.mp4" },
-            ];
-
-            // —— DOM 引用 —— 
-            const pager = document.getElementById('humanVideoPager');
-            const dotsWrap = pager.querySelector('.vp-dots');
-            const prev = pager.querySelector('.vp-prev');
-            const next = pager.querySelector('.vp-next');
-
-            const sel = document.getElementById('ht-select');
-            const searchInput = document.getElementById('ht-search');
-            const goBtn = document.getElementById('ht-go');
-            const dataList = document.getElementById('ht-task-list');
-
-            // —— 填充下拉与 datalist —— 
-            tasks.forEach(t => {
-              const opt1 = document.createElement('option');
-              opt1.value = t.id;
-              opt1.textContent = `${t.title} — ${t.sub}`;
-              sel.appendChild(opt1);
-
-              const opt2 = document.createElement('option');
-              opt2.value = t.title;
-              opt2.label = t.sub;
-              dataList.appendChild(opt2);
-            });
-
-            // —— 生成分页（每页 3 个卡片）——
-            const perPage = 3;
-            const pages = [];
-            for (let i = 0; i < tasks.length; i += perPage) {
-              pages.push(tasks.slice(i, i + perPage));
-            }
-
-            const frag = document.createDocumentFragment();
-            pages.forEach((pageTasks, pageIdx) => {
-              const pageEl = document.createElement('div');
-              pageEl.className = 'vp-page' + (pageIdx === 0 ? ' active' : '');
-              pageEl.id = 'ht-page-' + (pageIdx + 1);
-
-              const grid = document.createElement('div');
-              grid.className = 'video-grid';
-
-              pageTasks.forEach(task => {
-                const card = document.createElement('div');
-                card.className = 'ht-card';
-                card.id = 'task-' + task.id;
-
-                card.innerHTML = `
-                  <div class="ht-title">${task.title}</div>
-                  <div class="ht-sub">${task.sub}</div>
-                  <div class="video-wrap">
-                    <video autoplay muted loop playsinline controls preload="metadata" src="${task.src}"></video>
-                  </div>
-                `;
-                grid.appendChild(card);
-              });
-
-              pageEl.appendChild(grid);
-              frag.appendChild(pageEl);
-            });
-            pager.appendChild(frag);
-
-            // —— 生成页码点 —— 
-            dotsWrap.innerHTML = '';
-            const pageEls = Array.from(pager.querySelectorAll('.vp-page'));
-            pageEls.forEach((p, k) => {
-              const dot = document.createElement('span');
-              dot.className = 'vp-dot' + (k === 0 ? ' active' : '');
-              dot.setAttribute('role', 'tab');
-              dot.setAttribute('aria-selected', k === 0 ? 'true' : 'false');
-              dot.setAttribute('aria-controls', p.id);
-              dot.addEventListener('click', () => show(k));
-              dotsWrap.appendChild(dot);
-            });
-            const dots = Array.from(dotsWrap.querySelectorAll('.vp-dot'));
-
-            let idx = 0;
-            function pauseHiddenPages(except) {
-              pageEls.forEach((pg, k) => {
-                if (k !== except) {
-                  pg.querySelectorAll('video').forEach(v => { try{ v.pause(); v.currentTime = 0; }catch(e){} });
-                }
-              });
-            }
-            function playVisiblePage(i) {
-              pageEls[i].querySelectorAll('video').forEach(v => { try{ v.currentTime = 0; v.play(); }catch(e){} });
-            }
-            function show(i) {
-              pageEls[idx].classList.remove('active');
-              dots[idx].classList.remove('active');
-              dots[idx].setAttribute('aria-selected', 'false');
-
-              idx = (i + pageEls.length) % pageEls.length;
-
-              pageEls[idx].classList.add('active');
-              dots[idx].classList.add('active');
-              dots[idx].setAttribute('aria-selected', 'true');
-
-              pauseHiddenPages(idx);
-              playVisiblePage(idx);
-            }
-            prev.addEventListener('click', () => show(idx - 1));
-            next.addEventListener('click', () => show(idx + 1));
-            pauseHiddenPages(0); playVisiblePage(0);
-
-            // —— 跳转逻辑：下拉选择 or 搜索 —— 
-            sel.addEventListener('change', () => {
-              if (!sel.value) return;
-              jumpToTaskById(sel.value);
-            });
-
-            function findTaskByQuery(q){
-              if (!q) return null;
-              const query = q.trim().toLowerCase();
-              // 优先按标题精确命中；否则做包含匹配（标题/副标题）
-              return tasks.find(t => t.title.toLowerCase() === query)
-                  || tasks.find(t => (t.title + ' ' + t.sub).toLowerCase().includes(query));
-            }
-            function jumpToTaskById(taskId){
-              const idxTask = tasks.findIndex(t => t.id === taskId);
-              if (idxTask < 0) return;
-              const pageIndex = Math.floor(idxTask / perPage);
-              show(pageIndex);
-
-              // 高亮卡片并滚动到可视
-              const anchor = document.getElementById('task-' + taskId);
-              if (anchor){
-                anchor.classList.add('ht-highlight');
-                anchor.scrollIntoView({behavior:'smooth', block:'center'});
-                setTimeout(()=>anchor.classList.remove('ht-highlight'), 1600);
-              }
-            }
-            function jumpByQuery(){
-              const hit = findTaskByQuery(searchInput.value);
-              if (!hit) return;
-              jumpToTaskById(hit.id);
-            }
-            goBtn.addEventListener('click', jumpByQuery);
-            searchInput.addEventListener('keydown', (e) => {
-              if (e.key === 'Enter') jumpByQuery();
-            });
-
-          })();
-        </script>
-      </div>
+    <!-- 工具栏：任务下拉选择 + Go（同一行） -->
+    <div class="ht-toolbar">
+      <select id="ht-filter" class="ht-select" aria-label="Jump to a task">
+        <option value="" selected disabled>— Jump to a task —</option>
+        <option value="unplug_charger">Unplug Charger</option>
+        <option value="bread_bucket">Bread-Bucket</option>
+        <option value="press_stapler">Press Stapler</option>
+        <option value="orange_bucket">Orange-Bucket</option>
+        <option value="wipe_towel">Wipe Towel</option>
+        <option value="close_laptop">Close Laptop</option>
+        <option value="mango_bypass">Mango-Bowl (Bypass)</option>
+        <option value="mango_lift">Mango-Bowl (Lift)</option>
+        <option value="press_dice">Press Dice</option>
+        <option value="banana_plate">Banana-Plate</option>
+        <option value="pour_bottle">Pour Bottle</option>
+        <option value="toy_bear_box">Toy Bear-Box</option>
+        <option value="open_box_panda_box">Open Box + Panda-Box</option>
+        <option value="fold_towel">Fold Towel</option>
+        <option value="pour_milk_bottle">Pour Milk Bottle</option>
+      </select>
+      <button type="button" id="ht-go" class="ht-go" disabled>Go</button>
     </div>
-  </section>
+
+    <!-- 翻页容器 -->
+    <div id="humanVideoPager" class="video-pager" aria-label="Human tasks video pager">
+      <div class="vp-controls">
+        <button class="vp-btn vp-prev" aria-label="Previous page">‹</button>
+        <div class="vp-dots" role="tablist" aria-label="Pages"></div>
+        <button class="vp-btn vp-next" aria-label="Next page">›</button>
+      </div>
+      <!-- 页面会由脚本动态填充 -->
+    </div>
+
+    <!-- 生成卡片 + 翻页 + 跳转脚本 -->
+    <script>
+      (function () {
+        const perPage = 3;
+        const tasks = [
+          { slug:'unplug_charger',      title:'Unplug Charger: Unplug the white charger',                                       src:'resources/human_data/unplug_the_white_charger_0.mp4' },
+          { slug:'bread_bucket',        title:'Bread-Bucket: Drop bread to the green bucket',                                    src:'resources/human_data/drop_bread_to_the_green_bucket_0.mp4' },
+          { slug:'press_stapler',       title:'Press Stapler: Press the stapler',                                                src:'resources/human_data/press_the_stapler_0.mp4' },
+          { slug:'orange_bucket',       title:'Orange-Bucket: Put orange to the green bucket',                                   src:'resources/human_data/put_orange_to_the_green_bucket_0.mp4' },
+          { slug:'wipe_towel',          title:'Wipe Towel: Wipe blue towel on the table and push it to the bulky bottle',        src:'resources/human_data/wipe_blue_towel_on_the_table_and_push_it_to_the_bulky_bottle_0.mp4' },
+          { slug:'close_laptop',        title:'Close Laptop: Close silver laptop',                                               src:'resources/human_data/close_silver_laptop_0.mp4' },
+          { slug:'mango_bypass',        title:'Mango-Bowl (Bypass): Put mango to pink bowl while avoiding obstacle by bypassing',src:'resources/human_data/put_mango_to_pink_bowl_while_avoiding_obstacle_by_bypassing_0.mp4' },
+          { slug:'mango_lift',          title:'Mango-Bowl (Lift): Put mango to the pink bowl while avoiding obstacle by lifting',src:'resources/human_data/put_mango_to_the_pink_bowl_while_avoiding_obstacle_by_lifting.mp4' },
+          { slug:'press_dice',          title:'Press Dice: Press red dice to make it rotation',                                  src:'resources/human_data/press_red_dice_to_make_it_rotation_0.mp4' },
+          { slug:'banana_plate',        title:'Banana-Plate: Put banana to the white plate',                                     src:'resources/human_data/put_banana_to_the_white_plate_0.mp4' },
+          { slug:'pour_bottle',         title:'Pour Bottle: Pour bottle to the pink bowl',                                       src:'resources/human_data/pour_bottle_to_the_pink_bowl.mp4' },
+          { slug:'toy_bear_box',        title:'Toy Bear-Box: Put toy bear to the black box',                                     src:'resources/human_data/put_toy_bear_to_the_black_box_0.mp4' },
+          { slug:'open_box_panda_box',  title:'Open Box + Panda-Box: First open the white cap style box then put toy panda in',  src:'resources/human_data/first_open_the_white_cap_style_box_then_put_toy_panda_to_the_box_0.mp4' },
+          { slug:'fold_towel',          title:'Fold Towel: Fold the blue towel',                                                 src:'resources/human_data/fold_the_blue_towel_0.mp4' },
+          { slug:'pour_milk_bottle',    title:'Pour Milk Bottle: Pour milk bottle to the yellow pan',                            src:'resources/human_data/pour_milk_bottle_to_the_yellow_pan_0.mp4' },
+        ];
+
+        const pager = document.getElementById('humanVideoPager');
+        const dotsWrap = pager.querySelector('.vp-dots');
+        const prev = pager.querySelector('.vp-prev');
+        const next = pager.querySelector('.vp-next');
+
+        // —— 分页渲染 —— //
+        const pages = [];
+        for (let i = 0; i < tasks.length; i += perPage) {
+          const chunk = tasks.slice(i, i + perPage);
+          const page = document.createElement('div');
+          page.className = 'vp-page' + (i === 0 ? ' active' : '');
+          page.id = 'ht-page-' + (pages.length + 1);
+
+          const grid = document.createElement('div');
+          grid.className = 'video-grid';
+
+          chunk.forEach(item => {
+            const card = document.createElement('div');
+            card.className = 'ht-card';
+            card.setAttribute('data-slug', item.slug);
+            card.innerHTML = `
+              <h5 class="video-title" title="${item.title}">${item.title}</h5>
+              <div class="video-wrap">
+                <video autoplay muted loop playsinline controls preload="metadata" src="${item.src}"></video>
+              </div>
+            `;
+            grid.appendChild(card);
+          });
+
+          page.appendChild(grid);
+          pages.push(page);
+        }
+        // 插入页面
+        const frag = document.createDocumentFragment();
+        pages.forEach(p => frag.appendChild(p));
+        pager.appendChild(frag);
+
+        // —— 生成页码点 —— //
+        const dotsFrag = document.createDocumentFragment();
+        for (let i = 0; i < pages.length; i++) {
+          const dot = document.createElement('span');
+          dot.className = 'vp-dot' + (i === 0 ? ' active' : '');
+          dot.setAttribute('role', 'tab');
+          dot.setAttribute('aria-selected', i === 0 ? 'true' : 'false');
+          dot.setAttribute('aria-controls', pages[i].id);
+          dot.addEventListener('click', () => show(i));
+          dotsFrag.appendChild(dot);
+        }
+        dotsWrap.appendChild(dotsFrag);
+        const dots = Array.from(dotsWrap.querySelectorAll('.vp-dot'));
+
+        // —— 翻页逻辑 —— //
+        let idx = 0;
+        function pauseHiddenPages(except) {
+          pages.forEach((pg, k) => {
+            if (k !== except) {
+              pg.querySelectorAll('video').forEach(v => { try{ v.pause(); v.currentTime = 0; } catch(e){} });
+            }
+          });
+        }
+        function playVisiblePage(i) {
+          pages[i].querySelectorAll('video').forEach(v => { try{ v.currentTime = 0; v.play(); } catch(e){} });
+        }
+        function show(i) {
+          pages[idx].classList.remove('active');
+          dots[idx].classList.remove('active');
+          dots[idx].setAttribute('aria-selected', 'false');
+
+          idx = (i + pages.length) % pages.length;
+
+          pages[idx].classList.add('active');
+          dots[idx].classList.add('active');
+          dots[idx].setAttribute('aria-selected', 'true');
+
+          pauseHiddenPages(idx);
+          playVisiblePage(idx);
+        }
+        prev.addEventListener('click', () => show(idx - 1));
+        next.addEventListener('click', () => show(idx + 1));
+        pager.addEventListener('keydown', (e) => {
+          if (e.key === 'ArrowLeft') show(idx - 1);
+          if (e.key === 'ArrowRight') show(idx + 1);
+        });
+        pauseHiddenPages(0); playVisiblePage(0);
+
+        // —— 下拉选择 + Go 按钮（跳转） —— //
+        const select = document.getElementById('ht-filter');
+        const goBtn = document.getElementById('ht-go');
+
+        function jumpBySlug(slug){
+          const index = tasks.findIndex(t => t.slug === slug);
+          if (index < 0) return;
+
+          const targetPage = Math.floor(index / perPage);
+          show(targetPage);
+
+          // 高亮对应卡片
+          const pageEl = pages[targetPage];
+          const card = pageEl.querySelector(`[data-slug="${slug}"]`);
+          if (card) {
+            card.classList.add('flash');
+            card.scrollIntoView({ block: 'nearest', inline: 'nearest', behavior: 'smooth' });
+            setTimeout(() => card.classList.remove('flash'), 1200);
+          }
+        }
+
+        // 选择即跳转，同时启用Go按钮
+        select.addEventListener('change', () => {
+          goBtn.disabled = !select.value;
+          if (select.value) jumpBySlug(select.value);
+        });
+
+        // 点击Go跳转
+        goBtn.addEventListener('click', () => {
+          if (select.value) jumpBySlug(select.value);
+        });
+
+        // 初始禁用Go
+        goBtn.disabled = !select.value;
+      })();
+    </script>
+  </div>
+
 
 
 
