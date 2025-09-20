@@ -83,31 +83,17 @@
     }
     .navbar-dropdown .navbar-item{ color:#fff !important; }
     .navbar-dropdown .navbar-item:hover{ background: transparent !important; text-decoration: underline; }
-    /* 移动端打开菜单也保持透明 */
     .navbar-menu.is-active{ background: transparent !important; }
 
     /* 可访问性：跳到内容 */
-    .skip-link{
-      position:absolute; left:-9999px; top:0; background:#000; color:#fff; padding:8px 12px; border-radius:8px;
-    }
+    .skip-link{ position:absolute; left:-9999px; top:0; background:#000; color:#fff; padding:8px 12px; border-radius:8px; }
     .skip-link:focus{ left:12px; z-index:9999; }
 
     /* ===== 封面 ===== */
-    .cover {
-      position: relative; width: 100%; height: 100svh; min-height: 580px; overflow: hidden; background: #000;
-    }
+    .cover { position: relative; width: 100%; height: 100svh; min-height: 580px; overflow: hidden; background: #000; }
     .cover video, .cover img { width: 100%; height: 100%; object-fit: cover; display: block; filter: saturate(1.05) contrast(1.02) brightness(.92); }
-    .cover__overlay {
-      position: absolute; inset: 0; display: grid; place-items: center;
-      padding-left: var(--cover-side-gutter); padding-right: var(--cover-side-gutter);
-      background: linear-gradient(to bottom, rgba(0,0,0,.15) 0%, rgba(0,0,0,.35) 60%, rgba(0,0,0,.5) 100%);
-    }
-    .cover__content {
-      width: min(var(--cover-max-width), calc(100% - 2*var(--cover-side-gutter)));
-      margin-top: var(--cover-top-offset);
-      text-align: center; color: #fff; text-shadow: var(--cover-text-shadow);
-      padding: 18px 0; background: var(--cover-overlay-bg); border-radius: 12px;
-    }
+    .cover__overlay { position: absolute; inset: 0; display: grid; place-items: center; padding-left: var(--cover-side-gutter); padding-right: var(--cover-side-gutter); background: linear-gradient(to bottom, rgba(0,0,0,.15) 0%, rgba(0,0,0,.35) 60%, rgba(0,0,0,.5) 100%); }
+    .cover__content { width: min(var(--cover-max-width), calc(100% - 2*var(--cover-side-gutter))); margin-top: var(--cover-top-offset); text-align: center; color: #fff; text-shadow: var(--cover-text-shadow); padding: 18px 0; background: var(--cover-overlay-bg); border-radius: 12px; }
     .cover__title { display: flex; flex-direction: column; align-items: center; margin: 0 0 12px 0; }
     .cover__title .brand { font-size: var(--brand-size); font-weight: var(--cover-title-weight); line-height: 1.03; letter-spacing: -0.02em; }
     .cover__title .rest { margin-top: var(--title-gap); font-size: var(--title-rest-size); line-height: 1.2; font-weight: 500; opacity: .98; }
@@ -115,12 +101,7 @@
     .cover__subtitle { font-size: var(--cover-subtitle-size); font-weight: 500; opacity: .96; margin-top: 14px; }
     .cover__meta { font-size: clamp(18px, 1.1vw, 24px); opacity: .9; margin-top: 10px; margin-bottom: 20px; }
     .cover__actions { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--cover-cta-gap); margin-top: 6px; }
-    .cover__btn {
-      display: inline-flex; align-items: center; gap: 8px; padding: 10px 16px; border-radius: 999px;
-      border: 1px solid rgba(255,255,255,.6); color: #fff; text-decoration: none; backdrop-filter: blur(4px);
-      background: rgba(0,0,0,.25); transition: transform .18s ease, box-shadow .18s ease, background .18s ease, border-color .18s ease;
-      box-shadow: var(--cover-shadow); font-size: 14px; line-height: 1;
-    }
+    .cover__btn { display: inline-flex; align-items: center; gap: 8px; padding: 10px 16px; border-radius: 999px; border: 1px solid rgba(255,255,255,.6); color: #fff; text-decoration: none; backdrop-filter: blur(4px); background: rgba(0,0,0,.25); transition: transform .18s ease, box-shadow .18s ease, background .18s ease, border-color .18s ease; box-shadow: var(--cover-shadow); font-size: 14px; line-height: 1; }
     .cover__btn:hover { transform: translateY(-2px); background: rgba(255,255,255,.08); border-color: #fff; box-shadow: 0 10px 30px rgba(0,0,0,.25); }
     .section--after-cover { padding-block: 48px; }
 
@@ -135,77 +116,32 @@
     .vp-dot.active { background: #333; }
 
     /* 图片/视频淡入 */
-    .mt-img-wrap img,
-    .rvp-video video,
-    .media-fixed,
-    .mt-fig img,
-    .ht-card video { opacity:0; transition: opacity .25s ease; }
+    .mt-img-wrap img, .rvp-video video, .media-fixed, .mt-fig img, .ht-card video { opacity:0; transition: opacity .25s ease; }
     .is-ready { opacity:1 !important; }
 
     /* ===== 全局主题卡片/标题 ===== */
     .mt-section { position: relative; }
-    .mt-card{
-      background: linear-gradient(180deg, #ffffff, #fafafa);
-      border: 1px solid #e5e7eb; border-radius: 16px;
-      box-shadow: 0 10px 32px rgba(0,0,0,.08);
-      padding: 18px; transition: transform .18s ease, box-shadow .18s ease;
-    }
+    .mt-card{ background: linear-gradient(180deg, #ffffff, #fafafa); border: 1px solid #e5e7eb; border-radius: 16px; box-shadow: 0 10px 32px rgba(0,0,0,.08); padding: 18px; transition: transform .18s ease, box-shadow .18s ease; }
     .mt-card.compact{ padding:14px; }
     .mt-card:hover{ transform: translateY(-3px); box-shadow: 0 16px 40px rgba(0,0,0,.12); }
 
-    .mt-title{
-      display: table; margin: 0 auto 14px auto; padding-bottom: 6px; position: relative; text-align: center !important;
-    }
-    .mt-title::after{
-      content:""; position:absolute; left:50%; transform:translateX(-50%);
-      bottom:-4px; width: 120px; height: 3px; border-radius: 999px;
-      background: linear-gradient(90deg, #7c3aed, #06b6d4);
-    }
+    .mt-title{ display: table; margin: 0 auto 14px auto; padding-bottom: 6px; position: relative; text-align: center !important; }
+    .mt-title::after{ content:""; position:absolute; left:50%; transform:translateX(-50%); bottom:-4px; width: 120px; height: 3px; border-radius: 999px; background: linear-gradient(90deg, #7c3aed, #06b6d4); }
 
     .mt-video-wrap, .mt-img-wrap{ position: relative; width: 100%; border-radius: 12px; overflow: hidden; }
     .mt-video-wrap{ aspect-ratio: 16 / 9; }
     .mt-video-wrap video, .mt-img-wrap img{ width: 100%; height: 100%; object-fit: cover; display: block; }
 
-    .mt-badge{
-      position: absolute; top: 10px; left: 10px; padding: 6px 10px; border-radius: 999px;
-      background: rgba(0,0,0,.55); color:#fff; font-size:12px; letter-spacing:.2px;
-      box-shadow: 0 2px 8px rgba(0,0,0,.25); user-select: none;
-    }
+    .mt-badge{ position: absolute; top: 10px; left: 10px; padding: 6px 10px; border-radius: 999px; background: rgba(0,0,0,.55); color:#fff; font-size:12px; letter-spacing:.2px; box-shadow: 0 2px 8px rgba(0,0,0,.25); user-select: none; }
 
     .mt-fig-grid{ display:grid; grid-template-columns: 1fr; gap:24px; max-width:1100px; margin:0 auto; }
     .mt-fig{ margin:0; background:#fff; border-radius:12px; overflow:hidden; box-shadow: 0 8px 28px rgba(0,0,0,.12); }
     .mt-fig img{ width:100%; height:auto; display:block; }
     .mt-fig figcaption{ padding:10px 14px; font-size:.95rem; color:#6b7280; text-align:center; background:#fafafa; }
 
-    @media (min-width: 1024px){
-      .w-70 { width: 70%; margin-left:auto; margin-right:auto; }
-    }
+    @media (min-width: 1024px){ .w-70 { width: 70%; margin-left:auto; margin-right:auto; } }
 
-    /* ===== Human Tasks 卡片网格 ===== */
-    .ht-grid{
-      display:grid;
-      grid-template-columns: repeat(3, minmax(0,1fr));
-      gap: 24px;
-    }
-    @media (max-width: 992px){
-      .ht-grid{ grid-template-columns: repeat(2, minmax(0,1fr)); }
-    }
-    @media (max-width: 576px){
-      .ht-grid{ grid-template-columns: 1fr; }
-    }
-    .ht-card{
-      background:#fff; border:1px solid #e5e7eb; border-radius:16px;
-      box-shadow: 0 10px 28px rgba(0,0,0,.08);
-      overflow:hidden; display:flex; flex-direction:column;
-      transition: transform .18s ease, box-shadow .18s ease;
-    }
-    .ht-card:hover{ transform: translateY(-3px); box-shadow: 0 18px 44px rgba(0,0,0,.12); }
-    .ht-media{ position:relative; width:100%; aspect-ratio:16/9; overflow:hidden; }
-    .ht-media video{ width:100%; height:100%; object-fit:cover; display:block; }
-    .ht-badge{ position:absolute; top:10px; left:10px; padding:6px 10px; border-radius:999px; background:rgba(0,0,0,.55); color:#fff; font-size:12px; }
-    .ht-body{ padding:14px 16px; }
-    .ht-title{ margin:0; font-size:1rem; font-weight:800; color:#111827; line-height:1.3; }
-    .ht-desc{ margin:.35rem 0 0; color:#6b7280; font-size:.9rem; }
+    /* ===== Human / Robot Tasks（卡片网格基样式在各自作用域内再细化） ===== */
   </style>
 </head>
 
@@ -315,7 +251,7 @@
     </div>
   </section>
 
-  <!-- ================== Zero-shot (Videos + Results) ================== -->
+  <!-- ================== Zero-shot ================== -->
   <section class="section mt-section" id="zero-shot">
     <div class="container">
       <h2 class="title is-2 mt-title">MotionTrans Zero-Shot Inference Results on Real Robot</h2>
@@ -325,28 +261,16 @@
 
       <div class="mt-card" id="zeroShotBlock">
         <style>
-          .mt-seg-title{
-            display:flex; align-items:center; gap:10px;
-            margin: 6px 0 12px; font-weight:800; color:#374151; letter-spacing:.2px;
-          }
-          .mt-seg-title::before{
-            content:""; width:10px; height:10px; border-radius:50%;
-            background: linear-gradient(90deg, #7c3aed, #06b6d4);
-            box-shadow: 0 0 0 4px rgba(124,58,237,.12);
-          }
+          .mt-seg-title{ display:flex; align-items:center; gap:10px; margin: 6px 0 12px; font-weight:800; color:#374151; letter-spacing:.2px; }
+          .mt-seg-title::before{ content:""; width:10px; height:10px; border-radius:50%; background: linear-gradient(90deg, #7c3aed, #06b6d4); box-shadow: 0 0 0 4px rgba(124,58,237,.12); }
 
-          #resultVideoPager{
-            --gap: 24px; --badge-bg: rgba(0,0,0,.55); --badge-shadow: 0 2px 8px rgba(0,0,0,.25);
-          }
+          #resultVideoPager{ --gap: 24px; --badge-bg: rgba(0,0,0,.55); --badge-shadow: 0 2px 8px rgba(0,0,0,.25); }
           #resultVideoPager .rvp-task{ text-align:center; margin:0 0 12px; font-weight:700; line-height:1.2; }
           #resultVideoPager .rvp-grid{ display:grid; grid-template-columns: repeat(3, 1fr); gap: var(--gap); }
           #resultVideoPager .rvp-item{ display:flex; flex-direction:column; }
           #resultVideoPager .rvp-video{ position:relative; width:100%; aspect-ratio:16/9; border-radius:10px; overflow:hidden; background:#000; }
           #resultVideoPager .rvp-video video{ width:100%; height:100%; object-fit:cover; display:block; }
-          #resultVideoPager .rvp-badge{
-            position:absolute; top:10px; left:10px; padding:6px 10px; border-radius:999px;
-            background: var(--badge-bg); color:#fff; font-size:12px; letter-spacing:.2px; box-shadow: var(--badge-shadow); user-select:none;
-          }
+          #resultVideoPager .rvp-badge{ position:absolute; top:10px; left:10px; padding:6px 10px; border-radius:999px; background: var(--badge-bg); color:#fff; font-size:12px; letter-spacing:.2px; box-shadow: var(--badge-shadow); user-select:none; }
           #resultVideoPager .rvp-caption{ text-align:center; margin-top:6px; font-size:.95rem; color:#6b7280; }
           #resultVideoPager .vp-controls{ margin: 6px 0 16px; }
 
@@ -355,27 +279,13 @@
           #zero-shot img{ width:100%; height:auto; display:block; }
           #zero-shot figcaption{ padding:10px 14px; font-size:.95rem; color:#6b7280; text-align:center; background:#fafafa; }
 
-          /* —— Zero-shot 搜索栏（与 Human Tasks 一致） —— */
-          #zs-tools .ht-toolbar{
-            display:flex; flex-wrap:wrap; gap:12px; align-items:center; justify-content:center;
-            margin:12px auto 18px; max-width:980px;
-          }
-          #zs-tools .ht-select{
-            padding:10px 14px; border:1px solid #e5e7eb; border-radius:999px; background:#fff;
-            font-size:14px; min-width:280px; outline:none; box-shadow:0 2px 8px rgba(0,0,0,.04);
-          }
-          #zs-tools .ht-go{
-            padding:10px 16px; border:1px solid #e5e7eb; border-radius:999px; background:#111; color:#fff; font-size:14px; line-height:1;
-            cursor:pointer; box-shadow:0 2px 8px rgba(0,0,0,.06); transition: transform .15s ease, opacity .15s ease;
-          }
+          /* —— Zero-shot 搜索栏 —— */
+          #zs-tools .ht-toolbar{ display:flex; flex-wrap:wrap; gap:12px; align-items:center; justify-content:center; margin:12px auto 18px; max-width:980px; }
+          #zs-tools .ht-select{ padding:10px 14px; border:1px solid #e5e7eb; border-radius:999px; background:#fff; font-size:14px; min-width:280px; outline:none; box-shadow:0 2px 8px rgba(0,0,0,.04); }
+          #zs-tools .ht-go{ padding:10px 16px; border:1px solid #e5e7eb; border-radius:999px; background:#111; color:#fff; font-size:14px; line-height:1; cursor:pointer; box-shadow:0 2px 8px rgba(0,0,0,.06); transition: transform .15s ease, opacity .15s ease; }
           #zs-tools .ht-go:hover{ transform: translateY(-1px); }
           #zs-tools .ht-go:disabled{ opacity:.5; cursor:not-allowed; }
-
-          /* 高亮效果 */
-          #resultVideoPager .flash{
-            box-shadow: 0 0 0 3px #7c3aed inset, 0 10px 26px rgba(124,58,237,.25);
-            transition: box-shadow .25s ease;
-          }
+          #resultVideoPager .flash{ box-shadow: 0 0 0 3px #7c3aed inset, 0 10px 26px rgba(124,58,237,.25); transition: box-shadow .25s ease; }
         </style>
 
         <!-- Zero-shot 搜索栏 -->
@@ -438,10 +348,7 @@
             const zsSelect = document.getElementById('zs-filter');
             const zsGo = document.getElementById('zs-go');
             tasks.forEach((t, i) => {
-              const opt = document.createElement('option');
-              opt.value = String(i);
-              opt.textContent = t.title;
-              zsSelect.appendChild(opt);
+              const opt = document.createElement('option'); opt.value = String(i); opt.textContent = t.title; zsSelect.appendChild(opt);
             });
 
             const frag = document.createDocumentFragment();
@@ -493,52 +400,23 @@
             const dots = Array.from(dotsWrap.querySelectorAll('.vp-dot'));
 
             let idx = 0;
-            function pauseHiddenPages(except) {
-              pages.forEach((pg, k) => {
-                if (k !== except) { pg.querySelectorAll('video').forEach(v => { try{ v.pause(); v.currentTime = 0; } catch(e){} }); }
-              });
-            }
-            function playVisiblePage(i) {
-              pages[i].querySelectorAll('video').forEach(v => { try{ v.currentTime = 0; v.play(); } catch(e){} });
-            }
+            function pauseHiddenPages(except) { pages.forEach((pg, k) => { if (k !== except) { pg.querySelectorAll('video').forEach(v => { try{ v.pause(); v.currentTime = 0; } catch(e){} }); } }); }
+            function playVisiblePage(i) { pages[i].querySelectorAll('video').forEach(v => { try{ v.currentTime = 0; v.play(); } catch(e){} }); }
             function show(i) {
-              pages[idx].classList.remove('active');
-              dots[idx].classList.remove('active');
-              dots[idx].setAttribute('aria-selected', 'false');
+              pages[idx].classList.remove('active'); dots[idx].classList.remove('active'); dots[idx].setAttribute('aria-selected', 'false');
               idx = (i + pages.length) % pages.length;
-              pages[idx].classList.add('active');
-              dots[idx].classList.add('active');
-              dots[idx].setAttribute('aria-selected', 'true');
+              pages[idx].classList.add('active'); dots[idx].classList.add('active'); dots[idx].setAttribute('aria-selected', 'true');
               pauseHiddenPages(idx); playVisiblePage(idx);
             }
             prev.addEventListener('click', () => show(idx - 1));
             next.addEventListener('click', () => show(idx + 1));
-            pager.addEventListener('keydown', (e) => {
-              if (e.key === 'ArrowLeft') show(idx - 1);
-              if (e.key === 'ArrowRight') show(idx + 1);
-            });
+            pager.addEventListener('keydown', (e) => { if (e.key === 'ArrowLeft') show(idx - 1); if (e.key === 'ArrowRight') show(idx + 1); });
             pauseHiddenPages(0); playVisiblePage(0);
 
             // 搜索跳转逻辑
-            function flashPage(i){
-              const vids = pages[i].querySelectorAll('.rvp-video');
-              vids.forEach(v => v.classList.add('flash'));
-              setTimeout(() => vids.forEach(v => v.classList.remove('flash')), 1200);
-              pages[i].scrollIntoView({behavior:'smooth', block:'nearest'});
-            }
-            zsSelect.addEventListener('change', () => {
-              zsGo.disabled = !zsSelect.value;
-              if (zsSelect.value !== '') {
-                const i = parseInt(zsSelect.value, 10);
-                show(i); flashPage(i);
-              }
-            });
-            zsGo.addEventListener('click', () => {
-              if (zsSelect.value !== '') {
-                const i = parseInt(zsSelect.value, 10);
-                show(i); flashPage(i);
-              }
-            });
+            function flashPage(i){ const vids = pages[i].querySelectorAll('.rvp-video'); vids.forEach(v => v.classList.add('flash')); setTimeout(() => vids.forEach(v => v.classList.remove('flash')), 1200); pages[i].scrollIntoView({behavior:'smooth', block:'nearest'}); }
+            zsSelect.addEventListener('change', () => { zsGo.disabled = !zsSelect.value; if (zsSelect.value !== '') { const i = parseInt(zsSelect.value, 10); show(i); flashPage(i); } });
+            zsGo.addEventListener('click', () => { if (zsSelect.value !== '') { const i = parseInt(zsSelect.value, 10); show(i); flashPage(i); } });
             zsGo.disabled = !zsSelect.value;
           })();
         </script>
@@ -546,7 +424,7 @@
     </div>
   </section>
 
-  <!-- ================== Few-shot (Videos + Results) ================== -->
+  <!-- ================== Few-shot ================== -->
   <section class="section mt-section" id="fewshot">
     <div class="container">
       <h2 class="title is-2 mt-title">MotionTrans Few-Shot Inference Results on Real Robot</h2>
@@ -556,27 +434,14 @@
 
       <div class="mt-card" id="fewShotBlock">
         <style>
-          .mt-seg-title{
-            display:flex; align-items:center; gap:10px;
-            margin: 6px 0 12px; font-weight:800; color:#374151; letter-spacing:.2px;
-          }
-          .mt-seg-title::before{
-            content:""; width:10px; height:10px; border-radius:50%;
-            background: linear-gradient(90deg, #7c3aed, #06b6d4);
-            box-shadow: 0 0 0 4px rgba(124,58,237,.12);
-          }
+          .mt-seg-title{ display:flex; align-items:center; gap:10px; margin: 6px 0 12px; font-weight:800; color:#374151; letter-spacing:.2px; }
+          .mt-seg-title::before{ content:""; width:10px; height:10px; border-radius:50%; background: linear-gradient(90deg, #7c3aed, #06b6d4); box-shadow: 0 0 0 4px rgba(124,58,237,.12); }
 
-          #fewshotVideoPager{
-            --gap: 24px; --badge-bg: rgba(0,0,0,.55); --badge-shadow: 0 2px 8px rgba(0,0,0,.25);
-            --frame-border: #e5e7eb; --frame-title: #374151; --frame-bg: #fff;
-          }
+          #fewshotVideoPager{ --gap: 24px; --badge-bg: rgba(0,0,0,.55); --badge-shadow: 0 2px 8px rgba(0,0,0,.25); --frame-border: #e5e7eb; --frame-title: #374151; --frame-bg: #fff; }
           #fewshotVideoPager .rvp-task{ text-align:center; margin:0 0 12px; font-weight:800; line-height:1.2; }
           #fewshotVideoPager .rvp-grid{ display:grid; grid-template-columns: repeat(2, 1fr); gap: var(--gap); }
           @media (max-width: 768px){ #fewshotVideoPager .rvp-grid{ grid-template-columns: 1fr; } }
-          #fewshotVideoPager .rvp-frame{
-            background: var(--frame-bg); border: 1px solid var(--frame-border); border-radius: 14px;
-            box-shadow: 0 6px 24px rgba(0,0,0,.08); padding: 14px 16px 16px; display:flex; flex-direction:column;
-          }
+          #fewshotVideoPager .rvp-frame{ background: var(--frame-bg); border: 1px solid var(--frame-border); border-radius: 14px; box-shadow: 0 6px 24px rgba(0,0,0,.08); padding: 14px 16px 16px; display:flex; flex-direction:column; }
           #fewshotVideoPager .rvp-frame-title{ font-size:1.1rem; font-weight:800; color:var(--frame-title); margin:2px 0 10px; letter-spacing:.2px; text-align:left; }
           #fewshotVideoPager .rvp-item{ display:flex; flex-direction:column; }
           #fewshotVideoPager .rvp-video{ position:relative; width:100%; aspect-ratio:16/9; border-radius:12px; overflow:hidden; background:#000; }
@@ -591,26 +456,12 @@
           #fewshot figcaption{ padding:10px 14px; font-size:.95rem; color:#6b7280; text-align:center; background:#fafafa; }
 
           /* —— Few-shot 搜索栏 —— */
-          #fs-tools .ht-toolbar{
-            display:flex; flex-wrap:wrap; gap:12px; align-items:center; justify-content:center;
-            margin:12px auto 18px; max-width:980px;
-          }
-          #fs-tools .ht-select{
-            padding:10px 14px; border:1px solid #e5e7eb; border-radius:999px; background:#fff;
-            font-size:14px; min-width:280px; outline:none; box-shadow:0 2px 8px rgba(0,0,0,.04);
-          }
-          #fs-tools .ht-go{
-            padding:10px 16px; border:1px solid #e5e7eb; border-radius:999px; background:#111; color:#fff; font-size:14px; line-height:1;
-            cursor:pointer; box-shadow:0 2px 8px rgba(0,0,0,.06); transition: transform .15s ease, opacity .15s ease;
-          }
+          #fs-tools .ht-toolbar{ display:flex; flex-wrap:wrap; gap:12px; align-items:center; justify-content:center; margin:12px auto 18px; max-width:980px; }
+          #fs-tools .ht-select{ padding:10px 14px; border:1px solid #e5e7eb; border-radius:999px; background:#fff; font-size:14px; min-width:280px; outline:none; box-shadow:0 2px 8px rgba(0,0,0,.04); }
+          #fs-tools .ht-go{ padding:10px 16px; border:1px solid #e5e7eb; border-radius:999px; background:#111; color:#fff; font-size:14px; line-height:1; cursor:pointer; box-shadow:0 2px 8px rgba(0,0,0,.06); transition: transform .15s ease, opacity .15s ease; }
           #fs-tools .ht-go:hover{ transform: translateY(-1px); }
           #fs-tools .ht-go:disabled{ opacity:.5; cursor:not-allowed; }
-
-          /* 高亮效果 */
-          #fewshotVideoPager .flash{
-            box-shadow: 0 0 0 3px #7c3aed inset, 0 10px 26px rgba(124,58,237,.25);
-            transition: box-shadow .25s ease;
-          }
+          #fewshotVideoPager .flash{ box-shadow: 0 0 0 3px #7c3aed inset, 0 10px 26px rgba(124,58,237,.25); transition: box-shadow .25s ease; }
         </style>
 
         <!-- Few-shot 搜索栏 -->
@@ -672,12 +523,7 @@
             // 填充搜索下拉
             const fsSelect = document.getElementById('fs-filter');
             const fsGo = document.getElementById('fs-go');
-            tasks.forEach((t, i) => {
-              const opt = document.createElement('option');
-              opt.value = String(i);
-              opt.textContent = t.title;
-              fsSelect.appendChild(opt);
-            });
+            tasks.forEach((t, i) => { const opt = document.createElement('option'); opt.value = String(i); opt.textContent = t.title; fsSelect.appendChild(opt); });
 
             const frag = document.createDocumentFragment();
             tasks.forEach((t, i) => {
@@ -728,52 +574,23 @@
             const dots = Array.from(dotsWrap.querySelectorAll('.vp-dot'));
 
             let idx = 0;
-            function pauseHiddenPages(except) {
-              pages.forEach((pg, k) => {
-                if (k !== except) { pg.querySelectorAll('video').forEach(v => { try{ v.pause(); v.currentTime = 0; }catch(e){} }); }
-              });
-            }
-            function playVisiblePage(i) {
-              pages[i].querySelectorAll('video').forEach(v => { try{ v.currentTime = 0; v.play(); }catch(e){} });
-            }
+            function pauseHiddenPages(except) { pages.forEach((pg, k) => { if (k !== except) { pg.querySelectorAll('video').forEach(v => { try{ v.pause(); v.currentTime = 0; }catch(e){} }); } }); }
+            function playVisiblePage(i) { pages[i].querySelectorAll('video').forEach(v => { try{ v.currentTime = 0; v.play(); }catch(e){} }); }
             function show(i) {
-              pages[idx].classList.remove('active');
-              dots[idx].classList.remove('active');
-              dots[idx].setAttribute('aria-selected', 'false');
+              pages[idx].classList.remove('active'); dots[idx].classList.remove('active'); dots[idx].setAttribute('aria-selected', 'false');
               idx = (i + pages.length) % pages.length;
-              pages[idx].classList.add('active');
-              dots[idx].classList.add('active');
-              dots[idx].setAttribute('aria-selected', 'true');
+              pages[idx].classList.add('active'); dots[idx].classList.add('active'); dots[idx].setAttribute('aria-selected', 'true');
               pauseHiddenPages(idx); playVisiblePage(idx);
             }
             prev.addEventListener('click', () => show(idx - 1));
             next.addEventListener('click', () => show(idx + 1));
-            pager.addEventListener('keydown', (e) => {
-              if (e.key === 'ArrowLeft') show(idx - 1);
-              if (e.key === 'ArrowRight') show(idx + 1);
-            });
+            pager.addEventListener('keydown', (e) => { if (e.key === 'ArrowLeft') show(idx - 1); if (e.key === 'ArrowRight') show(idx + 1); });
             pauseHiddenPages(0); playVisiblePage(0);
 
             // 搜索跳转逻辑
-            function flashPage(i){
-              const vids = pages[i].querySelectorAll('.rvp-video');
-              vids.forEach(v => v.classList.add('flash'));
-              setTimeout(() => vids.forEach(v => v.classList.remove('flash')), 1200);
-              pages[i].scrollIntoView({behavior:'smooth', block:'nearest'});
-            }
-            fsSelect.addEventListener('change', () => {
-              fsGo.disabled = !fsSelect.value;
-              if (fsSelect.value !== '') {
-                const i = parseInt(fsSelect.value, 10);
-                show(i); flashPage(i);
-              }
-            });
-            fsGo.addEventListener('click', () => {
-              if (fsSelect.value !== '') {
-                const i = parseInt(fsSelect.value, 10);
-                show(i); flashPage(i);
-              }
-            });
+            function flashPage(i){ const vids = pages[i].querySelectorAll('.rvp-video'); vids.forEach(v => v.classList.add('flash')); setTimeout(() => vids.forEach(v => v.classList.remove('flash')), 1200); pages[i].scrollIntoView({behavior:'smooth', block:'nearest'}); }
+            fsSelect.addEventListener('change', () => { fsGo.disabled = !fsSelect.value; if (fsSelect.value !== '') { const i = parseInt(fsSelect.value, 10); show(i); flashPage(i); } });
+            fsGo.addEventListener('click', () => { if (fsSelect.value !== '') { const i = parseInt(fsSelect.value, 10); show(i); flashPage(i); } });
             fsGo.disabled = !fsSelect.value;
           })();
         </script>
@@ -845,83 +662,30 @@
   <h3 class="title is-3" style="text-align:center; margin: 8px 0 12px;">Human Tasks</h3>
 
   <div id="humanTasks" class="mt-card">
-    <!-- scoped styles for Human Tasks -->
     <style>
-      /* —— 工具栏（整体居中，同行显示下拉+Go） —— */
-      #humanTasks .ht-toolbar{
-        display:flex;
-        flex-wrap:wrap;
-        gap:12px;
-        align-items:center;
-        justify-content:center;      /* 居中放置 */
-        margin:12px auto 18px;
-        max-width:980px;
-      }
-      #humanTasks .ht-select{
-        padding:10px 14px;
-        border:1px solid #e5e7eb;
-        border-radius: 999px;
-        background:#fff;
-        font-size:14px;
-        min-width:280px;
-        outline:none;
-        box-shadow: 0 2px 8px rgba(0,0,0,.04);
-      }
-      #humanTasks .ht-go{
-        padding:10px 16px;
-        border:1px solid #e5e7eb;
-        border-radius:999px;
-        background:#111; color:#fff; font-size:14px; line-height:1;
-        cursor:pointer;
-        box-shadow: 0 2px 8px rgba(0,0,0,.06);
-        transition: transform .15s ease, opacity .15s ease;
-      }
+      #humanTasks .ht-toolbar{ display:flex; flex-wrap:wrap; gap:12px; align-items:center; justify-content:center; margin:12px auto 18px; max-width:980px; }
+      #humanTasks .ht-select{ padding:10px 14px; border:1px solid #e5e7eb; border-radius: 999px; background:#fff; font-size:14px; min-width:280px; outline:none; box-shadow: 0 2px 8px rgba(0,0,0,.04); }
+      #humanTasks .ht-go{ padding:10px 16px; border:1px solid #e5e7eb; border-radius:999px; background:#111; color:#fff; font-size:14px; line-height:1; cursor:pointer; box-shadow: 0 2px 8px rgba(0,0,0,.06); transition: transform .15s ease, opacity .15s ease; }
       #humanTasks .ht-go:hover{ transform: translateY(-1px); }
       #humanTasks .ht-go:disabled{ opacity:.5; cursor:not-allowed; }
-
-      /* —— 翻页控件 —— */
-      #humanTasks .vp-controls{
-        display:flex; align-items:center; justify-content:center; gap:16px; margin: 6px 0 16px;
-      }
-      #humanTasks .vp-btn{
-        border:none; width:40px; height:40px; border-radius:999px;
-        background:#222; color:#fff; line-height:40px; text-align:center; font-size:20px; cursor:pointer;
-      }
+      #humanTasks .vp-controls{ display:flex; align-items:center; justify-content:center; gap:16px; margin: 6px 0 16px; }
+      #humanTasks .vp-btn{ border:none; width:40px; height:40px; border-radius:999px; background:#222; color:#fff; line-height:40px; text-align:center; font-size:20px; cursor:pointer; }
       #humanTasks .vp-btn:focus{ outline:2px solid #888; }
       #humanTasks .vp-dots{ display:flex; gap:10px; align-items:center; }
       #humanTasks .vp-dot{ width:10px; height:10px; border-radius:50%; background:#cfcfcf; cursor:pointer; }
       #humanTasks .vp-dot.active{ background:#333; }
-
-      /* —— 页面与网格 —— */
       #humanTasks .video-pager .vp-page{ display:none; }
       #humanTasks .video-pager .vp-page.active{ display:block; }
-      #humanTasks .video-grid{
-        display:grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap:24px;
-      }
-      @media (max-width: 992px){
-        #humanTasks .video-grid{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
-      }
-      @media (max-width: 576px){
-        #humanTasks .video-grid{ grid-template-columns: 1fr; }
-      }
-
-      /* —— 卡片 —— */
-      #humanTasks .ht-card{
-        background:#fff; border:1px solid #e5e7eb; border-radius:12px; padding:12px;
-        box-shadow:0 6px 20px rgba(0,0,0,.06); display:flex; flex-direction:column;
-      }
+      #humanTasks .video-grid{ display:grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap:24px; }
+      @media (max-width: 992px){ #humanTasks .video-grid{ grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+      @media (max-width: 576px){ #humanTasks .video-grid{ grid-template-columns: 1fr; } }
+      #humanTasks .ht-card{ background:#fff; border:1px solid #e5e7eb; border-radius:12px; padding:12px; box-shadow:0 6px 20px rgba(0,0,0,.06); display:flex; flex-direction:column; }
       #humanTasks .video-title{ margin:0 0 8px 0; font-size:1rem; line-height:1.25; }
       #humanTasks .video-wrap{ width:100%; aspect-ratio:16/9; border-radius:10px; overflow:hidden; background:#000; }
       #humanTasks .video-wrap video{ width:100%; height:100%; object-fit:cover; display:block; }
-
-      /* —— 高亮跳转反馈 —— */
-      #humanTasks .ht-card.flash{
-        box-shadow: 0 0 0 3px #7c3aed inset, 0 8px 24px rgba(124,58,237,.25);
-        transition: box-shadow .25s ease;
-      }
+      #humanTasks .ht-card.flash{ box-shadow: 0 0 0 3px #7c3aed inset, 0 8px 24px rgba(124,58,237,.25); transition: box-shadow .25s ease; }
     </style>
 
-    <!-- 工具栏：任务下拉选择 + Go（同一行） -->
     <div class="ht-toolbar">
       <select id="ht-filter" class="ht-select" aria-label="Jump to a task">
         <option value="" selected disabled>— Jump to a task —</option>
@@ -944,17 +708,14 @@
       <button type="button" id="ht-go" class="ht-go" disabled>Go</button>
     </div>
 
-    <!-- 翻页容器 -->
     <div id="humanVideoPager" class="video-pager" aria-label="Human tasks video pager">
       <div class="vp-controls">
         <button class="vp-btn vp-prev" aria-label="Previous page">‹</button>
         <div class="vp-dots" role="tablist" aria-label="Pages"></div>
         <button class="vp-btn vp-next" aria-label="Next page">›</button>
       </div>
-      <!-- 页面会由脚本动态填充 -->
     </div>
 
-    <!-- 生成卡片 + 翻页 + 跳转脚本 -->
     <script>
       (function () {
         const perPage = 3;
@@ -981,7 +742,6 @@
         const prev = pager.querySelector('.vp-prev');
         const next = pager.querySelector('.vp-next');
 
-        // —— 分页渲染 —— //
         const pages = [];
         for (let i = 0; i < tasks.length; i += perPage) {
           const chunk = tasks.slice(i, i + perPage);
@@ -1008,18 +768,14 @@
           page.appendChild(grid);
           pages.push(page);
         }
-        // 插入页面
-        const frag = document.createDocumentFragment();
-        pages.forEach(p => frag.appendChild(p));
-        pager.appendChild(frag);
 
-        // —— 生成页码点 —— //
+        const frag = document.createDocumentFragment(); pages.forEach(p => frag.appendChild(p)); pager.appendChild(frag);
+
         const dotsFrag = document.createDocumentFragment();
         for (let i = 0; i < pages.length; i++) {
           const dot = document.createElement('span');
           dot.className = 'vp-dot' + (i === 0 ? ' active' : '');
-          dot.setAttribute('role', 'tab');
-          dot.setAttribute('aria-selected', i === 0 ? 'true' : 'false');
+          dot.setAttribute('role', 'tab'); dot.setAttribute('aria-selected', i === 0 ? 'true' : 'false');
           dot.setAttribute('aria-controls', pages[i].id);
           dot.addEventListener('click', () => show(i));
           dotsFrag.appendChild(dot);
@@ -1027,74 +783,185 @@
         dotsWrap.appendChild(dotsFrag);
         const dots = Array.from(dotsWrap.querySelectorAll('.vp-dot'));
 
-        // —— 翻页逻辑 —— //
         let idx = 0;
-        function pauseHiddenPages(except) {
-          pages.forEach((pg, k) => {
-            if (k !== except) {
-              pg.querySelectorAll('video').forEach(v => { try{ v.pause(); v.currentTime = 0; } catch(e){} });
-            }
-          });
-        }
-        function playVisiblePage(i) {
-          pages[i].querySelectorAll('video').forEach(v => { try{ v.currentTime = 0; v.play(); } catch(e){} });
-        }
+        function pauseHiddenPages(except) { pages.forEach((pg, k) => { if (k !== except) { pg.querySelectorAll('video').forEach(v => { try{ v.pause(); v.currentTime = 0; } catch(e){} }); } }); }
+        function playVisiblePage(i) { pages[i].querySelectorAll('video').forEach(v => { try{ v.currentTime = 0; v.play(); } catch(e){} }); }
         function show(i) {
-          pages[idx].classList.remove('active');
-          dots[idx].classList.remove('active');
-          dots[idx].setAttribute('aria-selected', 'false');
-
+          pages[idx].classList.remove('active'); dots[idx].classList.remove('active'); dots[idx].setAttribute('aria-selected', 'false');
           idx = (i + pages.length) % pages.length;
-
-          pages[idx].classList.add('active');
-          dots[idx].classList.add('active');
-          dots[idx].setAttribute('aria-selected', 'true');
-
-          pauseHiddenPages(idx);
-          playVisiblePage(idx);
+          pages[idx].classList.add('active'); dots[idx].classList.add('active'); dots[idx].setAttribute('aria-selected', 'true');
+          pauseHiddenPages(idx); playVisiblePage(idx);
         }
         prev.addEventListener('click', () => show(idx - 1));
         next.addEventListener('click', () => show(idx + 1));
-        pager.addEventListener('keydown', (e) => {
-          if (e.key === 'ArrowLeft') show(idx - 1);
-          if (e.key === 'ArrowRight') show(idx + 1);
-        });
+        pager.addEventListener('keydown', (e) => { if (e.key === 'ArrowLeft') show(idx - 1); if (e.key === 'ArrowRight') show(idx + 1); });
         pauseHiddenPages(0); playVisiblePage(0);
 
-        // —— 下拉选择 + Go 按钮（跳转） —— //
         const select = document.getElementById('ht-filter');
         const goBtn = document.getElementById('ht-go');
 
         function jumpBySlug(slug){
           const index = tasks.findIndex(t => t.slug === slug);
           if (index < 0) return;
-
           const targetPage = Math.floor(index / perPage);
           show(targetPage);
-
-          // 高亮对应卡片
           const pageEl = pages[targetPage];
           const card = pageEl.querySelector(`[data-slug="${slug}"]`);
-          if (card) {
-            card.classList.add('flash');
-            card.scrollIntoView({ block: 'nearest', inline: 'nearest', behavior: 'smooth' });
-            setTimeout(() => card.classList.remove('flash'), 1200);
-          }
+          if (card) { card.classList.add('flash'); card.scrollIntoView({ block: 'nearest', inline: 'nearest', behavior: 'smooth' }); setTimeout(() => card.classList.remove('flash'), 1200); }
         }
 
-        // 选择即跳转，同时启用Go按钮
-        select.addEventListener('change', () => {
-          goBtn.disabled = !select.value;
-          if (select.value) jumpBySlug(select.value);
-        });
-
-        // 点击Go跳转
-        goBtn.addEventListener('click', () => {
-          if (select.value) jumpBySlug(select.value);
-        });
-
-        // 初始禁用Go
+        select.addEventListener('change', () => { goBtn.disabled = !select.value; if (select.value) jumpBySlug(select.value); });
+        goBtn.addEventListener('click', () => { if (select.value) jumpBySlug(select.value); });
         goBtn.disabled = !select.value;
+      })();
+    </script>
+  </div>
+
+  <!-- ================== Robot Tasks（新增） ================== -->
+  <h3 class="title is-3" style="text-align:center; margin: 8px 0 12px;">Robot Tasks</h3>
+
+  <div id="robotTasks" class="mt-card">
+    <style>
+      #robotTasks .ht-toolbar{ display:flex; flex-wrap:wrap; gap:12px; align-items:center; justify-content:center; margin:12px auto 18px; max-width:980px; }
+      #robotTasks .ht-select{ padding:10px 14px; border:1px solid #e5e7eb; border-radius:999px; background:#fff; font-size:14px; min-width:280px; outline:none; box-shadow:0 2px 8px rgba(0,0,0,.04); }
+      #robotTasks .ht-go{ padding:10px 16px; border:1px solid #e5e7eb; border-radius:999px; background:#111; color:#fff; font-size:14px; line-height:1; cursor:pointer; box-shadow:0 2px 8px rgba(0,0,0,.06); transition: transform .15s ease, opacity .15s ease; }
+      #robotTasks .ht-go:hover{ transform: translateY(-1px); }
+      #robotTasks .ht-go:disabled{ opacity:.5; cursor:not-allowed; }
+      #robotTasks .vp-controls{ display:flex; align-items:center; justify-content:center; gap:16px; margin: 6px 0 16px; }
+      #robotTasks .vp-btn{ border:none; width:40px; height:40px; border-radius:999px; background:#222; color:#fff; line-height:40px; text-align:center; font-size:20px; cursor:pointer; }
+      #robotTasks .vp-btn:focus{ outline:2px solid #888; }
+      #robotTasks .vp-dots{ display:flex; gap:10px; align-items:center; }
+      #robotTasks .vp-dot{ width:10px; height:10px; border-radius:50%; background:#cfcfcf; cursor:pointer; }
+      #robotTasks .vp-dot.active{ background:#333; }
+      #robotTasks .video-pager .vp-page{ display:none; }
+      #robotTasks .video-pager .vp-page.active{ display:block; }
+      #robotTasks .video-grid{ display:grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap:24px; }
+      @media (max-width: 992px){ #robotTasks .video-grid{ grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+      @media (max-width: 576px){ #robotTasks .video-grid{ grid-template-columns: 1fr; } }
+      #robotTasks .ht-card{ background:#fff; border:1px solid #e5e7eb; border-radius:12px; padding:12px; box-shadow:0 6px 20px rgba(0,0,0,.06); display:flex; flex-direction:column; }
+      #robotTasks .video-title{ margin:0 0 8px 0; font-size:1rem; line-height:1.25; }
+      #robotTasks .video-wrap{ width:100%; aspect-ratio:16/9; border-radius:10px; overflow:hidden; background:#000; }
+      #robotTasks .video-wrap video{ width:100%; height:100%; object-fit:cover; display:block; }
+      #robotTasks .ht-card.flash{ box-shadow: 0 0 0 3px #7c3aed inset, 0 8px 24px rgba(124,58,237,.25); transition: box-shadow .25s ease; }
+    </style>
+
+    <!-- 工具栏：任务下拉选择 + Go（同一行） -->
+    <div class="ht-toolbar">
+      <select id="rt-filter" class="ht-select" aria-label="Jump to a robot task">
+        <option value="" selected disabled>— Jump to a task —</option>
+      </select>
+      <button type="button" id="rt-go" class="ht-go" disabled>Go</button>
+    </div>
+
+    <!-- 翻页容器 -->
+    <div id="robotVideoPager" class="video-pager" aria-label="Robot tasks video pager">
+      <div class="vp-controls">
+        <button class="vp-btn vp-prev" aria-label="Previous page">‹</button>
+        <div class="vp-dots" role="tablist" aria-label="Pages"></div>
+        <button class="vp-btn vp-next" aria-label="Next page">›</button>
+      </div>
+    </div>
+
+    <script>
+      (function(){
+        const perPage = 3;
+        const tasks = [
+          { slug:'drop_black_bottle_to_purple_bucket', title:'Drop Black Bottle to Purple Bucket', src:'resources/robot_data/drop_black_bottle_to_purple_bucket_0.mp4' },
+          { slug:'flip_down_the_black_bottle', title:'Flip Down the Black Bottle', src:'resources/robot_data/flip_down_the_black_bottle_0.mp4' },
+          { slug:'move_red_dice_to_the_bulky_bottle', title:'Move Red Dice to the Bulky Bottle', src:'resources/robot_data/move_red_dice_to_the_bulky_bottle_0.mp4' },
+          { slug:'open_the_white_cap_style_box', title:'Open the White Cap Style Box', src:'resources/robot_data/open_the_white_cap_style_box_0.mp4' },
+          { slug:'pour_coak_to_the_red_cup', title:'Pour Coak to the Red Cup', src:'resources/robot_data/pour_coak_to_the_red_cup_0.mp4' },
+          { slug:'press_the_pink_mouse', title:'Press the Pink Mouse', src:'resources/robot_data/press_the_pink_mouse_0.mp4' },
+          { slug:'push_orange_cube_to_the_bulky_bottle', title:'Push Orange Cube to the Bulky Bottle', src:'resources/robot_data/push_orange_cube_to_the_bulky_bottle_0.mp4' },
+          { slug:'put_bread_to_the_high_black_platform', title:'Put Bread to the High Black Platform', src:'resources/robot_data/put_bread_to_the_high_black_platform_0.mp4' },
+          { slug:'put_bread_to_the_red_pad', title:'Put Bread to the Red Pad', src:'resources/robot_data/put_bread_to_the_red_pad_0.mp4' },
+          { slug:'put_capybara_to_the_purple_pad', title:'Put Capybara to the Purple Pad', src:'resources/robot_data/put_Capybara_to_the_purple_pad_0.mp4' },
+          { slug:'put_chilli_to_the_white_plate', title:'Put Chilli to the White Plate', src:'resources/robot_data/put_chilli_to_the_white_plate_0.mp4' },
+          { slug:'put_cucumber_to_purple_bucket', title:'Put Cucumber to Purple Bucket', src:'resources/robot_data/put_cucumber_to_purple_bucket_0.mp4' },
+          { slug:'put_mango_to_the_pink_bowl', title:'Put Mango to the Pink Bowl', src:'resources/robot_data/put_mango_to_the_pink_bowl_0.mp4' },
+          { slug:'put_toy_panda_to_the_box', title:'Put Toy Panda to the Box', src:'resources/robot_data/put_toy_panda_to_the_box_0.mp4' },
+          { slug:'wipe_blue_towel_and_push_to_pink_bowl', title:'Wipe Blue Towel and Push to Pink Bowl', src:'resources/robot_data/wipe_blue_towel_on_the_table_and_push_it_left_or_right_to_the_pink_bowl_0.mp4' },
+        ];
+
+        // 填充下拉
+        const sel = document.getElementById('rt-filter');
+        const go  = document.getElementById('rt-go');
+        tasks.forEach(t => { const o = document.createElement('option'); o.value = t.slug; o.textContent = t.title; sel.appendChild(o); });
+
+        const pager = document.getElementById('robotVideoPager');
+        const dotsWrap = pager.querySelector('.vp-dots');
+        const prev = pager.querySelector('.vp-prev');
+        const next = pager.querySelector('.vp-next');
+
+        // 渲染分页
+        const pages = [];
+        for (let i = 0; i < tasks.length; i += perPage) {
+          const chunk = tasks.slice(i, i + perPage);
+          const page = document.createElement('div');
+          page.className = 'vp-page' + (i === 0 ? ' active' : '');
+          page.id = 'rt-page-' + (pages.length + 1);
+
+          const grid = document.createElement('div');
+          grid.className = 'video-grid';
+
+          chunk.forEach(item => {
+            const card = document.createElement('div');
+            card.className = 'ht-card';
+            card.setAttribute('data-slug', item.slug);
+            card.innerHTML = `
+              <h5 class="video-title" title="${item.title}">${item.title}</h5>
+              <div class="video-wrap">
+                <video autoplay muted loop playsinline controls preload="metadata" src="${item.src}"></video>
+              </div>
+            `;
+            grid.appendChild(card);
+          });
+
+          page.appendChild(grid);
+          pages.push(page);
+        }
+        const frag = document.createDocumentFragment(); pages.forEach(p => frag.appendChild(p)); pager.appendChild(frag);
+
+        // 页码点
+        const dotsFrag = document.createDocumentFragment();
+        for (let i = 0; i < pages.length; i++) {
+          const dot = document.createElement('span');
+          dot.className = 'vp-dot' + (i === 0 ? ' active' : '');
+          dot.setAttribute('role', 'tab'); dot.setAttribute('aria-selected', i === 0 ? 'true' : 'false');
+          dot.setAttribute('aria-controls', pages[i].id);
+          dot.addEventListener('click', () => show(i));
+          dotsFrag.appendChild(dot);
+        }
+        dotsWrap.appendChild(dotsFrag);
+        const dots = Array.from(dotsWrap.querySelectorAll('.vp-dot'));
+
+        // 翻页逻辑
+        let idx = 0;
+        function pauseHiddenPages(except){ pages.forEach((pg,k)=>{ if(k!==except){ pg.querySelectorAll('video').forEach(v=>{ try{ v.pause(); v.currentTime=0; }catch(e){} }); } }); }
+        function playVisiblePage(i){ pages[i].querySelectorAll('video').forEach(v=>{ try{ v.currentTime=0; v.play(); }catch(e){} }); }
+        function show(i){
+          pages[idx].classList.remove('active'); dots[idx].classList.remove('active'); dots[idx].setAttribute('aria-selected','false');
+          idx = (i + pages.length) % pages.length;
+          pages[idx].classList.add('active'); dots[idx].classList.add('active'); dots[idx].setAttribute('aria-selected','true');
+          pauseHiddenPages(idx); playVisiblePage(idx);
+        }
+        prev.addEventListener('click', ()=>show(idx-1));
+        next.addEventListener('click', ()=>show(idx+1));
+        pager.addEventListener('keydown', (e)=>{ if(e.key==='ArrowLeft') show(idx-1); if(e.key==='ArrowRight') show(idx+1); });
+        pauseHiddenPages(0); playVisiblePage(0);
+
+        // 跳转逻辑
+        function jump(slug){
+          const index = tasks.findIndex(t=>t.slug===slug);
+          if(index<0) return;
+          const targetPage = Math.floor(index / perPage);
+          show(targetPage);
+          const card = pages[targetPage].querySelector(`[data-slug="${slug}"]`);
+          if(card){ card.classList.add('flash'); card.scrollIntoView({behavior:'smooth', block:'nearest'}); setTimeout(()=>card.classList.remove('flash'), 1200); }
+        }
+        sel.addEventListener('change', ()=>{ go.disabled = !sel.value; if(sel.value) jump(sel.value); });
+        go.addEventListener('click', ()=>{ if(sel.value) jump(sel.value); });
+        go.disabled = !sel.value;
       })();
     </script>
   </div>
@@ -1135,17 +1002,12 @@
   <!-- ===== JS：汉堡菜单、媒体淡入 ===== -->
   <script>
     (function(){
-      // 汉堡按钮开关（Bulma）
       const burger = document.querySelector('.navbar-burger');
       const menu   = document.querySelector('.navbar-menu');
       if(burger && menu){
-        burger.addEventListener('click', ()=>{ 
-          burger.classList.toggle('is-active'); 
-          menu.classList.toggle('is-active');
-        });
+        burger.addEventListener('click', ()=>{ burger.classList.toggle('is-active'); menu.classList.toggle('is-active'); });
       }
 
-      // 媒体淡入
       document.querySelectorAll('img').forEach(img=>{
         const mark=()=>img.classList.add('is-ready');
         if(img.complete) mark(); else img.addEventListener('load', mark, {once:true});
