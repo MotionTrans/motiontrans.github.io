@@ -411,10 +411,19 @@
         #resultVideoPager .rvp-task{
           text-align:center; margin: 0 0 12px; font-weight: 700; line-height: 1.2;
         }
-        /* 始终 3 列并排，不再降列 */
+
+        /* 布局：上1行（Human）+ 下2列（DP / Pi0） */
         #resultVideoPager .rvp-grid{
-          display:grid; grid-template-columns: repeat(3, 1fr); gap: var(--gap);
+          display:grid;
+          grid-template-columns: repeat(2, 1fr);  /* 两列网格 */
+          gap: var(--gap);
         }
+        /* 第1个卡片（Human）跨两列，占满第一行 */
+        #resultVideoPager .rvp-grid .rvp-item:nth-child(1){
+          grid-column: 1 / -1;
+        }
+
+        /* 其余样式保持不变 */
         #resultVideoPager .rvp-item{ display:flex; flex-direction:column; }
         #resultVideoPager .rvp-video{
           position:relative; width:100%; aspect-ratio: 16/9; border-radius: 10px; overflow:hidden;
@@ -429,7 +438,14 @@
           text-align:center; margin-top:6px; font-size:.95rem; color:#6b7280;
         }
         #resultVideoPager .vp-controls{ margin: 6px 0 16px; }
+
+        /* 窄屏兜底：单列堆叠 */
+        @media (max-width: 640px){
+          #resultVideoPager .rvp-grid{ grid-template-columns: 1fr; }
+          #resultVideoPager .rvp-grid .rvp-item:nth-child(1){ grid-column: auto; }
+        }
       </style>
+
 
       <div id="resultVideoPager" class="video-pager" aria-label="Qualitative result video pager">
         <!-- Controls -->
