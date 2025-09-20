@@ -96,51 +96,48 @@
     .cover__content { width: min(var(--cover-max-width), calc(100% - 2*var(--cover-side-gutter))); margin-top: var(--cover-top-offset); text-align: center; color: #fff; text-shadow: var(--cover-text-shadow); padding: 18px 0; background: var(--cover-overlay-bg); border-radius: 12px; }
     .cover__title { display: flex; flex-direction: column; align-items: center; margin: 0 0 12px 0; }
     .cover__title .brand { font-size: var(--brand-size); font-weight: var(--cover-title-weight); line-height: 1.03; letter-spacing: -0.02em; }
-    /* Hero title: white fill + pure purple outer stroke (no inner bleed) */
+    :root{
+  /* 全局描边粗细（改这个数就行） */
+      --mt-stroke: 1px;              /* 常用：1.5px / 2px / 3px */
+      --mt-stroke-color: #7c3aed;
+    }
+
+    /* 白色填充 + 纯紫色外描边 */
     .cover__title .brand{
-      font-size: var(--brand-size);
-      font-weight: var(--cover-title-weight);
-      line-height: 1.03;
-      letter-spacing: -0.02em;
-
-      /* 填充为白色；关闭之前的渐变裁剪/描边设置 */
       color:#fff;
-      background: none !important;
-      -webkit-background-clip: initial !important;
-      background-clip: initial !important;
+      background:none!important;
       -webkit-text-fill-color: currentColor;
-      -webkit-text-stroke: 0 transparent;
 
-      /* 仅外描边：用多方向 drop-shadow 叠加，避免描到字母内部 */
+      /* 外描边（第一圈） */
       filter:
-        drop-shadow(0 0 0 #7c3aed)
-        drop-shadow(2px 0 0 #7c3aed)
-        drop-shadow(-2px 0 0 #7c3aed)
-        drop-shadow(0 2px 0 #7c3aed)
-        drop-shadow(0 -2px 0 #7c3aed)
-        drop-shadow(1.5px 1.5px 0 #7c3aed)
-        drop-shadow(-1.5px -1.5px 0 #7c3aed)
-        drop-shadow(-1.5px 1.5px 0 #7c3aed)
-        drop-shadow(1.5px -1.5px 0 #7c3aed)
-        drop-shadow(0 10px 24px rgba(0,0,0,.35)); /* 轻微立体感 */
+        drop-shadow(0 0 0 var(--mt-stroke-color))
+        drop-shadow(var(--mt-stroke) 0 0 var(--mt-stroke-color))
+        drop-shadow(calc(var(--mt-stroke) * -1) 0 0 var(--mt-stroke-color))
+        drop-shadow(0 var(--mt-stroke) 0 var(--mt-stroke-color))
+        drop-shadow(0 calc(var(--mt-stroke) * -1) 0 var(--mt-stroke-color))
+        drop-shadow(calc(var(--mt-stroke) * .707) calc(var(--mt-stroke) * .707) 0 var(--mt-stroke-color))
+        drop-shadow(calc(var(--mt-stroke) * -.707) calc(var(--mt-stroke) * -.707) 0 var(--mt-stroke-color))
+        drop-shadow(calc(var(--mt-stroke) * -.707) calc(var(--mt-stroke) * .707) 0 var(--mt-stroke-color))
+        drop-shadow(calc(var(--mt-stroke) * .707) calc(var(--mt-stroke) * -.707) 0 var(--mt-stroke-color));
     }
 
-    @media (max-width: 768px){
-      /* 移动端描边略细，避免糊 */
-      .cover__title .brand{
-        filter:
-          drop-shadow(0 0 0 #7c3aed)
-          drop-shadow(1.5px 0 0 #7c3aed)
-          drop-shadow(-1.5px 0 0 #7c3aed)
-          drop-shadow(0 1.5px 0 #7c3aed)
-          drop-shadow(0 -1.5px 0 #7c3aed)
-          drop-shadow(1px 1px 0 #7c3aed)
-          drop-shadow(-1px -1px 0 #7c3aed)
-          drop-shadow(-1px 1px 0 #7c3aed)
-          drop-shadow(1px -1px 0 #7c3aed)
-          drop-shadow(0 8px 18px rgba(0,0,0,.35));
-      }
+    /* 需要更粗？再加第二圈（可选，取消注释即可） */
+    /*
+    .cover__title .brand{
+      filter:
+        ...上面的九个阴影...,
+        drop-shadow(calc(var(--mt-stroke) * 2) 0 0 var(--mt-stroke-color))
+        drop-shadow(calc(var(--mt-stroke) * -2) 0 0 var(--mt-stroke-color))
+        drop-shadow(0 calc(var(--mt-stroke) * 2) 0 var(--mt-stroke-color))
+        drop-shadow(0 calc(var(--mt-stroke) * -2) 0 var(--mt-stroke-color));
     }
+    */
+
+    /* 移动端可用更细一点，避免糊 */
+    @media (max-width:768px){
+      :root{ --mt-stroke: 1.5px; }
+    }
+
 
 
 
