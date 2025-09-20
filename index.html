@@ -390,7 +390,6 @@
     </div>
   </section>
 
-
   <!-- ================== Task-wise Qualitative Results (Human · MotionTrans-DP · MotionTrans-Pi0-VLA) ================== -->
   <section class="section" id="qualitative-results">
     <div class="container">
@@ -407,71 +406,81 @@
           --gap: 20px;
           --badge-bg: rgba(0,0,0,.55);
           --badge-shadow: 0 2px 8px rgba(0,0,0,.25);
+          --frame-border: #e5e7eb;  /* gray-200 */
+          --frame-title: #374151;   /* gray-700 */
+          --frame-bg: #fff;
         }
+
         #resultVideoPager .rvp-task{
           text-align:center; margin: 0 0 12px; font-weight: 800; line-height: 1.2;
         }
 
-        /* 布局：第一行 Human（跨两列） + 第二行两列（DP / Pi0） */
+        /* 顶层：两块“框”上下排列 */
         #resultVideoPager .rvp-grid{
           display:grid;
-          grid-template-columns: repeat(2, 1fr);
+          grid-template-columns: 1fr;
           gap: var(--gap);
         }
-        #resultVideoPager .rvp-grid .rvp-item:nth-child(1){
-          grid-column: 1 / -1; /* Human 跨两列占满第一行 */
-        }
 
-        /* 行标题（显眼） */
-        #resultVideoPager .rvp-row-title{
-          grid-column: 1 / -1;
-          text-align:center;
-          font-size: 1.15rem;
-          font-weight: 700;
-          color: #374151;
+        /* 通用“框”样式 */
+        #resultVideoPager .rvp-frame{
+          background: var(--frame-bg);
+          border: 1px solid var(--frame-border);
+          border-radius: 14px;
+          box-shadow: 0 6px 24px rgba(0,0,0,.08);
+          padding: 14px 16px 16px;
+        }
+        #resultVideoPager .rvp-frame-title{
+          font-size: 1.1rem;
+          font-weight: 800;
+          color: var(--frame-title);
+          margin: 2px 0 10px;
           letter-spacing: .2px;
-          margin: 2px 0 6px;
+          text-align: left;
         }
 
-        /* 卡片 & 视频 */
+        /* Human 框：整体宽度略大于视频本体，居中 */
+        #resultVideoPager .rvp-frame--human{
+          width: 60%;
+          margin: 0 auto;
+        }
+
+        /* Robot 框：占满容器宽度，内部再做 2 列 */
+        #resultVideoPager .rvp-frame--robot{ width: 100%; }
+        #resultVideoPager .rvp-robot-grid{
+          display:grid; grid-template-columns: repeat(2, 1fr); gap: 16px;
+        }
+
+        /* 视频与角标 */
         #resultVideoPager .rvp-item{ display:flex; flex-direction:column; }
         #resultVideoPager .rvp-video{
-          position:relative; width:100%;
-          aspect-ratio: 16 / 9; border-radius: 12px; overflow:hidden;
+          position:relative; width:100%; aspect-ratio: 16 / 9;
+          border-radius: 12px; overflow:hidden;
         }
-        #resultVideoPager .rvp-video video{ width:100%; height:100%; object-fit:cover; display:block; }
-
-        /* Human 尺寸：占容器 56% 宽并居中，保持比例 */
-        #resultVideoPager .rvp-item--human .rvp-video{
-          width: 56%;
-          margin: 0 auto;
-          aspect-ratio: 16 / 9;
+        #resultVideoPager .rvp-video video{
+          width:100%; height:100%; object-fit:cover; display:block;
         }
-        #resultVideoPager .rvp-item--human .rvp-caption{
-          width: 56%;
-          margin: 6px auto 0;
-          text-align: center;
-        }
-
-        /* 角标 */
         #resultVideoPager .rvp-badge{
           position:absolute; top:10px; left:10px; padding:6px 10px; border-radius:999px;
           background: var(--badge-bg); color:#fff; font-size:12px; letter-spacing:.2px;
           box-shadow: var(--badge-shadow); user-select:none;
         }
 
-        /* 次级说明 */
+        /* 灰字说明（只用于 Robot 两个视频） */
         #resultVideoPager .rvp-caption{
           text-align:center; margin-top:6px; font-size:.95rem; color:#6b7280;
         }
 
+        /* 控件间距 */
         #resultVideoPager .vp-controls{ margin: 8px 0 16px; }
 
-        /* 窄屏兜底：单列堆叠 + Human 100% 宽 */
+        /* 窄屏兜底 */
+        @media (max-width: 992px){
+          #resultVideoPager .rvp-frame--human{ width: 70%; }
+        }
         @media (max-width: 768px){
-          #resultVideoPager .rvp-grid{ grid-template-columns: 1fr; }
-          #resultVideoPager .rvp-item--human .rvp-video,
-          #resultVideoPager .rvp-item--human .rvp-caption{ width:100%; }
+          #resultVideoPager .rvp-frame--human{ width: 100%; }
+          #resultVideoPager .rvp-robot-grid{ grid-template-columns: 1fr; }
         }
       </style>
 
@@ -558,36 +567,40 @@
 
             page.innerHTML = `
               <h3 class="rvp-task">${t.title}</h3>
+
               <div class="rvp-grid">
-                <!-- Human 行 -->
-                <div class="rvp-item rvp-item--human">
-                  <div class="rvp-video">
-                    <span class="rvp-badge">Human Data</span>
-                    <video autoplay muted loop playsinline controls preload="metadata" src="${t.human}"></video>
+                <!-- Human 框 -->
+                <div class="rvp-frame rvp-frame--human">
+                  <div class="rvp-frame-title">Human Demonstration</div>
+                  <div class="rvp-item rvp-item--human">
+                    <div class="rvp-video">
+                      <span class="rvp-badge">Human Data</span>
+                      <video autoplay muted loop playsinline controls preload="metadata" src="${t.human}"></video>
+                    </div>
                   </div>
-                  <div class="rvp-row-title">Human Demonstration</div>
-                  <div class="rvp-caption">Human demonstration</div>
                 </div>
 
-                <!-- 机器人行标题（跨两列） -->
-                <div class="rvp-row-title">Robot Inference</div>
-
-                <!-- MotionTrans-DP -->
-                <div class="rvp-item">
-                  <div class="rvp-video">
-                    <span class="rvp-badge">MotionTrans-DP</span>
-                    <video autoplay muted loop playsinline controls preload="metadata" src="${t.dp0}"></video>
+                <!-- Robot 框（两列并排） -->
+                <div class="rvp-frame rvp-frame--robot">
+                  <div class="rvp-frame-title">Robot Inference</div>
+                  <div class="rvp-robot-grid">
+                    <!-- MotionTrans-DP -->
+                    <div class="rvp-item">
+                      <div class="rvp-video">
+                        <span class="rvp-badge">MotionTrans-DP</span>
+                        <video autoplay muted loop playsinline controls preload="metadata" src="${t.dp0}"></video>
+                      </div>
+                      <div class="rvp-caption">MotionTrans-DP Zero Shot</div>
+                    </div>
+                    <!-- MotionTrans-Pi0-VLA -->
+                    <div class="rvp-item">
+                      <div class="rvp-video">
+                        <span class="rvp-badge">MotionTrans-Pi0-VLA</span>
+                        <video autoplay muted loop playsinline controls preload="metadata" src="${t.pi0}"></video>
+                      </div>
+                      <div class="rvp-caption">MotionTrans-Pi0-VLA Zero Shot</div>
+                    </div>
                   </div>
-                  <div class="rvp-caption">Robot inference (MotionTrans-DP Zero Shot)</div>
-                </div>
-
-                <!-- MotionTrans-Pi0-VLA -->
-                <div class="rvp-item">
-                  <div class="rvp-video">
-                    <span class="rvp-badge">MotionTrans-Pi0-VLA</span>
-                    <video autoplay muted loop playsinline controls preload="metadata" src="${t.pi0}"></video>
-                  </div>
-                  <div class="rvp-caption">Robot inference (MotionTrans-Pi0-VLA Zero Shot)</div>
                 </div>
               </div>
             `;
@@ -651,6 +664,8 @@
       </script>
     </div>
   </section>
+
+  
 
 
   <!-- ================== Few-shot Learning Results ================== -->
