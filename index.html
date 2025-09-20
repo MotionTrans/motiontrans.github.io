@@ -96,29 +96,52 @@
     .cover__content { width: min(var(--cover-max-width), calc(100% - 2*var(--cover-side-gutter))); margin-top: var(--cover-top-offset); text-align: center; color: #fff; text-shadow: var(--cover-text-shadow); padding: 18px 0; background: var(--cover-overlay-bg); border-radius: 12px; }
     .cover__title { display: flex; flex-direction: column; align-items: center; margin: 0 0 12px 0; }
     .cover__title .brand { font-size: var(--brand-size); font-weight: var(--cover-title-weight); line-height: 1.03; letter-spacing: -0.02em; }
-    /* 封面标题：透明描边 + 渐变文字裁剪 */
+    /* Hero title: white fill + pure purple outer stroke (no inner bleed) */
     .cover__title .brand{
       font-size: var(--brand-size);
       font-weight: var(--cover-title-weight);
       line-height: 1.03;
       letter-spacing: -0.02em;
 
-      /* 你的要求：透明描边 + 文本裁剪背景 */
-      color:#000;                                   /* 兼容回退 */
-      -webkit-text-stroke: 3px transparent;         /* 透明描边（不着色，只保留外轮廓） */
-      text-stroke: 5px transparent;                 /* 未来标准，兼容性备用 */
+      /* 填充为白色；关闭之前的渐变裁剪/描边设置 */
+      color:#fff;
+      background: none !important;
+      -webkit-background-clip: initial !important;
+      background-clip: initial !important;
+      -webkit-text-fill-color: currentColor;
+      -webkit-text-stroke: 0 transparent;
 
-      background: linear-gradient(
-        90deg,
-        red, orange, yellow, green, cyan, blue, purple
-      ) top left / 100% 100%;
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;         /* 让渐变真正填充字形 */
-
-      /* 细节优化：在深色视频上略提亮可读性（可选） */
-      text-shadow: 0 2px 12px rgba(0,0,0,.35);
+      /* 仅外描边：用多方向 drop-shadow 叠加，避免描到字母内部 */
+      filter:
+        drop-shadow(0 0 0 #7c3aed)
+        drop-shadow(2px 0 0 #7c3aed)
+        drop-shadow(-2px 0 0 #7c3aed)
+        drop-shadow(0 2px 0 #7c3aed)
+        drop-shadow(0 -2px 0 #7c3aed)
+        drop-shadow(1.5px 1.5px 0 #7c3aed)
+        drop-shadow(-1.5px -1.5px 0 #7c3aed)
+        drop-shadow(-1.5px 1.5px 0 #7c3aed)
+        drop-shadow(1.5px -1.5px 0 #7c3aed)
+        drop-shadow(0 10px 24px rgba(0,0,0,.35)); /* 轻微立体感 */
     }
+
+    @media (max-width: 768px){
+      /* 移动端描边略细，避免糊 */
+      .cover__title .brand{
+        filter:
+          drop-shadow(0 0 0 #7c3aed)
+          drop-shadow(1.5px 0 0 #7c3aed)
+          drop-shadow(-1.5px 0 0 #7c3aed)
+          drop-shadow(0 1.5px 0 #7c3aed)
+          drop-shadow(0 -1.5px 0 #7c3aed)
+          drop-shadow(1px 1px 0 #7c3aed)
+          drop-shadow(-1px -1px 0 #7c3aed)
+          drop-shadow(-1px 1px 0 #7c3aed)
+          drop-shadow(1px -1px 0 #7c3aed)
+          drop-shadow(0 8px 18px rgba(0,0,0,.35));
+      }
+    }
+
 
 
     .cover__title .rest { margin-top: var(--title-gap); font-size: var(--title-rest-size); line-height: 1.2; font-weight: 500; opacity: .98; }
