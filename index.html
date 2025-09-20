@@ -96,48 +96,50 @@
     .cover__content { width: min(var(--cover-max-width), calc(100% - 2*var(--cover-side-gutter))); margin-top: var(--cover-top-offset); text-align: center; color: #fff; text-shadow: var(--cover-text-shadow); padding: 18px 0; background: var(--cover-overlay-bg); border-radius: 12px; }
     .cover__title { display: flex; flex-direction: column; align-items: center; margin: 0 0 12px 0; }
     .cover__title .brand { font-size: var(--brand-size); font-weight: var(--cover-title-weight); line-height: 1.03; letter-spacing: -0.02em; }
+
+
+    
     :root{
-  /* 全局描边粗细（改这个数就行） */
-      --mt-stroke: 0.5px;              /* 常用：1.5px / 2px / 3px */
-      --mt-stroke-color: #7c3aed;
-    }
+            /* 调这里控制粗细与颜色 */
+            --brand-stroke: 3px;             /* 建议 2px~4px，越大越粗 */
+            --brand-stroke-color: #7c3aed;   /* 紫色描边 */
+          }
 
-    /* 白色填充 + 纯紫色外描边 */
-    .cover__title .brand{
-      color:#fff;
-      background:none!important;
-      -webkit-text-fill-color: currentColor;
+          /* 容器本体：尺寸/排版继承你原来的即可 */
+          .cover__title .brand{
+            position: relative;
+            display: inline-block;
+            line-height: 1.03;
+            letter-spacing: -0.02em;
+          }
 
-      /* 外描边（第一圈） */
-      filter:
-        drop-shadow(0 0 0 var(--mt-stroke-color))
-        drop-shadow(var(--mt-stroke) 0 0 var(--mt-stroke-color))
-        drop-shadow(calc(var(--mt-stroke) * -1) 0 0 var(--mt-stroke-color))
-        drop-shadow(0 var(--mt-stroke) 0 var(--mt-stroke-color))
-        drop-shadow(0 calc(var(--mt-stroke) * -1) 0 var(--mt-stroke-color))
-        drop-shadow(calc(var(--mt-stroke) * .707) calc(var(--mt-stroke) * .707) 0 var(--mt-stroke-color))
-        drop-shadow(calc(var(--mt-stroke) * -.707) calc(var(--mt-stroke) * -.707) 0 var(--mt-stroke-color))
-        drop-shadow(calc(var(--mt-stroke) * -.707) calc(var(--mt-stroke) * .707) 0 var(--mt-stroke-color))
-        drop-shadow(calc(var(--mt-stroke) * .707) calc(var(--mt-stroke) * -.707) 0 var(--mt-stroke-color));
-    }
+          /* 上层：纯填充（盖住内描边） */
+          .cover__title .brand__fill{
+            position: relative;
+            z-index: 2;
+            color: #fff;
+            -webkit-text-fill-color: #fff;
+            text-rendering: optimizeLegibility;
+            -webkit-font-smoothing: antialiased;
+          }
 
-    /* 需要更粗？再加第二圈（可选，取消注释即可） */
-    /*
-    .cover__title .brand{
-      filter:
-        ...上面的九个阴影...,
-        drop-shadow(calc(var(--mt-stroke) * 2) 0 0 var(--mt-stroke-color))
-        drop-shadow(calc(var(--mt-stroke) * -2) 0 0 var(--mt-stroke-color))
-        drop-shadow(0 calc(var(--mt-stroke) * 2) 0 var(--mt-stroke-color))
-        drop-shadow(0 calc(var(--mt-stroke) * -2) 0 var(--mt-stroke-color));
-    }
-    */
+          /* 下层：只画描边（透明填充 + 纯紫色描边） */
+          .cover__title .brand__stroke{
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            color: transparent;                 /* 不要填充颜色 */
+            -webkit-text-fill-color: transparent;
+            -webkit-text-stroke: var(--brand-stroke) var(--brand-stroke-color);
+            pointer-events: none;               /* 防止遮挡点击 */
+          }
 
-    /* 移动端可用更细一点，避免糊 */
-    @media (max-width:768px){
-      :root{ --mt-stroke: 1.5px; }
-    }
+          /* 小屏略细，避免锯齿感 */
+          @media (max-width: 768px){
+            :root{ --brand-stroke: 2px; }
+          }
 
+   
 
 
 
@@ -225,7 +227,11 @@
     <div class="cover__overlay">
       <div class="cover__content">
         <h1 class="cover__title" aria-label="MotionTrans: Human VR Data Enable Motion-Level Learning for Robotic Manipulation Policies">
-          <span class="brand">MotionTrans</span>
+          <span class="brand" aria-label="MotionTrans">
+            <span class="brand__fill">MotionTrans</span>
+            <span class="brand__stroke" aria-hidden="true">MotionTrans</span>
+          </span>
+
           <span class="rest">
             <span class="line">Human VR Data Enable Motion-Level Learning</span>
             <span class="line">for Robotic Manipulation Policies</span>
