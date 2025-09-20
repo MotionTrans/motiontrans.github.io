@@ -712,14 +712,58 @@
     </div>
   </section>
 
-  <!-- ================== Human Tasks (卡片网格) ================== -->
+  <!-- ================== Human Tasks（含搜索/筛选 + 卡片网格） ================== -->
   <section class="section mt-section" id="human-tasks">
     <div class="container">
       <h2 class="title is-2 mt-title">Human Tasks</h2>
 
-      <div class="ht-grid">
+      <!-- Toolbar: 搜索 + 筛选 + 统计 + 重置 -->
+      <style>
+        .ht-toolbar{
+          display:flex; flex-wrap:wrap; gap:12px; align-items:center;
+          margin: 12px 0 18px;
+        }
+        .ht-toolbar .field{ display:flex; align-items:center; gap:8px; }
+        .ht-toolbar input[type="search"]{
+          padding:10px 12px; border:1px solid #e5e7eb; border-radius:10px; min-width:220px; outline:none;
+        }
+        .ht-toolbar select{
+          padding:10px 12px; border:1px solid #e5e7eb; border-radius:10px; outline:none; background:#fff;
+        }
+        .ht-toolbar .btn-reset{
+          border:1px solid #e5e7eb; border-radius:999px; padding:8px 14px; background:#fff; cursor:pointer;
+        }
+        .ht-toolbar .muted{ color:#6b7280; font-size:.95rem; }
+      </style>
+      <div class="ht-toolbar" role="region" aria-label="Human task filters">
+        <div class="field">
+          <label for="ht-search" class="muted">Search</label>
+          <input id="ht-search" type="search" placeholder="Type keywords… (e.g., mango / press)">
+        </div>
+        <div class="field">
+          <label for="ht-filter" class="muted">Filter</label>
+          <select id="ht-filter" aria-label="Filter by category">
+            <option value="">All tasks</option>
+            <option value="put">Put / Place</option>
+            <option value="press">Press</option>
+            <option value="pour">Pour</option>
+            <option value="open+place">Open + Place</option>
+            <option value="fold">Fold</option>
+            <option value="wipe">Wipe</option>
+            <option value="obstacle-bypass">Obstacle · Bypass</option>
+            <option value="obstacle-lift">Obstacle · Lift</option>
+            <option value="close">Close</option>
+            <option value="unplug">Unplug</option>
+          </select>
+        </div>
+        <button class="btn-reset" id="ht-reset" type="button">Clear</button>
+        <span class="muted" id="ht-count" aria-live="polite"></span>
+      </div>
+
+      <!-- 网格样式复用你现有的 .ht-grid / .ht-card 等 -->
+      <div class="ht-grid" id="ht-grid">
         <!-- 1 -->
-        <article class="ht-card">
+        <article class="ht-card" data-tags="unplug">
           <div class="ht-media">
             <span class="ht-badge">Human Data</span>
             <video autoplay muted loop playsinline controls preload="metadata" src="resources/human_data/unplug_the_white_charger_0.mp4"></video>
@@ -730,7 +774,7 @@
         </article>
 
         <!-- 2 -->
-        <article class="ht-card">
+        <article class="ht-card" data-tags="put,container">
           <div class="ht-media">
             <span class="ht-badge">Human Data</span>
             <video autoplay muted loop playsinline controls preload="metadata" src="resources/human_data/drop_bread_to_the_green_bucket_0.mp4"></video>
@@ -741,7 +785,7 @@
         </article>
 
         <!-- 3 -->
-        <article class="ht-card">
+        <article class="ht-card" data-tags="press,tool">
           <div class="ht-media">
             <span class="ht-badge">Human Data</span>
             <video autoplay muted loop playsinline controls preload="metadata" src="resources/human_data/press_the_stapler_0.mp4"></video>
@@ -752,7 +796,7 @@
         </article>
 
         <!-- 4 -->
-        <article class="ht-card">
+        <article class="ht-card" data-tags="put,container">
           <div class="ht-media">
             <span class="ht-badge">Human Data</span>
             <video autoplay muted loop playsinline controls preload="metadata" src="resources/human_data/put_orange_to_the_green_bucket_0.mp4"></video>
@@ -763,7 +807,7 @@
         </article>
 
         <!-- 5 -->
-        <article class="ht-card">
+        <article class="ht-card" data-tags="wipe,push,cloth">
           <div class="ht-media">
             <span class="ht-badge">Human Data</span>
             <video autoplay muted loop playsinline controls preload="metadata" src="resources/human_data/wipe_blue_towel_on_the_table_and_push_it_to_the_bulky_bottle_0.mp4"></video>
@@ -774,7 +818,7 @@
         </article>
 
         <!-- 6 -->
-        <article class="ht-card">
+        <article class="ht-card" data-tags="close,device">
           <div class="ht-media">
             <span class="ht-badge">Human Data</span>
             <video autoplay muted loop playsinline controls preload="metadata" src="resources/human_data/close_silver_laptop_0.mp4"></video>
@@ -785,7 +829,7 @@
         </article>
 
         <!-- 7 -->
-        <article class="ht-card">
+        <article class="ht-card" data-tags="put,obstacle-bypass">
           <div class="ht-media">
             <span class="ht-badge">Human Data</span>
             <video autoplay muted loop playsinline controls preload="metadata" src="resources/human_data/put_mango_to_pink_bowl_while_avoiding_obstacle_by_bypassing_0.mp4"></video>
@@ -796,7 +840,7 @@
         </article>
 
         <!-- 8 -->
-        <article class="ht-card">
+        <article class="ht-card" data-tags="put,obstacle-lift">
           <div class="ht-media">
             <span class="ht-badge">Human Data</span>
             <video autoplay muted loop playsinline controls preload="metadata" src="resources/human_data/put_mango_to_the_pink_bowl_while_avoiding_obstacle_by_lifting.mp4"></video>
@@ -807,7 +851,7 @@
         </article>
 
         <!-- 9 -->
-        <article class="ht-card">
+        <article class="ht-card" data-tags="press,object">
           <div class="ht-media">
             <span class="ht-badge">Human Data</span>
             <video autoplay muted loop playsinline controls preload="metadata" src="resources/human_data/press_red_dice_to_make_it_rotation_0.mp4"></video>
@@ -818,7 +862,7 @@
         </article>
 
         <!-- 10 -->
-        <article class="ht-card">
+        <article class="ht-card" data-tags="put,tableware">
           <div class="ht-media">
             <span class="ht-badge">Human Data</span>
             <video autoplay muted loop playsinline controls preload="metadata" src="resources/human_data/put_banana_to_the_white_plate_0.mp4"></video>
@@ -829,7 +873,7 @@
         </article>
 
         <!-- 11 -->
-        <article class="ht-card">
+        <article class="ht-card" data-tags="pour,liquid">
           <div class="ht-media">
             <span class="ht-badge">Human Data</span>
             <video autoplay muted loop playsinline controls preload="metadata" src="resources/human_data/pour_bottle_to_the_pink_bowl.mp4"></video>
@@ -840,7 +884,7 @@
         </article>
 
         <!-- 12 -->
-        <article class="ht-card">
+        <article class="ht-card" data-tags="put,container">
           <div class="ht-media">
             <span class="ht-badge">Human Data</span>
             <video autoplay muted loop playsinline controls preload="metadata" src="resources/human_data/put_toy_bear_to_the_black_box_0.mp4"></video>
@@ -851,7 +895,7 @@
         </article>
 
         <!-- 13 -->
-        <article class="ht-card">
+        <article class="ht-card" data-tags="open+place,container">
           <div class="ht-media">
             <span class="ht-badge">Human Data</span>
             <video autoplay muted loop playsinline controls preload="metadata" src="resources/human_data/first_open_the_white_cap_style_box_then_put_toy_panda_to_the_box_0.mp4"></video>
@@ -862,7 +906,7 @@
         </article>
 
         <!-- 14 -->
-        <article class="ht-card">
+        <article class="ht-card" data-tags="fold,cloth">
           <div class="ht-media">
             <span class="ht-badge">Human Data</span>
             <video autoplay muted loop playsinline controls preload="metadata" src="resources/human_data/fold_the_blue_towel_0.mp4"></video>
@@ -873,7 +917,7 @@
         </article>
 
         <!-- 15 -->
-        <article class="ht-card">
+        <article class="ht-card" data-tags="pour,liquid">
           <div class="ht-media">
             <span class="ht-badge">Human Data</span>
             <video autoplay muted loop playsinline controls preload="metadata" src="resources/human_data/pour_milk_bottle_to_the_yellow_pan_0.mp4"></video>
@@ -883,8 +927,57 @@
           </div>
         </article>
       </div>
+
+      <p id="ht-empty" class="has-text-grey" style="text-align:center; margin-top:14px; display:none;">
+        No tasks match your filters.
+      </p>
     </div>
+
+    <!-- 过滤脚本（纯原生 JS） -->
+    <script>
+      (function(){
+        const grid   = document.getElementById('ht-grid');
+        const cards  = Array.from(grid.querySelectorAll('.ht-card'));
+        const q      = document.getElementById('ht-search');
+        const sel    = document.getElementById('ht-filter');
+        const reset  = document.getElementById('ht-reset');
+        const count  = document.getElementById('ht-count');
+        const empty  = document.getElementById('ht-empty');
+
+        function apply(){
+          const term = (q.value || '').trim().toLowerCase();
+          const cat  = (sel.value || '').trim().toLowerCase();
+          let shown = 0;
+
+          cards.forEach(card=>{
+            const title = card.querySelector('.ht-title')?.textContent.toLowerCase() || '';
+            const tags  = (card.getAttribute('data-tags') || '').toLowerCase().split(',').map(s=>s.trim()).filter(Boolean);
+
+            const matchTerm = !term || title.includes(term);
+            const matchCat  = !cat  || tags.includes(cat);
+
+            const ok = matchTerm && matchCat;
+            card.style.display = ok ? '' : 'none';
+            if(ok) shown++;
+          });
+
+          count.textContent = shown + ' / ' + cards.length + ' shown';
+          empty.style.display = shown ? 'none' : '';
+        }
+
+        q.addEventListener('input', apply);
+        sel.addEventListener('change', apply);
+        reset.addEventListener('click', ()=>{
+          q.value=''; sel.value=''; apply();
+          q.focus();
+        });
+
+        // 初始统计
+        apply();
+      })();
+    </script>
   </section>
+
 
   <!-- ================== Acknowledgments ================== -->
   <section class="section mt-section" id="acknowledgments">
