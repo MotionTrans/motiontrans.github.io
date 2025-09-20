@@ -737,17 +737,38 @@
           --gap: 24px;
           --badge-bg: rgba(0,0,0,.55);
           --badge-shadow: 0 2px 8px rgba(0,0,0,.25);
+          --frame-border: #e5e7eb;   /* gray-200 */
+          --frame-title: #374151;    /* gray-700 */
+          --frame-bg: #fff;
         }
         #fewshotVideoPager .rvp-task{
-          text-align:center; margin:0 0 12px; font-weight:700; line-height:1.2;
+          text-align:center; margin:0 0 12px; font-weight:800; line-height:1.2;
         }
-        /* 两列并排 */
+        /* 两列并排；窄屏降为一列 */
         #fewshotVideoPager .rvp-grid{
           display:grid; grid-template-columns: repeat(2, 1fr); gap: var(--gap);
         }
+        @media (max-width: 768px){
+          #fewshotVideoPager .rvp-grid{ grid-template-columns: 1fr; }
+        }
+
+        /* 统一“框”样式（人类/机器人相同） */
+        #fewshotVideoPager .rvp-frame{
+          background: var(--frame-bg);
+          border: 1px solid var(--frame-border);
+          border-radius: 14px;
+          box-shadow: 0 6px 24px rgba(0,0,0,.08);
+          padding: 14px 16px 16px;
+          display: flex; flex-direction: column;
+        }
+        #fewshotVideoPager .rvp-frame-title{
+          font-size: 1.1rem; font-weight: 800; color: var(--frame-title);
+          margin: 2px 0 10px; letter-spacing: .2px; text-align: left;
+        }
+
         #fewshotVideoPager .rvp-item{ display:flex; flex-direction:column; }
         #fewshotVideoPager .rvp-video{
-          position:relative; width:100%; aspect-ratio:16/9; border-radius:10px; overflow:hidden;
+          position:relative; width:100%; aspect-ratio:16/9; border-radius:12px; overflow:hidden;
         }
         #fewshotVideoPager .rvp-video video{ width:100%; height:100%; object-fit:cover; display:block; }
         #fewshotVideoPager .rvp-badge{
@@ -758,6 +779,7 @@
         #fewshotVideoPager .rvp-caption{
           text-align:center; margin-top:6px; font-size:.95rem; color:#6b7280;
         }
+
         #fewshotVideoPager .vp-controls{ margin:6px 0 16px; }
       </style>
 
@@ -776,7 +798,6 @@
           if (!pager) return;
 
           // ===== 13 个任务（左 Human / 右 MotionTrans-DP few-shot）=====
-          // 若文件名不同，改这里即可；不影响结构与样式。
           const tasks = [
             { title: "Orange → Green Bucket",
               human: "resources/human_data/put_orange_to_the_green_bucket_0.mp4",
@@ -810,10 +831,10 @@
               dp0:   "resources/infer_video_720x1280/mango_bypass_dp20_1280x720.mp4" },
             { title: "Mango → Pink Bowl (Lift)",
               human: "resources/human_data/put_mango_to_the_pink_bowl_while_avoiding_obstacle_by_lifting.mp4",
-              dp0:   "resources/infer_video_720x1280/mango_bypass_dp20_1280x720.mp4" },  // 若有 mango_lift_* 可替换
+              dp0:   "resources/infer_video_720x1280/mango_bypass_dp20_1280x720.mp4" },  // 如有 *lift* 可替换
             { title: "Toy Bear → Black Box",
               human: "resources/human_data/put_toy_bear_to_the_black_box_0.mp4",
-              dp0:   "resources/infer_video_720x1280/mango_lift_dp20_1280x720.mp4" },    // 你指定的映射
+              dp0:   "resources/infer_video_720x1280/mango_lift_dp20_1280x720.mp4" },    // 你的映射
             { title: "Wipe Towel",
               human: "resources/human_data/wipe_blue_towel_on_the_table_and_push_it_to_the_bulky_bottle_0.mp4",
               dp0:   "resources/infer_video_720x1280/wipe_towel_dp20_1280x720.mp4" },
@@ -823,7 +844,7 @@
           const next = pager.querySelector('.vp-next');
           const dotsWrap = pager.querySelector('.vp-dots');
 
-          // 动态生成每一页（两列：Human / MotionTrans-DP）
+          // 生成页面：每页两个“相同样式”的框
           const frag = document.createDocumentFragment();
           tasks.forEach((t, i) => {
             const page = document.createElement('div');
@@ -832,19 +853,28 @@
             page.innerHTML = `
               <h3 class="rvp-task">${t.title}</h3>
               <div class="rvp-grid">
-                <div class="rvp-item">
-                  <div class="rvp-video">
-                    <span class="rvp-badge">Human Data</span>
-                    <video autoplay muted loop playsinline controls preload="metadata" src="${t.human}"></video>
+                <!-- Human 框 -->
+                <div class="rvp-frame">
+                  <div class="rvp-frame-title">Human Demonstration</div>
+                  <div class="rvp-item">
+                    <div class="rvp-video">
+                      <span class="rvp-badge">Human Data</span>
+                      <video autoplay muted loop playsinline controls preload="metadata" src="${t.human}"></video>
+                    </div>
+                    <div class="rvp-caption">Human demonstration</div>
                   </div>
-                  <div class="rvp-caption">Human demonstration</div>
                 </div>
-                <div class="rvp-item">
-                  <div class="rvp-video">
-                    <span class="rvp-badge">MotionTrans-DP (few-shot)</span>
-                    <video autoplay muted loop playsinline controls preload="metadata" src="${t.dp0}"></video>
+
+                <!-- Robot 框（few-shot） -->
+                <div class="rvp-frame">
+                  <div class="rvp-frame-title">Robot Inference (few-shot)</div>
+                  <div class="rvp-item">
+                    <div class="rvp-video">
+                      <span class="rvp-badge">MotionTrans-DP</span>
+                      <video autoplay muted loop playsinline controls preload="metadata" src="${t.dp0}"></video>
+                    </div>
+                    <div class="rvp-caption">MotionTrans-DP, few-shot</div>
                   </div>
-                  <div class="rvp-caption">Robot inference (MotionTrans-DP, few-shot)</div>
                 </div>
               </div>
             `;
@@ -910,6 +940,7 @@
       </script>
     </div>
   </section>
+
 
 
 
