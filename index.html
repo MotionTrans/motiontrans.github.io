@@ -24,7 +24,7 @@
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700;800&family=Noto+Sans:wght@400;500;700&display=swap" rel="stylesheet">
 
-  <!-- CSS libs (保留你原有依赖；如有需要可精简为单一框架) -->
+  <!-- CSS libs -->
   <link rel="stylesheet" href="./static/css/bulma.min.css">
   <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
   <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
@@ -44,7 +44,7 @@
   <script src="./static/js/bulma-slider.min.js"></script>
   <script src="./static/js/index.js"></script>
 
-  <!-- ================== Global Cover Styles ================== -->
+  <!-- ================== Styles ================== -->
   <style>
     :root{
       --brand-size: clamp(64px, 10vw, 160px);
@@ -59,47 +59,32 @@
       --cover-cta-gap: 10px;
       --cover-shadow: 0 6px 28px rgba(0,0,0,.55);
       --cover-text-shadow: 2px 2px 12px rgba(0,0,0,.65);
-      --nav-blur-bg: rgba(0,0,0,.55);
     }
 
     html, body { height: 100%; margin: 0; font-family: "Google Sans","Noto Sans",system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif; }
     * { box-sizing: border-box; }
 
-    /* 平滑滚动与锚点偏移（避免被固定导航遮住） */
+    /* 平滑滚动与锚点偏移 */
     html{ scroll-behavior: smooth; }
     section[id], header#top{ scroll-margin-top: 80px; }
 
-    /* 导航：初始透明白字；滚动后半透明毛玻璃 */
-    .navbar { position: fixed; top:0; left:0; right:0; z-index: 20; }
-    .navbar.is-transparent { background: transparent; }
-    .navbar.is-transparent .navbar-item,
-    .navbar.is-transparent .navbar-link { color: #fff; }
-    .navbar.is-transparent .navbar-item:hover,
-    .navbar.is-transparent .navbar-link:hover { background: rgba(255,255,255,.12); color: #fff; border-radius: 8px; }
-
-    .navbar.nav-solid{
-      background: var(--nav-blur-bg);
-      backdrop-filter: blur(8px);
-      border-bottom: 1px solid rgba(255,255,255,.12);
+    /* ========= 导航栏整条透明（含下拉） ========= */
+    .navbar { position: fixed; top:0; left:0; right:0; z-index: 30; background: transparent !important; box-shadow: none; }
+    .navbar.is-transparent { background: transparent !important; }
+    .navbar-menu { background: transparent !important; }
+    .navbar-item, .navbar-link { color:#fff !important; }
+    .navbar-item:hover, .navbar-link:hover { background: transparent !important; text-decoration: underline; }
+    .navbar-dropdown{
+      background: transparent !important;
+      border: none !important;
+      box-shadow: none !important;
+      backdrop-filter: none !important;
+      padding-top: .25rem; padding-bottom: .25rem;
     }
-    .navbar.nav-solid .navbar-item,
-    .navbar.nav-solid .navbar-link{ color:#fff; }
-    .navbar.nav-solid .navbar-item:hover,
-    .navbar.nav-solid .navbar-link:hover{ background: rgba(255,255,255,.12); color:#fff; border-radius: 8px; }
-
-    /* 当前章节高亮 */
-    .navbar .navbar-item.is-active,
-    .navbar .navbar-link.is-active{
-      background: rgba(255,255,255,.16) !important;
-      border-radius: 8px;
-    }
-
-    /* 下拉菜单在透明背景上的可读性 */
-    .navbar.is-transparent .navbar-dropdown{
-      backdrop-filter: blur(8px);
-      border-radius: 12px;
-      box-shadow: 0 20px 60px rgba(0,0,0,.35);
-    }
+    .navbar-dropdown .navbar-item{ color:#fff !important; }
+    .navbar-dropdown .navbar-item:hover{ background: transparent !important; text-decoration: underline; }
+    /* 移动端打开菜单也保持透明 */
+    .navbar-menu.is-active{ background: transparent !important; }
 
     /* 可访问性：跳到内容 */
     .skip-link{
@@ -107,7 +92,7 @@
     }
     .skip-link:focus{ left:12px; z-index:9999; }
 
-    /* 封面 */
+    /* ===== 封面 ===== */
     .cover {
       position: relative; width: 100%; height: 100svh; min-height: 580px; overflow: hidden; background: #000;
     }
@@ -153,33 +138,23 @@
     .mt-img-wrap img,
     .rvp-video video,
     .media-fixed,
-    .mt-fig img { opacity:0; transition: opacity .25s ease; }
+    .mt-fig img,
+    .ht-card video { opacity:0; transition: opacity .25s ease; }
     .is-ready { opacity:1 !important; }
 
-    /* ================== Global MotionTrans Theme (applies site-wide) ================== */
+    /* ===== 全局主题卡片/标题 ===== */
     .mt-section { position: relative; }
-
     .mt-card{
       background: linear-gradient(180deg, #ffffff, #fafafa);
-      border: 1px solid #e5e7eb;
-      border-radius: 16px;
+      border: 1px solid #e5e7eb; border-radius: 16px;
       box-shadow: 0 10px 32px rgba(0,0,0,.08);
-      padding: 18px;
-      transition: transform .18s ease, box-shadow .18s ease;
+      padding: 18px; transition: transform .18s ease, box-shadow .18s ease;
     }
     .mt-card.compact{ padding:14px; }
     .mt-card:hover{ transform: translateY(-3px); box-shadow: 0 16px 40px rgba(0,0,0,.12); }
 
-    @media (prefers-reduced-motion: reduce){
-      *{ transition: none !important; }
-    }
-
     .mt-title{
-      display: table;
-      margin: 0 auto 14px auto;
-      padding-bottom: 6px;
-      position: relative;
-      text-align: center !important;
+      display: table; margin: 0 auto 14px auto; padding-bottom: 6px; position: relative; text-align: center !important;
     }
     .mt-title::after{
       content:""; position:absolute; left:50%; transform:translateX(-50%);
@@ -205,6 +180,32 @@
     @media (min-width: 1024px){
       .w-70 { width: 70%; margin-left:auto; margin-right:auto; }
     }
+
+    /* ===== Human Tasks 卡片网格 ===== */
+    .ht-grid{
+      display:grid;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap: 24px;
+    }
+    @media (max-width: 992px){
+      .ht-grid{ grid-template-columns: repeat(2, minmax(0,1fr)); }
+    }
+    @media (max-width: 576px){
+      .ht-grid{ grid-template-columns: 1fr; }
+    }
+    .ht-card{
+      background:#fff; border:1px solid #e5e7eb; border-radius:16px;
+      box-shadow: 0 10px 28px rgba(0,0,0,.08);
+      overflow:hidden; display:flex; flex-direction:column;
+      transition: transform .18s ease, box-shadow .18s ease;
+    }
+    .ht-card:hover{ transform: translateY(-3px); box-shadow: 0 18px 44px rgba(0,0,0,.12); }
+    .ht-media{ position:relative; width:100%; aspect-ratio:16/9; overflow:hidden; }
+    .ht-media video{ width:100%; height:100%; object-fit:cover; display:block; }
+    .ht-badge{ position:absolute; top:10px; left:10px; padding:6px 10px; border-radius:999px; background:rgba(0,0,0,.55); color:#fff; font-size:12px; }
+    .ht-body{ padding:14px 16px; }
+    .ht-title{ margin:0; font-size:1rem; font-weight:800; color:#111827; line-height:1.3; }
+    .ht-desc{ margin:.35rem 0 0; color:#6b7280; font-size:.9rem; }
   </style>
 </head>
 
@@ -213,7 +214,7 @@
   <!-- Skip to content -->
   <a class="skip-link" href="#abstract">Skip to content</a>
 
-  <!-- ===== Transparent navbar (初始透明白字，滚动后半透明毛玻璃) ===== -->
+  <!-- ===== 透明导航栏（含下拉全透明、白字） ===== -->
   <nav class="navbar is-transparent" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
       <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
@@ -303,7 +304,7 @@
   <section class="section mt-section" id="unified-human-centric">
     <div class="container">
       <h2 class="title is-2 mt-title">Unified Human-Centric State-Action Space</h2>
-      <div class="mt-card w-70">
+    <div class="mt-card w-70">
         <div class="mt-img-wrap">
           <img src="./resources/main_method.png" alt="MotionTrans method">
         </div>
@@ -394,7 +395,7 @@
               { title: "Mango → Pink Bowl (Bypass)", human: "resources/human_data/put_mango_to_pink_bowl_while_avoiding_obstacle_by_bypassing_0.mp4", dp0: "resources/infer_video_720x1280/mango_bypass_dp0_1280x720.mp4", pi0: "resources/infer_video_720x1280/mango_bypass_pi0_1280x720.mp4" },
               { title: "Mango → Pink Bowl (Lift)", human: "resources/human_data/put_mango_to_the_pink_bowl_while_avoiding_obstacle_by_lifting.mp4", dp0: "resources/infer_video_720x1280/mango_bypass_dp0_1280x720.mp4", pi0: "resources/infer_video_720x1280/mango_bypass_pi0_1280x720.mp4" },
               { title: "Toy Bear → Black Box", human: "resources/human_data/put_toy_bear_to_the_black_box_0.mp4", dp0: "resources/infer_video_720x1280/mango_lift_dp0_1280x720.mp4", pi0: "resources/infer_video_720x1280/mango_lift_pi0_1280x720.mp4" },
-              { title: "Wipe Towe", human: "resources/human_data/wipe_blue_towel_on_the_table_and_push_it_to_the_bulky_bottle_0.mp4", dp0: "resources/infer_video_720x1280/wipe_towel_dp0_1280x720.mp4", pi0: "resources/infer_video_720x1280/wipe_towel_pi0_1280x720.mp4" },
+              { title: "Wipe Towel", human: "resources/human_data/wipe_blue_towel_on_the_table_and_push_it_to_the_bulky_bottle_0.mp4", dp0: "resources/infer_video_720x1280/wipe_towel_dp0_1280x720.mp4", pi0: "resources/infer_video_720x1280/wipe_towel_pi0_1280x720.mp4" },
             ];
 
             const prev = pager.querySelector('.vp-prev');
@@ -565,7 +566,7 @@
               { title: "Mango → Pink Bowl (Bypass)", human: "resources/human_data/put_mango_to_pink_bowl_while_avoiding_obstacle_by_bypassing_0.mp4", dp0: "resources/infer_video_720x1280/mango_bypass_dp20_1280x720.mp4" },
               { title: "Mango → Pink Bowl (Lift)", human: "resources/human_data/put_mango_to_the_pink_bowl_while_avoiding_obstacle_by_lifting.mp4", dp0: "resources/infer_video_720x1280/mango_bypass_dp20_1280x720.mp4" },
               { title: "Toy Bear → Black Box", human: "resources/human_data/put_toy_bear_to_the_black_box_0.mp4", dp0: "resources/infer_video_720x1280/mango_lift_dp20_1280x720.mp4" },
-              { title: "Wipe Towel", human: "resources/human_data/wipe_blue_towel_on_the_table_and_push_it_to_THE_bulky_bottle_0.mp4", dp0: "resources/infer_video_720x1280/wipe_towel_dp20_1280x720.mp4" },
+              { title: "Wipe Towel", human: "resources/human_data/wipe_blue_towel_on_the_table_and_push_it_to_the_bulky_bottle_0.mp4", dp0: "resources/infer_video_720x1280/wipe_towel_dp20_1280x720.mp4" },
             ];
 
             const prev = pager.querySelector('.vp-prev');
@@ -707,175 +708,180 @@
             </div>
           </div>
         </div>
+      </div>
+    </div>
+  </section>
 
-        <br>
+  <!-- ================== Human Tasks (卡片网格) ================== -->
+  <section class="section mt-section" id="human-tasks">
+    <div class="container">
+      <h2 class="title is-2 mt-title">Human Tasks</h2>
 
-        <!-- ================== Human Tasks (Video Pager, 3x2) ================== -->
-        <h3 class="title is-3" style="text-align:center; margin: 8px 0 12px;">Human Tasks</h3>
-
-        <style>
-          #humanVideoPager { --video-title-lh: 1.25; --video-title-lines: 2; }
-          #humanVideoPager .video-grid{ display:grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
-          @media (max-width: 992px){ #humanVideoPager .video-grid{ grid-template-columns: repeat(2, minmax(0,1fr)); } }
-          @media (max-width: 576px){ #humanVideoPager .video-grid{ grid-template-columns: 1fr; } }
-          #humanVideoPager .video-item{ display:flex; flex-direction:column; }
-          #humanVideoPager .video-title{
-            margin: 0 0 8px 0; font-size: 1rem; line-height: var(--video-title-lh);
-            display: -webkit-box; -webkit-line-clamp: var(--video-title-lines); -webkit-box-orient: vertical;
-            overflow: hidden; min-height: calc(var(--video-title-lh) * var(--video-title-lines) * 1em);
-          }
-          #humanVideoPager .video-wrap{ width:100%; aspect-ratio: 16 / 9; border-radius: 10px; overflow: hidden; }
-          #humanVideoPager .video-wrap video{ width:100%; height:100%; object-fit: cover; display:block; }
-        </style>
-
-        <div id="humanVideoPager" class="video-pager">
-          <div class="vp-controls">
-            <button class="vp-btn vp-prev" aria-label="Previous page">‹</button>
-            <div class="vp-dots" role="tablist" aria-label="Video pages">
-              <span class="vp-dot active" role="tab" aria-selected="true" aria-controls="vp-page-1"></span>
-              <span class="vp-dot" role="tab" aria-selected="false" aria-controls="vp-page-2"></span>
-              <span class="vp-dot" role="tab" aria-selected="false" aria-controls="vp-page-3"></span>
-            </div>
-            <button class="vp-btn vp-next" aria-label="Next page">›</button>
+      <div class="ht-grid">
+        <!-- 1 -->
+        <article class="ht-card">
+          <div class="ht-media">
+            <span class="ht-badge">Human Data</span>
+            <video autoplay muted loop playsinline controls preload="metadata" src="resources/human_data/unplug_the_white_charger_0.mp4"></video>
           </div>
-
-          <!-- Page 1 -->
-          <div id="vp-page-1" class="vp-page active">
-            <div class="video-grid">
-              <div class="video-item">
-                <h5 class="video-title" title="Unplug Charger: Unplug the white charger">Unplug Charger: Unplug the white charger</h5>
-                <div class="video-wrap">
-                  <video autoplay muted loop playsinline controls preload="metadata" src="resources/human_data/unplug_the_white_charger_0.mp4"></video>
-                </div>
-              </div>
-              <div class="video-item">
-                <h5 class="video-title" title="Bread-Bucket: Drop bread to the green bucket">Bread-Bucket: Drop bread to the green bucket</h5>
-                <div class="video-wrap">
-                  <video autoplay muted loop playsinline controls preload="metadata" src="resources/human_data/press_red_dice_to_make_it_rotation_0.mp4"></video>
-                </div>
-              </div>
-              <div class="video-item">
-                <h5 class="video-title" title="Press Stapler: Press the stapler">Press Stapler: Press the stapler</h5>
-                <div class="video-wrap">
-                  <video autoplay muted loop playsinline controls preload="metadata" src="resources/human_data/press_the_stapler_0.mp4"></video>
-                </div>
-              </div>
-              <div class="video-item">
-                <h5 class="video-title" title="Orange-Bucket: Put orange to the green bucket">Orange-Bucket: Put orange to the green bucket</h5>
-                <div class="video-wrap">
-                  <video autoplay muted loop playsinline controls preload="metadata" src="resources/human_data/put_orange_to_the_green_bucket_0.mp4"></video>
-                </div>
-              </div>
-              <div class="video-item">
-                <h5 class="video-title" title="Wipe Towel: Wipe blue towel on the table and push it to the bulky bottle">Wipe Towel: Wipe blue towel on the table and push it to the bulky bottle</h5>
-                <div class="video-wrap">
-                  <video autoplay muted loop playsinline controls preload="metadata" src="resources/human_data/wipe_blue_towel_on_the_table_and_push_it_to_the_bulky_bottle_0.mp4"></video>
-                </div>
-              </div>
-              <div class="video-item">
-                <h5 class="video-title" title="Close Laptop: Close silver laptop">Close Laptop: Close silver laptop</h5>
-                <div class="video-wrap">
-                  <video autoplay muted loop playsinline controls preload="metadata" src="resources/human_data/close_silver_laptop_0.mp4"></video>
-                </div>
-              </div>
-            </div>
+          <div class="ht-body">
+            <h3 class="ht-title">Unplug Charger · Unplug the white charger</h3>
           </div>
+        </article>
 
-          <!-- Page 2 -->
-          <div id="vp-page-2" class="vp-page">
-            <div class="video-grid">
-              <div class="video-item">
-                <h5 class="video-title" title="Mango-Bowl (Bypass): Put mango to pink bowl while avoiding obstacle by bypassing">Mango-Bowl (Bypass): Put mango to pink bowl while avoiding obstacle by bypassing</h5>
-                <div class="video-wrap">
-                  <video autoplay muted loop playsinline controls preload="metadata" src="resources/human_data/put_mango_to_pink_bowl_while_avoiding_obstacle_by_bypassing_0.mp4"></video>
-                </div>
-              </div>
-              <div class="video-item">
-                <h5 class="video-title" title="Mango-Bowl (Lift): Put mango to the pink bowl while avoiding obstacle by lifting">Mango-Bowl (Lift): Put mango to the pink bowl while avoiding obstacle by lifting</h5>
-                <div class="video-wrap">
-                  <video autoplay muted loop playsinline controls preload="metadata" src="resources/human_data/put_mango_to_the_pink_bowl_while_avoiding_obstacle_by_lifting.mp4"></video>
-                </div>
-              </div>
-              <div class="video-item">
-                <h5 class="video-title" title="Press Dice: Press red dice to make it rotation">Press Dice: Press red dice to make it rotation</h5>
-                <div class="video-wrap">
-                  <video autoplay muted loop playsinline controls preload="metadata" src="resources/human_data/press_red_dice_to_make_it_rotation_0.mp4"></video>
-                </div>
-              </div>
-              <div class="video-item">
-                <h5 class="video-title" title="Banana-Plate: Put banana to the white plate">Banana-Plate: Put banana to the white plate</h5>
-                <div class="video-wrap">
-                  <video autoplay muted loop playsinline controls preload="metadata" src="resources/human_data/put_banana_to_the_white_plate_0.mp4"></video>
-                </div>
-              </div>
-              <div class="video-item">
-                <h5 class="video-title" title="Pour Bottle: Pour bottle to the pink bowl">Pour Bottle: Pour bottle to the pink bowl</h5>
-                <div class="video-wrap">
-                  <video autoplay muted loop playsinline controls preload="metadata" src="resources/human_data/pour_bottle_to_the_pink_bowl.mp4"></video>
-                </div>
-              </div>
-              <div class="video-item">
-                <h5 class="video-title" title="Toy Bear-Box: Put toy bear to the black box">Toy Bear-Box: Put toy bear to the black box</h5>
-                <div class="video-wrap">
-                  <video autoplay muted loop playsinline controls preload="metadata" src="resources/human_data/put_toy_bear_to_the_black_box_0.mp4"></video>
-                </div>
-              </div>
-            </div>
+        <!-- 2 -->
+        <article class="ht-card">
+          <div class="ht-media">
+            <span class="ht-badge">Human Data</span>
+            <video autoplay muted loop playsinline controls preload="metadata" src="resources/human_data/drop_bread_to_the_green_bucket_0.mp4"></video>
           </div>
-
-          <!-- Page 3 -->
-          <div id="vp-page-3" class="vp-page">
-            <div class="video-grid">
-              <div class="video-item">
-                <h5 class="video-title" title="Open Box + Pand-Box: First open the white cap style box then put toy panda to the box">Open Box + Pand-Box: First open the white cap style box then put toy panda to the box</h5>
-                <div class="video-wrap">
-                  <video autoplay muted loop playsinline controls preload="metadata" src="resources/human_data/first_open_the_white_cap_style_box_then_put_toy_panda_to_the_box_0.mp4"></video>
-                </div>
-              </div>
-              <div class="video-item">
-                <h5 class="video-title" title="Fold Towel: Fold the blue towel">Fold Towel: Fold the blue towel</h5>
-                <div class="video-wrap">
-                  <video autoplay muted loop playsinline controls preload="metadata" src="resources/human_data/fold_the_blue_towel_0.mp4"></video>
-                </div>
-              </div>
-              <div class="video-item">
-                <h5 class="video-title" title="Pour Milk Bottle: Pour milk bottle to the yellow pan">Pour Milk Bottle: Pour milk bottle to the yellow pan</h5>
-                <div class="video-wrap">
-                  <video autoplay muted loop playsinline controls preload="metadata" src="resources/human_data/pour_milk_bottle_to_the_yellow_pan_0.mp4"></video>
-                </div>
-              </div>
-            </div>
+          <div class="ht-body">
+            <h3 class="ht-title">Bread-Bucket · Drop bread to the green bucket</h3>
           </div>
+        </article>
 
-          <script>
-            (function () {
-              const pager = document.getElementById('humanVideoPager');
-              if (!pager) return;
-              const pages = Array.from(pager.querySelectorAll('.vp-page'));
-              const prev = pager.querySelector('.vp-prev');
-              const next = pager.querySelector('.vp-next');
-              const dots = Array.from(pager.querySelectorAll('.vp-dot'));
-              let idx = 0;
+        <!-- 3 -->
+        <article class="ht-card">
+          <div class="ht-media">
+            <span class="ht-badge">Human Data</span>
+            <video autoplay muted loop playsinline controls preload="metadata" src="resources/human_data/press_the_stapler_0.mp4"></video>
+          </div>
+          <div class="ht-body">
+            <h3 class="ht-title">Press Stapler · Press the stapler</h3>
+          </div>
+        </article>
 
-              function pauseHiddenPages(except) {
-                pages.forEach((p, k) => {
-                  if (k !== except) { p.querySelectorAll('video').forEach(v => { try{ v.pause(); v.currentTime = 0; }catch(e){} }); }
-                });
-              }
-              function show(i) {
-                pages[idx].classList.remove('active');
-                idx = (i + pages.length) % pages.length;
-                pages[idx].classList.add('active');
-                dots.forEach((d, k) => d.classList.toggle('active', k === idx));
-                pauseHiddenPages(idx);
-              }
-              prev.addEventListener('click', () => show(idx - 1));
-              next.addEventListener('click', () => show(idx + 1));
-              dots.forEach((d, k) => d.addEventListener('click', () => show(k)));
-              pauseHiddenPages(0);
-            })();
-          </script>
-        </div>
+        <!-- 4 -->
+        <article class="ht-card">
+          <div class="ht-media">
+            <span class="ht-badge">Human Data</span>
+            <video autoplay muted loop playsinline controls preload="metadata" src="resources/human_data/put_orange_to_the_green_bucket_0.mp4"></video>
+          </div>
+          <div class="ht-body">
+            <h3 class="ht-title">Orange-Bucket · Put orange to the green bucket</h3>
+          </div>
+        </article>
+
+        <!-- 5 -->
+        <article class="ht-card">
+          <div class="ht-media">
+            <span class="ht-badge">Human Data</span>
+            <video autoplay muted loop playsinline controls preload="metadata" src="resources/human_data/wipe_blue_towel_on_the_table_and_push_it_to_the_bulky_bottle_0.mp4"></video>
+          </div>
+          <div class="ht-body">
+            <h3 class="ht-title">Wipe Towel · Wipe towel & push to the bottle</h3>
+          </div>
+        </article>
+
+        <!-- 6 -->
+        <article class="ht-card">
+          <div class="ht-media">
+            <span class="ht-badge">Human Data</span>
+            <video autoplay muted loop playsinline controls preload="metadata" src="resources/human_data/close_silver_laptop_0.mp4"></video>
+          </div>
+          <div class="ht-body">
+            <h3 class="ht-title">Close Laptop · Close silver laptop</h3>
+          </div>
+        </article>
+
+        <!-- 7 -->
+        <article class="ht-card">
+          <div class="ht-media">
+            <span class="ht-badge">Human Data</span>
+            <video autoplay muted loop playsinline controls preload="metadata" src="resources/human_data/put_mango_to_pink_bowl_while_avoiding_obstacle_by_bypassing_0.mp4"></video>
+          </div>
+          <div class="ht-body">
+            <h3 class="ht-title">Mango-Bowl (Bypass) · Avoid by bypassing</h3>
+          </div>
+        </article>
+
+        <!-- 8 -->
+        <article class="ht-card">
+          <div class="ht-media">
+            <span class="ht-badge">Human Data</span>
+            <video autoplay muted loop playsinline controls preload="metadata" src="resources/human_data/put_mango_to_the_pink_bowl_while_avoiding_obstacle_by_lifting.mp4"></video>
+          </div>
+          <div class="ht-body">
+            <h3 class="ht-title">Mango-Bowl (Lift) · Avoid by lifting</h3>
+          </div>
+        </article>
+
+        <!-- 9 -->
+        <article class="ht-card">
+          <div class="ht-media">
+            <span class="ht-badge">Human Data</span>
+            <video autoplay muted loop playsinline controls preload="metadata" src="resources/human_data/press_red_dice_to_make_it_rotation_0.mp4"></video>
+          </div>
+          <div class="ht-body">
+            <h3 class="ht-title">Press Dice · Make it rotate</h3>
+          </div>
+        </article>
+
+        <!-- 10 -->
+        <article class="ht-card">
+          <div class="ht-media">
+            <span class="ht-badge">Human Data</span>
+            <video autoplay muted loop playsinline controls preload="metadata" src="resources/human_data/put_banana_to_the_white_plate_0.mp4"></video>
+          </div>
+          <div class="ht-body">
+            <h3 class="ht-title">Banana-Plate · Put banana to the white plate</h3>
+          </div>
+        </article>
+
+        <!-- 11 -->
+        <article class="ht-card">
+          <div class="ht-media">
+            <span class="ht-badge">Human Data</span>
+            <video autoplay muted loop playsinline controls preload="metadata" src="resources/human_data/pour_bottle_to_the_pink_bowl.mp4"></video>
+          </div>
+          <div class="ht-body">
+            <h3 class="ht-title">Pour Bottle · Pour bottle to the pink bowl</h3>
+          </div>
+        </article>
+
+        <!-- 12 -->
+        <article class="ht-card">
+          <div class="ht-media">
+            <span class="ht-badge">Human Data</span>
+            <video autoplay muted loop playsinline controls preload="metadata" src="resources/human_data/put_toy_bear_to_the_black_box_0.mp4"></video>
+          </div>
+          <div class="ht-body">
+            <h3 class="ht-title">Toy Bear-Box · Put toy bear to the black box</h3>
+          </div>
+        </article>
+
+        <!-- 13 -->
+        <article class="ht-card">
+          <div class="ht-media">
+            <span class="ht-badge">Human Data</span>
+            <video autoplay muted loop playsinline controls preload="metadata" src="resources/human_data/first_open_the_white_cap_style_box_then_put_toy_panda_to_the_box_0.mp4"></video>
+          </div>
+          <div class="ht-body">
+            <h3 class="ht-title">Open Box + Panda-Box · Open then put panda</h3>
+          </div>
+        </article>
+
+        <!-- 14 -->
+        <article class="ht-card">
+          <div class="ht-media">
+            <span class="ht-badge">Human Data</span>
+            <video autoplay muted loop playsinline controls preload="metadata" src="resources/human_data/fold_the_blue_towel_0.mp4"></video>
+          </div>
+          <div class="ht-body">
+            <h3 class="ht-title">Fold Towel · Fold the blue towel</h3>
+          </div>
+        </article>
+
+        <!-- 15 -->
+        <article class="ht-card">
+          <div class="ht-media">
+            <span class="ht-badge">Human Data</span>
+            <video autoplay muted loop playsinline controls preload="metadata" src="resources/human_data/pour_milk_bottle_to_the_yellow_pan_0.mp4"></video>
+          </div>
+          <div class="ht-body">
+            <h3 class="ht-title">Pour Milk Bottle · Pour to the yellow pan</h3>
+          </div>
+        </article>
       </div>
     </div>
   </section>
@@ -913,7 +919,7 @@
     </div>
   </section>
 
-  <!-- ===== Enhancement JS：导航滚动态、汉堡菜单、ScrollSpy、媒体淡入 ===== -->
+  <!-- ===== JS：汉堡菜单、媒体淡入 ===== -->
   <script>
     (function(){
       // 汉堡按钮开关（Bulma）
@@ -926,34 +932,7 @@
         });
       }
 
-      // 透明 → 半透明毛玻璃（滚出封面后生效）
-      const nav  = document.querySelector('nav.navbar');
-      const hero = document.querySelector('.cover');
-      if(nav && hero){
-        new IntersectionObserver(([e])=>{
-          nav.classList.toggle('nav-solid', !e.isIntersecting);
-        }, {threshold: 0.6}).observe(hero);
-      }
-
-      // ScrollSpy：高亮当前章节（仅对 href="#..." 的链接）
-      const links = [...document.querySelectorAll('.navbar a[href^="#"]')];
-      const linkMap = new Map(links.map(a => [ (a.getAttribute('href')||'').slice(1), a ]));
-      const sections = [...document.querySelectorAll('section[id], header#top')];
-      if(sections.length){
-        const io = new IntersectionObserver(entries=>{
-          entries.forEach(en=>{
-            if(en.isIntersecting){
-              const id = en.target.id || 'top';
-              links.forEach(a=>a.classList.remove('is-active'));
-              const link = linkMap.get(id);
-              if(link) link.classList.add('is-active');
-            }
-          });
-        }, { rootMargin: "-40% 0px -55% 0px" });
-        sections.forEach(s=>io.observe(s));
-      }
-
-      // 媒体淡入：图片与视频 ready 后加 is-ready
+      // 媒体淡入
       document.querySelectorAll('img').forEach(img=>{
         const mark=()=>img.classList.add('is-ready');
         if(img.complete) mark(); else img.addEventListener('load', mark, {once:true});
