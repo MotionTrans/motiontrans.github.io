@@ -218,23 +218,23 @@
     </div>
   </header>
 
-  <!-- ================== Abstract ================== -->
-  <section class="section mt-section" id="abstract">
+  <!-- ================== MotionTrans Pipeline (updated title + bold caption) ================== -->
+  <section class="section mt-section" id="unified-human-centric">
     <div class="container">
-      <h2 class="title is-2 mt-title">Abstract</h2>
-      <div class="columns is-centered">
-        <div class="column is-two-thirds">
-          <div class="mt-card" style="backdrop-filter: blur(4px); background: linear-gradient(180deg, rgba(255,255,255,.95), rgba(255,255,255,.9)); border-left:4px solid #7c3aed;">
-            <div class="content has-text-justified" style="margin:0;">
-              <p>
-                Scaling real robot data is a key bottleneck in imitation learning, leading to the use of auxiliary data for policy training. While other aspects of robotic manipulation such as image or language understanding may be learned from internet-based datasets, acquiring motion knowledge remains challenging. Human data, with its rich diversity of manipulation behaviors, offers a valuable resource for this purpose. While previous works show that using human data can bring benefits, such as improving robustness and training efficiency, it remains unclear whether it can realize its greatest advantage: enabling robot policies to directly learn new motions for task completion. In this paper, we systematically explore this potential through multi-task human-robot cotraining. We introduce MotionTrans, a framework that includes a data collection system, a human data transformation pipeline, and a weighted cotraining strategy. By cotraining 30 human-robot tasks simultaneously, we directly transfer more than 10 motions from human data to deployable end-to-end robot policies. Notably, 9 tasks achieve non-trivial success rates in zero-shot manner. MotionTrans also significantly enhances pretraining-finetuning performance (+40% success rate). Through ablation study, we identify key factors for successful motion learning: cotraining with robot data. These findings unlock the potential of motion-level learning from human data, offering insights into its effective use for training robotic manipulation policies. All data, code, and model weights will be open-sourced.
-              </p>
-            </div>
-          </div>
+      <h2 class="title is-2 mt-title">MotionTrans Framework: Motion-Level Learning from Human Demonstrations</h2>
+      <div class="mt-card w-70">
+        <div class="mt-img-wrap">
+          <img src="./resources/main_method.png" alt="MotionTrans pipeline from VR human data to deployable robot policies">
         </div>
+        <p style="text-align:center; margin-top:10px; font-weight:800; color:#111827;">
+          From VR human demonstrations to deployable, zero/few-shot robot skills via a unified state–action space,
+          human→robot data transformation, and weighted multi-task co-training.
+        </p>
       </div>
     </div>
   </section>
+
+
 
   <!-- ================== Unified Human-Centric State-Action Space ================== -->
   <section class="section mt-section" id="unified-human-centric">
@@ -973,15 +973,19 @@
       <div class="mt-card">
         <div class="content has-text-justified" style="margin:0;">
           <p>
-            We would like to express our sincere gratitude to Shuo Wang, Gu Zhang, Enshen Zhou, Haoxu Huang, Jialei Huang, Ruiqian Nai,
-            Zhengrong Xue, Junmin Zhao, and Weirui Ye for their valuable discussions. We are especially grateful to Ruiqian Nai and Fanqi Lin
-            for their assistance with the implementation of Pi0-VLA, and to Yankai Fu for his support with the hardware implementation.
+            We would like to express our sincere gratitude to
+            <strong>Shuo Wang</strong>, <strong>Gu Zhang</strong>, <strong>Enshen Zhou</strong>, <strong>Haoxu Huang</strong>,
+            <strong>Jialei Huang</strong>, <strong>Ruiqian Nai</strong>, <strong>Zhengrong Xue</strong>, <strong>Junmin Zhao</strong>,
+            and <strong>Weirui Ye</strong> for their valuable discussions. We are especially grateful to
+            <strong>Ruiqian Nai</strong> and <strong>Fanqi Lin</strong> for their assistance with the implementation of Pi0-VLA,
+            and to <strong>Yankai Fu</strong> for his support with the hardware implementation.
             Our thanks also extend to the SpiritAI and InspireRobot team for their assistance.
           </p>
         </div>
       </div>
     </div>
   </section>
+
 
   <!-- ================== BibTeX ================== -->
   <section class="section mt-section" id="BibTeX">
