@@ -137,7 +137,7 @@
     .cover__title .rest { margin-top: var(--title-gap); font-size: var(--title-rest-size); line-height: 1.2; font-weight: 500; opacity: .98; }
     .cover__title .rest .line { display: block; }
 
-    .cover__subtitle { font-size: var(--cover-subtitle-size); font-weight: 500; opacity: .96; margin-top: 14px; }
+    .cover__subtitle { font-size: var(--cover-subtitle-size); font-weight: 500; opacity: .96; margin-top: 14px; white-space: nowrap; }
     /* 只改作者名字链接为紫色并加粗 */
     .cover__subtitle a{ color:#4B70F5 !important; text-decoration:none; font-weight:700; }
     .cover__subtitle a:hover{ text-decoration:underline; opacity:.9; }
@@ -252,13 +252,13 @@
           </span>
         </h1>
 
-        <!-- ===== Authors: split into two lines explicitly ===== -->
-        <div class="cover__subtitle">
+        <!-- ===== Authors (single line, auto-fit font size) ===== -->
+        <div class="cover__subtitle" id="authors-line">
           <a href="https://michaelyuancb.github.io/">Chengbo Yuan</a><sup>1,2</sup>&nbsp;&nbsp;&nbsp;
           <a href="https://zhourui9813.github.io/">Rui Zhou</a><sup>*5</sup>&nbsp;&nbsp;&nbsp;
           <a href="https://scholar.google.com/citations?hl=zh-CN&user=AUVUNusAAAAJ">Mengzhen Liu</a><sup>*3</sup>&nbsp;&nbsp;&nbsp;
           <a href="https://yingdong-hu.github.io/">Yingdong Hu</a><sup>1,2</sup>&nbsp;&nbsp;&nbsp;
-          <a href="https://shengjiewang-jason.github.io/">Shengjie Wang</a><sup>1,2</sup>&nbsp;&nbsp;&nbsp;<br>
+          <a href="https://shengjiewang-jason.github.io/">Shengjie Wang</a><sup>1,2</sup>&nbsp;&nbsp;&nbsp;
           <a href="https://ericyi.github.io/">Li Yi</a><sup>1,2</sup>&nbsp;&nbsp;&nbsp;
           <a href="https://alvinwen428.github.io/">Chuan Wen</a><sup>4</sup>&nbsp;&nbsp;&nbsp;
           <a href="https://www.shanghangzhang.com/">Shanghang Zhang</a><sup>3</sup>&nbsp;&nbsp;&nbsp;
@@ -1054,7 +1054,7 @@
     </div>
   </section>
 
-  <!-- ===== JS：汉堡菜单、媒体淡入 + 封面视频懒加载 ===== -->
+  <!-- ===== JS：汉堡菜单、媒体淡入 + 封面视频懒加载 + 作者行自适应字号 ===== -->
   <script>
     (function(){
       const burger = document.querySelector('.navbar-burger');
@@ -1082,6 +1082,29 @@
         const mark=()=>v.classList.add('is-ready');
         if(v.readyState >= 2) mark(); else v.addEventListener('loadeddata', mark, {once:true});
       });
+
+      // —— 作者行：根据容器宽度自适应缩小字号到单行 —— 
+      const authors = document.getElementById('authors-line');
+      function fitAuthors() {
+        if (!authors) return;
+        // reset to CSS-defined size first
+        authors.style.fontSize = '';
+        // guard: if already fits, stop
+        const min = 10; // px 下限
+        let fs = parseFloat(getComputedStyle(authors).fontSize);
+        // 防止极端情况下死循环
+        let guard = 200;
+        while (authors.scrollWidth > authors.clientWidth && fs > min && guard-- > 0) {
+          fs -= 0.5;
+          authors.style.fontSize = fs + 'px';
+        }
+      }
+      window.addEventListener('resize', fitAuthors);
+      window.addEventListener('load', fitAuthors);
+      // 多触发几次以适配 webfont 加载后的度量变化
+      setTimeout(fitAuthors, 50);
+      setTimeout(fitAuthors, 250);
+      setTimeout(fitAuthors, 800);
     })();
   </script>
 
