@@ -393,19 +393,19 @@
             if (!pager) return;
 
             const tasks = [
-              { title: "Orange → Green Bucket", human: "resources/human_data/put_orange_to_the_green_bucket_0.mp4", dp0: "resources/infer_video_960x540/orange_bucket_dp0_1280x720.mp4", pi0: "resources/infer_video_960x540/orange_bucket_pi0_1280x720.mp4" },
-              { title: "Unplug Charger", human: "resources/human_data/unplug_the_white_charger_0.mp4", dp0: "resources/infer_video_960x540/unplug_charger_dp0_1280x720.mp4", pi0: "resources/infer_video_960x540/unplug_charger_pi0_1280x720.mp4" },
-              { title: "Close Laptop", human: "resources/human_data/close_silver_laptop_0.mp4", dp0: "resources/infer_video_960x540/close_laptop_dp0_1280x720.mp4", pi0: "resources/infer_video_960x540/close_laptop_pi0_1280x720.mp4" },
-              { title: "Banana → White Plate", human: "resources/human_data/put_banana_to_the_white_plate_0.mp4", dp0: "resources/infer_video_960x540/banana_plate_dp0_1280x720.mp4", pi0: "resources/infer_video_960x540/banana_plate_pi0_1280x720.mp4" },
-              { title: "Open Box → Put Toy Panda", human: "resources/human_data/first_open_the_white_cap_style_box_then_put_toy_panda_to_the_box_0.mp4", dp0: "resources/infer_video_960x540/box_panda_box_dp0_1280x720.mp4", pi0: "resources/infer_video_960x540/box_panda_box_pi0_1280x720.mp4" },
-              { title: "Press Dice", human: "resources/human_data/press_red_dice_to_make_it_rotation_0.mp4", dp0: "resources/infer_video_960x540/press_dice_dp0_1280x720.mp4", pi0: "resources/infer_video_960x540/press_dice_pi0_1280x720.mp4" },
-              { title: "Pour Bottle to Bowl", human: "resources/human_data/pour_bottle_to_the_pink_bowl.mp4", dp0: "resources/infer_video_960x540/pour_bottle_dp0_1280x720.mp4", pi0: "resources/infer_video_960x540/pour_bottle_pi0_1280x720.mp4" },
-              { title: "Bread-Bucket", human: "resources/human_data/drop_bread_to_the_green_bucket_0.mp4", dp0: "resources/infer_video_960x540/bread_bucket_dp0_1280x720.mp4", pi0: "resources/infer_video_960x540/bread_bucket_pi0_1280x720.mp4" },
-              { title: "Press Stapler", human: "resources/human_data/press_the_stapler_0.mp4", dp0: "resources/infer_video_960x540/press_stapler_dp0_1280x720.mp4", pi0: "resources/infer_video_960x540/press_stapler_pi0_1280x720.mp4" },
-              { title: "Mango → Pink Bowl (Bypass)", human: "resources/human_data/put_mango_to_pink_bowl_while_avoiding_obstacle_by_bypassing_0.mp4", dp0: "resources/infer_video_960x540/mango_bypass_dp0_1280x720.mp4", pi0: "resources/infer_video_960x540/mango_bypass_pi0_1280x720.mp4" },
-              { title: "Mango → Pink Bowl (Lift)", human: "resources/human_data/put_mango_to_the_pink_bowl_while_avoiding_obstacle_by_lifting.mp4", dp0: "resources/infer_video_960x540/mango_bypass_dp0_1280x720.mp4", pi0: "resources/infer_video_960x540/mango_bypass_pi0_1280x720.mp4" },
-              { title: "Toy Bear → Black Box", human: "resources/human_data/put_toy_bear_to_the_black_box_0.mp4", dp0: "resources/infer_video_960x540/mango_lift_dp0_1280x720.mp4", pi0: "resources/infer_video_960x540/mango_lift_pi0_1280x720.mp4" },
-              { title: "Wipe Towel", human: "resources/human_data/wipe_blue_towel_on_the_table_and_push_it_to_the_bulky_bottle_0.mp4", dp0: "resources/infer_video_960x540/wipe_towel_dp0_1280x720.mp4", pi0: "resources/infer_video_960x540/wipe_towel_pi0_1280x720.mp4" },
+              { title: "Orange → Green Bucket", human: "resources/human_data/put_orange_to_the_green_bucket_0.mp4", dp0: "resources/infer_video_960x540/orange_bucket_dp0_960x540.mp4", pi0: "resources/infer_video_960x540/orange_bucket_pi0_960x540.mp4" },
+              { title: "Unplug Charger", human: "resources/human_data/unplug_the_white_charger_0.mp4", dp0: "resources/infer_video_960x540/unplug_charger_dp0_960x540.mp4", pi0: "resources/infer_video_960x540/unplug_charger_pi0_960x540.mp4" },
+              { title: "Close Laptop", human: "resources/human_data/close_silver_laptop_0.mp4", dp0: "resources/infer_video_960x540/close_laptop_dp0_960x540.mp4", pi0: "resources/infer_video_960x540/close_laptop_pi0_960x540.mp4" },
+              { title: "Banana → White Plate", human: "resources/human_data/put_banana_to_the_white_plate_0.mp4", dp0: "resources/infer_video_960x540/banana_plate_dp0_960x540.mp4", pi0: "resources/infer_video_960x540/banana_plate_pi0_960x540.mp4" },
+              { title: "Open Box → Put Toy Panda", human: "resources/human_data/first_open_the_white_cap_style_box_then_put_toy_panda_to_the_box_0.mp4", dp0: "resources/infer_video_960x540/box_panda_box_dp0_960x540.mp4", pi0: "resources/infer_video_960x540/box_panda_box_pi0_960x540.mp4" },
+              { title: "Press Dice", human: "resources/human_data/press_red_dice_to_make_it_rotation_0.mp4", dp0: "resources/infer_video_960x540/press_dice_dp0_960x540.mp4", pi0: "resources/infer_video_960x540/press_dice_pi0_960x540.mp4" },
+              { title: "Pour Bottle to Bowl", human: "resources/human_data/pour_bottle_to_the_pink_bowl.mp4", dp0: "resources/infer_video_960x540/pour_bottle_dp0_960x540.mp4", pi0: "resources/infer_video_960x540/pour_bottle_pi0_960x540.mp4" },
+              { title: "Bread-Bucket", human: "resources/human_data/drop_bread_to_the_green_bucket_0.mp4", dp0: "resources/infer_video_960x540/bread_bucket_dp0_960x540.mp4", pi0: "resources/infer_video_960x540/bread_bucket_pi0_960x540.mp4" },
+              { title: "Press Stapler", human: "resources/human_data/press_the_stapler_0.mp4", dp0: "resources/infer_video_960x540/press_stapler_dp0_960x540.mp4", pi0: "resources/infer_video_960x540/press_stapler_pi0_960x540.mp4" },
+              { title: "Mango → Pink Bowl (Bypass)", human: "resources/human_data/put_mango_to_pink_bowl_while_avoiding_obstacle_by_bypassing_0.mp4", dp0: "resources/infer_video_960x540/mango_bypass_dp0_960x540.mp4", pi0: "resources/infer_video_960x540/mango_bypass_pi0_960x540.mp4" },
+              { title: "Mango → Pink Bowl (Lift)", human: "resources/human_data/put_mango_to_the_pink_bowl_while_avoiding_obstacle_by_lifting.mp4", dp0: "resources/infer_video_960x540/mango_bypass_dp0_960x540.mp4", pi0: "resources/infer_video_960x540/mango_bypass_pi0_960x540.mp4" },
+              { title: "Toy Bear → Black Box", human: "resources/human_data/put_toy_bear_to_the_black_box_0.mp4", dp0: "resources/infer_video_960x540/mango_lift_dp0_960x540.mp4", pi0: "resources/infer_video_960x540/mango_lift_pi0_960x540.mp4" },
+              { title: "Wipe Towel", human: "resources/human_data/wipe_blue_towel_on_the_table_and_push_it_to_the_bulky_bottle_0.mp4", dp0: "resources/infer_video_960x540/wipe_towel_dp0_960x540.mp4", pi0: "resources/infer_video_960x540/wipe_towel_pi0_960x540.mp4" },
             ];
 
             const prev = pager.querySelector('.vp-prev');
@@ -564,19 +564,19 @@
             if (!pager) return;
 
             const tasks = [
-              { title: "Orange → Green Bucket", human: "resources/human_data/put_orange_to_the_green_bucket_0.mp4", dp0: "resources/infer_video_960x540/orange_bucket_dp20_1280x720.mp4" },
-              { title: "Unplug Charger", human: "resources/human_data/unplug_the_white_charger_0.mp4", dp0: "resources/infer_video_960x540/unplug_charger_dp20_1280x720.mp4" },
-              { title: "Close Laptop", human: "resources/human_data/close_silver_laptop_0.mp4", dp0: "resources/infer_video_960x540/close_laptop_dp20_1280x720.mp4" },
-              { title: "Banana → White Plate", human: "resources/human_data/put_banana_to_the_white_plate_0.mp4", dp0: "resources/infer_video_960x540/banana_plate_dp20_1280x720.mp4" },
-              { title: "Open Box → Put Toy Panda", human: "resources/human_data/first_open_the_white_cap_style_box_then_put_toy_panda_to_the_box_0.mp4", dp0: "resources/infer_video_960x540/box_panda_box_dp20_1280x720.mp4" },
-              { title: "Press Dice", human: "resources/human_data/press_red_dice_to_make_it_rotation_0.mp4", dp0: "resources/infer_video_960x540/press_dice_dp20_1280x720.mp4" },
-              { title: "Pour Bottle to Bowl", human: "resources/human_data/pour_bottle_to_the_pink_bowl.mp4", dp0: "resources/infer_video_960x540/pour_bottle_dp20_1280x720.mp4" },
-              { title: "Bread-Bucket", human: "resources/human_data/drop_bread_to_the_green_bucket_0.mp4", dp0: "resources/infer_video_960x540/bread_bucket_dp20_1280x720.mp4" },
-              { title: "Press Stapler", human: "resources/human_data/press_the_stapler_0.mp4", dp0: "resources/infer_video_960x540/press_stapler_dp20_1280x720.mp4" },
-              { title: "Mango → Pink Bowl (Bypass)", human: "resources/human_data/put_mango_to_pink_bowl_while_avoiding_obstacle_by_bypassing_0.mp4", dp0: "resources/infer_video_960x540/mango_bypass_dp20_1280x720.mp4" },
-              { title: "Mango → Pink Bowl (Lift)", human: "resources/human_data/put_mango_to_the_pink_bowl_while_avoiding_obstacle_by_lifting.mp4", dp0: "resources/infer_video_960x540/mango_bypass_dp20_1280x720.mp4" },
-              { title: "Toy Bear → Black Box", human: "resources/human_data/put_toy_bear_to_the_black_box_0.mp4", dp0: "resources/infer_video_960x540/mango_lift_dp20_1280x720.mp4" },
-              { title: "Wipe Towel", human: "resources/human_data/wipe_blue_towel_on_the_table_and_push_it_to_the_bulky_bottle_0.mp4", dp0: "resources/infer_video_960x540/wipe_towel_dp20_1280x720.mp4" },
+              { title: "Orange → Green Bucket", human: "resources/human_data/put_orange_to_the_green_bucket_0.mp4", dp0: "resources/infer_video_960x540/orange_bucket_dp20_960x540.mp4" },
+              { title: "Unplug Charger", human: "resources/human_data/unplug_the_white_charger_0.mp4", dp0: "resources/infer_video_960x540/unplug_charger_dp20_960x540.mp4" },
+              { title: "Close Laptop", human: "resources/human_data/close_silver_laptop_0.mp4", dp0: "resources/infer_video_960x540/close_laptop_dp20_960x540.mp4" },
+              { title: "Banana → White Plate", human: "resources/human_data/put_banana_to_the_white_plate_0.mp4", dp0: "resources/infer_video_960x540/banana_plate_dp20_960x540.mp4" },
+              { title: "Open Box → Put Toy Panda", human: "resources/human_data/first_open_the_white_cap_style_box_then_put_toy_panda_to_the_box_0.mp4", dp0: "resources/infer_video_960x540/box_panda_box_dp20_960x540.mp4" },
+              { title: "Press Dice", human: "resources/human_data/press_red_dice_to_make_it_rotation_0.mp4", dp0: "resources/infer_video_960x540/press_dice_dp20_960x540.mp4" },
+              { title: "Pour Bottle to Bowl", human: "resources/human_data/pour_bottle_to_the_pink_bowl.mp4", dp0: "resources/infer_video_960x540/pour_bottle_dp20_960x540.mp4" },
+              { title: "Bread-Bucket", human: "resources/human_data/drop_bread_to_the_green_bucket_0.mp4", dp0: "resources/infer_video_960x540/bread_bucket_dp20_960x540.mp4" },
+              { title: "Press Stapler", human: "resources/human_data/press_the_stapler_0.mp4", dp0: "resources/infer_video_960x540/press_stapler_dp20_960x540.mp4" },
+              { title: "Mango → Pink Bowl (Bypass)", human: "resources/human_data/put_mango_to_pink_bowl_while_avoiding_obstacle_by_bypassing_0.mp4", dp0: "resources/infer_video_960x540/mango_bypass_dp20_960x540.mp4" },
+              { title: "Mango → Pink Bowl (Lift)", human: "resources/human_data/put_mango_to_the_pink_bowl_while_avoiding_obstacle_by_lifting.mp4", dp0: "resources/infer_video_960x540/mango_bypass_dp20_960x540.mp4" },
+              { title: "Toy Bear → Black Box", human: "resources/human_data/put_toy_bear_to_the_black_box_0.mp4", dp0: "resources/infer_video_960x540/mango_lift_dp20_960x540.mp4" },
+              { title: "Wipe Towel", human: "resources/human_data/wipe_blue_towel_on_the_table_and_push_it_to_the_bulky_bottle_0.mp4", dp0: "resources/infer_video_960x540/wipe_towel_dp20_960x540.mp4" },
             ];
 
             const prev = pager.querySelector('.vp-prev');
