@@ -140,6 +140,8 @@
     /* 只改作者名字链接为紫色 + 加粗 + 单个名字不换行 */
     .cover__subtitle a{ color:#9112bc !important; text-decoration:none; font-weight:700; white-space:nowrap; display:inline-block; }
     .cover__subtitle a:hover{ text-decoration:underline; opacity:.9; }
+    /* 防止作者名与其上标分行：在链接后插入“不可断行连接符(WORD JOINER)” */
+    .cover__subtitle a::after{ content:"\2060"; }
     /* 上标保持常规粗细 */
     .cover__subtitle sup{ font-weight:400; }
 
@@ -325,7 +327,7 @@
   <section class="section mt-section" id="zero-shot">
     <div class="container">
       <h2 class="title is-2 mt-title">MotionTrans Zero-Shot Inference Results on Real Robot</h2>
-    <p class="has-text-grey" style="text-align:center; margin-bottom:12px;">
+      <p class="has-text-grey" style="text-align:center; margin-bottom:12px;">
         (Left: Human Data · Middle: MotionTrans-DP · Right: MotionTrans-Pi0-VLA)
       </p>
 
