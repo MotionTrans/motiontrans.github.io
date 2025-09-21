@@ -110,8 +110,8 @@
 
     /* ===== 纯紫色外描边：双层文本法（无内描边、清晰抗锯齿） ===== */
     :root{
-      --brand-stroke: 12px;           /* 调粗细：建议 2px~4px */
-      --brand-stroke-color: #7c3aed; /* 紫色描边 */
+      --brand-stroke: 12px;
+      --brand-stroke-color: #7c3aed;
     }
     .cover__title .brand{
       position: relative;
@@ -136,14 +136,11 @@
 
     .cover__title .rest { margin-top: var(--title-gap); font-size: var(--title-rest-size); line-height: 1.2; font-weight: 500; opacity: .98; }
     .cover__title .rest .line { display: block; }
+
     .cover__subtitle { font-size: var(--cover-subtitle-size); font-weight: 500; opacity: .96; margin-top: 14px; }
-    /* 只改作者名字链接为紫色 + 加粗 + 单个名字不换行 */
-    .cover__subtitle a{ color:#9112bc !important; text-decoration:none; font-weight:700; white-space:nowrap; display:inline-block; }
+    /* 只改作者名字链接为紫色并加粗 */
+    .cover__subtitle a{ color:#4B70F5 !important; text-decoration:none; font-weight:700; }
     .cover__subtitle a:hover{ text-decoration:underline; opacity:.9; }
-    /* 防止作者名与其上标分行：在链接后插入“不可断行连接符(WORD JOINER)” */
-    .cover__subtitle a::after{ content:"\2060"; }
-    /* 上标保持常规粗细 */
-    .cover__subtitle sup{ font-weight:400; }
 
     .cover__meta { font-size: clamp(18px, 1.1vw, 24px); opacity: .9; margin-top: 10px; margin-bottom: 20px; }
     .cover__actions { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--cover-cta-gap); margin-top: 6px; }
@@ -225,9 +222,8 @@
     </div>
   </nav>
 
-  <!-- ================== Hero Cover（已优化：poster 先显 + 懒加载视频 + 渐显） ================== -->
+  <!-- ================== Hero Cover ================== -->
   <header id="top" class="cover" aria-label="Hero cover">
-    <!-- 背景媒体层 -->
     <div class="cover__media" aria-hidden="true">
       <img class="cover__poster" src="resources/cover_poster.jpg" alt="">
       <video id="bg-video"
@@ -237,7 +233,6 @@
              playsinline
              preload="none"
              poster="resources/cover_poster.jpg">
-        <!-- 懒加载：先放 data-src，稍后 JS 写回 src 再 load() -->
         <source data-src="resources/cover.webm" type="video/webm">
         <source data-src="resources/cover.mp4"  type="video/mp4">
       </video>
@@ -257,12 +252,13 @@
           </span>
         </h1>
 
+        <!-- ===== Authors: split into two lines explicitly ===== -->
         <div class="cover__subtitle">
           <a href="https://michaelyuancb.github.io/">Chengbo Yuan</a><sup>1,2</sup>&nbsp;&nbsp;&nbsp;
           <a href="https://zhourui9813.github.io/">Rui Zhou</a><sup>*5</sup>&nbsp;&nbsp;&nbsp;
           <a href="https://scholar.google.com/citations?hl=zh-CN&user=AUVUNusAAAAJ">Mengzhen Liu</a><sup>*3</sup>&nbsp;&nbsp;&nbsp;
           <a href="https://yingdong-hu.github.io/">Yingdong Hu</a><sup>1,2</sup>&nbsp;&nbsp;&nbsp;
-          <a href="https://shengjiewang-jason.github.io/">Shengjie Wang</a><sup>1,2</sup>&nbsp;&nbsp;&nbsp;
+          <a href="https://shengjiewang-jason.github.io/">Shengjie Wang</a><sup>1,2</sup>&nbsp;&nbsp;&nbsp;<br>
           <a href="https://ericyi.github.io/">Li Yi</a><sup>1,2</sup>&nbsp;&nbsp;&nbsp;
           <a href="https://alvinwen428.github.io/">Chuan Wen</a><sup>4</sup>&nbsp;&nbsp;&nbsp;
           <a href="https://www.shanghangzhang.com/">Shanghang Zhang</a><sup>3</sup>&nbsp;&nbsp;&nbsp;
@@ -307,11 +303,11 @@
     </div>
   </section>
 
-  <!-- ================== MotionTrans Pipeline (updated title + bold caption) ================== -->
+  <!-- ================== MotionTrans Pipeline ================== -->
   <section class="section mt-section" id="unified-human-centric">
     <div class="container">
       <h2 class="title is-2 mt-title">Motion-Level Learning from Human Demonstrations</h2>
-      <div class="mt-card w-70">
+    <div class="mt-card w-70">
         <div class="mt-img-wrap">
           <img src="./resources/main_method.png" alt="MotionTrans pipeline from VR human data to deployable robot policies">
         </div>
@@ -416,7 +412,6 @@
             const next = pager.querySelector('.vp-next');
             const dotsWrap = pager.querySelector('.vp-dots');
 
-            // 填充搜索下拉
             const zsSelect = document.getElementById('zs-filter');
             const zsGo = document.getElementById('zs-go');
             tasks.forEach((t, i) => {
@@ -457,7 +452,6 @@
             });
             pager.appendChild(frag);
 
-            // dots
             dotsWrap.innerHTML = '';
             const pages = Array.from(pager.querySelectorAll('.vp-page'));
             pages.forEach((p, k) => {
@@ -485,7 +479,6 @@
             pager.addEventListener('keydown', (e) => { if (e.key === 'ArrowLeft') show(idx - 1); if (e.key === 'ArrowRight') show(idx + 1); });
             pauseHiddenPages(0); playVisiblePage(0);
 
-            // 搜索跳转逻辑
             function flashPage(i){ const vids = pages[i].querySelectorAll('.rvp-video'); vids.forEach(v => v.classList.add('flash')); setTimeout(() => vids.forEach(v => v.classList.remove('flash')), 1200); pages[i].scrollIntoView({behavior:'smooth', block:'nearest'}); }
             zsSelect.addEventListener('change', () => { zsGo.disabled = !zsSelect.value; if (zsSelect.value !== '') { const i = parseInt(zsSelect.value, 10); show(i); flashPage(i); } });
             zsGo.addEventListener('click', () => { if (zsSelect.value !== '') { const i = parseInt(zsSelect.value, 10); show(i); flashPage(i); } });
@@ -527,7 +520,6 @@
           #fewshot img{ width:100%; height:auto; display:block; }
           #fewshot figcaption{ padding:10px 14px; font-size:.95rem; color:#6b7280; text-align:center; background:#fafafa; }
 
-          /* —— Few-shot 搜索栏 —— */
           #fs-tools .ht-toolbar{ display:flex; flex-wrap:wrap; gap:12px; align-items:center; justify-content:center; margin:12px auto 18px; max-width:980px; }
           #fs-tools .ht-select{ padding:10px 14px; border:1px solid #e5e7eb; border-radius:999px; background:#fff; font-size:14px; min-width:280px; outline:none; box-shadow:0 2px 8px rgba(0,0,0,.04); }
           #fs-tools .ht-go{ padding:10px 16px; border:1px solid #e5e7eb; border-radius:999px; background:#111; color:#fff; font-size:14px; line-height:1; cursor:pointer; box-shadow:0 2px 8px rgba(0,0,0,.06); transition: transform .15s ease, opacity .15s ease; }
@@ -536,7 +528,6 @@
           #fewshotVideoPager .flash{ box-shadow: 0 0 0 3px #7c3aed inset, 0 10px 26px rgba(124,58,237,.25); transition: box-shadow .25s ease; }
         </style>
 
-        <!-- Few-shot 搜索栏 -->
         <div id="fs-tools">
           <div class="ht-toolbar">
             <select id="fs-filter" class="ht-select" aria-label="Jump to a few-shot task">
@@ -592,7 +583,6 @@
             const next = pager.querySelector('.vp-next');
             const dotsWrap = pager.querySelector('.vp-dots');
 
-            // 填充搜索下拉
             const fsSelect = document.getElementById('fs-filter');
             const fsGo = document.getElementById('fs-go');
             tasks.forEach((t, i) => { const opt = document.createElement('option'); opt.value = String(i); opt.textContent = t.title; fsSelect.appendChild(opt); });
@@ -631,7 +621,6 @@
             });
             pager.appendChild(frag);
 
-            // dots
             dotsWrap.innerHTML = '';
             const pages = Array.from(pager.querySelectorAll('.vp-page'));
             pages.forEach((p, k) => {
@@ -659,7 +648,6 @@
             pager.addEventListener('keydown', (e) => { if (e.key === 'ArrowLeft') show(idx - 1); if (e.key === 'ArrowRight') show(idx + 1); });
             pauseHiddenPages(0); playVisiblePage(0);
 
-            // 搜索跳转逻辑
             function flashPage(i){ const vids = pages[i].querySelectorAll('.rvp-video'); vids.forEach(v => v.classList.add('flash')); setTimeout(() => vids.forEach(v => v.classList.remove('flash')), 1200); pages[i].scrollIntoView({behavior:'smooth', block:'nearest'}); }
             fsSelect.addEventListener('change', () => { fsGo.disabled = !fsSelect.value; if (fsSelect.value !== '') { const i = parseInt(fsSelect.value, 10); show(i); flashPage(i); } });
             fsGo.addEventListener('click', () => { if (fsSelect.value !== '') { const i = parseInt(fsSelect.value, 10); show(i); flashPage(i); } });
@@ -714,7 +702,6 @@
           </div>
         </div>
 
-        <!-- Dataset summary -->
         <div class="row">
           <div class="col">
             <div class="alert alert-light border rounded shadow-sm">
@@ -889,7 +876,7 @@
     </script>
   </div>
 
-  <!-- ================== Robot Tasks（新增） ================== -->
+  <!-- ================== Robot Tasks ================== -->
   <h3 class="title is-3" style="text-align:center; margin: 8px 0 12px;">Robot Tasks</h3>
 
   <div id="robotTasks" class="mt-card">
@@ -917,7 +904,6 @@
       #robotTasks .ht-card.flash{ box-shadow: 0 0 0 3px #7c3aed inset, 0 8px 24px rgba(124,58,237,.25); transition: box-shadow .25s ease; }
     </style>
 
-    <!-- 工具栏：任务下拉选择 + Go（同一行） -->
     <div class="ht-toolbar">
       <select id="rt-filter" class="ht-select" aria-label="Jump to a robot task">
         <option value="" selected disabled>— Jump to a task —</option>
@@ -925,7 +911,6 @@
       <button type="button" id="rt-go" class="ht-go" disabled>Go</button>
     </div>
 
-    <!-- 翻页容器 -->
     <div id="robotVideoPager" class="video-pager" aria-label="Robot tasks video pager">
       <div class="vp-controls">
         <button class="vp-btn vp-prev" aria-label="Previous page">‹</button>
@@ -955,7 +940,6 @@
           { slug:'wipe_blue_towel_and_push_to_pink_bowl', title:'Wipe Blue Towel and Push to Pink Bowl', src:'resources/robot_data/wipe_blue_towel_on_the_table_and_push_it_left_or_right_to_the_pink_bowl_0.mp4' },
         ];
 
-        // 填充下拉
         const sel = document.getElementById('rt-filter');
         const go  = document.getElementById('rt-go');
         tasks.forEach(t => { const o = document.createElement('option'); o.value = t.slug; o.textContent = t.title; sel.appendChild(o); });
@@ -965,7 +949,6 @@
         const prev = pager.querySelector('.vp-prev');
         const next = pager.querySelector('.vp-next');
 
-        // 渲染分页
         const pages = [];
         for (let i = 0; i < tasks.length; i += perPage) {
           const chunk = tasks.slice(i, i + perPage);
@@ -994,7 +977,6 @@
         }
         const frag = document.createDocumentFragment(); pages.forEach(p => frag.appendChild(p)); pager.appendChild(frag);
 
-        // 页码点
         const dotsFrag = document.createDocumentFragment();
         for (let i = 0; i < pages.length; i++) {
           const dot = document.createElement('span');
@@ -1007,7 +989,6 @@
         dotsWrap.appendChild(dotsFrag);
         const dots = Array.from(dotsWrap.querySelectorAll('.vp-dot'));
 
-        // 翻页逻辑
         let idx = 0;
         function pauseHiddenPages(except){ pages.forEach((pg,k)=>{ if(k!==except){ pg.querySelectorAll('video').forEach(v=>{ try{ v.pause(); v.currentTime=0; }catch(e){} }); } }); }
         function playVisiblePage(i){ pages[i].querySelectorAll('video').forEach(v=>{ try{ v.currentTime=0; v.play(); }catch(e){} }); }
@@ -1022,7 +1003,6 @@
         pager.addEventListener('keydown', (e)=>{ if(e.key==='ArrowLeft') show(idx-1); if(e.key==='ArrowRight') show(idx+1); });
         pauseHiddenPages(0); playVisiblePage(0);
 
-        // 跳转逻辑
         function jump(slug){
           const index = tasks.findIndex(t=>t.slug===slug);
           if(index<0) return;
@@ -1077,27 +1057,23 @@
   <!-- ===== JS：汉堡菜单、媒体淡入 + 封面视频懒加载 ===== -->
   <script>
     (function(){
-      // 汉堡按钮开关（Bulma）
       const burger = document.querySelector('.navbar-burger');
       const menu   = document.querySelector('.navbar-menu');
       if(burger && menu){
         burger.addEventListener('click', ()=>{ burger.classList.toggle('is-active'); menu.classList.toggle('is-active'); });
       }
 
-      // 封面视频懒加载：把 <source data-src> 写回真正的 src，再开始加载，ready 后渐显
       const bg = document.getElementById('bg-video');
       if (bg) {
         bg.querySelectorAll('source').forEach(s => {
           if (s.dataset.src) s.src = s.dataset.src;
         });
-        // 下一帧触发加载，避免阻塞首屏
         requestAnimationFrame(() => bg.load());
         const markReady = () => bg.classList.add('is-ready');
         bg.addEventListener('canplay', markReady, { once:true });
         bg.addEventListener('loadeddata', markReady, { once:true });
       }
 
-      // 其他媒体淡入
       document.querySelectorAll('img').forEach(img=>{
         const mark=()=>img.classList.add('is-ready');
         if(img.complete) mark(); else img.addEventListener('load', mark, {once:true});
