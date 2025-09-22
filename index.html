@@ -165,8 +165,8 @@
     .vp-dot { width: 10px; height: 10px; border-radius: 50%; background: #cfcfcf; cursor: pointer; }
     .vp-dot.active { background: #333; }
 
-    /* 图片/视频淡入 */
-    .mt-img-wrap img, .rvp-video video, .media-fixed, .mt-fig img, .ht-card video { opacity:0; transition: opacity .25s ease; }
+    /* 图片/视频淡入（+iframe） */
+    .mt-img-wrap img, .rvp-video video, .media-fixed, .mt-fig img, .ht-card video, .mt-video-wrap iframe { opacity:0; transition: opacity .25s ease; }
     .is-ready { opacity:1 !important; }
 
     /* ===== 全局主题卡片/标题 ===== */
@@ -181,6 +181,7 @@
     .mt-video-wrap, .mt-img-wrap{ position: relative; width: 100%; border-radius: 12px; overflow: hidden; }
     .mt-video-wrap{ aspect-ratio: 16 / 9; }
     .mt-video-wrap video, .mt-img-wrap img{ width: 100%; height: 100%; object-fit: cover; display: block; }
+    .mt-video-wrap iframe{ width:100%; height:100%; border:0; display:block; } /* NEW: 让 iframe 适配容器 */
 
     .mt-badge{ position: absolute; top: 10px; left: 10px; padding: 6px 10px; border-radius: 999px; background: rgba(0,0,0,.55); color:#fff; font-size:12px; letter-spacing:.2px; box-shadow: 0 2px 8px rgba(0,0,0,.25); user-select: none; }
 
@@ -282,6 +283,28 @@
       </div>
     </div>
   </header>
+
+  <!-- ================== Project Video (YouTube) ================== -->
+  <section class="section mt-section section--after-cover" id="teaser">
+    <div class="container">
+      <h2 class="title is-2 mt-title">Project Video</h2>
+      <div class="mt-card w-70">
+        <div class="mt-video-wrap">
+          <iframe
+            data-yt
+            title="MotionTrans — Project Video"
+            loading="lazy"
+            src="https://www.youtube.com/embed/-kLJIXnBwOw?rel=0&modestbranding=1&playsinline=1"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen>
+          </iframe>
+        </div>
+        <p style="text-align:center; margin-top:10px; font-weight:800; color:#111827;">
+          Teaser / Project video
+        </p>
+      </div>
+    </div>
+  </section>
 
   <!-- ================== Abstract ================== -->
   <section class="section mt-section" id="abstract">
@@ -1079,6 +1102,12 @@
       document.querySelectorAll('video').forEach(v=>{
         const mark=()=>v.classList.add('is-ready');
         if(v.readyState >= 2) mark(); else v.addEventListener('loadeddata', mark, {once:true});
+      });
+
+      // 让 YouTube iframe 也做淡入
+      document.querySelectorAll('iframe[data-yt]').forEach(f=>{
+        const mark = () => f.classList.add('is-ready');
+        f.addEventListener('load', mark, { once: true });
       });
     })();
   </script>
